@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://3vy0wsy2811y"]
+
+[ext_resource type="Texture2D" uid="uid://do0ydx76pjy6i" path="res://art/dottedline.png" id="1_hx6oq"]
+
+[node name="MapLine" type="Line2D"]
+texture_repeat = 2
+texture = ExtResource("1_hx6oq")
+texture_mode = 1

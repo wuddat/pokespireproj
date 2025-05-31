@@ -4,12 +4,12 @@ extends Node
 const battlescene := preload("res://scenes/battle/battle.tscn")
 const rewardscene := preload("res://scenes/battle_reward/battle_reward.tscn")
 const pokecenterscene := preload("res://scenes/pokecenter/pokecenter.tscn")
-const mapscene := preload("res://scenes/map/map.tscn")
 const shopscene := preload("res://scenes/shop/shop.tscn")
 const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 
 @export var run_startup: RunStartup
 
+@onready var map: Map = $Map
 @onready var currentview: Node = $CurrentView
 @onready var gold_ui: GoldUI = %GoldUI
 @onready var deck_button: CardPileOpener = %DeckButton
@@ -43,7 +43,9 @@ func _start_run() -> void:
 	
 	_setup_event_connections()
 	_setup_top_bar()
-	print("TODO: procedurally generate map")
+	
+	map.generate_new_map()
+	map.unlock_floor(0)
 
 
 func _change_view(scene: PackedScene) -> Node:
@@ -53,21 +55,30 @@ func _change_view(scene: PackedScene) -> Node:
 	get_tree().paused = false
 	var new_view := scene.instantiate()
 	currentview.add_child(new_view)
+	map.hide_map()
 	
 	return new_view
 
 
+func _show_map() -> void:
+	if currentview.get_child_count() > 0:
+		currentview.get_child(0).queue_free()
+		
+	map.show_map()
+	map.unlock_next_rooms()
+
+
 func _setup_event_connections() -> void:
 	Events.battle_won.connect(_on_battle_won)
-	Events.battle_reward_exited.connect(_change_view.bind(mapscene))
-	Events.pokecenter_exited.connect(_change_view.bind(mapscene))
+	Events.battle_reward_exited.connect(_show_map)
+	Events.pokecenter_exited.connect(_show_map)
 	Events.map_exited.connect(_on_map_exited)
-	Events.shop_exited.connect(_change_view.bind(mapscene))
-	Events.treasure_room_exited.connect(_change_view.bind(mapscene))
+	Events.shop_exited.connect(_show_map)
+	Events.treasure_room_exited.connect(_show_map)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
-	mapbtn.pressed.connect(_change_view.bind(mapscene))
+	mapbtn.pressed.connect(_show_map)
 	rewardsbtn.pressed.connect(_change_view.bind(rewardscene))
 	shopbtn.pressed.connect(_change_view.bind(shopscene))
 	treasurebtn.pressed.connect(_change_view.bind(treasurescene))
@@ -89,5 +100,17 @@ func _on_battle_won() -> void:
 	reward_scene.add_gold_reward(211)
 	reward_scene.add_card_reward()
 
-func _on_map_exited() -> void:
-	print("TODO: from the map, change view based on selected room")
+func _on_map_exited(room: Room) -> void:
+	match room.type:
+		Room.Type.MONSTER:
+			_change_view(battlescene)
+		Room.Type.TREASURE:
+			_change_view(treasurescene)
+		Room.Type.POKECENTER:
+			_change_view(pokecenterscene)
+		Room.Type.SHOP:
+			_change_view(shopscene)
+		Room.Type.BOSS:
+			_change_view(battlescene)
+		
+	
