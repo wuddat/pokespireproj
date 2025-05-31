@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq8ebkvp2okor"]
+
+[ext_resource type="Script" uid="uid://c8lso5oy6bktf" path="res://scenes/ui/card_menu_ui.gd" id="1_escg4"]
+[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/bulbasaur_tackle.tres" id="2_1as8l"]
+[ext_resource type="PackedScene" uid="uid://spupfh640ekm" path="res://scenes/ui/card_visuals.tscn" id="3_5nlic"]
+
+[node name="CardMenuUI" type="CenterContainer"]
+offset_right = 37.0
+offset_bottom = 48.0
+size_flags_horizontal = 3
+script = ExtResource("1_escg4")
+card = ExtResource("2_1as8l")
+
+[node name="Visuals" parent="." instance=ExtResource("3_5nlic")]
+layout_mode = 2
+
+[connection signal="gui_input" from="Visuals" to="." method="_on_visuals_gui_input"]
+[connection signal="mouse_entered" from="Visuals" to="." method="_on_visuals_mouse_entered"]
+[connection signal="mouse_exited" from="Visuals" to="." method="_on_visuals_mouse_exited"]

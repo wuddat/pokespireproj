@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d3rtbs11o7w7c"]
+
+[ext_resource type="Texture2D" uid="uid://bxgrktox5it82" path="res://art/tile_0105.png" id="1_4r3bw"]
+[ext_resource type="Script" uid="uid://0w51tebwgjp7" path="res://characters/bulbasaur/cards/bulbasaur_vinewhip.gd" id="2_s0mps"]
+[ext_resource type="AudioStream" uid="uid://cbf8waj2ma33o" path="res://art/sounds/VineWhip2.wav" id="3_if3hm"]
+
+[resource]
+script = ExtResource("2_s0mps")
+id = "bulbasaur_vinewhip"
+type = 0
+target = 2
+cost = 2
+icon = ExtResource("1_4r3bw")
+tooltip_text = "[center]Deal [color=\"ff0000\"]5[/color] damage to all enemies.[/center]"
+sound = ExtResource("3_if3hm")
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

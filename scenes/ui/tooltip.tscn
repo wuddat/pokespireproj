@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr2wwcitt72yh"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_mtwet"]
+[ext_resource type="Texture2D" uid="uid://bi6pfjs32f820" path="res://art/tile_0101.png" id="2_b5j4s"]
+[ext_resource type="Script" uid="uid://cot5y2etanmqp" path="res://scenes/ui/tooltip.gd" id="2_kv0sd"]
+
+[node name="Tooltip" type="PanelContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_right = 110.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme = ExtResource("1_mtwet")
+script = ExtResource("2_kv0sd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("2_b5j4s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TooltipText" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_mtwet")
+theme_override_constants/line_separation = 3
+bbcode_enabled = true
+text = "Test Tooltip
+card_playable
+card_playable"

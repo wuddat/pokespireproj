@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1j2o4bdr8i4q"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_rpnp3"]
+[ext_resource type="Script" uid="uid://dcgcygatgqtp4" path="res://scenes/ui/mana_ui.gd" id="2_jwxui"]
+
+[node name="ManaUI" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -41.0
+offset_right = 40.0
+offset_bottom = -11.0
+grow_vertical = 0
+theme = ExtResource("1_rpnp3")
+script = ExtResource("2_jwxui")
+
+[node name="ManaLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "8/8"
+horizontal_alignment = 1
+vertical_alignment = 1

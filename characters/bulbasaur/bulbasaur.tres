@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://dw7iw834ey8jm"]
+
+[ext_resource type="Script" uid="uid://dswbye42ve1b5" path="res://custom_resources/character_stats.gd" id="1_ev1ca"]
+[ext_resource type="Texture2D" uid="uid://duv7cpswg71c6" path="res://art/bulba.png" id="1_xxxnc"]
+[ext_resource type="SpriteFrames" uid="uid://drukf84u67p2t" path="res://art/frames/bulbasaur_frames.tres" id="2_xxxnc"]
+
+[resource]
+script = ExtResource("1_ev1ca")
+character_name = "Bulbasaur"
+description = "Grass Type Seed Pokemon"
+portrait = ExtResource("1_xxxnc")
+frames = ExtResource("2_xxxnc")
+draftable_move_ids = Array[String](["tackle", "tackle", "razorleaf", "razorleaf", "razorleaf", "bodyslam", "bodyslam", "bodyslam", "bodyslam", "bodyslam", "bodyslam", "bodyslam", "bodyslam", "tackle", "tackle", "tackle", "tackle", "tackle"])
+cards_per_turn = 4
+max_mana = 3
+starting_moves = Array[String](["tackle", "tackle", "razorleaf", "razorleaf", "bodyslam", "defensecurl", "defensecurl", "tackle", "tackle", "bodyslam", "defensecurl"])
+max_health = 50
+art = ExtResource("1_xxxnc")
+metadata/_custom_type_script = "uid://dswbye42ve1b5"

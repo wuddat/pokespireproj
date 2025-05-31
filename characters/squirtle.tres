@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://bylsusamu6ff4"]
+
+[ext_resource type="Texture2D" uid="uid://rc07vvkv2ffs" path="res://art/mank.png" id="1_46tbi"]
+[ext_resource type="Script" uid="uid://dswbye42ve1b5" path="res://custom_resources/character_stats.gd" id="1_h6c1m"]
+[ext_resource type="SpriteFrames" uid="uid://cwpej1o1muuub" path="res://art/frames/squirtle_frames.tres" id="2_77uey"]
+
+[resource]
+script = ExtResource("1_h6c1m")
+character_name = "Squirtle"
+description = "Turtle water pokemon"
+portrait = ExtResource("1_46tbi")
+frames = ExtResource("2_77uey")
+draftable_move_ids = Array[String]([])
+cards_per_turn = 4
+max_mana = 3
+starting_moves = Array[String](["tackle", "tackle", "tackle", "tackle"])
+max_health = 36
+art = ExtResource("1_46tbi")
+metadata/_custom_type_script = "uid://dswbye42ve1b5"

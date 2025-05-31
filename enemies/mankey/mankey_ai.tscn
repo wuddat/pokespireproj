@@ -1,0 +1,40 @@
+[gd_scene load_steps=11 format=3 uid="uid://bt8sq56qtfdcw"]
+
+[ext_resource type="Script" uid="uid://dav7bv4qmjqve" path="res://scenes/enemy/enemy_action_picker.gd" id="1_np0qq"]
+[ext_resource type="Script" uid="uid://btyxm5ojkli6g" path="res://enemies/mankey/mankey_attack_action.gd" id="2_23had"]
+[ext_resource type="Texture2D" uid="uid://cqcal03735mv8" path="res://art/tile_0118.png" id="3_2teau"]
+[ext_resource type="Script" uid="uid://caud66rvkxkbh" path="res://enemies/mankey/mankey_block_action.gd" id="3_kvip6"]
+[ext_resource type="Script" uid="uid://mopmtkqxtoli" path="res://custom_resources/intent.gd" id="4_45ooh"]
+[ext_resource type="AudioStream" uid="uid://b61ybdr7cy4kd" path="res://art/sounds/Tackle.wav" id="5_8gyoi"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="7_qm0rb"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="8_ixlom"]
+
+[sub_resource type="Resource" id="Resource_8hfi6"]
+script = ExtResource("4_45ooh")
+number = "6x2"
+icon = ExtResource("3_2teau")
+metadata/_custom_type_script = "uid://mopmtkqxtoli"
+
+[sub_resource type="Resource" id="Resource_rxuia"]
+script = ExtResource("4_45ooh")
+number = ""
+icon = ExtResource("7_qm0rb")
+metadata/_custom_type_script = "uid://mopmtkqxtoli"
+
+[node name="MankeyAI" type="Node"]
+script = ExtResource("1_np0qq")
+
+[node name="MankeyAttackAction" type="Node" parent="."]
+script = ExtResource("2_23had")
+damage = 6
+intent = SubResource("Resource_8hfi6")
+sound = ExtResource("5_8gyoi")
+type = 1
+chance_weight = 3.0
+
+[node name="MankeyBlockAction" type="Node" parent="."]
+script = ExtResource("3_kvip6")
+intent = SubResource("Resource_rxuia")
+sound = ExtResource("8_ixlom")
+type = 1
+chance_weight = 1.0

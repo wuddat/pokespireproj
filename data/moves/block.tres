@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bbjd13posqve7"]
+
+[ext_resource type="Script" uid="uid://dx2y46iy64m5m" path="res://data/moves/block.gd" id="1_i5q37"]
+
+[resource]
+script = ExtResource("1_i5q37")
+id = ""
+name = ""
+power = 0
+type = 1
+rarity = 0
+target = 0
+cost = 0
+tooltip_text = ""
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

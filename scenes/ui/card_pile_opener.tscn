@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0sv3khv88a0s"]
+
+[ext_resource type="Texture2D" uid="uid://hva3iy5hon7a" path="res://art/tile_0089.png" id="1_121hh"]
+[ext_resource type="Texture2D" uid="uid://d007n5sscvumv" path="res://art/tile_0090.png" id="2_rnmm3"]
+[ext_resource type="Script" uid="uid://dxg6hlgbgdvdj" path="res://scenes/ui/card_pile_opener.gd" id="2_s06w2"]
+
+[node name="CardPileOpener" type="TextureButton"]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_121hh")
+texture_hover = ExtResource("2_rnmm3")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_s06w2")

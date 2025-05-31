@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=3 format=3 uid="uid://bvvwd5mbdmejf"]
+
+[ext_resource type="Texture2D" uid="uid://bp5uictg4b81e" path="res://art/weedlepng.png" id="1_3ewpf"]
+[ext_resource type="Script" uid="uid://c3txlje6fsc51" path="res://custom_resources/stats.gd" id="1_vwc0v"]
+
+[resource]
+script = ExtResource("1_vwc0v")
+max_health = 10
+art = ExtResource("1_3ewpf")
+metadata/_custom_type_script = "uid://c3txlje6fsc51"

@@ -1,0 +1,79 @@
+{
+  "moves": {
+	"tackle": {
+	  "name": "Tackle",
+	  "id": "tackle",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "Grass",
+	  "target": "all_enemies",
+	  "power": 50,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "effects": [],
+	  "description": "[center]A physical attack that slams into the enemy dealing [color=red]5[/color] damage.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "Common"
+	},
+	"razorleaf": {
+	  "name": "Razor Leaf",
+	  "id": "razorleaf",
+	  "category": "attack",
+	  "subtype": "all_enemies",
+	  "type": "Grass",
+	  "target": "all_enemies",
+	  "power": 8,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "effects": [],
+	  "description": "[center]Deal [color=red]8[/color] damage to [b]ALL[/b] enemies.[/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "Uncommon"
+	},
+		"defensecurl": {
+	  "name": "Defense Curl",
+	  "id": "defensecurl",
+	  "category": "defense",
+	  "subtype": "self",
+	  "type": "Grass",
+	  "target": "self",
+	  "power": 6,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "effects": [],
+	  "description": "Curl up and harden.",
+	  "icon_path": "res://art/tile_0102.png",
+	  "rarity": "Common"
+	},
+		"bodyslam": {
+	  "name": "Body Slam",
+	  "id": "bodyslam",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "Normal",
+	  "target": "enemy",
+	  "power": 10,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "effects": [],
+	  "description": "[center]Slam your foe dealing [color=red]10[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
+	  "icon_path": "res://art/tile_0102.png",
+	  "rarity": "Rare"
+	},
+		"swordsdance": {
+	  "name": "Swords Dance",
+	  "id": "swordsdance",
+	  "category": "buff",
+	  "subtype": "single_target",
+	  "type": "Normal",
+	  "target": "self",
+	  "power": 10,
+	  "accuracy": 100,
+	  "cost": 3,
+	  "effects": [],
+	  "description": "[center]Get [color=red]BUFF[/color] gaining 2 [color=green]MUSCLE[/color].[/center]",
+	  "icon_path": "res://art/tile_0105.png",
+	  "rarity": "Rare"
+	}
+  }
+}

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b0nemgkee4xya"]
+
+[ext_resource type="Script" uid="uid://dl8as5sydvjp8" path="res://data/moves/attack.gd" id="1_hneox"]
+
+[resource]
+script = ExtResource("1_hneox")
+id = ""
+type = 0
+target = 0
+cost = 0
+tooltip_text = ""
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

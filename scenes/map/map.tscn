@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://c32muahqn1k4q"]
+
+[ext_resource type="Script" uid="uid://3oilh8t0ui87" path="res://scenes/map/map.gd" id="1_sxf4j"]
+[ext_resource type="Script" uid="uid://b41wr6qxktuox" path="res://scenes/map/map_generator.gd" id="2_tqkkf"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_sxf4j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 24.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Map"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Go Back"
+
+[node name="MapGenerator" type="Node" parent="."]
+script = ExtResource("2_tqkkf")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

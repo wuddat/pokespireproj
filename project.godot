@@ -1,0 +1,60 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="PokeSpireProject"
+run/main_scene="uid://dnr46qv68apmu"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="uid://no7ba2bkkoly"
+
+[autoload]
+
+Events="*res://global/events.gd"
+Shaker="*res://global/shaker.gd"
+MusicPlayer="*res://global/music_player.tscn"
+SFXPlayer="*res://global/sfx_player.tscn"
+MoveData="*res://global/move_data.gd"
+
+[display]
+
+window/size/viewport_width=512
+window/size/viewport_height=288
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom="uid://c3anpexwnb0eu"
+
+[input]
+
+left_mouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+right_mouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="card_target_selector"
+2d_physics/layer_2="card_drop_area"
+2d_physics/layer_3="enemies"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://d0kle55in8i44"]
+
+[ext_resource type="Texture2D" uid="uid://dwr8fw4dyveyn" path="res://art/charmander_back.png" id="1_71y2i"]
+[ext_resource type="Script" uid="uid://dswbye42ve1b5" path="res://custom_resources/character_stats.gd" id="2_l48km"]
+[ext_resource type="SpriteFrames" uid="uid://c5jw45j5u78xf" path="res://art/frames/charmander_frames.tres" id="2_wn2w8"]
+
+[resource]
+script = ExtResource("2_l48km")
+character_name = "Charmander"
+description = "Fire lizard pokemon"
+portrait = ExtResource("1_71y2i")
+frames = ExtResource("2_wn2w8")
+draftable_move_ids = Array[String]([])
+cards_per_turn = 4
+max_mana = 3
+starting_moves = Array[String](["tackle", "tackle", "tackle", "tackle"])
+max_health = 50
+art = ExtResource("1_71y2i")
+metadata/_custom_type_script = "uid://dswbye42ve1b5"

@@ -1,0 +1,197 @@
+[gd_scene load_steps=11 format=3 uid="uid://eoubudhuhg53"]
+
+[ext_resource type="Script" uid="uid://du8dr06jscr0u" path="res://scenes/ui/character_selector.gd" id="1_to3sr"]
+[ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="2_to3sr"]
+[ext_resource type="Texture2D" uid="uid://rc07vvkv2ffs" path="res://art/mank.png" id="4_gl58c"]
+[ext_resource type="Texture2D" uid="uid://bqbjtd8q7roxa" path="res://art/ratt.png" id="5_txrk6"]
+[ext_resource type="Texture2D" uid="uid://dl3a87y1bxtt8" path="res://art/tile_0096.png" id="6_uy6wb"]
+
+[sub_resource type="Gradient" id="Gradient_wb0q5"]
+offsets = PackedFloat32Array(0, 0.99375)
+colors = PackedColorArray(0.309065, 0.171555, 0, 1, 0.0383501, 0.0123539, 3.00817e-09, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q85j6"]
+gradient = SubResource("Gradient_wb0q5")
+width = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_8g5eo"]
+font = ExtResource("2_to3sr")
+font_size = 24
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.772549)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_45qu8"]
+paragraph_spacing = 4.0
+font = ExtResource("2_to3sr")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.772549)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2bl4m"]
+
+[node name="CharacterSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_to3sr")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_q85j6")
+
+[node name="CharacterText" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.5
+offset_top = -129.0
+offset_right = 142.5
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CharacterText"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bulbasaur"
+label_settings = SubResource("LabelSettings_8g5eo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="CharacterText"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "The Grass Type pokemon
+fucks shit up homie"
+label_settings = SubResource("LabelSettings_45qu8")
+vertical_alignment = 1
+
+[node name="CharacterPortrait" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.866
+offset_top = -15.0085
+offset_right = -164.866
+offset_bottom = 50.9915
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gl58c")
+
+[node name="StartButton" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -126.0
+offset_top = -69.0
+offset_right = -26.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Start Game"
+
+[node name="CharacterButtons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -15.0
+offset_right = 188.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="BulbasaurButton" type="Button" parent="CharacterButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_2bl4m")
+
+[node name="Icon" type="TextureRect" parent="CharacterButtons/BulbasaurButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gl58c")
+
+[node name="SquirtleButton" type="Button" parent="CharacterButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2bl4m")
+
+[node name="Icon" type="TextureRect" parent="CharacterButtons/SquirtleButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_txrk6")
+
+[node name="CharmanderButton" type="Button" parent="CharacterButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2bl4m")
+
+[node name="Icon" type="TextureRect" parent="CharacterButtons/CharmanderButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_uy6wb")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/BulbasaurButton" to="." method="_on_bulbasaur_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/SquirtleButton" to="." method="_on_squirtle_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/CharmanderButton" to="." method="_on_charmander_button_pressed"]
