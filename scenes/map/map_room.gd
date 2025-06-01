@@ -12,6 +12,8 @@ const ICONS:={
 	Room.Type.BOSS: [preload("res://art/tile_0092.png"), Vector2(1.25, 1.25)],
 }
 
+@export var music: AudioStream
+
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
 @onready var line_2d: Line2D = $Visuals/Line2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,6 +24,7 @@ var room: Room : set = set_room
 
 func _ready() -> void:
 	line_2d.visible = false
+	MusicPlayer.stop()
 
 
 func set_available(new_value: bool) -> void:
@@ -54,6 +57,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	
 	room.selected = true
 	animation_player.play("select")
+	MusicPlayer.play(music, true)
 
 
 #called by animatioplayer when 'select' animation finishes

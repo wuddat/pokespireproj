@@ -29,13 +29,14 @@ func _ready() -> void:
 	
 func start_battle(stats: CharacterStats) -> void:
 	get_tree().paused = false
-	MusicPlayer.play(music, true)
+	#MusicPlayer.play(music, true)
 	enemy_handler.reset_enemy_actions()
 	player_handler.start_battle(stats)
 	
 	
 func _on_enemies_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0:
+		MusicPlayer.play(music, true)
 		Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
 
 

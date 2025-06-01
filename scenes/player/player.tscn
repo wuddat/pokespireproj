@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxg8pf4q0o631" path="res://scenes/player/player.gd" id="1_gmlin"]
 [ext_resource type="PackedScene" uid="uid://b5xmc80xwdal6" path="res://scenes/ui/stats_ui.tscn" id="2_gmlin"]
-[ext_resource type="Texture2D" uid="uid://duv7cpswg71c6" path="res://art/bulba.png" id="2_lvxji"]
+[ext_resource type="Texture2D" uid="uid://63ugptgfqloj" path="res://art/squirtleback.png" id="2_lvxji"]
 
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_gmlin")

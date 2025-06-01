@@ -102,8 +102,8 @@ func _on_card_drag_or_aiming_started(used_card: CardUI) -> void:
 
 func _on_card_drag_or_aiming_ended(_card: CardUI) -> void:
 	disabled = false
-	self.playable = char_stats.card_playable(card)
+	playable = char_stats.card_playable(card)
 
 
 func _on_char_stats_changed() -> void:
-	self.playable = char_stats.card_playable(card)
+	playable = char_stats.card_playable(card)

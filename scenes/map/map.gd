@@ -5,6 +5,8 @@ const SCROLL_SPEED := 15
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
+@export var music: AudioStream
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
@@ -69,6 +71,8 @@ func unlock_next_rooms() -> void:
 
 func show_map() -> void:
 	show()
+	MusicPlayer.stop()
+	MusicPlayer.play(music, true)
 	camera_2d.enabled = true
 
 
