@@ -1,0 +1,29 @@
+{
+	"pokemon": {
+		"mankey": {
+		"name": "Mankey",
+		"sprite_path": "res://art/mank.png",
+		"max_health": 60,
+		"move_ids": ["karatechop", "highkick", "bodyslam"],
+		},
+		"rattata": {
+		"name": "rattata",
+		"sprite_path": "res://art/ratt.png",
+		"max_health": 22,
+		"move_ids": ["karatechop", "highkick"],
+		},
+		"weedle": {
+		"name": "weedle",
+		"sprite_path": "res://art/weedlepng.png",
+		"max_health": 12,
+		"move_ids": ["highkick"],
+		},
+		"geodude": {
+		"name": "geodude",
+		"sprite_path": "res://art/geodude.png",
+		"max_health": 20,
+		"move_ids": ["highkick"],
+		},
+		
+	}
+}

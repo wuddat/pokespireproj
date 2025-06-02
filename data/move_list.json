@@ -74,6 +74,38 @@
 	  "description": "[center]Get [color=red]BUFF[/color] gaining 2 [color=green]MUSCLE[/color].[/center]",
 	  "icon_path": "res://art/tile_0105.png",
 	  "rarity": "Rare"
-	}
+	},
+		"karatechop": {
+	  "name": "karatechop",
+	  "id": "karatechop",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "Normal",
+	  "target": "enemy",
+	  "power": 8,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "effects": [],
+	  "description": "[center]Slam your foe dealing [color=red]10[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
+	  "icon_path": "res://art/tile_0102.png",
+	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "rarity": "Rare"
+	},
+		"highkick": {
+	  "name": "highkick",
+	  "id": "highkick",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "Normal",
+	  "target": "enemy",
+	  "power": 20,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "effects": [],
+	  "description": "[center]Slam your foe dealing [color=red]10[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
+	  "icon_path": "res://art/tile_0102.png",
+	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "rarity": "Rare"
+	},
   }
 }

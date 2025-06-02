@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://tff5syx2geen"]
+
+[ext_resource type="Script" uid="uid://d2xphkdvm3vsu" path="res://battles/enemy_generator.gd" id="1_cuwp1"]
+[ext_resource type="PackedScene" uid="uid://b7kjap0xllfyb" path="res://scenes/enemy/enemy.tscn" id="2_4ksjp"]
+[ext_resource type="Resource" uid="uid://cu2ubymoan37f" path="res://enemies/generic_enemy/generic_enemy.tres" id="3_3hlcy"]
+
+[node name="Tier03Enemies" type="Node2D"]
+script = ExtResource("1_cuwp1")
+
+[node name="Enemy" parent="." instance=ExtResource("2_4ksjp")]
+position = Vector2(387, 150)
+stats = ExtResource("3_3hlcy")
+
+[node name="Enemy2" parent="." instance=ExtResource("2_4ksjp")]
+position = Vector2(285, 151)
+stats = ExtResource("3_3hlcy")
+
+[node name="Enemy3" parent="." instance=ExtResource("2_4ksjp")]
+position = Vector2(337, 138)
+stats = ExtResource("3_3hlcy")

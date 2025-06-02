@@ -14,6 +14,20 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
 
+func _ready():
+	await get_tree().process_frame
+	if stats and stats.species_id != "":
+		print("READY: species_id = ", stats.species_id)
+		var poke_data = Pokedex.get_pokemon_data(stats.species_id)
+		print("Pokedata: ", poke_data)
+		if poke_data:
+			stats.load_from_pokedex(poke_data)
+			sprite_2d.texture = stats.art
+			setup_ai()
+		else:
+			print("No Pokedex data found for: " + stats.species_id)
+	else:
+		print("Stats or species_id not set yet.")
 
 func set_current_action(value: EnemyAction) -> void:
 	current_action = value
@@ -29,6 +43,7 @@ func set_enemy_stats(value: EnemyStats) -> void:
 		stats.stats_changed.connect(update_action)
 	
 	update_enemy()
+	
 
 
 func setup_ai() -> void:
@@ -39,6 +54,14 @@ func setup_ai() -> void:
 	add_child(new_action_picker)
 	enemy_action_picker = new_action_picker
 	enemy_action_picker.enemy = self
+	
+	if enemy_action_picker.has_method("setup_actions_from_moves"):
+		enemy_action_picker.setup_actions_from_moves(self, stats.move_ids)
+	else:
+			print("enemy_action_picker does NOT have setup_actions_from_moves")
+	await get_tree().process_frame
+	update_action()
+	
 
 
 func update_stats() -> void:
@@ -68,6 +91,7 @@ func update_enemy() -> void:
 	arrow.position = Vector2.UP * (sprite_2d.get_rect().size.y / 2 + ARROW_OFFSET)
 	setup_ai()
 	update_stats()
+
 
 
 func do_turn() -> void:

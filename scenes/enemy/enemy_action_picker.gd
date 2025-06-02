@@ -9,7 +9,7 @@ extends Node
 
 func _ready() -> void:
 	target = get_tree().get_first_node_in_group("player")
-	setup_chances()
+	#setup_chances()
 
 
 func get_action() -> EnemyAction:
@@ -47,6 +47,63 @@ func get_chance_based_action() -> EnemyAction:
 			return action
 		
 	return null
+
+
+#func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void:
+	#enemy = enemy_ref
+	#target = get_tree().get_first_node_in_group("player")
+#
+	#for i in range(min(move_ids.size(), get_child_count())):
+		#var action_node = get_child(i)
+		#var move_id = move_ids[i]
+		#var move_data = MoveData.moves.get(move_id, {})
+#
+		#if action_node.has_method("setup_from_data"):
+			#action_node.call("setup_from_data", move_data)
+
+func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void:
+	enemy = enemy_ref
+	target = get_tree().get_first_node_in_group("player")
+
+	# Remove any previously added actions
+	if get_child_count() > 0:
+		for child in get_children():
+			child.queue_free()
+		await get_tree().process_frame  # Give the scene tree time to remove them
+
+	# Create new actions based on move_ids
+	for move_id in move_ids:
+		var move_data = MoveData.moves.get(move_id, {})
+		if move_data.is_empty():
+			push_warning("Missing move data for: " + move_id)
+			continue
+
+		var category = move_data.get("category", "attack")  # Default to "attack" if missing
+		var action_scene: Script
+
+		match category:
+			"attack":
+				action_scene = preload("res://enemies/generic_enemy/generic_enemy_attack.gd")
+			"block":
+				action_scene = preload("res://enemies/generic_enemy/generic_enemy_block.gd")
+			_:
+				push_warning("Unknown move category for: " + move_id)
+				continue
+
+		var action = action_scene.new()
+		add_child(action)
+
+		action.enemy = enemy
+		action.target = target
+
+		if action.has_method("setup_from_data"):
+			action.setup_from_data(move_data)
+		else:
+			push_warning("Action is missing setup_from_data")
+
+	setup_chances()
+
+
 
 
 func setup_chances() -> void:

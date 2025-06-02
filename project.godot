@@ -13,7 +13,7 @@ config_version=5
 config/name="PokeSpireProject"
 run/main_scene="uid://dnr46qv68apmu"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="uid://no7ba2bkkoly"
+config/icon="uid://uu2myxkxc2s8"
 
 [autoload]
 
@@ -22,6 +22,7 @@ Shaker="*res://global/shaker.gd"
 MusicPlayer="*res://global/music_player.tscn"
 SFXPlayer="*res://global/sfx_player.tscn"
 MoveData="*res://global/move_data.gd"
+Pokedex="*res://global/pokedex.gd"
 
 [display]
 

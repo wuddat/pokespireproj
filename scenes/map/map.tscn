@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c32muahqn1k4q"]
+[gd_scene load_steps=7 format=3 uid="uid://c32muahqn1k4q"]
 
 [ext_resource type="Script" uid="uid://3oilh8t0ui87" path="res://scenes/map/map.gd" id="1_sxf4j"]
 [ext_resource type="AudioStream" uid="uid://dpdenqqbovwfq" path="res://art/8_bit_iced_village_lofi.mp3" id="2_a2pkv"]
 [ext_resource type="Script" uid="uid://b41wr6qxktuox" path="res://scenes/map/map_generator.gd" id="2_tqkkf"]
+[ext_resource type="Resource" uid="uid://cbg5gf0cehe7m" path="res://battles/battle_stats_pool.tres" id="4_ph54e"]
 
 [sub_resource type="Gradient" id="Gradient_tqkkf"]
 offsets = PackedFloat32Array(0, 0.992665)
@@ -29,6 +30,7 @@ offset = Vector2(256, 144)
 
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource("2_tqkkf")
+battle_stats_pool = ExtResource("4_ph54e")
 
 [node name="MapBackground" type="CanvasLayer" parent="."]
 layer = -1

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://cu2ubymoan37f"]
+
+[ext_resource type="PackedScene" uid="uid://belkobawax8yt" path="res://enemies/generic_enemy/generic_enemy_ai.tscn" id="1_xbwui"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="2_xbwui"]
+[ext_resource type="Script" uid="uid://b5scvdy2uuhx3" path="res://custom_resources/enemy_stats.gd" id="3_fndka"]
+
+[resource]
+script = ExtResource("3_fndka")
+ai = ExtResource("1_xbwui")
+species_id = "mankey"
+move_ids = Array[String]([])
+max_health = 12
+art = ExtResource("2_xbwui")
+metadata/_custom_type_script = "uid://b5scvdy2uuhx3"

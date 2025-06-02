@@ -1,7 +1,7 @@
 class_name Map
 extends Node2D
 
-const SCROLL_SPEED := 15
+const SCROLL_SPEED := 20
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
@@ -28,6 +28,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+		
 	if event.is_action_pressed("scroll_up"):
 		camera_2d.position.y -= SCROLL_SPEED
 	elif event.is_action_pressed("scroll_down"):

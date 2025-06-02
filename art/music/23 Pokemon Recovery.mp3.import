@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1nfvki6piusg"
+path="res://.godot/imported/23 Pokemon Recovery.mp3-02863175140550bd86a73b7cd3e1631c.mp3str"
+
+[deps]
+
+source_file="res://art/music/23 Pokemon Recovery.mp3"
+dest_files=["res://.godot/imported/23 Pokemon Recovery.mp3-02863175140550bd86a73b7cd3e1631c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

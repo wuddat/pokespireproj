@@ -77,5 +77,5 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 			card.setup_from_data(move_data)
 		pile.add_card(card)
 		
-	print(pile)
+	#print(pile)
 	return pile

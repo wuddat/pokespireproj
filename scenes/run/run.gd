@@ -21,6 +21,8 @@ const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 @onready var rewardsbtn: Button = %RewardsButton
 @onready var shopbtn: Button = %ShopButton
 @onready var treasurebtn: Button = %TreasureButton
+@onready var health_ui: HealthUI = %HealthUI
+
 
 var stats: RunStats
 var character: CharacterStats
@@ -85,10 +87,24 @@ func _setup_event_connections() -> void:
 
 
 func 	_setup_top_bar():
+	character.stats_changed.connect(health_ui.update_stats.bind(character))
+	health_ui.update_stats(character)
 	gold_ui.run_stats = stats
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
+
+
+func _on_battle_room_entered(room: Room) -> void:
+	var battle_scene: Battle = _change_view(battlescene) as Battle
+	battle_scene.char_stats = character
+	battle_scene.battle_stats = room.battle_stats
+	battle_scene.start_battle()
+
+
+func _on_pokecenter_entered() -> void:
+	var pokecenter_scene: Pokecenter = _change_view(pokecenterscene) as Pokecenter
+	pokecenter_scene.char_stats = character
 
 
 func _on_battle_won() -> void:
@@ -96,21 +112,20 @@ func _on_battle_won() -> void:
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
 
-#	This is temporary, it will come from actual battle encounter as a dep l8r
-	reward_scene.add_gold_reward(211)
+	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
 	reward_scene.add_card_reward()
 
 func _on_map_exited(room: Room) -> void:
 	match room.type:
 		Room.Type.MONSTER:
-			_change_view(battlescene)
+			_on_battle_room_entered(room)
 		Room.Type.TREASURE:
 			_change_view(treasurescene)
 		Room.Type.POKECENTER:
-			_change_view(pokecenterscene)
+			_on_pokecenter_entered()
 		Room.Type.SHOP:
 			_change_view(shopscene)
 		Room.Type.BOSS:
-			_change_view(battlescene)
+			_on_battle_room_entered(room)
 		
 	

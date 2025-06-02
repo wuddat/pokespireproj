@@ -11,6 +11,8 @@ const MONSTER_ROOM_WEIGHT := 10.0
 const SHOP_ROOM_WEIGHT := 2.5
 const POKECENTER_ROOM_WEIGHT := 4
 
+@export var battle_stats_pool: BattleStatsPool
+
 var random_room_type_weights = {
 	Room.Type.MONSTER: 0.0,
 	Room.Type.POKECENTER: 0.0,
@@ -20,8 +22,8 @@ var random_room_type_total_weight := 0
 var map_data: Array[Array]
 
 
-func _ready() -> void:
-	generate_map()
+#func _ready() -> void:
+	#generate_map()
 
 
 func generate_map() -> Array[Array]:
@@ -32,19 +34,12 @@ func generate_map() -> Array[Array]:
 		var current_j := j
 		for i in FLOORS - 1:
 			current_j = _setup_connection(i, current_j)
-		
-		_setup_boss_room()
-		_setup_random_room_weights()
-		_setup_room_types()
-		
-	var i := 0
-	for floor in map_data:
-		print("Fl %s" % i)
-		var used_rooms = floor.filter(
-			func(room:Room): return room.next_rooms.size() > 0
-		)
-		print(used_rooms)
-		i += 1
+			
+	battle_stats_pool.setup()
+	
+	_setup_boss_room()
+	_setup_random_room_weights()
+	_setup_room_types()
 		
 	return map_data
 
@@ -142,6 +137,7 @@ func _setup_boss_room() -> void:
 			current_room.next_rooms.append(boss_room)
 	
 	boss_room.type = Room.Type.BOSS
+	boss_room.battle_stats = battle_stats_pool.get_random_battle_for_tier(2)
 
 
 func _setup_random_room_weights() -> void:
@@ -157,9 +153,9 @@ func _setup_room_types() -> void:
 	for room: Room in map_data[0]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.MONSTER
+			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(0)
 		
 	#9th floor is always treasure
-	#TODO look up the integer floor method for FLOORS/2 to avoid decimals
 	for room: Room in map_data[floori(FLOORS/2)]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.TREASURE
@@ -198,6 +194,14 @@ func _set_room_randomly(room_to_set: Room) -> void:
 		pokecenter_before_boss = is_pokecenter and room_to_set.row == 12
 	
 	room_to_set.type = type_candidate
+	
+	if type_candidate == Room.Type.MONSTER:
+		var tier_for_monster_rooms := 0
+		
+		if room_to_set.row > 2:
+			tier_for_monster_rooms = 1
+			
+		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
 	
 	
 func _room_has_parent_of_type(room: Room, type: Room.Type) -> bool:

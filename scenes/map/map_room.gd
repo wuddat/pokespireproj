@@ -36,6 +36,7 @@ func set_available(new_value: bool) -> void:
 	elif not room.selected:
 		animation_player.play("RESET")
 		line_2d.visible = false
+		sprite_2d.modulate = Color(1,1,1,0.7)
 		
 
 
