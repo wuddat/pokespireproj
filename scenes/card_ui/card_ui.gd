@@ -94,6 +94,7 @@ func _on_drop_point_detector_area_exited(area: Area2D) -> void:
 
 
 func _on_card_drag_or_aiming_started(used_card: CardUI) -> void:
+	Events.tooltip_hide_requested.emit()
 	if used_card == self:
 		return
 	

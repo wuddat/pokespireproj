@@ -84,8 +84,10 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 		match category:
 			"attack":
 				action_scene = preload("res://enemies/generic_enemy/generic_enemy_attack.gd")
-			"block":
+				print("attack assigned to ", move_id)
+			"defense":
 				action_scene = preload("res://enemies/generic_enemy/generic_enemy_block.gd")
+				print("block assigned to ", move_id)
 			_:
 				push_warning("Unknown move category for: " + move_id)
 				continue

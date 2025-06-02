@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnragedStatus" load_steps=3 format=3 uid="uid://bodjiemku8e14"]
+
+[ext_resource type="Script" uid="uid://cb2kg4f17h8i8" path="res://statuses/enraged.gd" id="1_arq51"]
+[ext_resource type="Texture2D" uid="uid://we077unk7u3w" path="res://art/statuseffects/flame.png" id="1_wdi67"]
+
+[resource]
+script = ExtResource("1_arq51")
+id = "enraged"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_wdi67")
+tooltip = "TODO"
+metadata/_custom_type_script = "uid://breq3elxr1644"

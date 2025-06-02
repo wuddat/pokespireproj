@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bltcdih6elcop"]
+
+[ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_gnc2q"]
+[ext_resource type="Script" uid="uid://b2rics0hgas1b" path="res://characters/bulbasaur/cards/powerTest.gd" id="1_sumew"]
+
+[resource]
+script = ExtResource("1_sumew")
+id = "enraged"
+name = "enraged"
+type = 2
+rarity = 2
+target = 0
+cost = 0
+power = 0
+exhausts = true
+icon = ExtResource("1_gnc2q")
+tooltip_text = "power test"
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

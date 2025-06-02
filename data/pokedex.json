@@ -3,26 +3,26 @@
 		"mankey": {
 		"name": "Mankey",
 		"sprite_path": "res://art/mank.png",
-		"max_health": 60,
-		"move_ids": ["karatechop", "highkick", "bodyslam"],
+		"max_health": 22,
+		"move_ids": ["defensecurl", "highkick", "tackle"],
 		},
 		"rattata": {
 		"name": "rattata",
 		"sprite_path": "res://art/ratt.png",
-		"max_health": 22,
-		"move_ids": ["karatechop", "highkick"],
+		"max_health": 18,
+		"move_ids": ["defensecurl", "highkick"],
 		},
 		"weedle": {
 		"name": "weedle",
 		"sprite_path": "res://art/weedlepng.png",
 		"max_health": 12,
-		"move_ids": ["highkick"],
+		"move_ids": ["defensecurl"],
 		},
 		"geodude": {
 		"name": "geodude",
 		"sprite_path": "res://art/geodude.png",
-		"max_health": 20,
-		"move_ids": ["highkick"],
+		"max_health": 25,
+		"move_ids": ["defensecurl"],
 		},
 		
 	}

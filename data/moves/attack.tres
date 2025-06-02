@@ -5,8 +5,12 @@
 [resource]
 script = ExtResource("1_hneox")
 id = ""
+name = ""
 type = 0
+rarity = 0
 target = 0
 cost = 0
+power = 0
+exhausts = false
 tooltip_text = ""
 metadata/_custom_type_script = "uid://v0y8cuyxdriv"

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_imfec"]
 [ext_resource type="StyleBox" uid="uid://cpv8itul2r88u" path="res://scenes/card_ui/card_base_style.tres" id="2_jxbv6"]
 [ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="3_imfec"]
-[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/bulbasaur_tackle.tres" id="3_m3e03"]
+[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="3_m3e03"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="6_imfec"]
 
 [node name="CardVisuals" type="Control"]

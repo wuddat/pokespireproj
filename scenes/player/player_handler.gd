@@ -5,6 +5,7 @@ const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.2
 
 @export var hand: Hand
+@export var player: Player
 
 var character: CharacterStats
 
@@ -18,18 +19,19 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile = character.deck.duplicate(true)
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
+	player.status_handler.statuses_applied.connect(_on_statuses_applied)
 	start_turn()
 
 
 func start_turn() -> void:
+	player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	character.block = 0
 	character.reset_mana()
-	draw_cards(character.cards_per_turn)
 
 
 func end_turn() -> void:
 	hand.disable_hand()
-	discard_cards()
+	player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 	
 	
 func draw_card() -> void:
@@ -77,4 +79,14 @@ func reshuffle_deck_from_discard() -> void:
 
 
 func _on_card_played(card: Card) -> void:
+	if card.exhausts or card.type == Card.Type.POWER:
+		return	
 	character.discard.add_card(card)
+
+
+func _on_statuses_applied(type: Status.Type) -> void:
+	match type:
+		Status.Type.START_OF_TURN:
+			draw_cards(character.cards_per_turn)
+		Status.Type.END_OF_TURN:
+			discard_cards()

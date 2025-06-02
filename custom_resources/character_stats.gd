@@ -76,6 +76,8 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 		if card.has_method("setup_from_data"):
 			card.setup_from_data(move_data)
 		pile.add_card(card)
+		#pile.add_card(preload("res://characters/bulbasaur/cards/bulbasaur_vinewhip.tres"))
+		#pile.add_card(preload("res://characters/bulbasaur/cards/powerTest.tres"))
 		
 	#print(pile)
 	return pile

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardPile" load_steps=4 format=3 uid="uid://c3f3nwbgvxh6f"]
 
 [ext_resource type="Script" uid="uid://v0y8cuyxdriv" path="res://custom_resources/card.gd" id="1_67ja5"]
-[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/bulbasaur_tackle.tres" id="2_lc8gg"]
+[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="2_lc8gg"]
 [ext_resource type="Script" uid="uid://ejt4wwwraouh" path="res://custom_resources/card_pile.gd" id="2_srscd"]
 
 [resource]

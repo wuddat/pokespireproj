@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackPower" load_steps=3 format=3 uid="uid://bnjj3deir31e3"]
+
+[ext_resource type="Texture2D" uid="uid://c8wlp4gswn3km" path="res://art/statuseffects/spooky.png" id="1_t2krk"]
+[ext_resource type="Script" uid="uid://cvxirryx7k44x" path="res://statuses/attack_power.gd" id="1_veqi3"]
+
+[resource]
+script = ExtResource("1_veqi3")
+id = "attack_power"
+type = 2
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 2
+icon = ExtResource("1_t2krk")
+tooltip = "TODO"
+metadata/_custom_type_script = "uid://breq3elxr1644"

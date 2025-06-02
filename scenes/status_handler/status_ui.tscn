@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cge3lxrc1ynd0"]
+
+[ext_resource type="Texture2D" uid="uid://lh34tx5gsyqv" path="res://art/statuseffects/zap.png" id="1_7scyp"]
+[ext_resource type="Script" uid="uid://dorhdkfgw607g" path="res://scenes/status_handler/status_ui.gd" id="1_r24ij"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r24ij"]
+font_size = 8
+
+[node name="StatusUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r24ij")
+
+[node name="StatusIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_7scyp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Duration" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 24.0
+offset_bottom = 16.0
+text = "99"
+label_settings = SubResource("LabelSettings_r24ij")
+vertical_alignment = 1
+
+[node name="Stacks" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 24.0
+offset_bottom = 16.0
+text = "99"
+label_settings = SubResource("LabelSettings_r24ij")
+vertical_alignment = 1

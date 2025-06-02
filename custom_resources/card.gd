@@ -17,19 +17,32 @@ const TYPE_COLORS := {
 	Card.Type.POWER: Color.PURPLE
 }
 
+const STATUS_LOOKUP := {
+	"poisoned": preload("res://statuses/poisoned.tres"),
+	"enraged": preload("res://statuses/enraged.tres"),
+	"exposed": preload("res://statuses/exposed.tres"),
+	"attack_power": preload("res://statuses/attack_power.tres")
+}
+
+
 @export_group("Card Attributes")
 @export var id: String
 @export var name: String
-@export var power: int
 @export var type: Type
 @export var rarity: Rarity
 @export var target: Target
 @export var cost: int
+@export var power: int
+@export var exhausts: bool = false
+
 
 @export_group("Card Visuals")
 @export var icon: Texture
 @export_multiline var tooltip_text: String
 @export var sound: AudioStream
+
+@export_group("Card Effects")
+@export var status_effects: Array[Status]
 
 
 func is_single_targeted() -> bool:
@@ -108,3 +121,9 @@ func setup_from_data(data: Dictionary) -> void:
 	else:
 		var soundpath = "res://art/sounds/Tackle.wav"
 		sound = load(soundpath)
+	
+	status_effects.clear()
+	if data.has("status_effects"):
+		for effect_id in data["status_effects"]:
+			if STATUS_LOOKUP.has(effect_id):
+				status_effects.append(STATUS_LOOKUP[effect_id].duplicate())

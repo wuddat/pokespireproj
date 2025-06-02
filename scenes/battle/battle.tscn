@@ -66,9 +66,10 @@ stats = ExtResource("5_fisqk")
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("4_py4tk")]
 
-[node name="PlayerHandler" type="Node" parent="." node_paths=PackedStringArray("hand")]
+[node name="PlayerHandler" type="Node" parent="." node_paths=PackedStringArray("hand", "player")]
 script = ExtResource("8_mxe8n")
 hand = NodePath("../BattleUI/Hand")
+player = NodePath("../Player")
 
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 script = ExtResource("7_icoan")

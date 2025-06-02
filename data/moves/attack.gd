@@ -13,3 +13,12 @@ func apply_effects(targets: Array[Node]) -> void:
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
 	print(damage_effect.amount)
+	
+	#apply status effect if any on card
+	for status_effect in status_effects:
+		if status_effect:
+			var stat_effect := StatusEffect.new()
+			var status_to_apply := status_effect.duplicate()
+			stat_effect.status = status_to_apply
+			stat_effect.execute(targets)
+	
