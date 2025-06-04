@@ -114,9 +114,13 @@ func _on_mouse_entered() -> void:
 	await get_tree().create_timer(STATUS_DETAIL_OVERLAY_DELAY, false).timeout
 	if is_mouse_over:
 		Events.status_tooltip_requested.emit(_get_all_statuses())
-	
 
 
 func _on_mouse_exited() -> void:
 	is_mouse_over = false
 	Events.status_tooltip_hide_requested.emit()
+
+func remove_status(id: String) -> void:
+	for status_ui: StatusUI in get_children():
+		if status_ui.status.id == id:
+			status_ui.queue_free()

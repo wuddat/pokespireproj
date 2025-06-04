@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Burned" load_steps=3 format=3 uid="uid://cgl5qmgapsrnm"]
+
+[ext_resource type="Script" uid="uid://th5wflomgs70" path="res://statuses/burned.gd" id="1_a7vnf"]
+[ext_resource type="Texture2D" uid="uid://we077unk7u3w" path="res://art/statuseffects/flame.png" id="1_qyxwe"]
+
+[resource]
+script = ExtResource("1_a7vnf")
+id = "burned"
+type = 2
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_qyxwe")
+tooltip = "BURNED: 
+Receives +1 DMG per stack."
+metadata/_custom_type_script = "uid://breq3elxr1644"

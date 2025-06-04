@@ -106,6 +106,13 @@ func update_intent() -> void:
 func do_turn() -> void:
 	stats.block = 0
 	
+	if status_handler._has_status("flinched"):
+		print("Enemy flinched and skips turn!")
+		status_handler.remove_status("flinched")
+		Events.enemy_action_completed.emit(self)
+		return
+
+	
 	if not current_action:
 		return
 	
