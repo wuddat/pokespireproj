@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b0nemgkee4xya"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b0nemgkee4xya"]
 
 [ext_resource type="Script" uid="uid://dl8as5sydvjp8" path="res://data/moves/attack.gd" id="1_hneox"]
+[ext_resource type="Script" uid="uid://breq3elxr1644" path="res://custom_resources/status.gd" id="2_x4pox"]
 
 [resource]
 script = ExtResource("1_hneox")
@@ -13,4 +14,5 @@ cost = 0
 power = 0
 exhausts = false
 tooltip_text = ""
+status_effects = Array[ExtResource("2_x4pox")]([])
 metadata/_custom_type_script = "uid://v0y8cuyxdriv"

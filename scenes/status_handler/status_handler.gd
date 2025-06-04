@@ -5,8 +5,14 @@ signal statuses_applied(type: Status.Type)
 
 const STATUS_APPLY_INTERVAL := 0.25
 const STATUS_UI = preload("res://scenes/status_handler/status_ui.tscn")
+const STATUS_DETAIL_OVERLAY_DELAY := 0.5
 
 @export var status_owner: Node2D
+
+var is_mouse_over := false
+
+#func _ready() ->void:
+	#_draw()
 
 
 func apply_statuses_by_type(type:Status.Type) -> void:
@@ -98,3 +104,19 @@ func _on_status_applied(status: Status) -> void:
 	if status.can_expire:
 		status.duration -= 1
 		print(status.id," effect applied and duration reduced by 1")
+		
+func get_statuses() -> Array[Status]:
+	return _get_all_statuses()
+
+
+func _on_mouse_entered() -> void:
+	is_mouse_over = true
+	await get_tree().create_timer(STATUS_DETAIL_OVERLAY_DELAY, false).timeout
+	if is_mouse_over:
+		Events.status_tooltip_requested.emit(_get_all_statuses())
+	
+
+
+func _on_mouse_exited() -> void:
+	is_mouse_over = false
+	Events.status_tooltip_hide_requested.emit()

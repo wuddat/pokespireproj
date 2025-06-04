@@ -11,18 +11,18 @@
 
 [sub_resource type="Resource" id="Resource_kai5s"]
 script = ExtResource("4_igsv5")
-number = ""
+base_text = ""
 metadata/_custom_type_script = "uid://mopmtkqxtoli"
 
 [sub_resource type="Resource" id="Resource_kms8m"]
 script = ExtResource("4_igsv5")
-number = ""
+base_text = ""
 icon = ExtResource("7_10078")
 metadata/_custom_type_script = "uid://mopmtkqxtoli"
 
 [sub_resource type="Resource" id="Resource_36tai"]
 script = ExtResource("4_igsv5")
-number = ""
+base_text = ""
 icon = ExtResource("10_3odth")
 metadata/_custom_type_script = "uid://mopmtkqxtoli"
 

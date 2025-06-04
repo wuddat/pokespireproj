@@ -5,6 +5,9 @@ const ATTACK_POWER_STATUS = preload("res://statuses/attack_power.tres")
 
 var stacks_per_turn := 2
 
+func get_tooltip() -> String:
+	return tooltip % stacks_per_turn
+
 func apply_status(target: Node) -> void:
 	print("applied enraged and increased atk pwr ")
 	

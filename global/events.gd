@@ -20,10 +20,14 @@ signal player_died
 signal enemy_action_completed(enemy: Enemy)
 signal enemy_turn_ended
 signal enemy_died(enemy: Enemy)
+signal enemy_captured
+
 
 #Battle-related Events
 signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)
 signal battle_won
+signal status_tooltip_requested(statuses: Array[Status])
+signal status_tooltip_hide_requested()
 
 #Map-related Events
 signal map_exited(room: Room)

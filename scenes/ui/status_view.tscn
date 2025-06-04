@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://6mq48o6e08j5"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_msrfa"]
+[ext_resource type="Script" uid="uid://dm5ivhiykxb27" path="res://scenes/ui/status_view.gd" id="1_pbqwo"]
+[ext_resource type="PackedScene" uid="uid://cjt3didegw4ym" path="res://scenes/ui/status_tooltip.tscn" id="3_xdcbm"]
+
+[node name="StatusView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_msrfa")
+script = ExtResource("1_pbqwo")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_msrfa")
+color = Color(0, 0, 0, 0.752941)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="StatusTooltips" type="VBoxContainer" parent="ScrollContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="StatusTooltip" parent="ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("3_xdcbm")]
+layout_mode = 2
+
+[node name="StatusTooltip2" parent="ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("3_xdcbm")]
+layout_mode = 2

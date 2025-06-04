@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=23 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -19,10 +19,11 @@
 [ext_resource type="Script" uid="uid://d2wwbjths5rhf" path="res://scenes/ui/red_flash.gd" id="15_t1kk3"]
 [ext_resource type="PackedScene" uid="uid://ofgutpuj26p0" path="res://scenes/ui/battle_over_panel.tscn" id="17_6ofp8"]
 [ext_resource type="PackedScene" uid="uid://d0sv3khv88a0s" path="res://scenes/ui/card_pile_opener.tscn" id="17_w40i5"]
+[ext_resource type="PackedScene" uid="uid://6mq48o6e08j5" path="res://scenes/ui/status_view.tscn" id="18_sgdsx"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="20_fe4ja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gynk"]
-size = Vector2(512, 187)
+size = Vector2(512, 178)
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_kd6yx")
@@ -41,7 +42,7 @@ metadata/_edit_lock_ = true
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
-position = Vector2(256, 93.5)
+position = Vector2(256, 89)
 shape = SubResource("RectangleShape2D_7gynk")
 debug_color = Color(0, 0.6, 0.701961, 0.0666667)
 
@@ -74,7 +75,7 @@ player = NodePath("../Player")
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 script = ExtResource("7_icoan")
 
-[node name="Hand" type="HBoxContainer" parent="BattleUI"]
+[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -88,6 +89,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 script = ExtResource("2_xd4uy")
+player = NodePath("../../Player")
 
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_fisqk")]
 offset_top = -87.0
@@ -95,8 +97,8 @@ offset_bottom = -57.0
 char_stats = ExtResource("5_fisqk")
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_mxe8n")]
-offset_top = 41.0
-offset_bottom = 111.0
+offset_top = 36.0
+offset_bottom = 86.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI"]
 unique_name_in_owner = true
@@ -193,3 +195,8 @@ visible = false
 [node name="DiscardPileView" parent="CardPileViews" instance=ExtResource("20_fe4ja")]
 unique_name_in_owner = true
 visible = false
+
+[node name="StatusUI" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="StatusView" parent="StatusUI" instance=ExtResource("18_sgdsx")]

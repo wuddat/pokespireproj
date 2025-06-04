@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_rest_button_pressed() -> void:
 	MusicPlayer.play(recovery, true)
-	rest_button.visible == false
+	rest_button.visible = false
 	char_stats.heal(char_stats.max_health)
 	animation_player.play("fade_out")
 

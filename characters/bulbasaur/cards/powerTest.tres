@@ -1,7 +1,8 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bltcdih6elcop"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bltcdih6elcop"]
 
 [ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_gnc2q"]
 [ext_resource type="Script" uid="uid://b2rics0hgas1b" path="res://characters/bulbasaur/cards/powerTest.gd" id="1_sumew"]
+[ext_resource type="Script" uid="uid://breq3elxr1644" path="res://custom_resources/status.gd" id="3_tw1pb"]
 
 [resource]
 script = ExtResource("1_sumew")
@@ -15,4 +16,5 @@ power = 0
 exhausts = true
 icon = ExtResource("1_gnc2q")
 tooltip_text = "power test"
+status_effects = Array[ExtResource("3_tw1pb")]([])
 metadata/_custom_type_script = "uid://v0y8cuyxdriv"

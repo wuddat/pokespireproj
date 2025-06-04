@@ -58,7 +58,8 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 	
 	var move_to_resource_map = {
 		"attack": preload("res://data/moves/attack.tres"),
-		"defense": preload("res://data/moves/block.tres")
+		"defense": preload("res://data/moves/block.tres"),
+		"power": preload("res://data/moves/power.tres")
 	}
 
 	for move_id in move_ids:

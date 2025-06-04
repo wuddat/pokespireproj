@@ -10,7 +10,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -110.0
 offset_right = 110.0
-offset_bottom = 70.0
+offset_bottom = 50.0
 grow_horizontal = 2
 theme = ExtResource("1_mtwet")
 script = ExtResource("2_kv0sd")
@@ -40,6 +40,4 @@ size_flags_vertical = 3
 theme = ExtResource("1_mtwet")
 theme_override_constants/line_separation = 3
 bbcode_enabled = true
-text = "Test Tooltip
-card_playable
-card_playable"
+text = "Test Tooltip"

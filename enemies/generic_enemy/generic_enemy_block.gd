@@ -10,7 +10,6 @@ func setup_from_data(data: Dictionary) -> void:
 	chance_weight = 1.0
 	
 	intent = Intent.new()
-	intent.number = str(block)
 	intent.icon = preload("res://art/tile_0102.png")
 
 

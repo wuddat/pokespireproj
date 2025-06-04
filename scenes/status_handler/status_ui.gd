@@ -12,6 +12,8 @@ extends Control
 	#await get_tree().create_timer(2).timeout
 	#status.duration -= 1
 	#status.stacks -= 2
+func _ready():
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func set_status(new_status: Status) -> void:
 	if not is_node_ready():

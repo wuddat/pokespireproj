@@ -9,6 +9,7 @@ const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
 
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
+@export var player_modifiers: ModifierHandler
 
 @onready var card_visuals: CardVisuals = $CardVisuals
 @onready var drop_point_detector: Area2D = $DropPointDetector
@@ -43,10 +44,23 @@ func play() -> void:
 	if not card:
 		return
 		
-	card.play(targets, char_stats)
+	card.play(targets, char_stats, player_modifiers)
 	queue_free()
+
+
+func get_active_enemy_modifiers() -> ModifierHandler:
+	if targets.is_empty() or targets.size() > 1 or not targets[0] is Enemy:
+		return null
 	
-	
+	return targets[0].modifier_handler
+
+
+func request_tooltip() -> void:
+	var enemy_modifiers := get_active_enemy_modifiers()
+	var updated_tooltip := card.get_updated_tooltip(player_modifiers, enemy_modifiers)
+	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
+
+
 func _on_gui_input(event: InputEvent) -> void:
 	card_state_machine.on_gui_input(event)
 
@@ -76,7 +90,7 @@ func _set_playable(value:bool) -> void:
 		card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
 	else:
 		card_visuals.cost.remove_theme_color_override("font_color")
-		card_visuals.icon.modulate - Color(1, 1, 1, 1)
+		card_visuals.icon.modulate = Color(1, 1, 1, 1)
 
 
 func _set_char_stats(value: CharacterStats) -> void:
@@ -94,7 +108,7 @@ func _on_drop_point_detector_area_exited(area: Area2D) -> void:
 
 
 func _on_card_drag_or_aiming_started(used_card: CardUI) -> void:
-	Events.tooltip_hide_requested.emit()
+	#Events.tooltip_hide_requested.emit()
 	if used_card == self:
 		return
 	

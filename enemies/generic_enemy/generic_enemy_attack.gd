@@ -4,6 +4,7 @@ extends EnemyAction
 
 
 func setup_from_data(data: Dictionary) -> void:
+	var damage_display = "%s"
 	damage = data.get("power", 0)
 	#print("data passed to setup as: ",data)
 	sound = preload("res://art/sounds/VineWhip2.wav")
@@ -11,7 +12,8 @@ func setup_from_data(data: Dictionary) -> void:
 	chance_weight = 1.0
 	
 	intent = Intent.new()
-	intent.number = str(damage)
+	intent.base_text = damage_display
+	intent.current_text = str(damage)
 	if damage <= 5:
 		intent.icon = preload("res://art/tile_0103.png")
 	elif damage <= 10:
@@ -44,3 +46,12 @@ func perform_action() -> void:
 		func():
 			Events.enemy_action_completed.emit(enemy)
 	)
+
+
+func update_intent_text() -> void:
+	var player := target as Player
+	if not player:
+		return
+	
+	var modified_dmg := player.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	intent.current_text = intent.base_text % modified_dmg

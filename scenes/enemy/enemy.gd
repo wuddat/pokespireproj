@@ -5,18 +5,22 @@ const ARROW_OFFSET := 20
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @export var stats: EnemyStats : set = set_enemy_stats
+@export var is_catchable: bool = false
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var arrow: Sprite2D = $Arrow
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
 @onready var status_handler: StatusHandler = $StatusHandler
+@onready var modifier_handler: ModifierHandler = $ModifierHandler
 
 var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
 
 func _ready():
 	await get_tree().process_frame
+	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
+	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	if stats and stats.species_id != "":
 		print("READY: species_id = ", stats.species_id)
 		var poke_data = Pokedex.get_pokemon_data(stats.species_id)
@@ -32,8 +36,7 @@ func _ready():
 
 func set_current_action(value: EnemyAction) -> void:
 	current_action = value
-	if current_action:
-		intent_ui.update_intent(current_action.intent)
+	update_intent()
 
 
 func set_enemy_stats(value: EnemyStats) -> void:
@@ -94,6 +97,11 @@ func update_enemy() -> void:
 	update_stats()
 
 
+func update_intent() -> void:
+	if current_action:
+		current_action.update_intent_text()
+		intent_ui.update_intent(current_action.intent)
+
 
 func do_turn() -> void:
 	stats.block = 0
@@ -104,21 +112,29 @@ func do_turn() -> void:
 	current_action.perform_action()
 
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
 	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
+	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
 	
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
-	tween.tween_callback(stats.take_damage.bind(damage))
+	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
 	
 	tween.finished.connect(
 		func():
 			sprite_2d.material = null
-			if stats.health <= 0:
+			
+			if stats.health <= 0 and status_handler._has_status("catching"):
+				is_catchable = true
+				print("enemy was caught ", is_catchable)
+				Events.enemy_captured.emit(self)
+				Events.enemy_died.emit(self)
+				queue_free()
+			elif stats.health <= 0:
 				Events.enemy_died.emit(self)
 				queue_free()
 	)

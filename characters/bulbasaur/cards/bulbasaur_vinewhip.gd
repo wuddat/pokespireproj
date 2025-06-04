@@ -5,7 +5,7 @@ const EXPOSED_STATUS =  preload("res://statuses/exposed.tres")
 var base_damage := 4
 var exposed_duration := 5
 
-func apply_effects(targets: Array[Node]) -> void:
+func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var damage_effect := DamageEffect.new()
 	damage_effect.amount = base_damage
 	damage_effect.sound = sound

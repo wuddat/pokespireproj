@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Catching" load_steps=3 format=3 uid="uid://djoiws28bcyu1"]
+
+[ext_resource type="Texture2D" uid="uid://uu2myxkxc2s8" path="res://art/pokeball.png" id="1_dqqeg"]
+[ext_resource type="Script" uid="uid://chr1i3vdn20nb" path="res://statuses/catching.gd" id="2_0bvwc"]
+
+[resource]
+script = ExtResource("2_0bvwc")
+id = "catching"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_dqqeg")
+tooltip = "TODO"
+metadata/_custom_type_script = "uid://breq3elxr1644"

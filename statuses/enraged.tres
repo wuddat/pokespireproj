@@ -12,5 +12,6 @@ can_expire = false
 duration = 0
 stacks = 0
 icon = ExtResource("1_wdi67")
-tooltip = "TODO"
+tooltip = "ENRAGED: 
+At the start of turn, gain %s AtkPwr."
 metadata/_custom_type_script = "uid://breq3elxr1644"

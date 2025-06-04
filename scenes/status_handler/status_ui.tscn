@@ -9,12 +9,14 @@ font_size = 8
 [node name="StatusUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_r24ij")
 
 [node name="StatusIcon" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
+mouse_filter = 2
 texture = ExtResource("1_7scyp")
 expand_mode = 1
 stretch_mode = 5

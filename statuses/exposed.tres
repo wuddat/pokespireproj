@@ -9,8 +9,9 @@ id = "exposed"
 type = 1
 stack_type = 2
 can_expire = true
-duration = 1
+duration = 2
 stacks = 0
 icon = ExtResource("1_0rmh8")
-tooltip = "TODO"
+tooltip = "EXPOSED:
+Receive 50% more damage."
 metadata/_custom_type_script = "uid://breq3elxr1644"

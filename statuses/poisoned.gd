@@ -1,6 +1,8 @@
 class_name PoisonedStatus
 extends Status
 
+func get_tooltip() -> String:
+	return tooltip % duration
 
 func apply_status(target: Node) -> void:
 		

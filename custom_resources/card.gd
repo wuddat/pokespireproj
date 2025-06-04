@@ -21,7 +21,8 @@ const STATUS_LOOKUP := {
 	"poisoned": preload("res://statuses/poisoned.tres"),
 	"enraged": preload("res://statuses/enraged.tres"),
 	"exposed": preload("res://statuses/exposed.tres"),
-	"attack_power": preload("res://statuses/attack_power.tres")
+	"attack_power": preload("res://statuses/attack_power.tres"),
+	"catching": preload("res://statuses/catching.tres")
 }
 
 
@@ -34,6 +35,7 @@ const STATUS_LOOKUP := {
 @export var cost: int
 @export var power: int
 @export var exhausts: bool = false
+var base_power: int
 
 
 @export_group("Card Visuals")
@@ -66,24 +68,34 @@ func _get_targets(targets: Array[Node]) -> Array[Node]:
 			return[]
 
 
-func play(targets: Array[Node], char_stats: CharacterStats) -> void:
+func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
 	Events.card_played.emit(self)
 	char_stats.mana -= cost
 	
 	if is_single_targeted():
-		apply_effects(targets)
+		apply_effects(targets, modifiers)
 	else:
-		apply_effects(_get_targets(targets))
+		apply_effects(_get_targets(targets), modifiers)
 
 
-func apply_effects(_targets: Array[Node]) -> void:
+func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	pass
+
+
+func get_default_tooltip() -> String:
+	return tooltip_text
+
+
+func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers:ModifierHandler) -> String:
+		return tooltip_text
+
 
 #card generation from movelist data
 func setup_from_data(data: Dictionary) -> void:
 	id = data.get("id", "CardIDError")
 	name = data.get("name", "CardNameError")
 	power = data.get("power", 88)
+	base_power = power
 	cost = data.get("cost", 88)
 	tooltip_text = data.get("description", "CardToolTipError")
 	var iconpath = data.get("icon_path", "res://art/arrow.png")

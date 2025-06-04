@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cb7gj06v16lg7"]
+
+[ext_resource type="Script" uid="uid://73hwssk8pbxy" path="res://data/moves/power.gd" id="1_xylfd"]
+[ext_resource type="Script" uid="uid://breq3elxr1644" path="res://custom_resources/status.gd" id="2_s6ybl"]
+
+[resource]
+script = ExtResource("1_xylfd")
+id = ""
+name = ""
+type = 0
+rarity = 0
+target = 0
+cost = 0
+power = 0
+exhausts = false
+tooltip_text = ""
+status_effects = Array[ExtResource("2_s6ybl")]([])
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"
