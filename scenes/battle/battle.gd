@@ -11,7 +11,9 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var party_handler: PartyHandler = $PartyHandler
 @onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
+@onready var left_panel: VBoxContainer = $StatUI/LeftPanel
 
+var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 
 func _ready() -> void:
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
@@ -31,11 +33,29 @@ func start_battle() -> void:
 	party_handler.character_stats = char_stats
 	party_handler.initialize_party_for_battle()
 	
+	display_active_party_ui()
+	
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()
+
+
+func display_active_party_ui()-> void:
+	var actives := party_handler.get_active_pokemon()
+
+	for pkmn_stats in actives:
+		var ui := stats_ui_scn.instantiate() as HealthBarUI
+		
+		left_panel.add_child(ui)
+		
+		ui.update_stats(pkmn_stats)
+		print("Added StatsUI for", pkmn_stats.species_id)
+		print("Parent node:", ui.get_parent())
+
+		if not pkmn_stats.stats_changed.is_connected(ui.update_stats):
+			pkmn_stats.stats_changed.connect(func(): ui.update_stats(pkmn_stats))
 
 
 func _on_enemies_child_order_changed() -> void:

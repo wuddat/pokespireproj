@@ -1,6 +1,9 @@
 class_name EnemyHandler
 extends Node2D
 
+@onready var right_panel: VBoxContainer = $"../StatUI/RightPanel"
+
+var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var acting_enemies: Array[Enemy] = []
 
 func _ready() -> void:
@@ -29,6 +32,18 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		new_enemy_child.stats = new_stats
 		
 		add_child(new_enemy_child)
+		
+		var ui := stats_ui_scn.instantiate() as HealthBarUI
+		
+		right_panel.add_child(ui)
+		
+		ui.update_stats(new_enemy_child.stats)
+		print("Added StatsUI for", new_enemy_child)
+		print("Parent node:", ui.get_parent())
+
+		if not new_enemy_child.stats.stats_changed.is_connected(ui.update_stats):
+			new_enemy_child.stats.stats_changed.connect(func(): ui.update_stats(new_enemy_child.stats))
+		
 		new_enemy_child.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(new_enemy_child))
 	all_new_enemies.queue_free()
 

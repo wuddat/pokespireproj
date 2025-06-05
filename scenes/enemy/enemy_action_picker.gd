@@ -31,7 +31,7 @@ func select_valid_target() -> void:
 			target = pkmn
 			for action in get_children():
 				action.target = target
-			print("new attack target is ", target)
+			#print("new attack target is ", target)
 			return
 	target = null
 	print("No valid Pokémon to target!")

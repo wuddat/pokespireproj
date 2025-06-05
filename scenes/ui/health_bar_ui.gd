@@ -1,9 +1,11 @@
-class_name StatsUI
-extends HBoxContainer
+class_name HealthBarUI
+extends PanelContainer
 
-@onready var block: HBoxContainer = $Block
+@onready var health: HealthUI = %HealthUI
+@onready var label: Label = %Label
 @onready var block_label: Label = %BlockLabel
-@onready var health: HealthUI = %Health
+@onready var block: HBoxContainer = %Block
+
 
 
 func update_stats(stats: Stats) -> void:
@@ -14,7 +16,9 @@ func update_stats(stats: Stats) -> void:
 		return
 	
 	block_label.text = str(stats.block)
+	
 	health.update_stats(stats)
-
-	block.visible = stats.block > 0
+	health.health_image.visible = false
+	label.text = str(stats.species_id)
 	health.visible = stats.health > 0
+	block.visible = stats.block > 0

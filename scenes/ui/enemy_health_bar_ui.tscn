@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://c77m74fce3rkt"]
+
+[ext_resource type="Script" uid="uid://7diyneorc6cc" path="res://scenes/ui/health_bar_ui.gd" id="1_0i27b"]
+[ext_resource type="PackedScene" uid="uid://kh5x4d2lti7e" path="res://scenes/ui/health_ui.tscn" id="2_ake31"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="3_al6fw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cvvog"]
+
+[node name="HealthBarUI" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 10)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_right = 175.0
+offset_bottom = 24.0
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cvvog")
+script = ExtResource("1_0i27b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PokemonName"
+horizontal_alignment = 2
+
+[node name="HBox" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Block" type="HBoxContainer" parent="VBoxContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="BlockImage" type="TextureRect" parent="VBoxContainer/HBox/Block"]
+layout_mode = 2
+texture = ExtResource("3_al6fw")
+stretch_mode = 5
+
+[node name="BlockLabel" type="Label" parent="VBoxContainer/HBox/Block"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthUI" parent="VBoxContainer/HBox" instance=ExtResource("2_ake31")]
+unique_name_in_owner = true
+layout_mode = 2
+bar_type = true

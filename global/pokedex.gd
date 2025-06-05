@@ -47,8 +47,8 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	# pokemon.type = data.get("type", [])  # assuming type is also an array
 
 	# DEBUG PRINTS
-	print("Created Pokemon:", species_id)
-	print("  Max Health:", pokemon.max_health)
-	print("  Move IDs:", pokemon.move_ids)
+	#print("Created Pokemon:", species_id)
+	#print("  Max Health:", pokemon.max_health)
+	#print("  Move IDs:", pokemon.move_ids)
 
 	return pokemon
