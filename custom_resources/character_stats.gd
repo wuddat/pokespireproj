@@ -14,7 +14,10 @@ extends Stats
 @export var max_mana: int
 @export var starting_moves: Array[String] = []
 
+@export_group("Pokemon Data")
+@export var starting_party: Array[String] = []
 
+var current_party: Array[Dictionary] = []
 var mana : int : set = set_mana
 var deck: CardPile
 var discard: CardPile
@@ -44,9 +47,25 @@ func card_playable(card: Card) -> bool:
 
 func create_instance() -> Resource:
 	var instance: CharacterStats = self.duplicate()
-	instance.health = max_health
+	instance.health = max_health #TODO update this to equal the number of pokemon in the party
 	instance.block = 0
 	instance.reset_mana()
+	
+	instance.current_party = []
+	
+	for species_id in starting_party:
+		var base_data = Pokedex.get_pokemon_data(species_id)
+		if base_data:
+			instance.current_party.append({
+				"species_id": species_id,
+				"max_health": base_data.get("max_health", 1),
+				"health": base_data.get("max_health", 1),
+				"move_ids": base_data.get("move_ids", [])
+			})
+			print("pokemon logged %s" % species_id)
+		else:
+			print("Missing Pokedex data for %s" % species_id)
+			
 	instance.deck = build_deck_from_move_ids(starting_moves)
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()

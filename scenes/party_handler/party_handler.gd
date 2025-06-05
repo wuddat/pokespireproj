@@ -6,17 +6,29 @@ extends Node
 @export var POS_3 := Vector2(95, 210)
 
 @export var max_party_size := 6
+@export var character_stats: CharacterStats
+
 var party: Array[PokemonStats] = []
 var active_indexes := [0,1,2]
 
-func _ready() -> void:
-	var mankey := Pokedex.create_pokemon_instance("mankey")
-	var bulbasaur := Pokedex.create_pokemon_instance("bulbasaur")
-	var weedle := Pokedex.create_pokemon_instance("weedle")
-	add_to_party(bulbasaur)
-	add_to_party(mankey)
-	add_to_party(weedle)
-	
+
+func initialize_party_for_battle() -> void:
+	if character_stats == null:
+		push_error("PartyHandler requires a reference to character_stats")
+		return
+
+	for pkmn_data in character_stats.current_party:
+		var instance := Pokedex.create_pokemon_instance(pkmn_data.species_id)
+		instance.species_id = pkmn_data.species_id
+		instance.health = pkmn_data.health
+		instance.max_health = pkmn_data.max_health
+		print("move ids before: ", pkmn_data.move_ids)
+		instance.move_ids.append(pkmn_data.move_ids)
+		print("move ids after append: ", instance.move_ids)
+		add_to_party(instance)
+		print("added %s to party in battle" % instance.species_id)
+
+	spawn_active_pokemon()
 
 
 func add_to_party(pokemon: PokemonStats) -> bool:
@@ -38,6 +50,11 @@ func spawn_active_pokemon():
 		var pokemon := actives[i]
 		var unit := preload("res://scenes/battle/pokemon_battle_unit.tscn").instantiate() as PokemonBattleUnit
 		unit.stats = pokemon
+		
+		if not unit.stats.stats_changed.is_connected(update_party_health_in_character_stats):
+			unit.stats.stats_changed.connect(update_party_health_in_character_stats)
+		unit.stats.stats_changed.connect(update_party_health_in_character_stats)
+		
 		match i:
 			0: unit.position = POS_1
 			1: unit.position = POS_2
@@ -54,3 +71,16 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 		if node is PokemonBattleUnit:
 			typed_array.append(node as PokemonBattleUnit)
 	return typed_array
+
+func update_party_health_in_character_stats() -> void:
+	if character_stats == null:
+		return
+	character_stats.current_party = []
+	for p in party:
+		character_stats.current_party.append({
+			"species_id": p.species_id,
+			"max_health": p.max_health,
+			"health": p.health,
+			"move_ids": p.move_ids.duplicate()
+		})
+		print("updated %s stats" % p.species_id)
