@@ -108,16 +108,19 @@ func _on_status_applied(status: Status) -> void:
 func get_statuses() -> Array[Status]:
 	return _get_all_statuses()
 
+var status_timer: SceneTreeTimer = null
 
 func _on_mouse_entered() -> void:
-	is_mouse_over = true
-	await get_tree().create_timer(STATUS_DETAIL_OVERLAY_DELAY, false).timeout
-	if is_mouse_over:
+	status_timer = get_tree().create_timer(STATUS_DETAIL_OVERLAY_DELAY)
+	await status_timer.timeout
+	if status_timer:
 		Events.status_tooltip_requested.emit(_get_all_statuses())
-
+		status_timer = null
 
 func _on_mouse_exited() -> void:
-	is_mouse_over = false
+	if status_timer:
+		status_timer.cancel_free()
+		status_timer = null
 	Events.status_tooltip_hide_requested.emit()
 
 func remove_status(id: String) -> void:
