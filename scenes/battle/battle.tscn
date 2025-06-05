@@ -201,5 +201,6 @@ visible = false
 
 [node name="StatusUI" type="CanvasLayer" parent="."]
 layer = 4
+visible = false
 
 [node name="StatusView" parent="StatusUI" instance=ExtResource("18_sgdsx")]

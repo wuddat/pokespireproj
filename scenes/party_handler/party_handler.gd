@@ -19,15 +19,15 @@ func initialize_party_for_battle() -> void:
 
 	for pkmn_data in character_stats.current_party:
 		var instance := Pokedex.create_pokemon_instance(pkmn_data.species_id)
-		instance.species_id = pkmn_data.species_id
-		instance.health = pkmn_data.health
-		instance.max_health = pkmn_data.max_health
-		print("move ids before: ", pkmn_data.move_ids)
-		instance.move_ids.append(pkmn_data.move_ids)
-		print("move ids after append: ", instance.move_ids)
-		add_to_party(instance)
-		print("added %s to party in battle" % instance.species_id)
-
+		if pkmn_data.health > 0:
+			instance.species_id = pkmn_data.species_id
+			instance.health = pkmn_data.health
+			instance.max_health = pkmn_data.max_health
+			print("move ids before: ", pkmn_data.move_ids)
+			instance.move_ids.append(pkmn_data.move_ids)
+			print("move ids after append: ", instance.move_ids)
+			add_to_party(instance)
+			print("added %s to party in battle" % instance.species_id)
 	spawn_active_pokemon()
 
 

@@ -6,7 +6,6 @@ extends HBoxContainer
 @onready var health: HealthUI = $Health
 
 
-
 func update_stats(stats: Stats) -> void:
 	block_label.text = str(stats.block)
 	health.update_stats(stats)
