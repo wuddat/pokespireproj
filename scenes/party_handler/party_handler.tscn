@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4ceusfsgxuxg"]
+
+[ext_resource type="Script" uid="uid://dq3uiw41i0oca" path="res://scenes/party_handler/party_handler.gd" id="1_fbxe1"]
+
+[node name="PartyHandler" type="Node" groups=["party_handler"]]
+script = ExtResource("1_fbxe1")

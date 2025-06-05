@@ -8,4 +8,4 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	status_effect.status = status_to_apply
 	status_effect.sound = preload("res://art/axe.ogg")
 	status_effect.execute(targets)
-	print(target, "enrages")
+	#print(target, "enrages")

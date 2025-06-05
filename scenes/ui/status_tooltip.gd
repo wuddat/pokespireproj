@@ -4,7 +4,7 @@ extends HBoxContainer
 @export var status: Status : set = set_status
 
 @onready var icon: TextureRect = $Icon
-@onready var label: Label = $Label
+@onready var label: RichTextLabel = $Label
 
 
 func set_status(new_status: Status) -> void:

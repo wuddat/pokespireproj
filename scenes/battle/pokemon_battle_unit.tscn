@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj8k32krl0vwq"]
+
+[ext_resource type="Script" uid="uid://5121pgfrbdxd" path="res://scenes/battle/pokemon_battle_unit.gd" id="1_6808p"]
+[ext_resource type="Texture2D" uid="uid://dwr8fw4dyveyn" path="res://art/charmander_back.png" id="1_yo7j0"]
+[ext_resource type="PackedScene" uid="uid://b5xmc80xwdal6" path="res://scenes/ui/stats_ui.tscn" id="2_6808p"]
+[ext_resource type="PackedScene" uid="uid://covk5qel4dban" path="res://scenes/status_handler/status_handler.tscn" id="3_itayc"]
+[ext_resource type="PackedScene" uid="uid://cinaas1i56ukh" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_oml2l"]
+[ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="6_dfvhe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo7j0"]
+size = Vector2(36, 35)
+
+[node name="PokemonBattleUnit" type="Area2D" groups=["active_pokemon", "player"]]
+collision_layer = 4
+script = ExtResource("1_6808p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yo7j0")
+flip_h = true
+
+[node name="StatsUI" parent="." instance=ExtResource("2_6808p")]
+offset_top = 4.0
+offset_bottom = 52.0
+
+[node name="StatusHandler" parent="." instance=ExtResource("3_itayc")]
+offset_left = -28.0
+offset_top = 32.0
+offset_right = -28.0
+offset_bottom = 32.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yo7j0")
+
+[node name="ModifierHandler" parent="." instance=ExtResource("5_oml2l")]
+
+[node name="DamageDealtModifier" parent="ModifierHandler" instance=ExtResource("6_dfvhe")]
+
+[node name="DamageTakenModifier" parent="ModifierHandler" instance=ExtResource("6_dfvhe")]
+type = 1
+
+[node name="CardCostModifier" parent="ModifierHandler" instance=ExtResource("6_dfvhe")]
+type = 2

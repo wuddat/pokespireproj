@@ -22,9 +22,9 @@ func _ready():
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	if stats and stats.species_id != "":
-		print("READY: species_id = ", stats.species_id)
+		#print("READY: species_id = ", stats.species_id)
 		var poke_data = Pokedex.get_pokemon_data(stats.species_id)
-		print("Pokedata: ", poke_data)
+		#print("Pokedata: ", poke_data)
 		if poke_data:
 			stats.load_from_pokedex(poke_data)
 			sprite_2d.texture = stats.art

@@ -9,6 +9,8 @@ extends Node2D
 @onready var player_handler: PlayerHandler = $PlayerHandler
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var player: Player = $Player
+@onready var party_handler: PartyHandler = $PartyHandler
+@onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
 
 
 func _ready() -> void:
@@ -28,11 +30,12 @@ func start_battle() -> void:
 	player.stats = char_stats
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
-	
+	#TODO pokemon party spawn tester
+	party_handler.spawn_active_pokemon()
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()
-	
-	
+
+
 func _on_enemies_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0:
 		MusicPlayer.play(music, true)

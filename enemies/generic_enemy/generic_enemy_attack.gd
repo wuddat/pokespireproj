@@ -2,15 +2,13 @@ extends EnemyAction
 
 @export var damage := 2
 
-
 func setup_from_data(data: Dictionary) -> void:
 	var damage_display = "%s"
 	damage = data.get("power", 0)
-	#print("data passed to setup as: ",data)
 	sound = preload("res://art/sounds/VineWhip2.wav")
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
-	
+
 	intent = Intent.new()
 	intent.base_text = damage_display
 	intent.current_text = str(damage)
@@ -22,36 +20,40 @@ func setup_from_data(data: Dictionary) -> void:
 		intent.icon = preload("res://art/tile_0118.png")
 	else:
 		intent.icon = preload("res://art/tile_0117.png")
-		
-		
 
 func perform_action() -> void:
-	if not enemy or not target:
-		return
-	
-	var tween := create_tween().set_trans(Tween.TRANS_QUINT)
-	var start := enemy.global_position
-	var end := target.global_position + Vector2.RIGHT * 32
-	var damage_effect := DamageEffect.new()
-	var target_array: Array[Node] = [target]
-	damage_effect.amount = damage
-	damage_effect.sound = sound
-	
-	tween.tween_property(enemy, "global_position", end, 0.4)
-	tween.tween_callback(damage_effect.execute.bind(target_array))
-	tween.tween_interval(.25)
-	tween.tween_property(enemy, "global_position", start, .4)
-	
-	tween.finished.connect(
-		func():
-			Events.enemy_action_completed.emit(enemy)
-	)
+	var targets_to_hit: Array[Node] = []
 
+	if targets.size() > 0:
+		# Multi-target mode (e.g., Razor Leaf)
+		for t in targets:
+			if is_instance_valid(t):
+				targets_to_hit.append(t)
+	else:
+		# Fallback to single target
+		if not is_instance_valid(target):
+			print("Invalid target detected. Attempting to retarget...")
+			if enemy and enemy.enemy_action_picker:
+				enemy.enemy_action_picker.select_valid_target()
+				target = enemy.enemy_action_picker.target
+
+		if is_instance_valid(target):
+			targets_to_hit.append(target)
+		else:
+			print("Still no valid target. Skipping action.")
+			Events.enemy_action_completed.emit(enemy)
+			return
+
+	animate_to_targets(targets_to_hit, 0, damage)
 
 func update_intent_text() -> void:
-	var player := target as Player
-	if not player:
+	if not is_instance_valid(target):
+		print("update_intent_text(): Target is invalid or freed.")
 		return
-	
-	var modified_dmg := player.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+
+	var target_pkmn := target as PokemonBattleUnit
+	if not target_pkmn:
+		return
+
+	var modified_dmg := target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
 	intent.current_text = intent.base_text % modified_dmg

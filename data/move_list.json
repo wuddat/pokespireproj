@@ -19,7 +19,7 @@
 	  "name": "Razor Leaf",
 	  "id": "razorleaf",
 	  "category": "attack",
-	  "subtype": "single_target",
+	  "subtype": "all_enemies",
 	  "type": "Item",
 	  "target": "all_enemies",
 	  "power": 8,
@@ -56,7 +56,7 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [],
-	  "description": "Apply Block to self for [color=blue]%s[/color].",
+	  "description": "[center]Apply Block to self for [color=blue]%s[/color][/center].",
 	  "icon_path": "res://art/tile_0102.png",
 	  "sound_path": "res://art/block.ogg",
 	  "rarity": "Common"
@@ -73,7 +73,7 @@
 	  "cost": 1,
 	  "status_effects": ["poisoned"],
 	  "description": "[center]Sting your foe dealing [color=red]%s[/color] damage and apply 2 [color=purple] POISON[/color].[/center]",
-	  "icon_path": "res://art/tile_0102.png",
+	  "icon_path": "res://art/tile_0114.png",
 	  "rarity": "Rare"
 	},
 		"swordsdance": {
@@ -88,7 +88,7 @@
 	  "cost": 0,
 	  "status_effects": ["enraged"],
 	  "description": "[center]Become [color=red]Enraged[/color].[/center]",
-	  "icon_path": "res://art/tile_0115.png",
+	  "icon_path": "res://art/tile_0118.png",
 	  "sound_path": "res://art/enemy_attack.ogg",
 	  "rarity": "rare"
 	},
@@ -102,9 +102,9 @@
 	  "power": 8,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "effects": [],
+	  "status_effects": [],
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage.[/center]",
-	  "icon_path": "res://art/tile_0102.png",
+	  "icon_path": "res://art/tile_0124.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "Rare"
 	},
@@ -120,7 +120,7 @@
 	  "cost": 1,
 	  "status_effects": ["exposed"],
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
-	  "icon_path": "res://art/tile_0102.png",
+	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "Rare"
 	},
@@ -136,7 +136,7 @@
 	  "cost": 2,
 	  "status_effects": ["exposed"],
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
-	  "icon_path": "res://art/tile_0102.png",
+	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "Rare"
 	},
@@ -152,8 +152,23 @@
 	  "cost": 1,
 	  "status_effects": ["burned"],
 	  "description": "[center]Burn for [color=red]%s[/color] damage and apply [color=orange]BURN[/color].[/center]",
-	  "icon_path": "res://art/tile_0102.png",
+	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "rarity": "Rare"
+	},
+	"quickattack": {
+	  "name": "Quick Attack",
+	  "id": "quickattack",
+	  "category": "attack",
+	  "subtype": "all_enemies",
+	  "type": "Normal",
+	  "target": "all_enemies",
+	  "power": 3,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "Rare"
 	},
   }

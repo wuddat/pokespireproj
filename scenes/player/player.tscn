@@ -14,6 +14,7 @@ script = ExtResource("1_gmlin")
 texture = ExtResource("2_lvxji")
 
 [node name="StatsUI" parent="." instance=ExtResource("2_gmlin")]
+metadata/_edit_use_anchors_ = true
 
 [node name="StatusHandler" parent="." node_paths=PackedStringArray("status_owner") instance=ExtResource("4_lvxji")]
 offset_left = -26.0
@@ -21,6 +22,7 @@ offset_top = 30.0
 offset_right = -26.0
 offset_bottom = 30.0
 status_owner = NodePath("..")
+metadata/_edit_use_anchors_ = true
 
 [node name="ModifierHandler" parent="." instance=ExtResource("5_75vfm")]
 

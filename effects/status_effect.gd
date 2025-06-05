@@ -8,6 +8,7 @@ func execute(targets: Array[Node]) -> void:
 	for target in targets:
 		if not target:
 			continue
-		if target is Enemy or target is Player:
+		if target is Enemy or target is Player or target is PokemonBattleUnit:
 			target.status_handler.add_status(status)
 			SFXPlayer.play(sound)
+			print("%s applied" % status)

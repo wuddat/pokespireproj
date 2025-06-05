@@ -41,3 +41,5 @@ theme = ExtResource("1_mtwet")
 theme_override_constants/line_separation = 3
 bbcode_enabled = true
 text = "Test Tooltip"
+fit_content = true
+scroll_active = false

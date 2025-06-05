@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjt3didegw4ym"]
+[gd_scene load_steps=3 format=3 uid="uid://cjt3didegw4ym"]
 
 [ext_resource type="Texture2D" uid="uid://no7ba2bkkoly" path="res://icon.png" id="1_5okso"]
 [ext_resource type="Script" uid="uid://bcqswhwrprjss" path="res://scenes/ui/status_tooltip.gd" id="1_nj0h8"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5okso"]
-font_size = 8
 
 [node name="StatusTooltip" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
@@ -21,11 +18,11 @@ texture = ExtResource("1_5okso")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "At end of turn, takes %s damage."
-label_settings = SubResource("LabelSettings_5okso")
-vertical_alignment = 1
+bbcode_enabled = true
+text = "At end of turn, takes [color=red]%s[/color] damage."
 autowrap_mode = 2
+vertical_alignment = 1

@@ -26,7 +26,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	damage_effect.amount = modifiers.get_modified_value(base_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
-	print(damage_effect.amount)
+	
 	
 	#apply status effect if any on card
 	for status_effect in status_effects:

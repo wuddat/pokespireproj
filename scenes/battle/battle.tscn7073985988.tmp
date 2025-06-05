@@ -86,9 +86,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -102.0
-offset_top = -38.0
+offset_top = -57.0
 offset_right = 103.0
-offset_bottom = 10.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -102,7 +102,7 @@ char_stats = ExtResource("5_fisqk")
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_mxe8n")]
 offset_top = 36.0
-offset_bottom = 91.0
+offset_bottom = 86.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI"]
 unique_name_in_owner = true
@@ -202,5 +202,6 @@ visible = false
 
 [node name="StatusUI" type="CanvasLayer" parent="."]
 layer = 4
+visible = false
 
 [node name="StatusView" parent="StatusUI" instance=ExtResource("18_sgdsx")]

@@ -12,6 +12,6 @@ can_expire = false
 duration = 0
 stacks = 2
 icon = ExtResource("1_t2krk")
-tooltip = "ATKPWR: 
-Attacks deal %s more damage."
+tooltip = "[color=rosybrown]ATKPWR: [/color]
+Attacks deal [color=red]%s[/color] more damage."
 metadata/_custom_type_script = "uid://breq3elxr1644"

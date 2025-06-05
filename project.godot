@@ -23,6 +23,7 @@ MusicPlayer="*res://global/music_player.tscn"
 SFXPlayer="*res://global/sfx_player.tscn"
 MoveData="*res://global/move_data.gd"
 Pokedex="*res://global/pokedex.gd"
+DEBUG="*res://utils/utils.gd"
 
 [display]
 
