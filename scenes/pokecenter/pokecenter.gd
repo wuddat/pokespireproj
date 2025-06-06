@@ -17,6 +17,8 @@ func _on_rest_button_pressed() -> void:
 	MusicPlayer.play(recovery, true)
 	rest_button.visible = false
 	char_stats.heal(char_stats.max_health)
+	for pkmn in char_stats.current_party:
+		pkmn.health = pkmn.max_health
 	animation_player.play("fade_out")
 
 #this is called from the AnimationPlayer as 'fade-out' in Pkmncentr scene
