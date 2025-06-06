@@ -18,6 +18,7 @@ signal player_died
 signal player_pokemon_start_status_applied(pokemon: PokemonBattleUnit)
 signal player_pokemon_end_status_applied(pokemon: PokemonBattleUnit)
 signal added_pkmn_to_party
+signal pkmn_fainted(pokemon: PokemonStats)
 
 #Enemy-related Events
 signal enemy_action_completed(enemy: Enemy)

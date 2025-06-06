@@ -57,7 +57,8 @@ func create_instance() -> Resource:
 		var pkmn = Pokedex.create_pokemon_instance(species_id)
 		if pkmn:
 			instance.current_party.append(pkmn)
-			print("pokemon logged %s " % pkmn.species_id)
+			print("pokemon loaded from dex: %s " % pkmn.species_id)
+			
 		else:
 			print("Missing Pokedex data for %s" % species_id)
 			
@@ -94,5 +95,16 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 		#pile.add_card(preload("res://characters/bulbasaur/cards/bulbasaur_vinewhip.tres"))
 		#pile.add_card(preload("res://characters/bulbasaur/cards/powerTest.tres"))
 		
-	#print(pile)
 	return pile
+
+func update_draftable_cards() -> void:
+	draftable_cards.cards.clear()
+
+	var new_draft_list : Array[String]
+
+	for pkmn in current_party:
+		var move_list = pkmn.get_draft_cards_from_type()
+		new_draft_list.append_array(move_list)
+	
+	var pkmn_draft_list: CardPile = build_deck_from_move_ids(new_draft_list)
+	draftable_cards = pkmn_draft_list

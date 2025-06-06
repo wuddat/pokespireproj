@@ -139,10 +139,6 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	print("added pkmn to party: ", pkmn_to_add.species_id)
 	Events.added_pkmn_to_party.emit()
 
-	for i in character_stats.current_party.size():
-		print("Slot %s:" % i)
-		Utils.print_resource(character_stats.current_party[i])
-
 
 func _on_back_button_pressed() -> void:
 	Events.battle_reward_exited.emit()

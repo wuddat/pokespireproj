@@ -81,6 +81,8 @@ func _setup_event_connections() -> void:
 	Events.treasure_room_exited.connect(_show_map)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
 	Events.added_pkmn_to_party.connect(_populate_party_buttons)
+	Events.added_pkmn_to_party.connect(_update_draftable_cards)
+	Events.pokemon_fainted.connect(_update_draftable_cards)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -143,8 +145,12 @@ func _on_map_exited(room: Room) -> void:
 func _on_pokemon_captured(stats: PokemonStats) -> void:
 	caught_pokemon.append(stats.duplicate())
 	print("caught pokemon in run: ", caught_pokemon)
-	Utils.print_resource(caught_pokemon[0])
+
 
 func _populate_party_buttons() -> void:
 	party_selector.char_stats = character
 	party_selector.populate_buttons()
+
+
+func _update_draftable_cards() -> void:
+	character.update_draftable_cards()

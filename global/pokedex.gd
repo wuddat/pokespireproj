@@ -2,6 +2,28 @@ extends Node
 
 var pokedex = {}
 
+#var DRAFT_CARD_POOLS := {
+	#"normal":["Raichu", "tackle"],
+	#"fighting":["Raichu", "tackle"],
+	#"flying":["Raichu", "tackle"],
+	#"poison":["Raichu", "tackle"],
+	#"ground":["Raichu", "tackle"],
+	#"rock":["Raichu", "tackle"],
+	#"bug":["Raichu", "tackle"],
+	#"ghost":["Raichu", "tackle"],
+	#"steel":["Raichu", "tackle"],
+	#"fire":["Raichu", "tackle"],
+	#"water":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#"name":["Raichu", "tackle"],
+	#
+#}
+
 func _ready():
 	var file = FileAccess.open("res://data/pokedex.json",FileAccess.READ)
 	pokedex = JSON.parse_string(file.get_as_text())["pokemon"]
@@ -31,13 +53,20 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.max_health = data.get("max_health", 10)
 	pokemon.health = pokemon.max_health
 	pokemon.art = load(data.get("sprite_path", "res://art/dottedline.png"))
-	# Load move IDs safely
-	var raw_move_ids = data.get("move_ids", [])
-	var typed_move_ids = Utils.to_typed_string_array(raw_move_ids)
-	pokemon.move_ids.append(typed_move_ids)
 	pokemon.icon = load(data.get("icon_path", "res://art/dottedline.png"))
 	
+	# WASH IT AND DRY IT BABY
+	var dirty_move_ids = data.get("move_ids", [])
+	var clean_move_ids = Utils.to_typed_string_array(dirty_move_ids)
+	pokemon.move_ids.append_array(clean_move_ids)
+
+	# WASH IT AND DRY IT BABY (tackles the Array instead of Array[String] error
+	var dirty_types = data.get("type", [])
+	var clean_types = Utils.to_typed_string_array(dirty_types)
+	pokemon.type.append_array(clean_types)
+
 	return pokemon
+
 
 	# Optional: Add sprite_path or type if needed later
 	# 

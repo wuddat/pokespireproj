@@ -5,6 +5,7 @@
 	  "species_id": "bulbasaur",
 	  "sprite_path": "res://art/sprites/1.png",
 	  "max_health": 23,
+	  "type": ["grass"],
 	  "move_ids": [
 		"tackle",
 		"growl"
@@ -60,6 +61,7 @@
 	  "species_id": "charizard",
 	  "sprite_path": "res://art/sprites/6.png",
 	  "max_health": 21,
+	  "type": ["grass"],
 	  "move_ids": [
 		"tackle",
 		"growl"

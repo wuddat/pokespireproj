@@ -5,6 +5,7 @@ extends Stats
 @export var species_id: String
 @export var move_ids: Array[String] = []
 @export var type: Array[String] = []
+@export var draft_pool: Array[String] = []
 
 
 static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
@@ -19,8 +20,14 @@ static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
 	return new_stats
 
 
-#func set_health(value: int) -> void:
-	#health = clampi(value, 0, max_health)
-	#print("Health changed: %d" % health)
-	#print(move_ids)
-	#stats_changed.emit()
+func get_draft_cards_from_type() -> Array[String]:
+	var combined_moves: Array[String] = []
+	print("PKMN TYPE: ", type)
+	for t in type:
+		print("Checking type: ", t)
+		var moves_for_type = MoveData.type_to_moves.get(t, [])
+		print("Moves for type '%s': %s" % [t, moves_for_type])
+		for move_id in moves_for_type:
+			if not combined_moves.has(move_id):
+				combined_moves.append(move_id)
+	return combined_moves
