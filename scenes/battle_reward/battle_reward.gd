@@ -9,9 +9,13 @@ const GOLD_ICON := preload("res://art/gold.png")
 const GOLD_TEXT := "%s gold"
 const CARD_ICON := preload("res://art/rarity.png")
 const CARD_TEXT := "Add New Card"
+const CAUGHT_ICON := preload("res://art/pokeball.png")
+const CAUGHT_TEXT := "Pkmn Captured!"
 
 @export var run_stats: RunStats
 @export var character_stats: CharacterStats
+@export var caught_pokemon: Array[PokemonStats] = []
+
 
 @onready var rewards: VBoxContainer = %Rewards
 
@@ -43,6 +47,18 @@ func add_card_reward() -> void:
 	card_reward.reward_text = CARD_TEXT
 	card_reward.pressed.connect(_show_card_rewards)
 	rewards.add_child.call_deferred(card_reward)
+
+
+func add_pkmn_reward() -> void:
+	print("Caught Pokémon array:", caught_pokemon)
+	print("Caught Pokémon count:", caught_pokemon.size())
+	for stats in caught_pokemon:
+		var pkmn_reward := REWARD_BUTTON.instantiate()
+		pkmn_reward.reward_icon = CAUGHT_ICON
+		pkmn_reward.reward_text = "Caught: %s " % stats.species_id.capitalize()
+		pkmn_reward.pressed.connect(_on_pokemon_reward_taken.bind(stats))
+		rewards.add_child.call_deferred(pkmn_reward)
+		print("Reward button added for:", stats.species_id)
 
 
 func _show_card_rewards() -> void:
@@ -112,6 +128,18 @@ func _on_card_reward_taken(card: Card) -> void:
 	if not character_stats or not card:
 		return
 	character_stats.deck.add_card(card)
+
+
+func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
+	if not character_stats:
+		return
+	var new_pokemon_stats := PokemonStats.from_enemy_stats(stats)
+	character_stats.current_party.append(new_pokemon_stats)
+	print("added pkmn to party: ", new_pokemon_stats.species_id)
+
+	for i in character_stats.current_party.size():
+		print("Slot %s:" % i)
+		Utils.print_resource(character_stats.current_party[i])
 
 
 func _on_back_button_pressed() -> void:

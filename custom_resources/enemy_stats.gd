@@ -1,9 +1,7 @@
 class_name EnemyStats
-extends Stats
+extends PokemonStats
 
 @export var ai: PackedScene
-@export var species_id: String
-@export var move_ids: Array[String]
 
 func load_from_pokedex(data: Dictionary) -> void:
 	if data.is_empty():

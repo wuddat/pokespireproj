@@ -26,6 +26,7 @@ const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 
 var stats: RunStats
 var character: CharacterStats
+var caught_pokemon: Array[PokemonStats] = []
 
 
 func _ready() -> void:
@@ -77,6 +78,7 @@ func _setup_event_connections() -> void:
 	Events.map_exited.connect(_on_map_exited)
 	Events.shop_exited.connect(_show_map)
 	Events.treasure_room_exited.connect(_show_map)
+	Events.pokemon_captured.connect(_on_pokemon_captured)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -111,9 +113,14 @@ func _on_battle_won() -> void:
 	var reward_scene := _change_view(rewardscene) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
+	reward_scene.caught_pokemon = caught_pokemon
+	print("caught pokemon in _on_battle_won: ", caught_pokemon)
 
 	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
 	reward_scene.add_card_reward()
+	reward_scene.add_pkmn_reward()
+	
+	caught_pokemon.clear() 
 
 func _on_map_exited(room: Room) -> void:
 	match room.type:
@@ -127,5 +134,9 @@ func _on_map_exited(room: Room) -> void:
 			_change_view(shopscene)
 		Room.Type.BOSS:
 			_on_battle_room_entered(room)
-		
-	
+
+
+func _on_pokemon_captured(stats: PokemonStats) -> void:
+	caught_pokemon.append(stats.duplicate())
+	print("caught pokemon in run: ", caught_pokemon)
+	Utils.print_resource(caught_pokemon[0])

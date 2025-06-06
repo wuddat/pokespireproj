@@ -17,17 +17,8 @@ func initialize_party_for_battle() -> void:
 		push_error("PartyHandler requires a reference to character_stats")
 		return
 
-	for pkmn_data in character_stats.current_party:
-		var instance := Pokedex.create_pokemon_instance(pkmn_data.species_id)
-		if pkmn_data.health > 0:
-			instance.species_id = pkmn_data.species_id
-			instance.health = pkmn_data.health
-			instance.max_health = pkmn_data.max_health
-			print("move ids before: ", pkmn_data.move_ids)
-			instance.move_ids.append(pkmn_data.move_ids)
-			print("move ids after append: ", instance.move_ids)
-			add_to_party(instance)
-			print("added %s to party in battle" % instance.species_id)
+	for pkmn in character_stats.current_party:
+		add_to_party(pkmn)
 	spawn_active_pokemon()
 
 
@@ -39,10 +30,13 @@ func add_to_party(pokemon: PokemonStats) -> bool:
 
 func get_active_pokemon() -> Array[PokemonStats]:
 	var actives: Array[PokemonStats] = []
-	for i in active_indexes:
-		if i >= 0 and i < party.size():
-			actives.append(party[i])
+	for pkmn in party:
+		if pkmn.health > 0:
+			actives.append(pkmn)
+		if actives.size() == 3:
+			break
 	return actives
+
 
 func spawn_active_pokemon():
 	var actives := get_active_pokemon()
@@ -50,11 +44,11 @@ func spawn_active_pokemon():
 		var pokemon := actives[i]
 		var unit := preload("res://scenes/battle/pokemon_battle_unit.tscn").instantiate() as PokemonBattleUnit
 		unit.stats = pokemon
-		
+			
 		if not unit.stats.stats_changed.is_connected(update_party_health_in_character_stats):
 			unit.stats.stats_changed.connect(update_party_health_in_character_stats)
 		unit.stats.stats_changed.connect(update_party_health_in_character_stats)
-		
+			
 		match i:
 			0: unit.position = POS_1
 			1: unit.position = POS_2
@@ -75,12 +69,4 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 func update_party_health_in_character_stats() -> void:
 	if character_stats == null:
 		return
-	character_stats.current_party = []
-	for p in party:
-		character_stats.current_party.append({
-			"species_id": p.species_id,
-			"max_health": p.max_health,
-			"health": p.health,
-			"move_ids": p.move_ids.duplicate()
-		})
-		#print("updated %s stats" % p.species_id)
+	character_stats.current_party = party.duplicate()

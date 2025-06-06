@@ -31,6 +31,7 @@ signal battle_won
 signal status_tooltip_requested(statuses: Array[Status])
 signal status_tooltip_hide_requested()
 signal pokemon_fainted
+signal pokemon_captured(stats: PokemonStats)
 
 #Map-related Events
 signal map_exited(room: Room)

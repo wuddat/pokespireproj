@@ -1,7 +1,6 @@
 extends Node
 
 var pokedex = {}
-const PokemonStats = preload("res://custom_resources/pokemon_stats.gd")
 
 func _ready():
 	var file = FileAccess.open("res://data/pokedex.json",FileAccess.READ)
@@ -33,14 +32,11 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.health = pokemon.max_health
 	pokemon.art = load(data.get("sprite_path", "res://art/missingno.png"))
 	# Load move IDs safely
-	var raw_ids = data.get("move_ids", [])
-	if typeof(raw_ids) == TYPE_ARRAY:
-		for id in raw_ids:
-			pokemon.move_ids.append(str(id))  # Ensure everything is string
-	elif typeof(raw_ids) == TYPE_STRING:
-		pokemon.move_ids.append(raw_ids)
-	else:
-		push_warning("Unexpected move_ids format for: " + species_id)
+	var raw_move_ids = data.get("move_ids", [])
+	var typed_move_ids = Utils.to_typed_string_array(raw_move_ids)
+	pokemon.move_ids.append(typed_move_ids)
+	
+	return pokemon
 
 	# Optional: Add sprite_path or type if needed later
 	# 
@@ -50,5 +46,3 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	#print("Created Pokemon:", species_id)
 	#print("  Max Health:", pokemon.max_health)
 	#print("  Move IDs:", pokemon.move_ids)
-
-	return pokemon

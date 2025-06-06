@@ -43,19 +43,26 @@ func start_battle() -> void:
 
 
 func display_active_party_ui()-> void:
+	for child in left_panel.get_children():
+		child.queue_free()
 	var actives := party_handler.get_active_pokemon()
 
-	for pkmn_stats in actives:
+	for pkmn in actives:
 		var ui := stats_ui_scn.instantiate() as HealthBarUI
 		
 		left_panel.add_child(ui)
 		
-		ui.update_stats(pkmn_stats)
-		print("Added StatsUI for", pkmn_stats.species_id)
-		print("Parent node:", ui.get_parent())
+		ui.update_stats(pkmn)
+		print("Added StatsUI for", pkmn.species_id)
 
-		if not pkmn_stats.stats_changed.is_connected(ui.update_stats):
-			pkmn_stats.stats_changed.connect(func(): ui.update_stats(pkmn_stats))
+		if not pkmn.stats_changed.is_connected(_update_pokemon_stats_ui):
+			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, ui))
+
+
+
+func _update_pokemon_stats_ui(pkmn: PokemonStats, ui: HealthBarUI) -> void:
+	ui.update_stats(pkmn)
+
 
 
 func _on_enemies_child_order_changed() -> void:

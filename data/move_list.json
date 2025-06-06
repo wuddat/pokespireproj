@@ -24,26 +24,26 @@
 	  "target": "all_enemies",
 	  "power": 8,
 	  "accuracy": 100,
-	  "cost": 2,
+	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
-	  "icon_path": "res://art/pokeball.png",
-	  "rarity": "Rare"
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "Uncommon"
 	},
 	"pokeball": {
 	  "name": "Pokeball",
 	  "id": "pokeball",
-	  "category": "power",
-	  "subtype": "all_enemies",
+	  "category": "attack",
+	  "subtype": "single_target",
 	  "type": "Grass",
-	  "target": "all_enemies",
+	  "target": "enemy",
 	  "power": 8,
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": ["catching"],
-	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies.[/center]",
-	  "icon_path": "res://art/tile_0101.png",
-	  "rarity": "Uncommon"
+	  "description": "[center]Attempt to [color=gold]CATCH[/color] a pokemon![/center]",
+	  "icon_path": "res://art/pokeball.png",
+	  "rarity": "Rare"
 	},
 		"defensecurl": {
 	  "name": "Defense Curl",

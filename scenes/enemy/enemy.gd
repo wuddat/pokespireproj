@@ -5,7 +5,6 @@ const ARROW_OFFSET := 20
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @export var stats: EnemyStats : set = set_enemy_stats
-@export var is_catchable: bool = false
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var arrow: Sprite2D = $Arrow
@@ -16,6 +15,10 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
+
+var is_catchable: bool = false
+var is_caught: bool = false
+var skip_turn: bool = false
 
 func _ready():
 	await get_tree().process_frame
@@ -111,7 +114,11 @@ func do_turn() -> void:
 		status_handler.remove_status("flinched")
 		Events.enemy_action_completed.emit(self)
 		return
-
+	
+	if status_handler._has_status("catching"):
+		print("%s is being caught, skipping turn." % self)
+		Events.enemy_action_completed.emit(self)
+		return
 	
 	if not current_action:
 		return
@@ -138,7 +145,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 			if stats.health <= 0 and status_handler._has_status("catching"):
 				is_catchable = true
 				print("enemy was caught ", is_catchable)
-				Events.enemy_captured.emit(self)
+				print("Emitting captured signal with:", self.stats)
+				mark_as_caught()
 				Events.enemy_died.emit(self)
 				queue_free()
 			elif stats.health <= 0:
@@ -146,6 +154,23 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 				queue_free()
 	)
 
+func mark_as_caught() -> void:
+	if is_caught:
+		return
+	is_caught = true
+	skip_turn = true
+	is_catchable = false
+	
+	if sprite_2d:
+		sprite_2d.texture = preload("res://art/pokeball.png")
+	
+	print("mark_as_caught signal with:", stats)
+	Events.pokemon_captured.emit(PokemonStats.from_enemy_stats(stats))
+	
+	#TODO if this breaks combat - update to resolve end of combat with enemies still alive
+	enemy_action_picker = null
+	# maybe emit a signal instead?
+	
 
 func _on_area_entered(_area: Area2D) -> void:
 	arrow.show()

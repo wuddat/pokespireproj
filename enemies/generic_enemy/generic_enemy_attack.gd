@@ -55,7 +55,6 @@ func perform_action() -> void:
 
 func update_intent_text() -> void:
 	if not is_instance_valid(target):
-		print("update_intent_text(): Target is invalid or freed.")
 		return
 
 	var target_pkmn := target as PokemonBattleUnit

@@ -17,7 +17,7 @@ extends Stats
 @export_group("Pokemon Data")
 @export var starting_party: Array[String] = []
 
-var current_party: Array[Dictionary] = []
+var current_party: Array[PokemonStats] = []
 var mana : int : set = set_mana
 var deck: CardPile
 var discard: CardPile
@@ -54,15 +54,10 @@ func create_instance() -> Resource:
 	instance.current_party = []
 	
 	for species_id in starting_party:
-		var base_data = Pokedex.get_pokemon_data(species_id)
-		if base_data:
-			instance.current_party.append({
-				"species_id": species_id,
-				"max_health": base_data.get("max_health", 1),
-				"health": base_data.get("max_health", 1),
-				"move_ids": base_data.get("move_ids", [])
-			})
-			print("pokemon logged %s" % species_id)
+		var pkmn = Pokedex.create_pokemon_instance(species_id)
+		if pkmn:
+			instance.current_party.append(pkmn)
+			print("pokemon logged %s " % pkmn.species_id)
 		else:
 			print("Missing Pokedex data for %s" % species_id)
 			
