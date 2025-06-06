@@ -8,7 +8,7 @@
 	  "type": ["grass"],
 	  "move_ids": [
 		"tackle",
-		"growl"
+		"razorleaf"
 	  ],
 	  "icon_path": "res://art/sprites/icons/1.png"
 	},
@@ -64,7 +64,7 @@
 	  "type": ["grass"],
 	  "move_ids": [
 		"tackle",
-		"growl"
+		"razorleaf"
 	  ],
 	  "icon_path": "res://art/sprites/icons/6.png"
 	},

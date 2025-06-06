@@ -13,6 +13,7 @@ extends Stats
 @export var cards_per_turn: int
 @export var max_mana: int
 @export var starting_moves: Array[String] = []
+@export var starting_items: Array[String] = []
 
 @export_group("Pokemon Data")
 @export var starting_party: Array[String] = []
@@ -53,20 +54,85 @@ func create_instance() -> Resource:
 	
 	instance.current_party = []
 	
-	for species_id in starting_party:
-		var pkmn = Pokedex.create_pokemon_instance(species_id)
+	for starter in starting_party:
+		var pkmn = Pokedex.create_pokemon_instance(starter)
 		if pkmn:
 			instance.current_party.append(pkmn)
 			print("pokemon loaded from dex: %s " % pkmn.species_id)
 			
 		else:
-			print("Missing Pokedex data for %s" % species_id)
+			print("Missing Pokedex data for %s" % starter)
 			
-	instance.deck = build_deck_from_move_ids(starting_moves)
+	instance.deck = CardPile.new()
+	for pkmn in instance.current_party:
+		var pkmn_cards = build_deck_from_starter(pkmn)
+		instance.deck.cards.append_array(pkmn_cards.cards)
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
 	instance.draftable_cards = build_deck_from_move_ids(draftable_move_ids)
 	return instance
+
+
+func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
+	var pile := CardPile.new()
+	var move_to_resource_map = {
+		"attack": preload("res://data/moves/attack.tres"),
+		"defense": preload("res://data/moves/block.tres"),
+		"power": preload("res://data/moves/power.tres")
+	}
+	
+	var move_ids = starting_moves
+	for move_id in move_ids:
+		var move_data = MoveData.moves.get(move_id)
+		if move_data == null:
+			continue
+		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
+		if card_type == null:
+			continue
+		var card: Card = card_type.duplicate()
+		if card.has_method("setup_from_data"):
+			card.setup_from_data(move_data)
+		card.pkmn_owner_uid = pkmn.uid
+		pile.add_card(card)
+	move_ids = starting_items
+	for move_id in move_ids:
+		var move_data = MoveData.moves.get(move_id)
+		if move_data == null:
+			continue
+		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
+		if card_type == null:
+			continue
+		var card: Card = card_type.duplicate()
+		if card.has_method("setup_from_data"):
+			card.setup_from_data(move_data)
+			pile.add_card(card)
+	return pile
+
+
+func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
+	var pile := CardPile.new()
+	var move_to_resource_map = {
+		"attack": preload("res://data/moves/attack.tres"),
+		"defense": preload("res://data/moves/block.tres"),
+		"power": preload("res://data/moves/power.tres")
+	}
+	
+	var move_ids = pkmn.move_ids
+	for move_id in move_ids:
+		var move_data = MoveData.moves.get(move_id)
+		if move_data == null:
+			continue
+		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
+		if card_type == null:
+			continue
+		var card: Card = card_type.duplicate()
+		if card.has_method("setup_from_data"):
+			card.setup_from_data(move_data)
+		card.pkmn_owner_uid = pkmn.uid
+		pile.add_card(card)
+	return pile
+
+
 
 func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 	var pile := CardPile.new()
@@ -108,3 +174,4 @@ func update_draftable_cards() -> void:
 	
 	var pkmn_draft_list: CardPile = build_deck_from_move_ids(new_draft_list)
 	draftable_cards = pkmn_draft_list
+	

@@ -54,6 +54,8 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.health = pokemon.max_health
 	pokemon.art = load(data.get("sprite_path", "res://art/dottedline.png"))
 	pokemon.icon = load(data.get("icon_path", "res://art/dottedline.png"))
+	pokemon.uid = "pkmn_" + str(Time.get_unix_time_from_system())
+	print("uid generated as: ", pokemon.uid)
 	
 	# WASH IT AND DRY IT BABY
 	var dirty_move_ids = data.get("move_ids", [])

@@ -10,6 +10,7 @@ signal stats_changed
 var health: int : set = set_health
 var block: int : set = set_block
 
+var uid: String
 
 func set_health(value : int) -> void:
 	health = clampi(value, 0, max_health)
