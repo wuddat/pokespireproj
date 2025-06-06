@@ -19,7 +19,6 @@ texture = ExtResource("1_yo7j0")
 flip_h = true
 
 [node name="StatsUI" parent="." instance=ExtResource("2_6808p")]
-visible = false
 offset_top = 4.0
 offset_bottom = 52.0
 

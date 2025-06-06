@@ -6,12 +6,16 @@ const HAND_DISCARD_INTERVAL := 0.2
 
 @export var hand: Hand
 @export var player: Player
+@onready var party_handler: PartyHandler = $"../PartyHandler"
 
 var character: CharacterStats
+var acting_pokemon: Array[PokemonBattleUnit] = []
+
 
 
 func _ready() -> void:
-	Events.card_played.connect(_on_card_played)
+	_establish_connections()
+
 
 
 func start_battle(char_stats: CharacterStats) -> void:
@@ -19,7 +23,7 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile = character.deck.duplicate(true)
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
-	player.status_handler.statuses_applied.connect(_on_statuses_applied)
+	_establish_connections()
 	start_turn()
 
 
@@ -27,11 +31,26 @@ func start_turn() -> void:
 	player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	character.block = 0
 	character.reset_mana()
+	acting_pokemon = party_handler.get_active_pokemon_nodes().duplicate()
+	if acting_pokemon.is_empty():
+		# fallback, maybe just proceed
+		return
+
+	for pkmn in acting_pokemon:
+		pkmn.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+
 
 
 func end_turn() -> void:
 	hand.disable_hand()
 	player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
+	acting_pokemon = party_handler.get_active_pokemon_nodes().duplicate()
+	if acting_pokemon.is_empty():
+		# fallback, maybe just proceed
+		return
+
+	for pkmn in acting_pokemon:
+		pkmn.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 	
 	
 func draw_card() -> void:
@@ -90,3 +109,23 @@ func _on_statuses_applied(type: Status.Type) -> void:
 			draw_cards(character.cards_per_turn)
 		Status.Type.END_OF_TURN:
 			discard_cards()
+
+func _on_pokemon_start_status_applied(pkmn: PokemonBattleUnit) -> void:
+	acting_pokemon.erase(pkmn)
+
+func _on_pokemon_end_status_applied(pkmn: PokemonBattleUnit) -> void:
+	acting_pokemon.erase(pkmn)
+
+
+func _establish_connections() -> void:
+	if not Events.card_played.is_connected(_on_card_played):
+		Events.card_played.connect(_on_card_played)
+		
+	if not Events.player_pokemon_start_status_applied.is_connected(_on_pokemon_start_status_applied):
+		Events.player_pokemon_start_status_applied.connect(_on_pokemon_start_status_applied)
+		
+	if not Events.player_pokemon_end_status_applied.is_connected(_on_pokemon_end_status_applied):
+		Events.player_pokemon_end_status_applied.connect(_on_pokemon_end_status_applied)
+		
+	if not player.status_handler.statuses_applied.is_connected(_on_statuses_applied):
+		player.status_handler.statuses_applied.connect(_on_statuses_applied)

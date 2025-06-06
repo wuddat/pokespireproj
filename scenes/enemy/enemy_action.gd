@@ -26,7 +26,7 @@ func perform_action() -> void:
 func update_intent_text() -> void:
 	intent.current_text = intent.base_text
 
-func animate_to_targets(targets_to_hit: Array[Node], index: int, damage:int) -> void:
+func animate_to_targets(targets_to_hit: Array[Node], index: int, damage:int, status_effects:Array[Status]) -> void:
 	if index >= targets_to_hit.size():
 		# All done
 		Events.enemy_action_completed.emit(enemy)
@@ -34,7 +34,7 @@ func animate_to_targets(targets_to_hit: Array[Node], index: int, damage:int) -> 
 
 	var target_node = targets_to_hit[index]
 	if not is_instance_valid(target_node):
-		animate_to_targets(targets_to_hit, index + 1, damage)
+		animate_to_targets(targets_to_hit, index + 1, damage, status_effects)
 		return
 
 	var start_pos = enemy.global_position
@@ -46,11 +46,20 @@ func animate_to_targets(targets_to_hit: Array[Node], index: int, damage:int) -> 
 	var damage_effect = DamageEffect.new()
 	damage_effect.amount = damage
 	damage_effect.sound = sound
+	
+	if status_effects.size() > 0:
+		for status_effect in status_effects:
+			if status_effect:
+				var stat_effect := StatusEffect.new()
+				var status_to_apply := status_effect.duplicate()
+				stat_effect.status = status_to_apply
+				stat_effect.execute([target_node])
+	
 
 	tween.tween_callback(func(): damage_effect.execute([target_node]))
 	tween.tween_interval(0.2)
 	tween.tween_property(enemy, "global_position", start_pos, 0.3)
 
 	tween.finished.connect(func():
-		animate_to_targets(targets_to_hit, index + 1, damage)
+		animate_to_targets(targets_to_hit, index + 1, damage, status_effects)
 	)

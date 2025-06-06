@@ -5,6 +5,7 @@ extends PanelContainer
 @onready var label: Label = %Label
 @onready var block_label: Label = %BlockLabel
 @onready var block: HBoxContainer = %Block
+@onready var fainted: Label = %Fainted
 
 
 
@@ -20,5 +21,5 @@ func update_stats(stats: Stats) -> void:
 	health.update_stats(stats)
 	health.health_image.visible = false
 	label.text = str(stats.species_id)
-	health.visible = stats.health > 0
+	fainted.visible = stats.health <= 0
 	block.visible = stats.block > 0

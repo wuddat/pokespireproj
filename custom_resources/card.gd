@@ -138,6 +138,8 @@ func setup_from_data(data: Dictionary) -> void:
 	
 	status_effects.clear()
 	if data.has("status_effects"):
-		for effect_id in data["status_effects"]:
-			if STATUS_LOOKUP.has(effect_id):
-				status_effects.append(STATUS_LOOKUP[effect_id].duplicate())
+		var raw_ids = data["status_effects"]
+		var typed_ids = Utils.to_typed_string_array(raw_ids)
+		
+		status_effects.clear()
+		status_effects.append_array(StatusData.get_status_effects_from_ids(typed_ids))

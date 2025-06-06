@@ -1,4 +1,3 @@
-class_name Debug
 extends Node
 
 static func print_resource(resource: Resource) -> void:
@@ -12,3 +11,9 @@ static func print_resource(resource: Resource) -> void:
 		var value = resource.get(name)
 		print("%s: %s" % [name, value])
 	print("------------------------------")
+
+func to_typed_string_array(input: Array) -> Array[String]:
+	var result: Array[String] = []
+	for item in input:
+		result.append(str(item))
+	return result

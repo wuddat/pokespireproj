@@ -15,6 +15,8 @@ signal player_hand_discarded
 signal player_turn_ended
 signal player_hit
 signal player_died
+signal player_pokemon_start_status_applied(pokemon: PokemonBattleUnit)
+signal player_pokemon_end_status_applied(pokemon: PokemonBattleUnit)
 
 #Enemy-related Events
 signal enemy_action_completed(enemy: Enemy)

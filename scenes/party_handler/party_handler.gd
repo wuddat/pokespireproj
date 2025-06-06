@@ -83,4 +83,4 @@ func update_party_health_in_character_stats() -> void:
 			"health": p.health,
 			"move_ids": p.move_ids.duplicate()
 		})
-		print("updated %s stats" % p.species_id)
+		#print("updated %s stats" % p.species_id)

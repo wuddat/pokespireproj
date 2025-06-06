@@ -56,3 +56,10 @@ size_flags_vertical = 1
 text = "888"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Fainted" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fainted"
+horizontal_alignment = 1
+vertical_alignment = 1
