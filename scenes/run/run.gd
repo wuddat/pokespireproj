@@ -22,6 +22,7 @@ const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 @onready var shopbtn: Button = %ShopButton
 @onready var treasurebtn: Button = %TreasureButton
 @onready var health_ui: HealthUI = %HealthUI
+@onready var party_selector: HBoxContainer = %PartySelector
 
 
 var stats: RunStats
@@ -79,6 +80,7 @@ func _setup_event_connections() -> void:
 	Events.shop_exited.connect(_show_map)
 	Events.treasure_room_exited.connect(_show_map)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
+	Events.added_pkmn_to_party.connect(_populate_party_buttons)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -95,6 +97,8 @@ func 	_setup_top_bar():
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
+	party_selector.char_stats = character
+	party_selector.populate_buttons()
 
 
 func _on_battle_room_entered(room: Room) -> void:
@@ -140,3 +144,7 @@ func _on_pokemon_captured(stats: PokemonStats) -> void:
 	caught_pokemon.append(stats.duplicate())
 	print("caught pokemon in run: ", caught_pokemon)
 	Utils.print_resource(caught_pokemon[0])
+
+func _populate_party_buttons() -> void:
+	party_selector.char_stats = character
+	party_selector.populate_buttons()

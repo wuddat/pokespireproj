@@ -30,11 +30,12 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.species_id = species_id
 	pokemon.max_health = data.get("max_health", 10)
 	pokemon.health = pokemon.max_health
-	pokemon.art = load(data.get("sprite_path", "res://art/missingno.png"))
+	pokemon.art = load(data.get("sprite_path", "res://art/dottedline.png"))
 	# Load move IDs safely
 	var raw_move_ids = data.get("move_ids", [])
 	var typed_move_ids = Utils.to_typed_string_array(raw_move_ids)
 	pokemon.move_ids.append(typed_move_ids)
+	pokemon.icon = load(data.get("icon_path", "res://art/dottedline.png"))
 	
 	return pokemon
 

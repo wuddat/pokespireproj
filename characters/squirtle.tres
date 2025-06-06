@@ -14,6 +14,7 @@ draftable_move_ids = Array[String]([])
 cards_per_turn = 4
 max_mana = 3
 starting_moves = Array[String](["tackle", "tackle", "tackle", "tackle"])
+starting_party = Array[String]([])
 max_health = 36
 art = ExtResource("1_77uey")
 metadata/_custom_type_script = "uid://dswbye42ve1b5"

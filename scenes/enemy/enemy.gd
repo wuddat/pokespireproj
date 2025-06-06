@@ -165,7 +165,8 @@ func mark_as_caught() -> void:
 		sprite_2d.texture = preload("res://art/pokeball.png")
 	
 	print("mark_as_caught signal with:", stats)
-	Events.pokemon_captured.emit(PokemonStats.from_enemy_stats(stats))
+	var pkmn_to_add = Pokedex.create_pokemon_instance(stats.species_id)
+	Events.pokemon_captured.emit(PokemonStats.from_enemy_stats(pkmn_to_add))
 	
 	#TODO if this breaks combat - update to resolve end of combat with enemies still alive
 	enemy_action_picker = null

@@ -15,6 +15,7 @@ static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
 	new_stats.health = stats.max_health
 	new_stats.art = stats.art
 	new_stats.type = stats.type.duplicate()
+	new_stats.icon = stats.icon
 	return new_stats
 
 

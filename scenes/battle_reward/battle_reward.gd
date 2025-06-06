@@ -134,8 +134,10 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	if not character_stats:
 		return
 	var new_pokemon_stats := PokemonStats.from_enemy_stats(stats)
-	character_stats.current_party.append(new_pokemon_stats)
-	print("added pkmn to party: ", new_pokemon_stats.species_id)
+	var pkmn_to_add = Pokedex.create_pokemon_instance(new_pokemon_stats.species_id)
+	character_stats.current_party.append(pkmn_to_add)
+	print("added pkmn to party: ", pkmn_to_add.species_id)
+	Events.added_pkmn_to_party.emit()
 
 	for i in character_stats.current_party.size():
 		print("Slot %s:" % i)
