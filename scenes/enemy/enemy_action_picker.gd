@@ -11,8 +11,8 @@ func _ready() -> void:
 	await wait_for_party_handler()
 	refresh_target_pool()
 
-	if not Events.pokemon_fainted.is_connected(_on_pokemon_fainted):
-		Events.pokemon_fainted.connect(_on_pokemon_fainted)
+	if not Events.party_pokemon_fainted.is_connected(_on_pokemon_fainted):
+		Events.party_pokemon_fainted.connect(_on_pokemon_fainted)
 
 func wait_for_party_handler() -> void:
 	await get_tree().process_frame

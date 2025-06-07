@@ -52,7 +52,7 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	tween.finished.connect(func():
 		sprite_2d.material = null
 		if stats.health <= 0:
-			Events.pokemon_fainted.emit(self)
+			Events.party_pokemon_fainted.emit(self)
 			queue_free()
 	)
 

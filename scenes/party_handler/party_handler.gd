@@ -5,10 +5,11 @@ extends Node
 @export var POS_2 := Vector2(200, 210)
 @export var POS_3 := Vector2(95, 210)
 
+
 @export var max_party_size := 6
 @export var character_stats: CharacterStats
 
-var party: Array[PokemonStats] = []
+var active_party: Array[PokemonStats] = []
 var active_indexes := [0,1,2]
 
 
@@ -16,21 +17,19 @@ func initialize_party_for_battle() -> void:
 	if character_stats == null:
 		push_error("PartyHandler requires a reference to character_stats")
 		return
-
-	for pkmn in character_stats.current_party:
-		add_to_party(pkmn)
+	
 	spawn_active_pokemon()
 
 
 func add_to_party(pokemon: PokemonStats) -> bool:
-	if party.size() >= max_party_size:
+	if active_party.size() >= max_party_size:
 		return false
-	party.append(pokemon)
+	active_party.append(pokemon)
 	return true
 
 func get_active_pokemon() -> Array[PokemonStats]:
 	var actives: Array[PokemonStats] = []
-	for pkmn in party:
+	for pkmn in active_party:
 		if pkmn.health > 0:
 			actives.append(pkmn)
 		if actives.size() == 3:
@@ -69,4 +68,13 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 func update_party_health_in_character_stats() -> void:
 	if character_stats == null:
 		return
-	character_stats.current_party = party.duplicate()
+	character_stats.current_party = active_party.duplicate()
+
+
+func set_active_party(pkmn_list: Array[PokemonStats]) -> void:
+	active_party.clear()
+	for pkmn in pkmn_list:
+		if add_to_party(pkmn):
+			continue
+		else:
+			push_warning("Party is full. Could not add: %s" % pkmn.species_id)

@@ -23,6 +23,8 @@ var mana : int : set = set_mana
 var deck: CardPile
 var discard: CardPile
 var draw_pile: CardPile
+var faint_pile: Dictionary = {} # uid (String) -> CardPile
+var battle_deck: CardPile
 var draftable_cards: CardPile
 
 
@@ -133,7 +135,6 @@ func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
 	return pile
 
 
-
 func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 	var pile := CardPile.new()
 	
@@ -163,6 +164,7 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 		
 	return pile
 
+
 func update_draftable_cards() -> void:
 	draftable_cards.cards.clear()
 
@@ -175,3 +177,28 @@ func update_draftable_cards() -> void:
 	var pkmn_draft_list: CardPile = build_deck_from_move_ids(new_draft_list)
 	draftable_cards = pkmn_draft_list
 	
+
+func get_faint_pile(uid: String) -> CardPile:
+	if faint_pile.has(uid):
+		return faint_pile[uid]
+	else:
+		return CardPile.new()
+
+
+func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:
+	var pile := CardPile.new()
+
+	for card in deck.cards:
+		if selected_pokemon.any(func(pkmn): return pkmn.uid == card.pkmn_owner_uid):
+			if not faint_pile.has(card.pkmn_owner_uid) or not faint_pile[card.pkmn_owner_uid].cards.has(card):
+				pile.add_card(card)
+
+	return pile
+
+
+
+func print_faint_pile():
+	for uid in faint_pile.keys():
+		print("UID:", uid)
+		for card in faint_pile[uid].cards:
+			print(" -", card.move_id)

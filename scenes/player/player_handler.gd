@@ -6,6 +6,7 @@ const HAND_DISCARD_INTERVAL := 0.2
 
 @export var hand: Hand
 @export var player: Player
+
 @onready var party_handler: PartyHandler = $"../PartyHandler"
 
 var character: CharacterStats
@@ -20,7 +21,11 @@ func _ready() -> void:
 
 func start_battle(char_stats: CharacterStats) -> void:
 	character = char_stats
-	character.draw_pile = character.deck.duplicate(true)
+	
+	character.battle_deck = character.build_battle_deck(party_handler.active_party)
+	character.draw_pile = character.battle_deck.duplicate(true)
+	character.draw_pile.shuffle()
+
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
 	_establish_connections()
@@ -40,7 +45,6 @@ func start_turn() -> void:
 		pkmn.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
-
 func end_turn() -> void:
 	hand.disable_hand()
 	player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
@@ -51,8 +55,8 @@ func end_turn() -> void:
 
 	for pkmn in acting_pokemon:
 		pkmn.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
-	
-	
+
+
 func draw_card() -> void:
 	reshuffle_deck_from_discard()
 	hand.add_card(character.draw_pile.draw_card())
@@ -97,6 +101,48 @@ func reshuffle_deck_from_discard() -> void:
 	character.draw_pile.shuffle()
 
 
+func exhaust_cards_on_faint(uid: String) -> void:
+	if not character.faint_pile.has(uid):
+		character.faint_pile[uid] = CardPile.new()
+	
+	var cards_to_exhaust := CardPile.new()
+
+	for card: Card in character.draw_pile.cards:
+		if card.pkmn_owner_uid == uid:
+			cards_to_exhaust.add_card(card)
+	character.draw_pile.cards = character.draw_pile.cards.filter(
+		func(c): return c.pkmn_owner_uid != uid
+	)
+
+	for card: Card in character.discard.cards:
+		if card.pkmn_owner_uid == uid:
+			cards_to_exhaust.add_card(card)
+	character.discard.cards = character.discard.cards.filter(
+		func(c): return c.pkmn_owner_uid != uid
+	)
+
+	for card in cards_to_exhaust.cards:
+		character.faint_pile[uid].add_card(card)
+
+	print("Exhausted %d cards for fainted pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
+	print("The faint_pile is currently: ", character.faint_pile)
+
+
+func restore_fainted_cards(uid: String) -> void:
+	if not character.faint_pile.has(uid):
+		return
+	
+	var pile: CardPile = character.faint_pile[uid]
+	if pile.empty():
+		return
+
+	for card in pile.cards:
+		character.draw_pile.add_card(card)
+	
+	character.faint_pile.erase(uid)
+	print("Restored %d cards for revived pokemon: %s" % [pile.cards.size(), uid])
+
+
 func _on_card_played(card: Card) -> void:
 	if card.exhausts or card.type == Card.Type.POWER:
 		return	
@@ -110,11 +156,18 @@ func _on_statuses_applied(type: Status.Type) -> void:
 		Status.Type.END_OF_TURN:
 			discard_cards()
 
+
 func _on_pokemon_start_status_applied(pkmn: PokemonBattleUnit) -> void:
 	acting_pokemon.erase(pkmn)
 
+
 func _on_pokemon_end_status_applied(pkmn: PokemonBattleUnit) -> void:
 	acting_pokemon.erase(pkmn)
+
+
+func _on_party_pokemon_fainted(unit: PokemonBattleUnit) -> void:
+	var uid :=unit.stats.uid
+	exhaust_cards_on_faint(uid)
 
 
 func _establish_connections() -> void:
@@ -129,3 +182,6 @@ func _establish_connections() -> void:
 		
 	if not player.status_handler.statuses_applied.is_connected(_on_statuses_applied):
 		player.status_handler.statuses_applied.connect(_on_statuses_applied)
+		
+	if not Events.party_pokemon_fainted.is_connected(_on_party_pokemon_fainted):
+		Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)

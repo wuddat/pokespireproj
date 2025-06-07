@@ -4,6 +4,7 @@ extends Node2D
 @export var battle_stats: BattleStats
 @export var char_stats: CharacterStats
 @export var music: AudioStream
+@export var party_selector: HBoxContainer
 
 @onready var battle_ui: BattleUI = $BattleUI
 @onready var player_handler: PlayerHandler = $PlayerHandler
@@ -31,6 +32,8 @@ func start_battle() -> void:
 	
 	player.stats = char_stats
 	party_handler.character_stats = char_stats
+	var selected_party = party_selector.get_selected_pokemon()
+	party_handler.set_active_party(selected_party)
 	party_handler.initialize_party_for_battle()
 	
 	display_active_party_ui()
@@ -40,6 +43,7 @@ func start_battle() -> void:
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()
+	print("The faint_pile is currently: ", char_stats.faint_pile)
 
 
 func display_active_party_ui()-> void:

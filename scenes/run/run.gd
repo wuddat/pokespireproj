@@ -82,7 +82,8 @@ func _setup_event_connections() -> void:
 	Events.pokemon_captured.connect(_on_pokemon_captured)
 	Events.added_pkmn_to_party.connect(_populate_party_buttons)
 	Events.added_pkmn_to_party.connect(_update_draftable_cards)
-	Events.pokemon_fainted.connect(_update_draftable_cards)
+	Events.party_pokemon_fainted.connect(_update_draftable_cards)
+	Events.party_pokemon_fainted.connect(_populate_party_buttons)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -106,6 +107,7 @@ func 	_setup_top_bar():
 func _on_battle_room_entered(room: Room) -> void:
 	var battle_scene: Battle = _change_view(battlescene) as Battle
 	battle_scene.char_stats = character
+	battle_scene.party_selector = party_selector
 	battle_scene.battle_stats = room.battle_stats
 	battle_scene.start_battle()
 
