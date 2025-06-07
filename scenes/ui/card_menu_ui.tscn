@@ -6,7 +6,7 @@
 
 [node name="CardMenuUI" type="CenterContainer"]
 offset_right = 37.0
-offset_bottom = 48.0
+offset_bottom = 69.0
 size_flags_horizontal = 3
 script = ExtResource("1_escg4")
 card = ExtResource("2_1as8l")

@@ -75,6 +75,17 @@ func create_instance() -> Resource:
 	return instance
 
 
+func get_faint_pile(uid: String) -> CardPile:
+	if faint_pile.has(uid):
+		return faint_pile[uid]
+	else:
+		return CardPile.new()
+
+
+func get_all_party_members() -> Array[PokemonStats]:
+	return current_party
+
+
 func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
 	var pile := CardPile.new()
 	var move_to_resource_map = {
@@ -95,6 +106,7 @@ func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
 		if card.has_method("setup_from_data"):
 			card.setup_from_data(move_data)
 		card.pkmn_owner_uid = pkmn.uid
+		card.pkmn_icon = pkmn.icon
 		pile.add_card(card)
 	move_ids = starting_items
 	for move_id in move_ids:
@@ -165,6 +177,23 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 	return pile
 
 
+func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:
+	var pile := CardPile.new()
+
+	for card in deck.cards:
+		var owner_uid := card.pkmn_owner_uid
+
+		var is_active_pokemon_card := selected_pokemon.any(func(pkmn): return pkmn.uid == owner_uid)
+		var is_item_card := owner_uid == "" or owner_uid == null
+
+		var not_in_faint_pile = not faint_pile.has(owner_uid) or not faint_pile[owner_uid].cards.has(card)
+
+		if (is_active_pokemon_card or is_item_card) and not_in_faint_pile:
+			pile.add_card(card)
+
+	return pile
+
+
 func update_draftable_cards() -> void:
 	draftable_cards.cards.clear()
 
@@ -176,25 +205,6 @@ func update_draftable_cards() -> void:
 	
 	var pkmn_draft_list: CardPile = build_deck_from_move_ids(new_draft_list)
 	draftable_cards = pkmn_draft_list
-	
-
-func get_faint_pile(uid: String) -> CardPile:
-	if faint_pile.has(uid):
-		return faint_pile[uid]
-	else:
-		return CardPile.new()
-
-
-func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:
-	var pile := CardPile.new()
-
-	for card in deck.cards:
-		if selected_pokemon.any(func(pkmn): return pkmn.uid == card.pkmn_owner_uid):
-			if not faint_pile.has(card.pkmn_owner_uid) or not faint_pile[card.pkmn_owner_uid].cards.has(card):
-				pile.add_card(card)
-
-	return pile
-
 
 
 func print_faint_pile():

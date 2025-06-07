@@ -79,6 +79,7 @@ func _set_card(value: Card) -> void:
 	if value == null:
 		push_warning("_set_card was called with a null value. Skipping.")
 		return
+	print("CardUI: Setting card:", value, "with UID:", value.pkmn_owner_uid)
 	card = value
 	card_visuals.card = card
 
@@ -95,6 +96,7 @@ func _set_playable(value:bool) -> void:
 
 func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
+	card_visuals.set_char_stats(value)
 	char_stats.stats_changed.connect(_on_char_stats_changed)
 
 

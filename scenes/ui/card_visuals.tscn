@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://spupfh640ekm"]
+[gd_scene load_steps=8 format=3 uid="uid://spupfh640ekm"]
 
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_x0ouv"]
 [ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_imfec"]
@@ -6,13 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="3_imfec"]
 [ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="3_m3e03"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="6_imfec"]
+[ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_m3e03"]
 
 [node name="CardVisuals" type="Control"]
-custom_minimum_size = Vector2(37, 48)
+custom_minimum_size = Vector2(37, 62)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 37.0
-offset_bottom = 48.0
+offset_bottom = 62.0
 theme = ExtResource("1_x0ouv")
 script = ExtResource("2_imfec")
 card = ExtResource("3_m3e03")
@@ -22,6 +23,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -29,19 +31,19 @@ theme_override_styles/panel = ExtResource("2_jxbv6")
 
 [node name="Cost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 18.0
-offset_bottom = 13.0
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 17.0
+offset_bottom = 28.0
 text = "99"
 vertical_alignment = 1
 
 [node name="Effect" type="Label" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 1.0
-offset_right = 36.0
-offset_bottom = 13.0
+offset_left = 21.0
+offset_top = 16.0
+offset_right = 37.0
+offset_bottom = 28.0
 text = "99"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -53,10 +55,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -9.0
-offset_right = 10.0
-offset_bottom = 11.0
+offset_left = -9.5
+offset_top = -1.0
+offset_right = 10.5
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -66,15 +68,29 @@ stretch_mode = 5
 
 [node name="Rarity" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -14.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 14.0
-grow_horizontal = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 9.5
+offset_top = 20.0
+offset_right = 29.5
+offset_bottom = 40.0
+grow_horizontal = 2
 rotation = 3.14159
 texture = ExtResource("6_imfec")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OwnerIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -10.5
+offset_top = -2.0
+offset_right = 9.5
+offset_bottom = 18.0
+grow_horizontal = 2
+texture = ExtResource("7_m3e03")
 expand_mode = 1
 stretch_mode = 5

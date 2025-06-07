@@ -43,6 +43,7 @@ var base_power: int
 
 @export_group("Card Visuals")
 @export var icon: Texture
+@export var pkmn_icon: Texture
 @export_multiline var tooltip_text: String
 @export var sound: AudioStream
 

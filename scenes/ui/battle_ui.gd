@@ -20,6 +20,9 @@ func _ready() -> void:
 
 
 func initialize_card_pile_ui() -> void:
+	draw_pile_view.char_stats = char_stats
+	discard_pile_view.char_stats = char_stats
+
 	draw_pile_button.card_pile = char_stats.draw_pile
 	draw_pile_view.card_pile = char_stats.draw_pile
 	discard_pile_button.card_pile = char_stats.discard

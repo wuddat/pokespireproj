@@ -4,6 +4,7 @@ extends Control
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 
 @export var card_pile: CardPile
+@export var char_stats: CharacterStats
 
 @onready var title: Label = %Title
 @onready var cards: GridContainer = %Cards
@@ -52,5 +53,8 @@ func _update_view(randomized: bool) -> void:
 		cards.add_child(new_card)
 		new_card.card = card
 		new_card.tooltip_requested.connect(card_detail_overlay.show_tooltip)
+		
+		new_card.set_char_stats(char_stats)
+
 		
 	show()

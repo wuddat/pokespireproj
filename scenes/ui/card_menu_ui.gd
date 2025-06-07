@@ -29,3 +29,6 @@ func set_card(value: Card) -> void:
 	
 	card = value
 	visuals.card = card
+
+func set_char_stats(value: CharacterStats) -> void:
+	visuals.char_stats = value
