@@ -52,6 +52,7 @@ mouse_filter = 2
 
 [node name="StatusTooltips" type="VBoxContainer" parent="ScrollContainer/CenterContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0

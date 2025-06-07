@@ -38,6 +38,7 @@ const STATUS_LOOKUP := {
 @export var power: int
 @export var exhausts: bool = false
 @export var pkmn_owner_uid: String
+@export var pkmn_owner_name: String
 var base_power: int
 
 

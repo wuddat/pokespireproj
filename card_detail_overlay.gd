@@ -10,10 +10,9 @@ const STATUS_TOOLTIP_SCENE := preload("res://scenes/ui/status_tooltip.tscn")
 @onready var tooltip_card: CenterContainer = %TooltipCard
 @onready var card_description: RichTextLabel = %CardDescription
 @onready var card_name: Label = %CardName
-@onready var card_owner: RichTextLabel = $VBoxContainer/HBoxContainer/VBoxContainer2/CardOwner
 @onready var inflicts: RichTextLabel = %Inflicts
 @onready var status_box: VBoxContainer = %StatusBox
-@onready var pokemon: RichTextLabel = %Pokemon
+@onready var pokemon_name: RichTextLabel = %Pokemon
 
 
 func _ready() -> void:
@@ -40,7 +39,7 @@ func show_tooltip(card: Card) -> void:
 	
 	card_description.text = card.get_default_tooltip()
 	card_name.text = card.name
-	
+	pokemon_name.text = "[color=goldenrod]%s[/color]" % card.pkmn_owner_name.capitalize()
 	
 	
 	# Show statuses if available

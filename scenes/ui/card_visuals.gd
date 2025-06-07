@@ -37,10 +37,8 @@ func _try_update_visuals() -> void:
 
 func _update_visuals() -> void:
 	if not is_instance_valid(card):
-		print("CardVisuals: No valid card.")
 		return
 
-	print("CardVisuals: Updating visuals for card with UID:", card.pkmn_owner_uid)
 
 	cost.text = str(card.cost)
 	effect.text = str(card.power)
@@ -53,18 +51,14 @@ func _update_visuals() -> void:
 		owner_icon.texture = card.pkmn_icon
 		owner_icon.visible = true
 	else:
-		print("CardVisuals: No owner found for UID:", card.pkmn_owner_uid)
 		owner_icon.visible = false
 
 
 func get_owner_pokemon(uid: String) -> PokemonStats:
 	if char_stats == null:
-		print("CardVisuals: char_stats is null.")
 		return null
 	var party_members = char_stats.get_all_party_members()
 	for pkmn: PokemonStats in party_members:
 		if pkmn.uid == uid:
-			print("CardVisuals: Matching UID found in party:", pkmn.species_id)
 			return pkmn
-			print("CardVisuals: No matching UID in party.")
 	return null

@@ -63,42 +63,40 @@ theme_override_constants/separation = 50
 alignment = 2
 
 [node name="Owner" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="Placeholder2" type="Control" parent="VBoxContainer/CenterContainer/HBoxContainer/Owner"]
 layout_mode = 2
 
 [node name="CardOwner" type="RichTextLabel" parent="VBoxContainer/CenterContainer/HBoxContainer/Owner"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/outline_size = 1
 bbcode_enabled = true
+text = "Learned by:"
 fit_content = true
 horizontal_alignment = 2
 
 [node name="Pokemon" type="RichTextLabel" parent="VBoxContainer/CenterContainer/HBoxContainer/Owner"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/outline_size = 1
 bbcode_enabled = true
+text = "[color=goldenrod]Bulbasaur[/color]"
 fit_content = true
 horizontal_alignment = 2
 
 [node name="StatusBox" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="Placeholder2" type="Control" parent="VBoxContainer/CenterContainer/HBoxContainer/StatusBox"]
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="Inflicts" type="RichTextLabel" parent="VBoxContainer/CenterContainer/HBoxContainer/StatusBox"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/outline_size = 1

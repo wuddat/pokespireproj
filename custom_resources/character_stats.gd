@@ -107,6 +107,7 @@ func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
 			card.setup_from_data(move_data)
 		card.pkmn_owner_uid = pkmn.uid
 		card.pkmn_icon = pkmn.icon
+		card.pkmn_owner_name = pkmn.species_id
 		pile.add_card(card)
 	move_ids = starting_items
 	for move_id in move_ids:
