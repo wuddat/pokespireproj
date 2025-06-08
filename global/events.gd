@@ -31,7 +31,7 @@ signal status_tooltip_hide_requested()
 signal pokemon_captured(stats: PokemonStats)
 
 #Pokemon-related Events
-signal party_pokemon_fainted
+signal party_pokemon_fainted(pokemon: PokemonBattleUnit)
 signal player_pokemon_start_status_applied(pokemon: PokemonBattleUnit)
 signal player_pokemon_end_status_applied(pokemon: PokemonBattleUnit)
 signal added_pkmn_to_party

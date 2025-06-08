@@ -21,12 +21,17 @@ func _ready() -> void:
 
 func start_battle(char_stats: CharacterStats) -> void:
 	character = char_stats
+	character.faint_pile.clear()
 	
 	character.battle_deck = character.build_battle_deck(party_handler.active_battle_party)
 	character.draw_pile = character.battle_deck.duplicate(true)
 	character.draw_pile.shuffle()
+	
+	for pkmn in character.current_party:
+		if pkmn.health <= 0:
+			print("Exhausting cards for fainted Pokémon: %s (UID: %s)" % [pkmn.species_id, pkmn.uid])
+			exhaust_cards_on_faint(pkmn.uid)
 
-	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
 	_establish_connections()
 	start_turn()
@@ -124,6 +129,8 @@ func exhaust_cards_on_faint(uid: String) -> void:
 	for card in cards_to_exhaust.cards:
 		character.faint_pile[uid].add_card(card)
 
+	character.draw_pile.shuffle()
+	
 	print("Exhausted %d cards for fainted/switched pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
 	#print("The faint_pile is currently: ", character.faint_pile)
 
@@ -178,6 +185,7 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 			switched_pkmn_cards_to_add.add_card(card)
 	for card in switched_pkmn_cards_to_add.cards:
 		character.draw_pile.add_card(card)
+		character.draw_pile.shuffle()
 	
 
 func _establish_connections() -> void:

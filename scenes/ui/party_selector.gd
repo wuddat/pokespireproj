@@ -35,17 +35,22 @@ func _ready() -> void:
 	sync_highlight_to_battling_pokemon()
 	if not Events.player_pokemon_switch_completed.is_connected(_on_pokemon_switch):
 		Events.player_pokemon_switch_completed.connect(_on_pokemon_switch)
+	if not Events.party_pokemon_fainted.is_connected(_on_party_pokemon_fainted):
+		Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 	update_buttons()
 
 
 func update_buttons() -> void:
+	for pkmn in char_stats.current_party:
+		if pkmn.health <= 0 and highlighted_in_bar_pkmn.has(pkmn.uid):
+			highlighted_in_bar_pkmn.erase(pkmn.uid)
+			
 	for i in range(6):
 		var button = $".".get_child(i) as TextureButton
 		if i < char_stats.current_party.size():
 			var pkmn = char_stats.current_party[i]
 			
 			button.texture_normal = pkmn.icon if pkmn.health >= 0 else preload("res://art/dottedline.png")
-			
 			button.disabled = pkmn.health <= 0
 			
 			if pkmn.health<= 0:
@@ -54,7 +59,6 @@ func update_buttons() -> void:
 				button.modulate = Color.CYAN
 			elif pkmn.uid in highlighted_in_bar_pkmn:
 				button.modulate = Color.WHITE
-
 			else:
 				button.modulate = Color.DIM_GRAY
 		else:
@@ -80,6 +84,14 @@ func _on_slot_pressed(index: int) -> void:
 	if in_battle:
 		if switching:
 			print("Attempting switch-in with UID: %s" % uid)
+			
+			if uid in get_active_uids():
+				print("Cancelled switch: %s is already active in battle." % uid)
+				switching = false
+				selected_switch_out_uid = ""
+				update_buttons()
+				return
+			
 			if uid == selected_switch_out_uid or pkmn.health <= 0:
 				switching = false
 				selected_switch_out_uid = ""
@@ -161,4 +173,11 @@ func _on_pokemon_switch(pkmn: PokemonStats) -> void:
 	sync_highlight_to_battling_pokemon()
 	update_buttons()
 
-		
+
+func _on_party_pokemon_fainted(unit: PokemonBattleUnit):
+	var uid = unit.stats.uid
+	if highlighted_in_bar_pkmn.has(uid):
+		highlighted_in_bar_pkmn.erase(uid)
+	if currently_battling_pokemon.any(func(p): return p.uid == uid):
+		currently_battling_pokemon = currently_battling_pokemon.filter(func(p): return p.uid != uid)
+	update_buttons()

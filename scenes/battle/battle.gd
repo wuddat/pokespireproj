@@ -26,6 +26,8 @@ func _ready() -> void:
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	Events.player_died.connect(_on_player_died)
 	Events.player_pokemon_switch_completed.connect(_update_stat_ui)
+	Events.player_pokemon_switch_requested.connect(_hide_switch_ui)
+	
 	
 	
 func start_battle() -> void:
@@ -77,12 +79,15 @@ func update_stat_ui_for_party() -> void:
 			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, ui))
 
 		# Hide by default
-		ui.visible = false
+		ui.visible = true
+		ui.modulate = Color(1,1,1,.5)
 
 	# Reveal only the UIs for currently active Pokémon
 	for pkmn in active_pokemon:
 		if stat_ui_by_uid.has(pkmn.uid):
 			stat_ui_by_uid[pkmn.uid].visible = true
+			var ui = stat_ui_by_uid[pkmn.uid]
+			ui.modulate = Color(1,1,1,1)
 
 	# Clean up orphaned bars
 	for uid in stat_ui_by_uid.keys():
@@ -117,7 +122,12 @@ func _update_stat_ui(pkmn: PokemonStats) -> void:
 	if stat_ui_by_uid.has(pkmn.uid):
 		var ui = stat_ui_by_uid[pkmn.uid]
 		ui.update_stats(pkmn)
-		ui.visible = true
+		ui.modulate = Color(1,1,1,1)
 		if not pkmn.stats_changed.is_connected(_update_pokemon_stats_ui):
 			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, stat_ui_by_uid[pkmn.uid]))
 		_update_pokemon_stats_ui(pkmn, ui)
+
+func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
+	if stat_ui_by_uid.has(switch_out_uid):
+		var ui = stat_ui_by_uid[switch_out_uid]
+		ui.modulate = Color(1,1,1,.5)
