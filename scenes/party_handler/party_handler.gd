@@ -77,8 +77,8 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 	#print("ACTIVE BATTLE UNITS:")
 	#for unit in typed_array:
 		#print("- %s | UID: %s | BLOCK: %d" % [unit.stats.species_id, unit.stats.uid, unit.stats.block])
-
 	return typed_array
+
 
 func sync_battle_health_to_party_data() -> void:
 	if character_stats == null:

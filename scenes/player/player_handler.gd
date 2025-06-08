@@ -194,7 +194,7 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 			switched_pkmn_cards_to_add.add_card(card)
 	for card in switched_pkmn_cards_to_add.cards:
 		character.draw_pile.add_card(card)
-		character.draw_pile.shuffle()
+	character.draw_pile.shuffle()
 	
 
 func _establish_connections() -> void:
