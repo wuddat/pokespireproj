@@ -13,6 +13,7 @@ extends Node2D
 @onready var party_handler: PartyHandler = $PartyHandler
 @onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
 @onready var left_panel: VBoxContainer = $StatUI/LeftPanel
+@onready var pkmn_fainted_ui: PkmnFaintedUI = $FaintUI/PkmnFainted
 
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var stat_ui_by_uid: Dictionary = {}
@@ -45,6 +46,7 @@ func start_battle() -> void:
 	party_selector.selected_switch_out_uid = ""
 	party_handler.finalize_battle_party(selected_party)
 	party_handler.initialize_party_for_battle()
+	pkmn_fainted_ui.char_stats = char_stats
 	
 	update_stat_ui_for_party()
 	

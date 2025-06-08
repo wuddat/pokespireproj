@@ -6,6 +6,7 @@ extends Stats
 @export var move_ids: Array[String] = []
 @export var type: Array[String] = []
 @export var draft_pool: Array[String] = []
+@export var is_battling: bool = false
 
 
 static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:

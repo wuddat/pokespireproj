@@ -144,6 +144,8 @@ func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
 		if card.has_method("setup_from_data"):
 			card.setup_from_data(move_data)
 		card.pkmn_owner_uid = pkmn.uid
+		card.pkmn_icon = pkmn.icon
+		card.pkmn_owner_name = pkmn.species_id
 		pile.add_card(card)
 	return pile
 
@@ -198,14 +200,21 @@ func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:
 func update_draftable_cards() -> void:
 	draftable_cards.cards.clear()
 
-	var new_draft_list : Array[String]
-
-	for pkmn in current_party:
-		var move_list = pkmn.get_draft_cards_from_type()
-		new_draft_list.append_array(move_list)
+	var new_draft_deck := CardPile.new()
 	
-	var pkmn_draft_list: CardPile = build_deck_from_move_ids(new_draft_list)
-	draftable_cards = pkmn_draft_list
+	for pkmn in current_party:
+		var pkmn_draft_cards: CardPile = build_deck_from_pokemon(pkmn)
+		for card: Card in pkmn_draft_cards.cards:
+			new_draft_deck.add_card(card)
+	
+	draftable_cards = new_draft_deck
+
+
+func check_if_all_party_fainted() -> void:
+	for pkmn in current_party:
+		if pkmn.health > 0:
+			return
+		Events.player_died.emit()
 
 
 func print_faint_pile():

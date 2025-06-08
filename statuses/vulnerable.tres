@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://2agcwlmpx4x3"]
+
+[ext_resource type="Texture2D" uid="uid://bwp27owllm0bl" path="res://art/statuseffects/earth.png" id="1_f25os"]
+[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_g1lb8"]
+
+[resource]
+script = ExtResource("2_g1lb8")
+id = "vulnerable"
+type = 1
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_f25os")
+tooltip = "[color=peru]VULNERABLE:[/color]
+One time double damage."
+metadata/_custom_type_script = "uid://breq3elxr1644"

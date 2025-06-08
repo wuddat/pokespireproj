@@ -48,6 +48,17 @@ func update_pokemon() -> void:
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
 
+func gain_block(block: int, mod_type:Modifier.Type) -> void:
+	if stats.health <= 0:
+		return
+	
+	var modified_block := modifier_handler.get_modified_value(block, mod_type)
+	
+	var tween:= create_tween()
+	tween.tween_callback(Shaker.shake.bind(self,25,0.15))
+	tween.tween_callback(stats.gain_block.bind(modified_block))
+	tween.tween_interval(0.17)
+
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0:
 		return

@@ -85,6 +85,7 @@ func _setup_event_connections() -> void:
 	Events.party_pokemon_fainted.connect(_update_draftable_cards)
 	Events.party_pokemon_fainted.connect(_update_party_buttons)
 	
+	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
 	mapbtn.pressed.connect(_show_map)
@@ -154,6 +155,8 @@ func _on_pokemon_captured(stats: PokemonStats) -> void:
 func _update_party_buttons() -> void:
 	party_selector.char_stats = character
 	party_selector.update_buttons()
+	
+	character.check_if_all_party_fainted()
 
 
 func _update_draftable_cards() -> void:

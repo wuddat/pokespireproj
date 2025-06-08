@@ -90,7 +90,9 @@ func _show_card_rewards() -> void:
 					picked_card = available_cards.pick_random()
 					card_reward_array.append(picked_card)
 				break
-	
+	print("Cards in reward array are: ")
+	for card in card_reward_array:
+		Utils.print_resource(card)
 	card_rewards.rewards = card_reward_array
 	card_rewards.show()
 

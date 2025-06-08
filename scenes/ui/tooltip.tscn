@@ -12,6 +12,8 @@ offset_left = -110.0
 offset_right = 110.0
 offset_bottom = 50.0
 grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_mtwet")
 script = ExtResource("2_kv0sd")
 
@@ -25,9 +27,33 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="pkmn" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_b5j4s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TooltipTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/line_separation = 3
+bbcode_enabled = true
+text = "Fire Blast"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("2_b5j4s")
 expand_mode = 1
@@ -40,6 +66,6 @@ size_flags_vertical = 3
 theme = ExtResource("1_mtwet")
 theme_override_constants/line_separation = 3
 bbcode_enabled = true
-text = "Test Tooltip"
+text = "This is where the ability text goes"
 fit_content = true
 scroll_active = false

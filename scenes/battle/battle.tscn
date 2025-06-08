@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=25 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://d0sv3khv88a0s" path="res://scenes/ui/card_pile_opener.tscn" id="17_w40i5"]
 [ext_resource type="PackedScene" uid="uid://6mq48o6e08j5" path="res://scenes/ui/status_view.tscn" id="18_sgdsx"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="20_fe4ja"]
+[ext_resource type="PackedScene" uid="uid://cfip7c5hyvwvo" path="res://scenes/ui/pkmn_fainted_ui.tscn" id="23_156m4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gynk"]
 size = Vector2(512, 178)
@@ -73,7 +74,7 @@ script = ExtResource("8_mxe8n")
 hand = NodePath("../BattleUI/Hand")
 player = NodePath("../Player")
 
-[node name="PartyHandler" parent="." instance=ExtResource("12_156m4")]
+[node name="PartyHandler" parent="." groups=["PartyHandler"] instance=ExtResource("12_156m4")]
 
 [node name="StatUI" type="CanvasLayer" parent="."]
 
@@ -110,9 +111,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -102.0
-offset_top = -38.0
+offset_top = -52.0
 offset_right = 103.0
-offset_bottom = 10.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -120,8 +121,10 @@ script = ExtResource("2_xd4uy")
 player = NodePath("../../Player")
 
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_fisqk")]
-offset_top = -87.0
-offset_bottom = -57.0
+offset_left = 2.0
+offset_top = -68.0
+offset_right = 32.0
+offset_bottom = -38.0
 char_stats = ExtResource("5_fisqk")
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_mxe8n")]
@@ -135,10 +138,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -109.0
-offset_top = -87.0
-offset_right = -9.0
-offset_bottom = -57.0
+offset_left = -145.0
+offset_top = -34.0
+offset_right = -45.0
+offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("13_icoan")
@@ -149,10 +152,10 @@ unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -43.0
-offset_right = 41.0
-offset_bottom = -11.0
+offset_left = 1.0
+offset_top = -37.0
+offset_right = 33.0
+offset_bottom = -5.0
 grow_vertical = 0
 counter = NodePath("Counter")
 
@@ -169,13 +172,16 @@ vertical_alignment = 1
 
 [node name="DiscardPileButton" parent="BattleUI" node_paths=PackedStringArray("counter") instance=ExtResource("17_w40i5")]
 unique_name_in_owner = true
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 472.0
-offset_top = -43.0
-offset_right = 504.0
-offset_bottom = -11.0
+offset_left = -36.0
+offset_top = -37.0
+offset_right = -4.0
+offset_bottom = -5.0
+grow_horizontal = 0
 grow_vertical = 0
 counter = NodePath("Counter")
 
@@ -228,3 +234,9 @@ visible = false
 layer = 4
 
 [node name="StatusView" parent="StatusUI" instance=ExtResource("18_sgdsx")]
+
+[node name="FaintUI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="PkmnFainted" parent="FaintUI" instance=ExtResource("23_156m4")]
+visible = false

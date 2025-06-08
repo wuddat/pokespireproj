@@ -1,1666 +1,305 @@
 {
-  "pokemon": {
-	"bulbasaur": {
-	  "name": "Bulbasaur",
-	  "species_id": "bulbasaur",
-	  "sprite_path": "res://art/sprites/1.png",
-	  "max_health": 23,
-	  "type": ["grass"],
-	  "move_ids": [
-		"tackle",
-		"razorleaf"
-	  ],
-	  "icon_path": "res://art/sprites/icons/1.png"
-	},
-	"ivysaur": {
-	  "name": "Ivysaur",
-	  "species_id": "ivysaur",
-	  "sprite_path": "res://art/sprites/2.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/2.png"
-	},
-	"venusaur": {
-	  "name": "Venusaur",
-	  "species_id": "venusaur",
-	  "sprite_path": "res://art/sprites/3.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/3.png"
-	},
-	"charmander": {
-	  "name": "Charmander",
-	  "species_id": "charmander",
-	  "sprite_path": "res://art/sprites/4.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"scratch",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/4.png"
-	},
-	"charmeleon": {
-	  "name": "Charmeleon",
-	  "species_id": "charmeleon",
-	  "sprite_path": "res://art/sprites/5.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/5.png"
-	},
-	"charizard": {
-	  "name": "Charizard",
-	  "species_id": "charizard",
-	  "sprite_path": "res://art/sprites/6.png",
-	  "max_health": 21,
-	  "type": ["grass"],
-	  "move_ids": [
-		"tackle",
-		"razorleaf"
-	  ],
-	  "icon_path": "res://art/sprites/icons/6.png"
-	},
-	"squirtle": {
-	  "name": "Squirtle",
-	  "species_id": "squirtle",
-	  "sprite_path": "res://art/sprites/7.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"tailwhip"
-	  ],
-	  "icon_path": "res://art/sprites/icons/7.png"
-	},
-	"wartortle": {
-	  "name": "Wartortle",
-	  "species_id": "wartortle",
-	  "sprite_path": "res://art/sprites/8.png",
-	  "max_health": 14,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/8.png"
-	},
-	"blastoise": {
-	  "name": "Blastoise",
-	  "species_id": "blastoise",
-	  "sprite_path": "res://art/sprites/9.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/9.png"
-	},
-	"caterpie": {
-	  "name": "Caterpie",
-	  "species_id": "caterpie",
-	  "sprite_path": "res://art/sprites/10.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/10.png"
-	},
-	"metapod": {
-	  "name": "Metapod",
-	  "species_id": "metapod",
-	  "sprite_path": "res://art/sprites/11.png",
-	  "max_health": 14,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/11.png"
-	},
-	"butterfree": {
-	  "name": "Butterfree",
-	  "species_id": "butterfree",
-	  "sprite_path": "res://art/sprites/12.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/12.png"
-	},
-	"weedle": {
-	  "name": "Weedle",
-	  "species_id": "weedle",
-	  "sprite_path": "res://art/sprites/13.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"poisonsting"
-	  ],
-	  "icon_path": "res://art/sprites/icons/13.png"
-	},
-	"kakuna": {
-	  "name": "Kakuna",
-	  "species_id": "kakuna",
-	  "sprite_path": "res://art/sprites/14.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/14.png"
-	},
-	"beedrill": {
-	  "name": "Beedrill",
-	  "species_id": "beedrill",
-	  "sprite_path": "res://art/sprites/15.png",
-	  "max_health": 29,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/15.png"
-	},
-	"pidgey": {
-	  "name": "Pidgey",
-	  "species_id": "pidgey",
-	  "sprite_path": "res://art/sprites/16.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/16.png"
-	},
-	"pidgeotto": {
-	  "name": "Pidgeotto",
-	  "species_id": "pidgeotto",
-	  "sprite_path": "res://art/sprites/17.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/17.png"
-	},
-	"pidgeot": {
-	  "name": "Pidgeot",
-	  "species_id": "pidgeot",
-	  "sprite_path": "res://art/sprites/18.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/18.png"
-	},
-	"rattata": {
-	  "name": "Rattata",
-	  "species_id": "rattata",
-	  "sprite_path": "res://art/sprites/19.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"quickattack",
-		"tailwhip"
-	  ],
-	  "icon_path": "res://art/sprites/icons/19.png"
-	},
-	"raticate": {
-	  "name": "Raticate",
-	  "species_id": "raticate",
-	  "sprite_path": "res://art/sprites/20.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/20.png"
-	},
-	"spearow": {
-	  "name": "Spearow",
-	  "species_id": "spearow",
-	  "sprite_path": "res://art/sprites/21.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/21.png"
-	},
-	"fearow": {
-	  "name": "Fearow",
-	  "species_id": "fearow",
-	  "sprite_path": "res://art/sprites/22.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/22.png"
-	},
-	"ekans": {
-	  "name": "Ekans",
-	  "species_id": "ekans",
-	  "sprite_path": "res://art/sprites/23.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/23.png"
-	},
-	"arbok": {
-	  "name": "Arbok",
-	  "species_id": "arbok",
-	  "sprite_path": "res://art/sprites/24.png",
-	  "max_health": 29,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/24.png"
-	},
-	"pikachu": {
-	  "name": "Pikachu",
-	  "species_id": "pikachu",
-	  "sprite_path": "res://art/sprites/25.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"thundershock",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/25.png"
-	},
-	"raichu": {
-	  "name": "Raichu",
-	  "species_id": "raichu",
-	  "sprite_path": "res://art/sprites/26.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/26.png"
-	},
-	"sandshrew": {
-	  "name": "Sandshrew",
-	  "species_id": "sandshrew",
-	  "sprite_path": "res://art/sprites/27.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/27.png"
-	},
-	"sandslash": {
-	  "name": "Sandslash",
-	  "species_id": "sandslash",
-	  "sprite_path": "res://art/sprites/28.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/28.png"
-	},
-	"nidoranf": {
-	  "name": "Nidoranf",
-	  "species_id": "nidoranf",
-	  "sprite_path": "res://art/sprites/29.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/29.png"
-	},
-	"nidorina": {
-	  "name": "Nidorina",
-	  "species_id": "nidorina",
-	  "sprite_path": "res://art/sprites/30.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/30.png"
-	},
-	"nidoqueen": {
-	  "name": "Nidoqueen",
-	  "species_id": "nidoqueen",
-	  "sprite_path": "res://art/sprites/31.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/31.png"
-	},
-	"nidoranm": {
-	  "name": "Nidoranm",
-	  "species_id": "nidoranm",
-	  "sprite_path": "res://art/sprites/32.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/32.png"
-	},
-	"nidorino": {
-	  "name": "Nidorino",
-	  "species_id": "nidorino",
-	  "sprite_path": "res://art/sprites/33.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/33.png"
-	},
-	"nidoking": {
-	  "name": "Nidoking",
-	  "species_id": "nidoking",
-	  "sprite_path": "res://art/sprites/34.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/34.png"
-	},
-	"clefairy": {
-	  "name": "Clefairy",
-	  "species_id": "clefairy",
-	  "sprite_path": "res://art/sprites/35.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/35.png"
-	},
-	"clefable": {
-	  "name": "Clefable",
-	  "species_id": "clefable",
-	  "sprite_path": "res://art/sprites/36.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/36.png"
-	},
-	"vulpix": {
-	  "name": "Vulpix",
-	  "species_id": "vulpix",
-	  "sprite_path": "res://art/sprites/37.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/37.png"
-	},
-	"ninetales": {
-	  "name": "Ninetales",
-	  "species_id": "ninetales",
-	  "sprite_path": "res://art/sprites/38.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/38.png"
-	},
-	"jigglypuff": {
-	  "name": "Jigglypuff",
-	  "species_id": "jigglypuff",
-	  "sprite_path": "res://art/sprites/39.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/39.png"
-	},
-	"wigglytuff": {
-	  "name": "Wigglytuff",
-	  "species_id": "wigglytuff",
-	  "sprite_path": "res://art/sprites/40.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/40.png"
-	},
-	"zubat": {
-	  "name": "Zubat",
-	  "species_id": "zubat",
-	  "sprite_path": "res://art/sprites/41.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/41.png"
-	},
-	"golbat": {
-	  "name": "Golbat",
-	  "species_id": "golbat",
-	  "sprite_path": "res://art/sprites/42.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/42.png"
-	},
-	"oddish": {
-	  "name": "Oddish",
-	  "species_id": "oddish",
-	  "sprite_path": "res://art/sprites/43.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/43.png"
-	},
-	"gloom": {
-	  "name": "Gloom",
-	  "species_id": "gloom",
-	  "sprite_path": "res://art/sprites/44.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/44.png"
-	},
-	"vileplume": {
-	  "name": "Vileplume",
-	  "species_id": "vileplume",
-	  "sprite_path": "res://art/sprites/45.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/45.png"
-	},
-	"paras": {
-	  "name": "Paras",
-	  "species_id": "paras",
-	  "sprite_path": "res://art/sprites/46.png",
-	  "max_health": 29,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/46.png"
-	},
-	"parasect": {
-	  "name": "Parasect",
-	  "species_id": "parasect",
-	  "sprite_path": "res://art/sprites/47.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/47.png"
-	},
-	"venonat": {
-	  "name": "Venonat",
-	  "species_id": "venonat",
-	  "sprite_path": "res://art/sprites/48.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/48.png"
-	},
-	"venomoth": {
-	  "name": "Venomoth",
-	  "species_id": "venomoth",
-	  "sprite_path": "res://art/sprites/49.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/49.png"
-	},
-	"diglett": {
-	  "name": "Diglett",
-	  "species_id": "diglett",
-	  "sprite_path": "res://art/sprites/50.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/50.png"
-	},
-	"dugtrio": {
-	  "name": "Dugtrio",
-	  "species_id": "dugtrio",
-	  "sprite_path": "res://art/sprites/51.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/51.png"
-	},
-	"meowth": {
-	  "name": "Meowth",
-	  "species_id": "meowth",
-	  "sprite_path": "res://art/sprites/52.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/52.png"
-	},
-	"persian": {
-	  "name": "Persian",
-	  "species_id": "persian",
-	  "sprite_path": "res://art/sprites/53.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/53.png"
-	},
-	"psyduck": {
-	  "name": "Psyduck",
-	  "species_id": "psyduck",
-	  "sprite_path": "res://art/sprites/54.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/54.png"
-	},
-	"golduck": {
-	  "name": "Golduck",
-	  "species_id": "golduck",
-	  "sprite_path": "res://art/sprites/55.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/55.png"
-	},
-	"mankey": {
-	  "name": "Mankey",
-	  "species_id": "mankey",
-	  "sprite_path": "res://art/sprites/56.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"karatechop",
-		"leer"
-	  ],
-	  "icon_path": "res://art/sprites/icons/56.png"
-	},
-	"primeape": {
-	  "name": "Primeape",
-	  "species_id": "primeape",
-	  "sprite_path": "res://art/sprites/57.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/57.png"
-	},
-	"growlithe": {
-	  "name": "Growlithe",
-	  "species_id": "growlithe",
-	  "sprite_path": "res://art/sprites/58.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/58.png"
-	},
-	"arcanine": {
-	  "name": "Arcanine",
-	  "species_id": "arcanine",
-	  "sprite_path": "res://art/sprites/59.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/59.png"
-	},
-	"poliwag": {
-	  "name": "Poliwag",
-	  "species_id": "poliwag",
-	  "sprite_path": "res://art/sprites/60.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/60.png"
-	},
-	"poliwhirl": {
-	  "name": "Poliwhirl",
-	  "species_id": "poliwhirl",
-	  "sprite_path": "res://art/sprites/61.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/61.png"
-	},
-	"poliwrath": {
-	  "name": "Poliwrath",
-	  "species_id": "poliwrath",
-	  "sprite_path": "res://art/sprites/62.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/62.png"
-	},
-	"abra": {
-	  "name": "Abra",
-	  "species_id": "abra",
-	  "sprite_path": "res://art/sprites/63.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/63.png"
-	},
-	"kadabra": {
-	  "name": "Kadabra",
-	  "species_id": "kadabra",
-	  "sprite_path": "res://art/sprites/64.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/64.png"
-	},
-	"alakazam": {
-	  "name": "Alakazam",
-	  "species_id": "alakazam",
-	  "sprite_path": "res://art/sprites/65.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/65.png"
-	},
-	"machop": {
-	  "name": "Machop",
-	  "species_id": "machop",
-	  "sprite_path": "res://art/sprites/66.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/66.png"
-	},
-	"machoke": {
-	  "name": "Machoke",
-	  "species_id": "machoke",
-	  "sprite_path": "res://art/sprites/67.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/67.png"
-	},
-	"machamp": {
-	  "name": "Machamp",
-	  "species_id": "machamp",
-	  "sprite_path": "res://art/sprites/68.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/68.png"
-	},
-	"bellsprout": {
-	  "name": "Bellsprout",
-	  "species_id": "bellsprout",
-	  "sprite_path": "res://art/sprites/69.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/69.png"
-	},
-	"weepinbell": {
-	  "name": "Weepinbell",
-	  "species_id": "weepinbell",
-	  "sprite_path": "res://art/sprites/70.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/70.png"
-	},
-	"victreebel": {
-	  "name": "Victreebel",
-	  "species_id": "victreebel",
-	  "sprite_path": "res://art/sprites/71.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/71.png"
-	},
-	"tentacool": {
-	  "name": "Tentacool",
-	  "species_id": "tentacool",
-	  "sprite_path": "res://art/sprites/72.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/72.png"
-	},
-	"tentacruel": {
-	  "name": "Tentacruel",
-	  "species_id": "tentacruel",
-	  "sprite_path": "res://art/sprites/73.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/73.png"
-	},
-	"geodude": {
-	  "name": "Geodude",
-	  "species_id": "geodude",
-	  "sprite_path": "res://art/sprites/74.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"defensecurl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/74.png"
-	},
-	"graveler": {
-	  "name": "Graveler",
-	  "species_id": "graveler",
-	  "sprite_path": "res://art/sprites/75.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/75.png"
-	},
-	"golem": {
-	  "name": "Golem",
-	  "species_id": "golem",
-	  "sprite_path": "res://art/sprites/76.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/76.png"
-	},
-	"ponyta": {
-	  "name": "Ponyta",
-	  "species_id": "ponyta",
-	  "sprite_path": "res://art/sprites/77.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/77.png"
-	},
-	"rapidash": {
-	  "name": "Rapidash",
-	  "species_id": "rapidash",
-	  "sprite_path": "res://art/sprites/78.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/78.png"
-	},
-	"slowpoke": {
-	  "name": "Slowpoke",
-	  "species_id": "slowpoke",
-	  "sprite_path": "res://art/sprites/79.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/79.png"
-	},
-	"slowbro": {
-	  "name": "Slowbro",
-	  "species_id": "slowbro",
-	  "sprite_path": "res://art/sprites/80.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/80.png"
-	},
-	"magnemite": {
-	  "name": "Magnemite",
-	  "species_id": "magnemite",
-	  "sprite_path": "res://art/sprites/81.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/81.png"
-	},
-	"magneton": {
-	  "name": "Magneton",
-	  "species_id": "magneton",
-	  "sprite_path": "res://art/sprites/82.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/82.png"
-	},
-	"farfetchd": {
-	  "name": "Farfetchd",
-	  "species_id": "farfetchd",
-	  "sprite_path": "res://art/sprites/83.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/83.png"
-	},
-	"doduo": {
-	  "name": "Doduo",
-	  "species_id": "doduo",
-	  "sprite_path": "res://art/sprites/84.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/84.png"
-	},
-	"dodrio": {
-	  "name": "Dodrio",
-	  "species_id": "dodrio",
-	  "sprite_path": "res://art/sprites/85.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/85.png"
-	},
-	"seel": {
-	  "name": "Seel",
-	  "species_id": "seel",
-	  "sprite_path": "res://art/sprites/86.png",
-	  "max_health": 14,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/86.png"
-	},
-	"dewgong": {
-	  "name": "Dewgong",
-	  "species_id": "dewgong",
-	  "sprite_path": "res://art/sprites/87.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/87.png"
-	},
-	"grimer": {
-	  "name": "Grimer",
-	  "species_id": "grimer",
-	  "sprite_path": "res://art/sprites/88.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/88.png"
-	},
-	"muk": {
-	  "name": "Muk",
-	  "species_id": "muk",
-	  "sprite_path": "res://art/sprites/89.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/89.png"
-	},
-	"shellder": {
-	  "name": "Shellder",
-	  "species_id": "shellder",
-	  "sprite_path": "res://art/sprites/90.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/90.png"
-	},
-	"cloyster": {
-	  "name": "Cloyster",
-	  "species_id": "cloyster",
-	  "sprite_path": "res://art/sprites/91.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/91.png"
-	},
-	"gastly": {
-	  "name": "Gastly",
-	  "species_id": "gastly",
-	  "sprite_path": "res://art/sprites/92.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/92.png"
-	},
-	"haunter": {
-	  "name": "Haunter",
-	  "species_id": "haunter",
-	  "sprite_path": "res://art/sprites/93.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/93.png"
-	},
-	"gengar": {
-	  "name": "Gengar",
-	  "species_id": "gengar",
-	  "sprite_path": "res://art/sprites/94.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/94.png"
-	},
-	"onix": {
-	  "name": "Onix",
-	  "species_id": "onix",
-	  "sprite_path": "res://art/sprites/95.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/95.png"
-	},
-	"drowzee": {
-	  "name": "Drowzee",
-	  "species_id": "drowzee",
-	  "sprite_path": "res://art/sprites/96.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/96.png"
-	},
-	"hypno": {
-	  "name": "Hypno",
-	  "species_id": "hypno",
-	  "sprite_path": "res://art/sprites/97.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/97.png"
-	},
-	"krabby": {
-	  "name": "Krabby",
-	  "species_id": "krabby",
-	  "sprite_path": "res://art/sprites/98.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/98.png"
-	},
-	"kingler": {
-	  "name": "Kingler",
-	  "species_id": "kingler",
-	  "sprite_path": "res://art/sprites/99.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/99.png"
-	},
-	"voltorb": {
-	  "name": "Voltorb",
-	  "species_id": "voltorb",
-	  "sprite_path": "res://art/sprites/100.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/100.png"
-	},
-	"electrode": {
-	  "name": "Electrode",
-	  "species_id": "electrode",
-	  "sprite_path": "res://art/sprites/101.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/101.png"
-	},
-	"exeggcute": {
-	  "name": "Exeggcute",
-	  "species_id": "exeggcute",
-	  "sprite_path": "res://art/sprites/102.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/102.png"
-	},
-	"exeggutor": {
-	  "name": "Exeggutor",
-	  "species_id": "exeggutor",
-	  "sprite_path": "res://art/sprites/103.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/103.png"
-	},
-	"cubone": {
-	  "name": "Cubone",
-	  "species_id": "cubone",
-	  "sprite_path": "res://art/sprites/104.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/104.png"
-	},
-	"marowak": {
-	  "name": "Marowak",
-	  "species_id": "marowak",
-	  "sprite_path": "res://art/sprites/105.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/105.png"
-	},
-	"hitmonlee": {
-	  "name": "Hitmonlee",
-	  "species_id": "hitmonlee",
-	  "sprite_path": "res://art/sprites/106.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/106.png"
-	},
-	"hitmonchan": {
-	  "name": "Hitmonchan",
-	  "species_id": "hitmonchan",
-	  "sprite_path": "res://art/sprites/107.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/107.png"
-	},
-	"lickitung": {
-	  "name": "Lickitung",
-	  "species_id": "lickitung",
-	  "sprite_path": "res://art/sprites/108.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/108.png"
-	},
-	"koffing": {
-	  "name": "Koffing",
-	  "species_id": "koffing",
-	  "sprite_path": "res://art/sprites/109.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/109.png"
-	},
-	"weezing": {
-	  "name": "Weezing",
-	  "species_id": "weezing",
-	  "sprite_path": "res://art/sprites/110.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/110.png"
-	},
-	"rhyhorn": {
-	  "name": "Rhyhorn",
-	  "species_id": "rhyhorn",
-	  "sprite_path": "res://art/sprites/111.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/111.png"
-	},
-	"rhydon": {
-	  "name": "Rhydon",
-	  "species_id": "rhydon",
-	  "sprite_path": "res://art/sprites/112.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/112.png"
-	},
-	"chansey": {
-	  "name": "Chansey",
-	  "species_id": "chansey",
-	  "sprite_path": "res://art/sprites/113.png",
-	  "max_health": 21,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/113.png"
-	},
-	"tangela": {
-	  "name": "Tangela",
-	  "species_id": "tangela",
-	  "sprite_path": "res://art/sprites/114.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/114.png"
-	},
-	"kangaskhan": {
-	  "name": "Kangaskhan",
-	  "species_id": "kangaskhan",
-	  "sprite_path": "res://art/sprites/115.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/115.png"
-	},
-	"horsea": {
-	  "name": "Horsea",
-	  "species_id": "horsea",
-	  "sprite_path": "res://art/sprites/116.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/116.png"
-	},
-	"seadra": {
-	  "name": "Seadra",
-	  "species_id": "seadra",
-	  "sprite_path": "res://art/sprites/117.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/117.png"
-	},
-	"goldeen": {
-	  "name": "Goldeen",
-	  "species_id": "goldeen",
-	  "sprite_path": "res://art/sprites/118.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/118.png"
-	},
-	"seaking": {
-	  "name": "Seaking",
-	  "species_id": "seaking",
-	  "sprite_path": "res://art/sprites/119.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/119.png"
-	},
-	"staryu": {
-	  "name": "Staryu",
-	  "species_id": "staryu",
-	  "sprite_path": "res://art/sprites/120.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/120.png"
-	},
-	"starmie": {
-	  "name": "Starmie",
-	  "species_id": "starmie",
-	  "sprite_path": "res://art/sprites/121.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/121.png"
-	},
-	"mr.mime": {
-	  "name": "Mr.mime",
-	  "species_id": "mr.mime",
-	  "sprite_path": "res://art/sprites/122.png",
-	  "max_health": 13,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/122.png"
-	},
-	"scyther": {
-	  "name": "Scyther",
-	  "species_id": "scyther",
-	  "sprite_path": "res://art/sprites/123.png",
-	  "max_health": 29,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/123.png"
-	},
-	"jynx": {
-	  "name": "Jynx",
-	  "species_id": "jynx",
-	  "sprite_path": "res://art/sprites/124.png",
-	  "max_health": 12,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/124.png"
-	},
-	"electabuzz": {
-	  "name": "Electabuzz",
-	  "species_id": "electabuzz",
-	  "sprite_path": "res://art/sprites/125.png",
-	  "max_health": 16,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/125.png"
-	},
-	"magmar": {
-	  "name": "Magmar",
-	  "species_id": "magmar",
-	  "sprite_path": "res://art/sprites/126.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/126.png"
-	},
-	"pinsir": {
-	  "name": "Pinsir",
-	  "species_id": "pinsir",
-	  "sprite_path": "res://art/sprites/127.png",
-	  "max_health": 20,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/127.png"
-	},
-	"tauros": {
-	  "name": "Tauros",
-	  "species_id": "tauros",
-	  "sprite_path": "res://art/sprites/128.png",
-	  "max_health": 25,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/128.png"
-	},
-	"magikarp": {
-	  "name": "Magikarp",
-	  "species_id": "magikarp",
-	  "sprite_path": "res://art/sprites/129.png",
-	  "max_health": 26,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/129.png"
-	},
-	"gyarados": {
-	  "name": "Gyarados",
-	  "species_id": "gyarados",
-	  "sprite_path": "res://art/sprites/130.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/130.png"
-	},
-	"lapras": {
-	  "name": "Lapras",
-	  "species_id": "lapras",
-	  "sprite_path": "res://art/sprites/131.png",
-	  "max_health": 17,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/131.png"
-	},
-	"ditto": {
-	  "name": "Ditto",
-	  "species_id": "ditto",
-	  "sprite_path": "res://art/sprites/132.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/132.png"
-	},
-	"eevee": {
-	  "name": "Eevee",
-	  "species_id": "eevee",
-	  "sprite_path": "res://art/sprites/133.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/133.png"
-	},
-	"vaporeon": {
-	  "name": "Vaporeon",
-	  "species_id": "vaporeon",
-	  "sprite_path": "res://art/sprites/134.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/134.png"
-	},
-	"jolteon": {
-	  "name": "Jolteon",
-	  "species_id": "jolteon",
-	  "sprite_path": "res://art/sprites/135.png",
-	  "max_health": 18,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/135.png"
-	},
-	"flareon": {
-	  "name": "Flareon",
-	  "species_id": "flareon",
-	  "sprite_path": "res://art/sprites/136.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/136.png"
-	},
-	"porygon": {
-	  "name": "Porygon",
-	  "species_id": "porygon",
-	  "sprite_path": "res://art/sprites/137.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/137.png"
-	},
-	"omanyte": {
-	  "name": "Omanyte",
-	  "species_id": "omanyte",
-	  "sprite_path": "res://art/sprites/138.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/138.png"
-	},
-	"omastar": {
-	  "name": "Omastar",
-	  "species_id": "omastar",
-	  "sprite_path": "res://art/sprites/139.png",
-	  "max_health": 14,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/139.png"
-	},
-	"kabuto": {
-	  "name": "Kabuto",
-	  "species_id": "kabuto",
-	  "sprite_path": "res://art/sprites/140.png",
-	  "max_health": 28,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/140.png"
-	},
-	"kabutops": {
-	  "name": "Kabutops",
-	  "species_id": "kabutops",
-	  "sprite_path": "res://art/sprites/141.png",
-	  "max_health": 23,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/141.png"
-	},
-	"aerodactyl": {
-	  "name": "Aerodactyl",
-	  "species_id": "aerodactyl",
-	  "sprite_path": "res://art/sprites/142.png",
-	  "max_health": 24,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/142.png"
-	},
-	"snorlax": {
-	  "name": "Snorlax",
-	  "species_id": "snorlax",
-	  "sprite_path": "res://art/sprites/143.png",
-	  "max_health": 15,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/143.png"
-	},
-	"articuno": {
-	  "name": "Articuno",
-	  "species_id": "articuno",
-	  "sprite_path": "res://art/sprites/144.png",
-	  "max_health": 19,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/144.png"
-	},
-	"zapdos": {
-	  "name": "Zapdos",
-	  "species_id": "zapdos",
-	  "sprite_path": "res://art/sprites/145.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/145.png"
-	},
-	"moltres": {
-	  "name": "Moltres",
-	  "species_id": "moltres",
-	  "sprite_path": "res://art/sprites/146.png",
-	  "max_health": 14,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/146.png"
-	},
-	"dratini": {
-	  "name": "Dratini",
-	  "species_id": "dratini",
-	  "sprite_path": "res://art/sprites/147.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/147.png"
-	},
-	"dragonair": {
-	  "name": "Dragonair",
-	  "species_id": "dragonair",
-	  "sprite_path": "res://art/sprites/148.png",
-	  "max_health": 22,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/148.png"
-	},
-	"dragonite": {
-	  "name": "Dragonite",
-	  "species_id": "dragonite",
-	  "sprite_path": "res://art/sprites/149.png",
-	  "max_health": 27,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/149.png"
-	},
-	"mewtwo": {
-	  "name": "Mewtwo",
-	  "species_id": "mewtwo",
-	  "sprite_path": "res://art/sprites/150.png",
-	  "max_health": 29,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/150.png"
-	},
-	"mew": {
-	  "name": "Mew",
-	  "species_id": "mew",
-	  "sprite_path": "res://art/sprites/151.png",
-	  "max_health": 30,
-	  "move_ids": [
-		"tackle",
-		"growl"
-	  ],
-	  "icon_path": "res://art/sprites/icons/151.png"
+	"pokemon": {
+		"bulbasaur": {
+			"name": "Bulbasaur",
+			"species_id": "bulbasaur",
+			"sprite_path": "res://art/sprites/1.png",
+			"type": [
+				"grass"
+			],
+			"icon_path": "res://art/sprites/icons/1.png",
+			"max_health": 16,
+			"move_ids": [
+				"razorleaf",
+				"razorleaf"
+			]
+		},
+		"ivysaur": {
+			"name": "Ivysaur",
+			"species_id": "ivysaur",
+			"sprite_path": "res://art/sprites/2.png",
+			"icon_path": "res://art/sprites/icons/2.png",
+			"type": [
+				"grass"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"razorleaf"
+			]
+		},
+		"venusaur": {
+			"name": "Venusaur",
+			"species_id": "venusaur",
+			"sprite_path": "res://art/sprites/3.png",
+			"icon_path": "res://art/sprites/icons/3.png",
+			"type": [
+				"grass"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"razorleaf",
+				"bodyslam"
+			]
+		},
+		"charmander": {
+			"name": "Charmander",
+			"species_id": "charmander",
+			"sprite_path": "res://art/sprites/4.png",
+			"icon_path": "res://art/sprites/icons/4.png",
+			"type": [
+				"fire"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"ember"
+			]
+		},
+		"charmeleon": {
+			"name": "Charmeleon",
+			"species_id": "charmeleon",
+			"sprite_path": "res://art/sprites/5.png",
+			"icon_path": "res://art/sprites/icons/5.png",
+			"type": [
+				"fire"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"ember",
+				"bodyslam"
+			]
+		},
+		"charizard": {
+			"name": "Charizard",
+			"species_id": "charizard",
+			"sprite_path": "res://art/sprites/6.png",
+			"icon_path": "res://art/sprites/icons/6.png",
+			"type": [
+				"fire"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"ember",
+				"ember"
+			]
+		},
+		"squirtle": {
+			"name": "Squirtle",
+			"species_id": "squirtle",
+			"sprite_path": "res://art/sprites/7.png",
+			"icon_path": "res://art/sprites/icons/7.png",
+			"type": [
+				"water"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"defensecurl"
+			]
+		},
+		"wartortle": {
+			"name": "Wartortle",
+			"species_id": "wartortle",
+			"sprite_path": "res://art/sprites/8.png",
+			"icon_path": "res://art/sprites/icons/8.png",
+			"type": [
+				"water"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"defensecurl"
+			]
+		},
+		"blastoise": {
+			"name": "Blastoise",
+			"species_id": "blastoise",
+			"sprite_path": "res://art/sprites/9.png",
+			"icon_path": "res://art/sprites/icons/9.png",
+			"type": [
+				"water"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"bodyslam"
+			]
+		},
+		"caterpie": {
+			"name": "Caterpie",
+			"species_id": "caterpie",
+			"sprite_path": "res://art/sprites/10.png",
+			"icon_path": "res://art/sprites/icons/10.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"tackle"
+			]
+		},
+		"metapod": {
+			"name": "Metapod",
+			"species_id": "metapod",
+			"sprite_path": "res://art/sprites/11.png",
+			"icon_path": "res://art/sprites/icons/11.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"defensecurl"
+			]
+		},
+		"butterfree": {
+			"name": "Butterfree",
+			"species_id": "butterfree",
+			"sprite_path": "res://art/sprites/12.png",
+			"icon_path": "res://art/sprites/icons/12.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"poisonsting"
+			]
+		},
+		"weedle": {
+			"name": "Weedle",
+			"species_id": "weedle",
+			"sprite_path": "res://art/sprites/13.png",
+			"icon_path": "res://art/sprites/icons/13.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"poisonsting"
+			]
+		},
+		"kakuna": {
+			"name": "Kakuna",
+			"species_id": "kakuna",
+			"sprite_path": "res://art/sprites/14.png",
+			"icon_path": "res://art/sprites/icons/14.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"defensecurl"
+			]
+		},
+		"beedrill": {
+			"name": "Beedrill",
+			"species_id": "beedrill",
+			"sprite_path": "res://art/sprites/15.png",
+			"icon_path": "res://art/sprites/icons/15.png",
+			"type": [
+				"bug"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"poisonsting",
+				"swordsdance"
+			]
+		},
+		"pidgey": {
+			"name": "Pidgey",
+			"species_id": "pidgey",
+			"sprite_path": "res://art/sprites/16.png",
+			"icon_path": "res://art/sprites/icons/16.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"quickattack"
+			]
+		},
+		"pidgeotto": {
+			"name": "Pidgeotto",
+			"species_id": "pidgeotto",
+			"sprite_path": "res://art/sprites/17.png",
+			"icon_path": "res://art/sprites/icons/17.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"quickattack",
+				"tackle"
+			]
+		},
+		"pidgeot": {
+			"name": "Pidgeot",
+			"species_id": "pidgeot",
+			"sprite_path": "res://art/sprites/18.png",
+			"icon_path": "res://art/sprites/icons/18.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"quickattack",
+				"bodyslam"
+			]
+		},
+		"rattata": {
+			"name": "Rattata",
+			"species_id": "rattata",
+			"sprite_path": "res://art/sprites/19.png",
+			"icon_path": "res://art/sprites/icons/19.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"quickattack"
+			]
+		},
+		"raticate": {
+			"name": "Raticate",
+			"species_id": "raticate",
+			"sprite_path": "res://art/sprites/20.png",
+			"icon_path": "res://art/sprites/icons/20.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"quickattack",
+				"highkick"
+			]
+		},
+		"spearow": {
+			"name": "Spearow",
+			"species_id": "spearow",
+			"sprite_path": "res://art/sprites/21.png",
+			"icon_path": "res://art/sprites/icons/21.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 14,
+			"move_ids": [
+				"quickattack"
+			]
+		},
+		"fearow": {
+			"name": "Fearow",
+			"species_id": "fearow",
+			"sprite_path": "res://art/sprites/22.png",
+			"icon_path": "res://art/sprites/icons/22.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"quickattack",
+				"highkick"
+			]
+		}
 	}
-  }
 }

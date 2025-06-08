@@ -65,8 +65,6 @@ func spawn_active_pokemon():
 			2: unit.position = POS_2
 			_: unit.position = Vector2(0, 0)
 		add_child(unit)
-		#DEBUG.print_resource(pokemon)
-		#print("Spawned Pokémon: %s with HP %d" % [pokemon.species_id, pokemon.health])
 
 
 func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
@@ -105,20 +103,20 @@ func finalize_battle_party(pkmn_list: Array[PokemonStats]) -> void:
 
 
 func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void:
-	#print("Switch Requested: OUT = %s | IN = %s" % [uid_out, uid_in])
-	#for child in get_children():
-		#if child is PokemonBattleUnit:
-			#print("Existing Unit: %s | UID: %s" % [child.stats.species_id, child.stats.uid])
+	print("Switch Requested: OUT = %s | IN = %s" % [uid_out, uid_in])
+	for child in get_children():
+		if child is PokemonBattleUnit:
+			print("Existing Unit: %s | UID: %s" % [child.stats.species_id, child.stats.uid])
 			
 	for child in get_children():
 		if child is PokemonBattleUnit and child.stats.uid == uid_out:
-			#print("Switching OUT: %s" % child.stats.species_id)
-			#print("active_battle_party before: ")
+			print("Switching OUT: %s" % child.stats.species_id)
+			print("active_battle_party before: ")
 			for p in active_battle_party:
-				#print(p.species_id)
+				print(p.species_id)
 				if p.uid == uid_out:
 					active_battle_party.erase(p)
-			#print("active_battle_party after: ")
+			print("active_battle_party after: ")
 			for p in active_battle_party:
 				print(p.species_id)
 			var old_unit := child as PokemonBattleUnit
@@ -128,9 +126,9 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 
 			# pkmn to swap in
 			for pkmn in character_stats.current_party:
-				#print("Check Battle Party: %s | UID: %s" % [pkmn.species_id, pkmn.uid])
+				print("Check Battle Party: %s | UID: %s" % [pkmn.species_id, pkmn.uid])
 				if pkmn.uid == uid_in:
-					#print("Switching IN: %s" % pkmn.species_id)
+					print("Switching IN: %s" % pkmn.species_id)
 					var new_unit := PKMN_BATTLE_UNIT.instantiate()
 					new_unit.stats = pkmn
 					new_unit.spawn_position = slot

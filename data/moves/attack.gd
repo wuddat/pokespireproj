@@ -1,7 +1,6 @@
 extends Card
 
 
-
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 

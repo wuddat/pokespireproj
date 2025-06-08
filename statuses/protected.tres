@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://b3507d0tlawwr"]
+
+[ext_resource type="Texture2D" uid="uid://bwp27owllm0bl" path="res://art/statuseffects/earth.png" id="1_tkp1y"]
+[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_8w6ds"]
+
+[resource]
+script = ExtResource("2_8w6ds")
+id = "protected"
+type = 1
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_tkp1y")
+tooltip = "[color=peru]PROTECTED:[/color]
+Ignore the [b]NEXT[/b] instance of damage."
+metadata/_custom_type_script = "uid://breq3elxr1644"

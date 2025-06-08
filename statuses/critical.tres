@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://cgqnwayjcve0s"]
+
+[ext_resource type="Texture2D" uid="uid://lh34tx5gsyqv" path="res://art/statuseffects/zap.png" id="1_6cj1j"]
+[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_n3cms"]
+
+[resource]
+script = ExtResource("2_n3cms")
+id = "critical"
+type = 1
+stack_type = 2
+can_expire = true
+duration = 1
+stacks = 0
+icon = ExtResource("1_6cj1j")
+tooltip = "[color=goldenrod]CRITICAL:[/color]
+Receives [b]X2[/b] damage!"
+metadata/_custom_type_script = "uid://breq3elxr1644"

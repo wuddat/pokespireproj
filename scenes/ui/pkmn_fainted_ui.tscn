@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfip7c5hyvwvo"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_anndu"]
+[ext_resource type="Script" uid="uid://777l0s6e7isk" path="res://scenes/ui/pkmn_fainted_ui.gd" id="2_ic5en"]
+
+[node name="PkmnFainted" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_anndu")
+script = ExtResource("2_ic5en")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_anndu")
+color = Color(0, 0, 0, 0.752941)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+offset_left = 56.0
+offset_top = 44.0
+offset_right = 456.0
+offset_bottom = 244.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Oh no!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Your Pokemon Fainted!
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose another to switch in!"
+horizontal_alignment = 1
+
+[node name="PartyPokemon" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 39
+alignment = 1

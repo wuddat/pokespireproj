@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpw38rx1au2ku"]
+
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="1_kbbcr"]
+
+[node name="PokemonSprite" type="TextureButton"]
+offset_right = 37.0
+offset_bottom = 37.0
+texture_normal = ExtResource("1_kbbcr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 29.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Bulbasaur"
+horizontal_alignment = 1

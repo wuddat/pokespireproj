@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackPower" load_steps=3 format=3 uid="uid://bgggaldvvytup"]
+
+[ext_resource type="Texture2D" uid="uid://biqv7ci8f0adj" path="res://art/statuseffects/insect.png" id="1_8fou5"]
+[ext_resource type="Script" uid="uid://cvxirryx7k44x" path="res://statuses/attack_power.gd" id="2_xrrc3"]
+
+[resource]
+script = ExtResource("2_xrrc3")
+id = "dexterity"
+type = 2
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 2
+icon = ExtResource("1_8fou5")
+tooltip = "[color=rosybrown]DEXTERITY: [/color]
+Scaling BLOCK gain."
+metadata/_custom_type_script = "uid://breq3elxr1644"

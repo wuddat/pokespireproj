@@ -14,6 +14,18 @@ var is_mouse_over := false
 #func _ready() ->void:
 	#_draw()
 
+#status application test code
+#func _ready() -> void:
+	#var test := load("res://statuses/enraged.tres")
+	#await get_tree().create_timer(2).timeout
+	#add_status(test)
+	#await get_tree().create_timer(2).timeout
+	#add_status(test)
+	#await get_tree().create_timer(2).timeout
+	#_get_status(test.id).apply_status(null)
+	#await get_tree().create_timer(2).timeout
+	#_get_status(test.id).apply_status(null)
+
 
 func apply_statuses_by_type(type:Status.Type) -> void:
 	if type == Status.Type.EVENT_BASED:
@@ -33,18 +45,6 @@ func apply_statuses_by_type(type:Status.Type) -> void:
 		tween.tween_interval(STATUS_APPLY_INTERVAL)
 		
 	tween.finished.connect(func(): statuses_applied.emit(type))
-
-#status application test code
-#func _ready() -> void:
-	#var test := load("res://statuses/enraged.tres")
-	#await get_tree().create_timer(2).timeout
-	#add_status(test)
-	#await get_tree().create_timer(2).timeout
-	#add_status(test)
-	#await get_tree().create_timer(2).timeout
-	#_get_status(test.id).apply_status(null)
-	#await get_tree().create_timer(2).timeout
-	#_get_status(test.id).apply_status(null)
 
 
 func add_status(status: Status) -> void:

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://dy3ut5jhgy5t5"]
+
+[ext_resource type="Texture2D" uid="uid://di3135mpcxuoy" path="res://art/statuseffects/iron.png" id="1_ivq05"]
+[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_jhc6m"]
+
+[resource]
+script = ExtResource("2_jhc6m")
+id = "despair"
+type = 1
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_ivq05")
+tooltip = "[color=gray]DESPAIR:[/color]
+The next time the user would gain [color=blue]BLOCK[/color], it does nothing."
+metadata/_custom_type_script = "uid://breq3elxr1644"

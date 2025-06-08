@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://diwhdhhq1rccs"]
+
+[ext_resource type="Texture2D" uid="uid://br8xoomakdgpw" path="res://art/statuseffects/pixie.png" id="1_fcnd0"]
+[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_rfm3c"]
+
+[resource]
+script = ExtResource("2_rfm3c")
+id = "cleanse"
+type = 1
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_fcnd0")
+tooltip = "[color=peru]CLEANSE:[/color]
+"
+metadata/_custom_type_script = "uid://breq3elxr1644"
