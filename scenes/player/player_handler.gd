@@ -10,7 +10,6 @@ const HAND_DISCARD_INTERVAL := 0.2
 @onready var party_handler: PartyHandler = $"../PartyHandler"
 
 var character: CharacterStats
-var acting_pokemon: Array[PokemonBattleUnit] = []
 
 
 
@@ -29,11 +28,12 @@ func start_battle(char_stats: CharacterStats) -> void:
 	
 	for pkmn in character.current_party:
 		if pkmn.health <= 0:
-			print("Exhausting cards for fainted Pokémon: %s (UID: %s)" % [pkmn.species_id, pkmn.uid])
+			#print("Exhausting cards for fainted Pokémon: %s (UID: %s)" % [pkmn.species_id, pkmn.uid])
 			exhaust_cards_on_faint(pkmn.uid)
 
 	character.discard = CardPile.new()
 	_establish_connections()
+	await get_tree().process_frame
 	start_turn()
 
 
@@ -41,24 +41,33 @@ func start_turn() -> void:
 	player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	character.block = 0
 	character.reset_mana()
-	acting_pokemon = party_handler.get_active_pokemon_nodes().duplicate()
-	if acting_pokemon.is_empty():
+	
+	var pkmn_with_turns = party_handler.get_active_pokemon_nodes()
+	var pkmn_status_execution = pkmn_with_turns.duplicate()
+	
+	#print("pkmn_with_turns are: %s" % [pkmn_with_turns])
+	if pkmn_with_turns.is_empty():
 		# fallback, maybe just proceed
 		return
-
-	for pkmn in acting_pokemon:
+	
+	#TODO debug for determining acting_party_pokemon
+	for pkmn in pkmn_with_turns:
+		#print("STARTING TURN FOR:", pkmn.stats.species_id, "| BLOCK:", pkmn.stats.block)
 		pkmn.start_of_turn()
+
 
 
 func end_turn() -> void:
 	hand.disable_hand()
 	player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
-	acting_pokemon = party_handler.get_active_pokemon_nodes().duplicate()
-	if acting_pokemon.is_empty():
+	var pkmn_with_turns = party_handler.get_active_pokemon_nodes()
+	var pkmn_status_execution = pkmn_with_turns.duplicate()
+
+	if pkmn_status_execution.is_empty():
 		# fallback, maybe just proceed
 		return
 
-	for pkmn in acting_pokemon:
+	for pkmn in pkmn_status_execution:
 		pkmn.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 
 
@@ -131,7 +140,7 @@ func exhaust_cards_on_faint(uid: String) -> void:
 
 	character.draw_pile.shuffle()
 	
-	print("Exhausted %d cards for fainted/switched pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
+	#print("Exhausted %d cards for fainted/switched pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
 	#print("The faint_pile is currently: ", character.faint_pile)
 
 
@@ -147,7 +156,7 @@ func restore_fainted_cards(uid: String) -> void:
 		character.draw_pile.add_card(card)
 	
 	character.faint_pile.erase(uid)
-	print("Restored %d cards for revived pokemon: %s" % [pile.cards.size(), uid])
+	#print("Restored %d cards for revived pokemon: %s" % [pile.cards.size(), uid])
 
 
 func _on_card_played(card: Card) -> void:
@@ -164,12 +173,12 @@ func _on_statuses_applied(type: Status.Type) -> void:
 			discard_cards()
 
 
-func _on_pokemon_start_status_applied(pkmn: PokemonBattleUnit) -> void:
-	acting_pokemon.erase(pkmn)
+#func _on_pokemon_start_status_applied(pkmn: PokemonBattleUnit) -> void:
 
 
-func _on_pokemon_end_status_applied(pkmn: PokemonBattleUnit) -> void:
-	acting_pokemon.erase(pkmn)
+
+#func _on_pokemon_end_status_applied(pkmn: PokemonBattleUnit) -> void:
+
 
 
 func _on_party_pokemon_fainted(unit: PokemonBattleUnit) -> void:
@@ -192,11 +201,11 @@ func _establish_connections() -> void:
 	if not Events.card_played.is_connected(_on_card_played):
 		Events.card_played.connect(_on_card_played)
 		
-	if not Events.player_pokemon_start_status_applied.is_connected(_on_pokemon_start_status_applied):
-		Events.player_pokemon_start_status_applied.connect(_on_pokemon_start_status_applied)
-		
-	if not Events.player_pokemon_end_status_applied.is_connected(_on_pokemon_end_status_applied):
-		Events.player_pokemon_end_status_applied.connect(_on_pokemon_end_status_applied)
+	#if not Events.player_pokemon_start_status_applied.is_connected(_on_pokemon_start_status_applied):
+		#Events.player_pokemon_start_status_applied.connect(_on_pokemon_start_status_applied)
+		#
+	#if not Events.player_pokemon_end_status_applied.is_connected(_on_pokemon_end_status_applied):
+		#Events.player_pokemon_end_status_applied.connect(_on_pokemon_end_status_applied)
 		
 	if not player.status_handler.statuses_applied.is_connected(_on_statuses_applied):
 		player.status_handler.statuses_applied.connect(_on_statuses_applied)

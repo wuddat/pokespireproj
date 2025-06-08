@@ -22,11 +22,11 @@ static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
 
 func get_draft_cards_from_type() -> Array[String]:
 	var combined_moves: Array[String] = []
-	print("PKMN TYPE: ", type)
+	#print("PKMN TYPE: ", type)
 	for t in type:
-		print("Checking type: ", t)
+		#print("Checking type: ", t)
 		var moves_for_type = MoveData.type_to_moves.get(t, [])
-		print("Moves for type '%s': %s" % [t, moves_for_type])
+		#print("Moves for type '%s': %s" % [t, moves_for_type])
 		for move_id in moves_for_type:
 			if not combined_moves.has(move_id):
 				combined_moves.append(move_id)

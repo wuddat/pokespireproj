@@ -18,8 +18,12 @@ func _ready() -> void:
 
 
 func start_of_turn():
+	#print(">>> START OF TURN CALLED FOR:", stats.species_id, "| Current Block:", stats.block)
+	#print("status_handler valid? ", is_instance_valid(status_handler))
+
 	stats.block = 0
 	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+	#print(">>> END OF TURN LOGIC FOR:", stats.species_id, "| Block After Reset:", stats.block)
 
 
 func set_pokemon_stats(value: PokemonStats) -> void:
@@ -32,12 +36,12 @@ func set_pokemon_stats(value: PokemonStats) -> void:
 
 func update_pokemon() -> void:
 	if not stats is PokemonStats:
-		print("Invalid stats on PokémonBattleUnit")
+		#print("Invalid stats on PokémonBattleUnit")
 		return
 	if not is_inside_tree():
 		await ready
 		
-	print("Updating Pokémon: %s with HP %d" % [stats.species_id, stats.health])
+	#print("Updating Pokémon: %s with HP %d" % [stats.species_id, stats.health])
 	sprite_2d.texture = stats.art
 	update_stats()
 

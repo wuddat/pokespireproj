@@ -21,7 +21,9 @@ func wait_for_party_handler() -> void:
 func refresh_target_pool() -> void:
 	var party_handler = get_tree().get_first_node_in_group("party_handler")
 	if party_handler and party_handler.has_method("get_active_pokemon_nodes"):
-		target_pool = party_handler.get_active_pokemon_nodes()
+		target_pool = party_handler.get_active_pokemon_nodes().filter(
+			func(unit): return is_instance_valid(unit)
+		)
 		select_valid_target()
 
 func select_valid_target() -> void:

@@ -22,6 +22,7 @@ func _ready():
 
 
 func initialize_party_for_battle() -> void:
+	await get_tree().process_frame
 	if character_stats == null:
 		push_error("PartyHandler requires a reference to character_stats")
 		return
@@ -38,8 +39,8 @@ func add_to_battle_party(pokemon: PokemonStats) -> bool:
 func get_active_pokemon() -> Array[PokemonStats]:
 	var actives: Array[PokemonStats] = []
 	for pkmn in active_battle_party:
-		print("requested pkmn: %s" % pkmn.species_id)
-		print("pkmn HP: %s" % pkmn.health)
+		#print("requested pkmn: %s" % pkmn.species_id)
+		#print("pkmn HP: %s" % pkmn.health)
 		if pkmn.health > 0:
 			actives.append(pkmn)
 		if actives.size() == 3:
@@ -65,7 +66,7 @@ func spawn_active_pokemon():
 			_: unit.position = Vector2(0, 0)
 		add_child(unit)
 		#DEBUG.print_resource(pokemon)
-		print("Spawned Pokémon: %s with HP %d" % [pokemon.species_id, pokemon.health])
+		#print("Spawned Pokémon: %s with HP %d" % [pokemon.species_id, pokemon.health])
 
 
 func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
@@ -73,6 +74,10 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 	for node in get_children():
 		if node is PokemonBattleUnit:
 			typed_array.append(node as PokemonBattleUnit)
+	#print("ACTIVE BATTLE UNITS:")
+	#for unit in typed_array:
+		#print("- %s | UID: %s | BLOCK: %d" % [unit.stats.species_id, unit.stats.uid, unit.stats.block])
+
 	return typed_array
 
 func sync_battle_health_to_party_data() -> void:
@@ -89,9 +94,9 @@ func sync_battle_health_to_party_data() -> void:
 
 func finalize_battle_party(pkmn_list: Array[PokemonStats]) -> void:
 	active_battle_party.clear()
-	print("Finalizing Battle Party:")
+	#print("Finalizing Battle Party:")
 	for pkmn in pkmn_list:
-		print("- %s | UID: %s | HP: %d" % [pkmn.species_id, pkmn.uid, pkmn.health])
+		#print("- %s | UID: %s | HP: %d" % [pkmn.species_id, pkmn.uid, pkmn.health])
 		if add_to_battle_party(pkmn):
 			continue
 		else:
@@ -100,20 +105,20 @@ func finalize_battle_party(pkmn_list: Array[PokemonStats]) -> void:
 
 
 func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void:
-	print("Switch Requested: OUT = %s | IN = %s" % [uid_out, uid_in])
-	for child in get_children():
-		if child is PokemonBattleUnit:
-			print("Existing Unit: %s | UID: %s" % [child.stats.species_id, child.stats.uid])
+	#print("Switch Requested: OUT = %s | IN = %s" % [uid_out, uid_in])
+	#for child in get_children():
+		#if child is PokemonBattleUnit:
+			#print("Existing Unit: %s | UID: %s" % [child.stats.species_id, child.stats.uid])
 			
 	for child in get_children():
 		if child is PokemonBattleUnit and child.stats.uid == uid_out:
-			print("Switching OUT: %s" % child.stats.species_id)
-			print("active_battle_party before: ")
+			#print("Switching OUT: %s" % child.stats.species_id)
+			#print("active_battle_party before: ")
 			for p in active_battle_party:
-				print(p.species_id)
+				#print(p.species_id)
 				if p.uid == uid_out:
 					active_battle_party.erase(p)
-			print("active_battle_party after: ")
+			#print("active_battle_party after: ")
 			for p in active_battle_party:
 				print(p.species_id)
 			var old_unit := child as PokemonBattleUnit
@@ -123,9 +128,9 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 
 			# pkmn to swap in
 			for pkmn in character_stats.current_party:
-				print("Check Battle Party: %s | UID: %s" % [pkmn.species_id, pkmn.uid])
+				#print("Check Battle Party: %s | UID: %s" % [pkmn.species_id, pkmn.uid])
 				if pkmn.uid == uid_in:
-					print("Switching IN: %s" % pkmn.species_id)
+					#print("Switching IN: %s" % pkmn.species_id)
 					var new_unit := PKMN_BATTLE_UNIT.instantiate()
 					new_unit.stats = pkmn
 					new_unit.spawn_position = slot

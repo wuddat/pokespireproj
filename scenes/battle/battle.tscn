@@ -228,4 +228,3 @@ visible = false
 layer = 4
 
 [node name="StatusView" parent="StatusUI" instance=ExtResource("18_sgdsx")]
-visible = false

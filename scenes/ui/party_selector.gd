@@ -73,20 +73,20 @@ func _on_slot_pressed(index: int) -> void:
 	var pkmn := char_stats.current_party[index]
 	var uid := pkmn.uid
 
-	print("\n=== SLOT PRESSED ===")
-	print("Clicked Pokémon: %s | UID: %s | HP: %d" % [pkmn.species_id, uid, pkmn.health])
-	print("In battle? %s | Switching? %s | Selected Switch Out UID: %s" % [in_battle, switching, selected_switch_out_uid])
-	print("highlighted_in_bar_pkmn before click: %s" % [highlighted_in_bar_pkmn])
-	print("Active Battle Pokémon UIDs:")
-	for pokemon in currently_battling_pokemon:
-		print("%s: %s" % [pokemon.species_id, pokemon.uid])
+	#print("\n=== SLOT PRESSED ===")
+	#print("Clicked Pokémon: %s | UID: %s | HP: %d" % [pkmn.species_id, uid, pkmn.health])
+	#print("In battle? %s | Switching? %s | Selected Switch Out UID: %s" % [in_battle, switching, selected_switch_out_uid])
+	#print("highlighted_in_bar_pkmn before click: %s" % [highlighted_in_bar_pkmn])
+	#print("Active Battle Pokémon UIDs:")
+	#for pokemon in currently_battling_pokemon:
+		#print("%s: %s" % [pokemon.species_id, pokemon.uid])
 
 	if in_battle:
 		if switching:
-			print("Attempting switch-in with UID: %s" % uid)
+			#print("Attempting switch-in with UID: %s" % uid)
 			
 			if uid in get_active_uids():
-				print("Cancelled switch: %s is already active in battle." % uid)
+				#print("Cancelled switch: %s is already active in battle." % uid)
 				switching = false
 				selected_switch_out_uid = ""
 				update_buttons()
@@ -96,7 +96,7 @@ func _on_slot_pressed(index: int) -> void:
 				switching = false
 				selected_switch_out_uid = ""
 				update_buttons()
-				print("Cancelled switching due to same UID or fainted.")
+				#print("Cancelled switching due to same UID or fainted.")
 				return
 
 			Events.player_pokemon_switch_requested.emit(selected_switch_out_uid, uid)
@@ -106,29 +106,29 @@ func _on_slot_pressed(index: int) -> void:
 			for battler_uid in highlighted_in_bar_pkmn:
 				if battler_uid == selected_switch_out_uid:
 					highlighted_in_bar_pkmn.erase(battler_uid)
-			print("Switch requested: OUT = %s, IN = %s" % [selected_switch_out_uid, uid])
+			#print("Switch requested: OUT = %s, IN = %s" % [selected_switch_out_uid, uid])
 			switching = false
 			selected_switch_out_uid = ""
 		else:
 			if uid in get_active_uids():
 				switching = true
 				selected_switch_out_uid = uid
-				print("Entering switch mode for UID: %s" % uid)
+				#print("Entering switch mode for UID: %s" % uid)
 	else:
 		if uid in highlighted_in_bar_pkmn:
 			if highlighted_in_bar_pkmn.size() > 1:
 				highlighted_in_bar_pkmn.erase(uid)
 				sync_highlight_to_battling_pokemon()
-				print("Deselected UID: %s" % uid)
+				#print("Deselected UID: %s" % uid)
 		else:
 			if highlighted_in_bar_pkmn.size() < 3:
 				highlighted_in_bar_pkmn.append(uid)
 				sync_highlight_to_battling_pokemon()
-				print("Selected UID: %s" % uid)
+				#print("Selected UID: %s" % uid)
 
 	update_buttons()
-	print("highlighted_in_bar_pkmn UIDs after click: %s" % [highlighted_in_bar_pkmn])
-	print("=== END SLOT PRESS ===\n")
+	#print("highlighted_in_bar_pkmn UIDs after click: %s" % [highlighted_in_bar_pkmn])
+	#print("=== END SLOT PRESS ===\n")
 
 func get_active_uids() -> Array[String]:
 	var uids: Array[String] = []
@@ -139,11 +139,11 @@ func get_active_uids() -> Array[String]:
 
 func sync_highlight_to_battling_pokemon():
 	currently_battling_pokemon.clear()
-	print("Syncing highlighted Pokémon to the actively_battling_pkmn: %s" % highlighted_in_bar_pkmn)
+	#print("Syncing highlighted Pokémon to the actively_battling_pkmn: %s" % highlighted_in_bar_pkmn)
 	for pkmn in char_stats.current_party:
 		if pkmn.uid in highlighted_in_bar_pkmn:
 			currently_battling_pokemon.append(pkmn)
-			print("- Added %s | UID: %s | HP: %d" % [pkmn.species_id, pkmn.uid, pkmn.health])
+			#print("- Added %s | UID: %s | HP: %d" % [pkmn.species_id, pkmn.uid, pkmn.health])
 	update_buttons()
 
 
@@ -161,9 +161,9 @@ func get_selected_pokemon() -> Array[PokemonStats]:
 	for pkmn in char_stats.current_party:
 		if pkmn.uid in highlighted_in_bar_pkmn:
 			selected.append(pkmn)
-	print("get_selected_pokemon() returning:")
-	for p in selected:
-		print("- %s | UID: %s | HP: %d" % [p.species_id, p.uid, p.health])
+	#print("get_selected_pokemon() returning:")
+	#for p in selected:
+		#print("- %s | UID: %s | HP: %d" % [p.species_id, p.uid, p.health])
 	return selected
 
 
