@@ -4,6 +4,7 @@ extends Node2D
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @export var stats: PokemonStats : set = set_pokemon_stats
+@export var spawn_position: String
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var stats_ui: StatsUI = $StatsUI
@@ -14,6 +15,12 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
+
+
+func start_of_turn():
+	stats.block = 0
+	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+
 
 func set_pokemon_stats(value: PokemonStats) -> void:
 	stats = value

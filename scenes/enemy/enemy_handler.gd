@@ -9,11 +9,12 @@ var caught_pokemon: Array[PokemonStats] = []
 
 
 func _ready() -> void:
-	Events.enemy_died.connect(_on_enemy_died)
+	Events.enemy_fainted.connect(_on_enemy_fainted)
 	Events.enemy_action_completed.connect(_on_enemy_action_completed)
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)
 	Events.player_hand_discarded.connect(_on_player_hand_drawn)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
+	
 
 func setup_enemies(battle_stats: BattleStats) -> void:
 	if not battle_stats:
@@ -40,7 +41,6 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		right_panel.add_child(ui)
 		
 		ui.update_stats(new_enemy_child.stats)
-		print("Added StatsUI for ", new_enemy_child)
 
 		if not new_enemy_child.stats.stats_changed.is_connected(ui.update_stats):
 			new_enemy_child.stats.stats_changed.connect(func(): ui.update_stats(new_enemy_child.stats))
@@ -85,7 +85,7 @@ func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 			_start_next_enemy_turn()
 
 
-func _on_enemy_died(enemy: Enemy) -> void:
+func _on_enemy_fainted(enemy: Enemy) -> void:
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)
 	

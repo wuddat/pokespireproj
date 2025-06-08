@@ -22,7 +22,7 @@ func _ready() -> void:
 func start_battle(char_stats: CharacterStats) -> void:
 	character = char_stats
 	
-	character.battle_deck = character.build_battle_deck(party_handler.active_party)
+	character.battle_deck = character.build_battle_deck(party_handler.active_battle_party)
 	character.draw_pile = character.battle_deck.duplicate(true)
 	character.draw_pile.shuffle()
 
@@ -42,7 +42,7 @@ func start_turn() -> void:
 		return
 
 	for pkmn in acting_pokemon:
-		pkmn.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+		pkmn.start_of_turn()
 
 
 func end_turn() -> void:
@@ -124,8 +124,8 @@ func exhaust_cards_on_faint(uid: String) -> void:
 	for card in cards_to_exhaust.cards:
 		character.faint_pile[uid].add_card(card)
 
-	print("Exhausted %d cards for fainted pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
-	print("The faint_pile is currently: ", character.faint_pile)
+	print("Exhausted %d cards for fainted/switched pokemon: %s" % [cards_to_exhaust.cards.size(), uid])
+	#print("The faint_pile is currently: ", character.faint_pile)
 
 
 func restore_fainted_cards(uid: String) -> void:
@@ -169,6 +169,16 @@ func _on_party_pokemon_fainted(unit: PokemonBattleUnit) -> void:
 	var uid :=unit.stats.uid
 	exhaust_cards_on_faint(uid)
 
+func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void:
+	exhaust_cards_on_faint(uid_out)
+	var switched_pkmn_cards_to_add := CardPile.new()
+	var player_deck := character.deck.duplicate(true)
+	for card: Card in player_deck.cards:
+		if card.pkmn_owner_uid == uid_in:
+			switched_pkmn_cards_to_add.add_card(card)
+	for card in switched_pkmn_cards_to_add.cards:
+		character.draw_pile.add_card(card)
+	
 
 func _establish_connections() -> void:
 	if not Events.card_played.is_connected(_on_card_played):
@@ -185,3 +195,6 @@ func _establish_connections() -> void:
 		
 	if not Events.party_pokemon_fainted.is_connected(_on_party_pokemon_fainted):
 		Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
+	
+	if not Events.player_pokemon_switch_requested.is_connected(_on_party_pokemon_switch_requested):
+		Events.player_pokemon_switch_requested.connect(_on_party_pokemon_switch_requested)

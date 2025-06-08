@@ -79,7 +79,6 @@ func _set_card(value: Card) -> void:
 	if value == null:
 		push_warning("_set_card was called with a null value. Skipping.")
 		return
-	print("CardUI: Setting card:", value, "with UID:", value.pkmn_owner_uid)
 	card = value
 	card_visuals.card = card
 

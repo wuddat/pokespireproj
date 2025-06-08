@@ -80,10 +80,10 @@ func _setup_event_connections() -> void:
 	Events.shop_exited.connect(_show_map)
 	Events.treasure_room_exited.connect(_show_map)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
-	Events.added_pkmn_to_party.connect(_populate_party_buttons)
+	Events.added_pkmn_to_party.connect(_update_party_buttons)
 	Events.added_pkmn_to_party.connect(_update_draftable_cards)
 	Events.party_pokemon_fainted.connect(_update_draftable_cards)
-	Events.party_pokemon_fainted.connect(_populate_party_buttons)
+	Events.party_pokemon_fainted.connect(_update_party_buttons)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -101,7 +101,7 @@ func 	_setup_top_bar():
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
 	party_selector.char_stats = character
-	party_selector.populate_buttons()
+	party_selector.update_buttons()
 
 
 func _on_battle_room_entered(room: Room) -> void:
@@ -110,6 +110,7 @@ func _on_battle_room_entered(room: Room) -> void:
 	battle_scene.party_selector = party_selector
 	battle_scene.battle_stats = room.battle_stats
 	battle_scene.start_battle()
+	party_selector.in_battle = true
 
 
 func _on_pokecenter_entered() -> void:
@@ -127,6 +128,7 @@ func _on_battle_won() -> void:
 	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
 	reward_scene.add_card_reward()
 	reward_scene.add_pkmn_reward()
+	party_selector.in_battle = false
 	
 	caught_pokemon.clear() 
 
@@ -149,9 +151,9 @@ func _on_pokemon_captured(stats: PokemonStats) -> void:
 	print("caught pokemon in run: ", caught_pokemon)
 
 
-func _populate_party_buttons() -> void:
+func _update_party_buttons() -> void:
 	party_selector.char_stats = character
-	party_selector.populate_buttons()
+	party_selector.update_buttons()
 
 
 func _update_draftable_cards() -> void:

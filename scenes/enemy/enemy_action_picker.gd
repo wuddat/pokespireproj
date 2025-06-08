@@ -9,10 +9,9 @@ var target_pool: Array[PokemonBattleUnit] = []
 
 func _ready() -> void:
 	await wait_for_party_handler()
+	_initialize_connections()
 	refresh_target_pool()
 
-	if not Events.party_pokemon_fainted.is_connected(_on_pokemon_fainted):
-		Events.party_pokemon_fainted.connect(_on_pokemon_fainted)
 
 func wait_for_party_handler() -> void:
 	await get_tree().process_frame
@@ -119,3 +118,14 @@ func _set_target(value: Node2D) -> void:
 	target = value
 	for action in get_children():
 		action.target = target
+
+func _on_pokemon_switch(pkmn: PokemonStats) -> void:
+	refresh_target_pool()
+	select_valid_target()
+
+func _initialize_connections() -> void:
+	if not Events.player_pokemon_switch_completed.is_connected(_on_pokemon_switch):
+		Events.player_pokemon_switch_completed.connect(_on_pokemon_switch)
+		
+	if not Events.party_pokemon_fainted.is_connected(_on_pokemon_fainted):
+		Events.party_pokemon_fainted.connect(_on_pokemon_fainted)

@@ -15,6 +15,8 @@ extends Node2D
 @onready var left_panel: VBoxContainer = $StatUI/LeftPanel
 
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
+var stat_ui_by_uid: Dictionary = {}
+
 
 func _ready() -> void:
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
@@ -23,6 +25,7 @@ func _ready() -> void:
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	Events.player_died.connect(_on_player_died)
+	Events.player_pokemon_switch_completed.connect(_update_stat_ui)
 	
 	
 func start_battle() -> void:
@@ -33,34 +36,60 @@ func start_battle() -> void:
 	player.stats = char_stats
 	party_handler.character_stats = char_stats
 	var selected_party = party_selector.get_selected_pokemon()
-	party_handler.set_active_party(selected_party)
+	for p in selected_party:
+		print("- %s | UID: %s | HP: %d" % [p.species_id, p.uid, p.health])
+	party_selector.in_battle = true
+	party_selector.switching = false
+	party_selector.selected_switch_out_uid = ""
+	party_handler.finalize_battle_party(selected_party)
 	party_handler.initialize_party_for_battle()
 	
-	display_active_party_ui()
+	update_stat_ui_for_party()
 	
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()
-	print("The faint_pile is currently: ", char_stats.faint_pile)
 
+#TODO clean up this function - literally a straight copy paste chatgpt because i was tired
+func update_stat_ui_for_party() -> void:
+	var active_pokemon := party_handler.get_active_pokemon()
+	var seen_uids: Array[String] = []
 
-func display_active_party_ui()-> void:
-	for child in left_panel.get_children():
-		child.queue_free()
-	var actives := party_handler.get_active_pokemon()
+	for pkmn in char_stats.current_party:
+		seen_uids.append(pkmn.uid)
 
-	for pkmn in actives:
-		var ui := stats_ui_scn.instantiate() as HealthBarUI
-		
-		left_panel.add_child(ui)
-		
+		# Get or create the HealthBarUI for this Pokémon
+		var ui: HealthBarUI
+		if stat_ui_by_uid.has(pkmn.uid):
+			ui = stat_ui_by_uid[pkmn.uid]
+		else:
+			ui = stats_ui_scn.instantiate()
+			left_panel.add_child(ui)
+			stat_ui_by_uid[pkmn.uid] = ui
+
+		# Always update stats immediately
 		ui.update_stats(pkmn)
-		print("Added StatsUI for", pkmn.species_id)
 
+		# Connect if not already connected
 		if not pkmn.stats_changed.is_connected(_update_pokemon_stats_ui):
 			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, ui))
+
+		# Hide by default
+		ui.visible = false
+
+	# Reveal only the UIs for currently active Pokémon
+	for pkmn in active_pokemon:
+		if stat_ui_by_uid.has(pkmn.uid):
+			stat_ui_by_uid[pkmn.uid].visible = true
+
+	# Clean up orphaned bars
+	for uid in stat_ui_by_uid.keys():
+		if not seen_uids.has(uid):
+			stat_ui_by_uid[uid].queue_free()
+			stat_ui_by_uid.erase(uid)
+
 
 
 
@@ -82,3 +111,13 @@ func _on_enemy_turn_ended() -> void:
 	
 func _on_player_died() -> void:
 		Events.battle_over_screen_requested.emit("You Whited Out!", BattleOverPanel.Type.LOSE)
+
+
+func _update_stat_ui(pkmn: PokemonStats) -> void:
+	if stat_ui_by_uid.has(pkmn.uid):
+		var ui = stat_ui_by_uid[pkmn.uid]
+		ui.update_stats(pkmn)
+		ui.visible = true
+		if not pkmn.stats_changed.is_connected(_update_pokemon_stats_ui):
+			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, stat_ui_by_uid[pkmn.uid]))
+		_update_pokemon_stats_ui(pkmn, ui)
