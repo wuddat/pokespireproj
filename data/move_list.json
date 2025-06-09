@@ -10,7 +10,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["flinched"],
+	  "status_effects": ["despair","flinched"],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "Common"

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://cgqnwayjcve0s"]
+[gd_resource type="Resource" script_class="Critical" load_steps=3 format=3 uid="uid://cgqnwayjcve0s"]
 
 [ext_resource type="Texture2D" uid="uid://lh34tx5gsyqv" path="res://art/statuseffects/zap.png" id="1_6cj1j"]
-[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_n3cms"]
+[ext_resource type="Script" uid="uid://donccitvahriq" path="res://statuses/critical.gd" id="2_6cj1j"]
 
 [resource]
-script = ExtResource("2_n3cms")
+script = ExtResource("2_6cj1j")
 id = "critical"
 type = 1
 stack_type = 2

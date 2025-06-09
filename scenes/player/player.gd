@@ -10,11 +10,10 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
-#func _ready() -> void:
-	#status_handler.status_owner = self
-	#var exposed := preload("res://statuses/exposed.tres")
-	#exposed.duration = 2
-	#status_handler.add_status(exposed)
+func _ready() -> void:
+	status_handler.status_owner = self
+	var status := preload("res://statuses/critical.tres")
+	status_handler.add_status(status)
 
 func set_character_stats(value: CharacterStats) -> void:
 	stats = value

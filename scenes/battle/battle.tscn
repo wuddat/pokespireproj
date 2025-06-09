@@ -239,4 +239,5 @@ layer = 4
 layer = 5
 
 [node name="PkmnFainted" parent="FaintUI" instance=ExtResource("23_156m4")]
+process_mode = 3
 visible = false

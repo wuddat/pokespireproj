@@ -36,6 +36,12 @@ func _ready():
 			print("No Pokedex data found for: " + stats.species_id)
 	else:
 		print("Stats or species_id not set yet.")
+	
+		#status effect testing
+	status_handler.status_owner = self
+	var status := preload("res://statuses/critical.tres")
+	status_handler.add_status(status)
+
 
 func set_current_action(value: EnemyAction) -> void:
 	current_action = value
@@ -108,7 +114,8 @@ func update_intent() -> void:
 
 func do_turn() -> void:
 	stats.block = 0
-	
+	if skip_turn:
+		Events.enemy_action_completed.emit(self)
 	if status_handler._has_status("flinched"):
 		print("Enemy flinched and skips turn!")
 		status_handler.remove_status("flinched")
@@ -153,6 +160,22 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 				Events.enemy_fainted.emit(self)
 				queue_free()
 	)
+
+
+func gain_block(block: int, mod_type:Modifier.Type) -> void:
+	if stats.health <= 0:
+		return
+	
+	var modified_block := modifier_handler.get_modified_value(block, mod_type)
+	
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var start := self.global_position
+	var up_position := start + Vector2(0, -10)
+	tween.tween_property(self, "position", up_position, 0.1)
+	tween.tween_property(self, "position", start, 0.1)
+	tween.tween_callback(stats.gain_block.bind(modified_block))
+	tween.tween_interval(0.17)
+
 
 func mark_as_caught() -> void:
 	if is_caught:

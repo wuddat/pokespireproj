@@ -17,15 +17,19 @@ const TYPE_COLORS := {
 	Card.Type.POWER: Color.PURPLE
 }
 
-const STATUS_LOOKUP := {
-	"poisoned": preload("res://statuses/poisoned.tres"),
-	"enraged": preload("res://statuses/enraged.tres"),
-	"exposed": preload("res://statuses/exposed.tres"),
-	"attack_power": preload("res://statuses/attack_power.tres"),
-	"catching": preload("res://statuses/catching.tres"),
-	"burned": preload("res://statuses/burned.tres"),
-	"flinched": preload("res://statuses/flinched.tres")
-}
+#const STATUS_LOOKUP := {
+	#"attack_power": preload("res://statuses/attack_power.tres"),
+	#"burned": preload("res://statuses/burned.tres"),
+	#"catching": preload("res://statuses/catching.tres"),
+	#"despair": preload("res://statuses/despair.tres"),
+	#"enraged": preload("res://statuses/enraged.tres"),
+	#"exposed": preload("res://statuses/exposed.tres"),
+	#"flinched": preload("res://statuses/flinched.tres"),
+	#"poisoned": preload("res://statuses/poisoned.tres"),
+	#
+	#
+	#
+#}
 
 
 @export_group("Card Attributes")
@@ -93,6 +97,7 @@ func get_default_tooltip() -> String:
 
 func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers:ModifierHandler) -> String:
 		return tooltip_text
+
 
 
 #card generation from movelist data

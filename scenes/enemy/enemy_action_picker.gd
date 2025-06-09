@@ -22,20 +22,23 @@ func refresh_target_pool() -> void:
 	var party_handler = get_tree().get_first_node_in_group("party_handler")
 	if party_handler and party_handler.has_method("get_active_pokemon_nodes"):
 		target_pool = party_handler.get_active_pokemon_nodes().filter(
-			func(unit): return is_instance_valid(unit)
+			func(unit): return is_instance_valid(unit) and unit.stats and unit.stats.health > 0
 		)
 		select_valid_target()
 
 func select_valid_target() -> void:
-	for pkmn in target_pool:
-		if is_instance_valid(pkmn):
-			target = pkmn
-			for action in get_children():
-				action.target = target
-			#print("new attack target is ", target)
-			return
-	target = null
-	print("No valid Pokémon to target!")
+	var valid_targets = target_pool.filter(
+		func(pkmn): return is_instance_valid(pkmn) and pkmn.stats and pkmn.stats.health > 0
+	)
+	if valid_targets.is_empty():
+		target = null
+		for action in get_children():
+			action.target = null
+		print("No valid Pokémon to target!")
+		return
+	target = valid_targets.pick_random()
+	for action in get_children():
+		action.target = target
 
 func _on_pokemon_fainted(_fainted_pokemon: Node) -> void:
 	refresh_target_pool()

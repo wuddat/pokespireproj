@@ -11,21 +11,6 @@ const STATUS_DETAIL_OVERLAY_DELAY := 0.5
 
 var is_mouse_over := false
 
-#func _ready() ->void:
-	#_draw()
-
-#status application test code
-#func _ready() -> void:
-	#var test := load("res://statuses/enraged.tres")
-	#await get_tree().create_timer(2).timeout
-	#add_status(test)
-	#await get_tree().create_timer(2).timeout
-	#add_status(test)
-	#await get_tree().create_timer(2).timeout
-	#_get_status(test.id).apply_status(null)
-	#await get_tree().create_timer(2).timeout
-	#_get_status(test.id).apply_status(null)
-
 
 func apply_statuses_by_type(type:Status.Type) -> void:
 	if type == Status.Type.EVENT_BASED:
@@ -74,8 +59,16 @@ func add_status(status: Status) -> void:
 	if status.stack_type == Status.StackType.INTENSITY:
 		_get_status(status.id).stacks += status.stacks
 		print(status.id," effect stacked")
-	
-	
+
+
+func has_and_consume_status(id: String) -> bool:
+	if _has_status(id):
+		remove_status(id)
+		return true
+	return false
+
+
+
 func _has_status(id: String) -> bool:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:

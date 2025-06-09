@@ -7,9 +7,6 @@ func get_default_tooltip() -> String:
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
 	var mod_block := player_modifiers.get_modified_value(base_power, Modifier.Type.BLOCK_GAINED)
 
-	if enemy_modifiers:
-		mod_block = enemy_modifiers.get_modified_value(mod_block, Modifier.Type.BLOCK_GAINED)
-
 	return tooltip_text % mod_block
 
 

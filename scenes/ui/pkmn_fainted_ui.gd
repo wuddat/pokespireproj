@@ -39,6 +39,7 @@ func _show_fainted_screen(fainted_pkmn: PokemonBattleUnit) -> void:
 
 	# 👇 Only show UI if there are valid switch options
 	if switchable_found:
+		get_tree().paused = true  
 		show()
 	else:
 		print("No valid Pokémon to switch into — skipping faint UI.")
@@ -47,5 +48,6 @@ func _show_fainted_screen(fainted_pkmn: PokemonBattleUnit) -> void:
 
 func _on_slot_pressed(uid: String) -> void:
 	print("faint_to_switch_out UID is: ", faint_to_switch_out)
+	get_tree().paused = false  
 	Events.player_pokemon_switch_requested.emit(faint_to_switch_out, uid)
 	hide()

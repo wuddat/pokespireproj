@@ -15,7 +15,11 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
-
+	
+	##status effect testing
+	#status_handler.status_owner = self
+	#var status := preload("res://statuses/critical.tres")
+	#status_handler.add_status(status)
 
 func start_of_turn():
 	#print(">>> START OF TURN CALLED FOR:", stats.species_id, "| Current Block:", stats.block)
@@ -53,9 +57,14 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 		return
 	
 	var modified_block := modifier_handler.get_modified_value(block, mod_type)
+
+		
 	
-	var tween:= create_tween()
-	tween.tween_callback(Shaker.shake.bind(self,25,0.15))
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var start := self.global_position
+	var up_position := start + Vector2(0, -10)
+	tween.tween_property(self, "position", up_position, 0.1)
+	tween.tween_property(self, "position", start, 0.1)
 	tween.tween_callback(stats.gain_block.bind(modified_block))
 	tween.tween_interval(0.17)
 
@@ -75,7 +84,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 		sprite_2d.material = null
 		if stats.health <= 0:
 			Events.party_pokemon_fainted.emit(self)
-			queue_free()
+			hide()
+			
 	)
 
 

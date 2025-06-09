@@ -26,6 +26,9 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
 	
+	if self.status_handler.has_status("critical"):
+		self.status_handler.remove_status("critical")
+	
 	
 	#apply status effect if any on card
 	for status_effect in status_effects:
