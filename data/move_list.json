@@ -333,6 +333,22 @@
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "Rare"
 	},
+	"earthquake": {
+	  "name": "Earth Quake",
+	  "id": "earthquake",
+	  "category": "attack",
+	  "subtype": "all",
+	  "type": "ground",
+	  "target": "all",
+	  "power": 15,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage to EVERYTHING.[/center]",
+	  "icon_path": "res://art/tile_0127.png",
+	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "rarity": "Rare"
+	},
 	"ember": {
 	  "name": "Ember",
 	  "id": "ember",
@@ -368,6 +384,23 @@
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common"
+	},
+	"flareblitz": {
+	  "name": "Flare Blitz",
+	  "id": "flareblitz",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "fire",
+	  "target": "enemy",
+	  "power": 35,
+	  "accuracy": 100,
+	  "cost": 3,
+	  "status_effects": ["burned", "burned"],
+	  "description": "[center]Deal [color=red]%s[/color] damage to an enemy. Damages the user slightly and [color=redorange]BURNS[/color] both.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "self_damage": 10,
+	  "self_status": ["burned","burned"],
+	  "rarity": "rare",
 	},
 	"flashcannon": {
 	  "name": "Flash Cannon",
@@ -695,6 +728,22 @@
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "uncommon"
 	},
+	"poisongas": {
+	  "name": "Poison Gas",
+	  "id": "poisongas",
+	  "category": "attack",
+	  "subtype": "all",
+	  "type": "poison",
+	  "target": "random_enemy",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 0,
+	  "status_effects": ["poisoned","poisoned",],
+	  "description": "[center]Apply [color=purple]POISON[/color] to random allies/enemies [color=purple]3X[/color].[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "common",
+	  "multiplay": 3,
+	},
 	"poisonjab": {
 	  "name": "Poison Jab",
 	  "id": "poisonjab",
@@ -777,6 +826,22 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common"
+	},
+	"psybeam": {
+	  "name": "Psybeam",
+	  "id": "psybeam",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "psychic",
+	  "target": "enemy",
+	  "power": 7,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage TWICE![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "common",
+	  "multiplay": 2,
 	},
 	"psychic": {
 	  "name": "Psychic",
@@ -874,6 +939,21 @@
 	  "description": "[center]Gain [color=blue]%s[/color] BLOCK![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "Uncommon"
+	},
+	"safeguard": {
+	  "name": "Safeguard",
+	  "id": "safeguard",
+	  "category": "defense",
+	  "subtype": "allies",
+	  "type": "normal",
+	  "target": "all_allies",
+	  "power": 6,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Apply [color=blue]BLOCK[/color] to all allies![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "uncommon"
 	},
 	"scaryface": {
 	  "name": "Scary Face",
@@ -1028,6 +1108,23 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
+	},
+	"swagger": {
+	  "name": "Swagger",
+	  "id": "swagger",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "normal",
+	  "target": "enemy",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power",],
+	  "description": "[center]Apply [color=red]10[/color] AtkPwr to the user AND an enemy.[/center]",
+	  "icon_path": "res://art/tile_0127.png",
+	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "self_status": ["attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power","attack_power",],
+	  "rarity": "uncommon"
 	},
 	"swordsdance": {
 	  "name": "Swords Dance",
