@@ -10,7 +10,7 @@ extends Node
 @export var character_stats: CharacterStats
 
 var PKMN_BATTLE_UNIT := preload("res://scenes/battle/pokemon_battle_unit.tscn")
-
+var stat_ui_by_uid: Dictionary = {}
 var active_battle_party: Array[PokemonStats] = []
 var active_indexes := [0,1,2]
 
@@ -53,6 +53,11 @@ func spawn_active_pokemon():
 	for i in range(actives.size()):
 		var pokemon := actives[i]
 		var unit := PKMN_BATTLE_UNIT.instantiate() as PokemonBattleUnit
+		
+		if stat_ui_by_uid.has(pokemon.uid):
+			var ui = stat_ui_by_uid[pokemon.uid]
+			unit.set_health_bar_ui(ui)
+	
 		unit.stats = pokemon
 		unit.spawn_position = "POS_%s" % i
 			
@@ -76,6 +81,15 @@ func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
 	#for unit in typed_array:
 		#print("- %s | UID: %s | BLOCK: %d" % [unit.stats.species_id, unit.stats.uid, unit.stats.block])
 	return typed_array
+
+
+func get_pkmn_by_uid(uid: String) -> PokemonBattleUnit:
+	for pkmn: PokemonBattleUnit in get_children():
+		if pkmn.stats.uid == uid:
+			#print("CARD_UID_GET: found pkmn matching UID: %s" % pkmn.stats.species_id)
+			return pkmn
+	print("No pokemon found in fight with UID %s" % uid)
+	return
 
 
 func sync_battle_health_to_party_data() -> void:

@@ -12,4 +12,3 @@ func initialize_status(target: Node) -> void:
 
 func apply_status(target: Node) -> void:
 	status_applied.emit(self)
-	target.status_handler.queue_remove_on_next_attack("critical")

@@ -10,7 +10,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % mod_block
 
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var base_block = base_power
 	
@@ -20,7 +20,9 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 		
 	var block_effect := BlockEffect.new()
 	block_effect.amount = modifiers.get_modified_value(base_block, Modifier.Type.BLOCK_GAINED)
+	print("block effect amount is: ", block_effect.amount)
 	block_effect.sound = sound
+	print("block targets are: ", [targets])
 	block_effect.execute(targets)
 
 	for status_effect in status_effects:

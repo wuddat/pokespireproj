@@ -28,6 +28,7 @@ func _ready() -> void:
 	Events.player_died.connect(_on_player_died)
 	Events.player_pokemon_switch_completed.connect(_update_stat_ui)
 	Events.player_pokemon_switch_requested.connect(_hide_switch_ui)
+	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 	
 	
 	
@@ -44,11 +45,14 @@ func start_battle() -> void:
 	party_selector.in_battle = true
 	party_selector.switching = false
 	party_selector.selected_switch_out_uid = ""
+	party_handler.stat_ui_by_uid = stat_ui_by_uid  
 	party_handler.finalize_battle_party(selected_party)
 	party_handler.initialize_party_for_battle()
+	
+	
 	pkmn_fainted_ui.char_stats = char_stats
 	
-	update_stat_ui_for_party()
+	initialize_stat_ui_for_party()
 	
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
@@ -57,7 +61,7 @@ func start_battle() -> void:
 	battle_ui.initialize_card_pile_ui()
 
 #TODO clean up this function - literally a straight copy paste chatgpt because i was tired
-func update_stat_ui_for_party() -> void:
+func initialize_stat_ui_for_party() -> void:
 	var active_pokemon := party_handler.get_active_pokemon()
 	var seen_uids: Array[String] = []
 
@@ -133,3 +137,8 @@ func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
 	if stat_ui_by_uid.has(switch_out_uid):
 		var ui = stat_ui_by_uid[switch_out_uid]
 		ui.modulate = Color(1,1,1,.5)
+
+
+func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
+	if pkmn and pkmn.is_inside_tree():
+		pkmn.status_handler.clear_all_statuses()

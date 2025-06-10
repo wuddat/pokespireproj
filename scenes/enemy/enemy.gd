@@ -38,9 +38,9 @@ func _ready():
 		print("Stats or species_id not set yet.")
 	
 		#status effect testing
-	status_handler.status_owner = self
-	var status := preload("res://statuses/critical.tres")
-	status_handler.add_status(status)
+	#status_handler.status_owner = self
+	#var status := preload("res://statuses/critical.tres")
+	#status_handler.add_status(status)
 
 
 func set_current_action(value: EnemyAction) -> void:
@@ -114,23 +114,29 @@ func update_intent() -> void:
 
 func do_turn() -> void:
 	stats.block = 0
-	if skip_turn:
-		Events.enemy_action_completed.emit(self)
+
+	# Check and process skip-related statuses first
 	if status_handler._has_status("flinched"):
-		print("Enemy flinched and skips turn!")
+		print("Enemy flinched and will skip turn.")
 		status_handler.remove_status("flinched")
-		Events.enemy_action_completed.emit(self)
-		return
+		skip_turn = true
 	
 	if status_handler._has_status("catching"):
-		print("%s is being caught, skipping turn." % self)
+		print("%s is being caught, will skip turn." % self)
+		skip_turn = true
+	
+	# If any reason caused a skip, end the turn here
+	if skip_turn:
+		print("Enemy skipping turn due to skip_turn flag.")
 		Events.enemy_action_completed.emit(self)
 		return
 	
+	# Otherwise, perform the action as usual
 	if not current_action:
 		return
 	
 	current_action.perform_action()
+
 
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:

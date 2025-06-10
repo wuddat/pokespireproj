@@ -1,19 +1,17 @@
 class_name Player
 extends Node2D
 
-const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @export var stats: CharacterStats : set = set_character_stats
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
-func _ready() -> void:
-	status_handler.status_owner = self
-	var status := preload("res://statuses/critical.tres")
-	status_handler.add_status(status)
+#func _ready() -> void:
+	#status_handler.status_owner = self
+	#var status := preload("res://statuses/critical.tres")
+	#status_handler.add_status(status)
 
 func set_character_stats(value: CharacterStats) -> void:
 	stats = value
@@ -30,7 +28,7 @@ func update_player() -> void:
 	if not is_inside_tree():
 		await ready
 
-	sprite_2d.texture = stats.art
+
 	update_stats()
 
 

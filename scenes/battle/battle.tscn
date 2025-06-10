@@ -86,7 +86,7 @@ offset_top = -59.0
 offset_right = 40.0
 offset_bottom = -19.0
 grow_vertical = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = 10
 
 [node name="RightPanel" type="VBoxContainer" parent="StatUI"]
 anchors_preset = 6
@@ -104,7 +104,7 @@ theme_override_constants/separation = -3
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 script = ExtResource("7_icoan")
 
-[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player")]
+[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player", "party_handler")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -119,6 +119,7 @@ grow_vertical = 0
 alignment = 1
 script = ExtResource("2_xd4uy")
 player = NodePath("../../Player")
+party_handler = NodePath("../../PartyHandler")
 
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_fisqk")]
 offset_left = 2.0

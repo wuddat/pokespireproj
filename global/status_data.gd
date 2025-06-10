@@ -12,6 +12,7 @@ const STATUS_LOOKUP := {
 	"exposed": preload("res://statuses/exposed.tres"),
 	"flinched": preload("res://statuses/flinched.tres"),
 	"poisoned": preload("res://statuses/poisoned.tres"),
+	"scaling": preload("res://statuses/scaling_per_turn.tres"),
 }
 
 func get_status_effects_from_ids(ids: Array[String]) -> Array[Status]:

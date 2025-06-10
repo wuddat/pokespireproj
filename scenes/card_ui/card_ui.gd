@@ -9,12 +9,17 @@ const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
 
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
-@export var player_modifiers: ModifierHandler
+@export var player_pkmn_modifiers: ModifierHandler
+
+@export var battle_unit_owner: PokemonBattleUnit
+
 
 @onready var card_visuals: CardVisuals = $CardVisuals
 @onready var drop_point_detector: Area2D = $DropPointDetector
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var targets: Array[Node] = []
+
+
 
 var original_index := 0
 var parent: Control
@@ -44,7 +49,7 @@ func play() -> void:
 	if not card:
 		return
 		
-	card.play(targets, char_stats, player_modifiers)
+	card.play(targets, char_stats, player_pkmn_modifiers, battle_unit_owner)
 	queue_free()
 
 
@@ -57,7 +62,7 @@ func get_active_enemy_modifiers() -> ModifierHandler:
 
 func request_tooltip() -> void:
 	var enemy_modifiers := get_active_enemy_modifiers()
-	var updated_tooltip := card.get_updated_tooltip(player_modifiers, enemy_modifiers)
+	var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers)
 	Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon)
 
 

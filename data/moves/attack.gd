@@ -13,7 +13,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		return tooltip_text % mod_dmg
 
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var base_damage = base_power
 	
@@ -25,9 +25,6 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	damage_effect.amount = modifiers.get_modified_value(base_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
-	
-	if self.status_handler.has_status("critical"):
-		self.status_handler.remove_status("critical")
 	
 	
 	#apply status effect if any on card

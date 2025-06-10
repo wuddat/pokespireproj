@@ -9,7 +9,12 @@ const STATUS_DETAIL_OVERLAY_DELAY := 0.5
 
 @export var status_owner: Node2D
 
+var health_ui_status_container: Node = null
 var is_mouse_over := false
+
+
+func set_status_ui_container(container: Node) -> void:
+	health_ui_status_container = container
 
 
 func apply_statuses_by_type(type:Status.Type) -> void:
@@ -33,32 +38,42 @@ func apply_statuses_by_type(type:Status.Type) -> void:
 
 
 func add_status(status: Status) -> void:
-	var stackable := status.stack_type != Status.StackType.NONE #check if stackable
-	
-	#add if new status
+	var stackable := status.stack_type != Status.StackType.NONE
+
 	if not _has_status(status.id):
 		var new_status_ui := STATUS_UI.instantiate() as StatusUI
+
+		#  LOGIC: Add to StatusHandler scene tree for status logic to work
 		add_child(new_status_ui)
+
+		#  VISUALS: Also add a copy to the HealthBarUI (optional)
+		if health_ui_status_container:
+			var visual_ui := STATUS_UI.instantiate()
+			visual_ui.status = status
+			health_ui_status_container.add_child(visual_ui)
+
 		new_status_ui.status = status
 		new_status_ui.status.status_applied.connect(_on_status_applied)
 		new_status_ui.status.initialize_status(status_owner)
-		print(status.id," new status effect added")
+
+		print(status.id, " new status effect added")
 		return
-	
-	#if status is a one time active and we already have - return
+
+	# If not stackable, already present — do nothing
 	if not status.can_expire and not stackable:
 		return
-	
-	#if status duration is stackable - increase it
+
+	# If duration stackable
 	if status.can_expire and status.stack_type == Status.StackType.DURATION:
 		_get_status(status.id).duration += status.duration
-		print(status.id," effect duration stacked")
+		print(status.id, " effect duration stacked")
 		return
-	
-	#if status itself is stackable, stack it
+
+	# If intensity stackable
 	if status.stack_type == Status.StackType.INTENSITY:
 		_get_status(status.id).stacks += status.stacks
-		print(status.id," effect stacked")
+		print(status.id, " effect stacked")
+
 
 
 func has_and_consume_status(id: String) -> bool:
@@ -66,6 +81,16 @@ func has_and_consume_status(id: String) -> bool:
 		remove_status(id)
 		return true
 	return false
+
+
+func clear_all_statuses() -> void:
+	for child in get_children():
+		if child is StatusUI:
+			child.queue_free()
+	if health_ui_status_container:
+		for child in health_ui_status_container.get_children():
+			if child is StatusUI:
+				child.queue_free()
 
 
 
@@ -117,6 +142,13 @@ func _on_mouse_exited() -> void:
 	Events.status_tooltip_hide_requested.emit()
 
 func remove_status(id: String) -> void:
+	# Remove from logic tree
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			status_ui.queue_free()
+
+	# Remove from visual container
+	if health_ui_status_container:
+		for status_ui: StatusUI in health_ui_status_container.get_children():
+			if status_ui.status.id == id:
+				status_ui.queue_free()

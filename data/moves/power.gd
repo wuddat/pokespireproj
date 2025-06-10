@@ -1,7 +1,7 @@
 extends Card
 
 
-func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, _battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var _base_damage = move_data.get("power" , 0)
 	

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Scaling" load_steps=2 format=3 uid="uid://bbi23q0wbw578"]
+
+[ext_resource type="Script" uid="uid://jirbw0t7g7vv" path="res://statuses/scaling_per_turn.gd" id="1_doryd"]
+
+[resource]
+script = ExtResource("1_doryd")
+id = "scaling"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+tooltip = ""
+metadata/_custom_type_script = "uid://breq3elxr1644"

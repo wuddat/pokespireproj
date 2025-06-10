@@ -11,15 +11,28 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
+var health_bar_ui: HealthBarUI
+var _queued_health_bar_ui: HealthBarUI = null
+
 
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
 	
+	if _queued_health_bar_ui != null:
+		set_health_bar_ui(_queued_health_bar_ui)
+		
 	##status effect testing
-	#status_handler.status_owner = self
-	#var status := preload("res://statuses/critical.tres")
-	#status_handler.add_status(status)
+	
+	var status := preload("res://statuses/scaling_per_turn.tres")
+	#var status1 := preload("res://statuses/attack_power.tres")
+	#var status2 := preload("res://statuses/exposed.tres")
+	#var status3 := preload("res://statuses/burned.tres")
+	status_handler.add_status(status)
+	#status_handler.add_status(status1)
+	#status_handler.add_status(status2)
+	#status_handler.add_status(status3)
+
 
 func start_of_turn():
 	#print(">>> START OF TURN CALLED FOR:", stats.species_id, "| Current Block:", stats.block)
@@ -56,7 +69,8 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
 	
-	var modified_block := modifier_handler.get_modified_value(block, mod_type)
+	#var modified_block := modifier_handler.get_modified_value(block, mod_type)
+	#print("MODIFIED BLOCK IS: ", modified_block)
 
 		
 	
@@ -65,7 +79,7 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	var up_position := start + Vector2(0, -10)
 	tween.tween_property(self, "position", up_position, 0.1)
 	tween.tween_property(self, "position", start, 0.1)
-	tween.tween_callback(stats.gain_block.bind(modified_block))
+	tween.tween_callback(stats.gain_block.bind(block))
 	tween.tween_interval(0.17)
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
@@ -88,6 +102,12 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 			
 	)
 
+func set_health_bar_ui(ui:HealthBarUI) -> void:
+	if is_inside_tree() and is_instance_valid(status_handler):
+		health_bar_ui = ui
+		status_handler.set_status_ui_container(ui.status_container)
+	else:
+		_queued_health_bar_ui = ui  # Delay until ready
 
 func _on_statuses_applied(type: Status.Type) -> void:
 	if type == Status.Type.START_OF_TURN:

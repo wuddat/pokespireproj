@@ -13,4 +13,5 @@ func execute(targets: Array[Node]) -> void:
 		else: 
 			if target.has_method("gain_block"):
 				target.gain_block(amount, receiver_mod_type)
+				print("block EFFECT script says the amount is: ", amount)
 				SFXPlayer.play(sound)

@@ -7,14 +7,15 @@
 [resource]
 script = ExtResource("1_h6c1m")
 character_name = "Squirtle"
-description = "Turtle water pokemon"
+description = "I like turtles!"
 portrait = ExtResource("1_77uey")
 frames = ExtResource("2_77uey")
 draftable_move_ids = Array[String]([])
 cards_per_turn = 4
 max_mana = 3
-starting_moves = Array[String](["tackle", "tackle", "tackle", "tackle"])
-starting_party = Array[String]([])
+starting_moves = Array[String](["poisonsting", "poisonsting", "poisonsting", "poisonsting", "poisonsting", "defensecurl", "defensecurl", "defensecurl", "defensecurl"])
+starting_items = Array[String](["pokeball", "pokeball"])
+starting_party = Array[String](["squirtle"])
 max_health = 36
 art = ExtResource("1_77uey")
 metadata/_custom_type_script = "uid://dswbye42ve1b5"

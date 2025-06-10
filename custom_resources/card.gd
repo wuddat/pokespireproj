@@ -60,7 +60,7 @@ func is_single_targeted() -> bool:
 	return target == Target.SINGLE_ENEMY
 
 
-func _get_targets(targets: Array[Node]) -> Array[Node]:
+func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) -> Array[Node]:
 	if not targets:
 		return []
 		
@@ -68,7 +68,7 @@ func _get_targets(targets: Array[Node]) -> Array[Node]:
 	
 	match target:
 		Target.SELF:
-			return tree.get_nodes_in_group("player")
+			return [battle_unit_owner]
 		Target.ALL_ENEMIES:
 			return tree.get_nodes_in_group("enemies")
 		Target.EVERYONE:
@@ -77,17 +77,22 @@ func _get_targets(targets: Array[Node]) -> Array[Node]:
 			return[]
 
 
-func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
+func play(
+	targets: Array[Node], 
+	char_stats: CharacterStats, 
+	modifiers: ModifierHandler,
+	battle_unit_owner: PokemonBattleUnit
+) -> void:
 	Events.card_played.emit(self)
 	char_stats.mana -= cost
 	
 	if is_single_targeted():
-		apply_effects(targets, modifiers)
+		apply_effects(targets, modifiers, battle_unit_owner)
 	else:
-		apply_effects(_get_targets(targets), modifiers)
+		apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
 
 
-func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
+func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, _battle_unit_owner: PokemonBattleUnit) -> void:
 	pass
 
 

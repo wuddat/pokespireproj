@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo7j0"]
 size = Vector2(36, 35)
 
-[node name="PokemonBattleUnit" type="Area2D" groups=["active_pokemon", "player"]]
+[node name="PokemonBattleUnit" type="Area2D" groups=["active_pokemon"]]
 collision_layer = 4
 script = ExtResource("1_6808p")
 
@@ -23,6 +23,7 @@ offset_top = 4.0
 offset_bottom = 52.0
 
 [node name="StatusHandler" parent="." instance=ExtResource("3_itayc")]
+visible = false
 offset_left = -28.0
 offset_top = -21.0
 offset_right = -28.0
