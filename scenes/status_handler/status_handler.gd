@@ -40,7 +40,7 @@ func apply_statuses_by_type(type:Status.Type) -> void:
 func add_status(status: Status) -> void:
 	var stackable := status.stack_type != Status.StackType.NONE
 
-	if not _has_status(status.id):
+	if not has_status(status.id):
 		var new_status_ui := STATUS_UI.instantiate() as StatusUI
 
 		#  LOGIC: Add to StatusHandler scene tree for status logic to work
@@ -77,7 +77,7 @@ func add_status(status: Status) -> void:
 
 
 func has_and_consume_status(id: String) -> bool:
-	if _has_status(id):
+	if has_status(id):
 		remove_status(id)
 		return true
 	return false
@@ -94,7 +94,7 @@ func clear_all_statuses() -> void:
 
 
 
-func _has_status(id: String) -> bool:
+func has_status(id: String) -> bool:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			return true

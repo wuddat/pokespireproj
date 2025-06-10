@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://7nvrul8eslvx"]
+
+[ext_resource type="Script" uid="uid://bbkro88cp3b02" path="res://scenes/shop/shop_pkmn.gd" id="1_dhfsf"]
+[ext_resource type="PackedScene" uid="uid://cpw38rx1au2ku" path="res://scenes/ui/pkmn_button.tscn" id="2_dhfsf"]
+[ext_resource type="Texture2D" uid="uid://d056agsiro50a" path="res://art/gold.png" id="3_fm50a"]
+
+[node name="ShopPkmn" type="VBoxContainer"]
+custom_minimum_size = Vector2(50, 93)
+offset_right = 50.0
+offset_bottom = 93.0
+theme_override_constants/separation = 17
+alignment = 1
+script = ExtResource("1_dhfsf")
+
+[node name="PkmnContainer" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PokemonSprite" parent="PkmnContainer" instance=ExtResource("2_dhfsf")]
+layout_mode = 2
+
+[node name="Price" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Price"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("3_fm50a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PriceLabel" type="Label" parent="Price"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "999"
+
+[node name="BuyButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 12)
+layout_mode = 2
+text = "Buy"
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

@@ -114,6 +114,13 @@ func _on_battle_room_entered(room: Room) -> void:
 	party_selector.in_battle = true
 
 
+func _on_shop_entered() -> void:
+	var shop  := _change_view(shopscene) as Shop
+	shop.char_stats = character
+	shop.run_stats = stats
+	shop.populate_shop()
+
+
 func _on_pokecenter_entered() -> void:
 	var pokecenter_scene: Pokecenter = _change_view(pokecenterscene) as Pokecenter
 	pokecenter_scene.char_stats = character
@@ -142,7 +149,7 @@ func _on_map_exited(room: Room) -> void:
 		Room.Type.POKECENTER:
 			_on_pokecenter_entered()
 		Room.Type.SHOP:
-			_change_view(shopscene)
+			_on_shop_entered()
 		Room.Type.BOSS:
 			_on_battle_room_entered(room)
 

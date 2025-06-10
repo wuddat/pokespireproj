@@ -55,11 +55,13 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
 	
-	if battle_unit_owner.status_handler.has_and_consume_status("critical"):
-		var dmg_dealt_mod := battle_unit_owner.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
-		if dmg_dealt_mod:
-			dmg_dealt_mod.remove_value("critical")
-			print("critical consumed")
+	if battle_unit_owner != null:
+		if battle_unit_owner.status_handler.has_status("critical"):
+			battle_unit_owner.status_handler.has_and_consume_status("critical")
+			var dmg_dealt_mod := battle_unit_owner.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
+			if dmg_dealt_mod:
+				dmg_dealt_mod.remove_value("critical")
+				print("critical consumed")
 
 	
 	#apply status effect if any to enemy

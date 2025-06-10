@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpw38rx1au2ku"]
+[gd_scene load_steps=3 format=3 uid="uid://cpw38rx1au2ku"]
 
 [ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="1_kbbcr"]
+[ext_resource type="Script" uid="uid://b7mq0y2jecbh0" path="res://scenes/ui/pkmn_button.gd" id="2_svwu3"]
 
 [node name="PokemonSprite" type="TextureButton"]
 offset_right = 37.0
 offset_bottom = 37.0
 texture_normal = ExtResource("1_kbbcr")
+script = ExtResource("2_svwu3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

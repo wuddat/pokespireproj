@@ -116,12 +116,12 @@ func do_turn() -> void:
 	stats.block = 0
 
 	# Check and process skip-related statuses first
-	if status_handler._has_status("flinched"):
+	if status_handler.has_status("flinched"):
 		print("Enemy flinched and will skip turn.")
 		status_handler.remove_status("flinched")
 		skip_turn = true
 	
-	if status_handler._has_status("catching"):
+	if status_handler.has_status("catching"):
 		print("%s is being caught, will skip turn." % self)
 		skip_turn = true
 	
@@ -155,7 +155,7 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 		func():
 			sprite_2d.material = null
 			
-			if stats.health <= 0 and status_handler._has_status("catching"):
+			if stats.health <= 0 and status_handler.has_status("catching"):
 				is_catchable = true
 				print("enemy was caught ", is_catchable)
 				print("Emitting captured signal with:", self.stats)
