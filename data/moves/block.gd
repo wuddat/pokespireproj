@@ -4,7 +4,7 @@ extends Card
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
+func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets) -> String:
 	var mod_block := player_modifiers.get_modified_value(base_power, Modifier.Type.BLOCK_GAINED)
 
 	return tooltip_text % mod_block

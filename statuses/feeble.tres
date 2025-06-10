@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://cp8eyxyi22q41"]
+[gd_resource type="Resource" script_class="FeebleStatus" load_steps=3 format=3 uid="uid://cp8eyxyi22q41"]
 
-[ext_resource type="Texture2D" uid="uid://couaqduv1c3u0" path="res://art/statuseffects/dread.png" id="1_6f63l"]
-[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_lw75y"]
+[ext_resource type="Texture2D" uid="uid://bqdll34u7vxxx" path="res://art/statuseffects/splash.png" id="1_6f63l"]
+[ext_resource type="Script" uid="uid://b3qj2wikmfcsn" path="res://statuses/feeble.gd" id="2_lw75y"]
 
 [resource]
 script = ExtResource("2_lw75y")

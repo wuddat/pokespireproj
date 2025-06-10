@@ -4,11 +4,24 @@ extends Card
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
+func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
 		var mod_dmg := player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
 		if enemy_modifiers:
 			mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
+		
+		# Check for conditional bonus
+		if bonus_damage_if_target_has_status != "":
+			for target in targets:
+				var handler = target.get_node_or_null("StatusHandler")
+				if handler:
+					var statuses = handler.get_statuses()
+					print("statuses on unit are: %s" % [statuses])
+					for status in statuses:
+						if status.id == bonus_damage_if_target_has_status:
+							mod_dmg *= bonus_damage_multiplier
+							break
+
 		
 		return tooltip_text % mod_dmg
 
@@ -21,16 +34,53 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		push_warning("No move data for card ID: %s" % id)
 		return
 	
+	var final_damage = base_damage
+
+# Check for conditional bonus
+	# Check for conditional bonus
+	if bonus_damage_if_target_has_status != "":
+		for target in targets:
+			var handler = target.get_node_or_null("StatusHandler")
+			if handler:
+				var statuses = handler.get_statuses()
+				print("statuses on unit are: %s" % [statuses])
+				for status in statuses:
+					if status.id == bonus_damage_if_target_has_status:
+						final_damage *= bonus_damage_multiplier
+						break
+
+	#damage to enemy
 	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(base_damage, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = modifiers.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
 	
+	if battle_unit_owner.status_handler.has_and_consume_status("critical"):
+		var dmg_dealt_mod := battle_unit_owner.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
+		if dmg_dealt_mod:
+			dmg_dealt_mod.remove_value("critical")
+			print("critical consumed")
+
 	
-	#apply status effect if any on card
+	#apply status effect if any to enemy
 	for status_effect in status_effects:
 		if status_effect:
 			var stat_effect := StatusEffect.new()
 			var status_to_apply := status_effect.duplicate()
 			stat_effect.status = status_to_apply
 			stat_effect.execute(targets)
+		
+	#user recoil damage if any
+	if self_damage > 0:
+		var self_dmg_effect := DamageEffect.new()
+		self_dmg_effect.amount = self_damage
+		self_dmg_effect.sound = null
+		self_dmg_effect.execute([battle_unit_owner])
+		
+	#status effects on user if any
+	for self_stat in self_status:
+		if self_stat:
+			var self_effect := StatusEffect.new()
+			var status_to_apply := self_stat.duplicate()
+			self_effect.status = status_to_apply
+			self_effect.execute([battle_unit_owner])

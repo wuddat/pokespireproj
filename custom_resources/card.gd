@@ -3,7 +3,7 @@ extends Resource
 
 enum Type {ATTACK, SKILL, POWER}
 enum Rarity {COMMON, UNCOMMON, RARE}
-enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
+enum Target {SELF, SINGLE_ENEMY, SINGLE_ALLY, ALL_ENEMIES, ALL_ALLIES, ALL, RANDOM_ENEMY}
 
 const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
@@ -16,20 +16,6 @@ const TYPE_COLORS := {
 	Card.Type.SKILL: Color.DARK_BLUE,
 	Card.Type.POWER: Color.PURPLE
 }
-
-#const STATUS_LOOKUP := {
-	#"attack_power": preload("res://statuses/attack_power.tres"),
-	#"burned": preload("res://statuses/burned.tres"),
-	#"catching": preload("res://statuses/catching.tres"),
-	#"despair": preload("res://statuses/despair.tres"),
-	#"enraged": preload("res://statuses/enraged.tres"),
-	#"exposed": preload("res://statuses/exposed.tres"),
-	#"flinched": preload("res://statuses/flinched.tres"),
-	#"poisoned": preload("res://statuses/poisoned.tres"),
-	#
-	#
-	#
-#}
 
 
 @export_group("Card Attributes")
@@ -54,25 +40,52 @@ var base_power: int
 
 @export_group("Card Effects")
 @export var status_effects: Array[Status]
+@export var self_damage: int = 0
+@export var self_status: Array[Status] = []
+@export var multiplay: int = 1
+@export var bonus_damage_if_target_has_status: String = ""
+@export var bonus_damage_multiplier: float = 1.0
+
+
+var random_targets = []
 
 
 func is_single_targeted() -> bool:
-	return target == Target.SINGLE_ENEMY
+	return target in [Target.SINGLE_ENEMY, Target.SINGLE_ALLY]
 
 
 func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) -> Array[Node]:
-	if not targets:
+	if not battle_unit_owner:
 		return []
 		
-	var tree := targets[0].get_tree()
+	var tree := battle_unit_owner.get_tree()
+	
+	var is_player := battle_unit_owner.is_in_group("active_pokemon")
+	var player_party := tree.get_nodes_in_group("active_pokemon")
+	var allies_group: Array[Node] = []
+	for pkmn in player_party:
+		if pkmn.stats.uid != battle_unit_owner.stats.uid:
+			allies_group.append(pkmn)
+	var enemy_group := tree.get_nodes_in_group("enemies")
 	
 	match target:
 		Target.SELF:
 			return [battle_unit_owner]
+		Target.SINGLE_ENEMY, Target.SINGLE_ALLY:
+			return targets
 		Target.ALL_ENEMIES:
-			return tree.get_nodes_in_group("enemies")
-		Target.EVERYONE:
-			return tree.get_nodes_in_group("player") + tree.get_nodes_in_group("enemies")
+			return enemy_group
+		Target.ALL_ALLIES:
+			return allies_group
+		Target.ALL:
+			return player_party + enemy_group
+		Target.RANDOM_ENEMY:
+			print("RANDOM_ENEMY group:", enemy_group)
+			if enemy_group.size() > 0:
+				var selected = enemy_group[randi() % enemy_group.size()]
+				print("Selected random enemy:", selected.name)
+				return [selected]
+			return []
 		_:
 			return[]
 
@@ -86,10 +99,19 @@ func play(
 	Events.card_played.emit(self)
 	char_stats.mana -= cost
 	
-	if is_single_targeted():
-		apply_effects(targets, modifiers, battle_unit_owner)
-	else:
-		apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
+	random_targets.clear()
+	if target == Target.RANDOM_ENEMY:
+		for i in multiplay:
+			random_targets.append(_get_targets([], battle_unit_owner))
+	
+	for i in multiplay:
+		if is_single_targeted():
+			if target == Target.RANDOM_ENEMY:
+				apply_effects(random_targets[i], modifiers, battle_unit_owner)
+			else:
+				apply_effects(targets, modifiers, battle_unit_owner)
+		else:
+			apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, _battle_unit_owner: PokemonBattleUnit) -> void:
@@ -100,7 +122,7 @@ func get_default_tooltip() -> String:
 	return tooltip_text
 
 
-func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers:ModifierHandler) -> String:
+func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers:ModifierHandler, _targets: Array[Node]) -> String:
 		return tooltip_text
 
 
@@ -115,6 +137,11 @@ func setup_from_data(data: Dictionary) -> void:
 	tooltip_text = data.get("description", "CardToolTipError")
 	var iconpath = data.get("icon_path", "res://art/arrow.png")
 	icon = load(iconpath)
+	multiplay = data.get("multiplay", 1)
+	self_damage = data.get("self_damage", 0)
+	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
+	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
+
 	
 
 	match data.get("category", "attack"):
@@ -128,12 +155,19 @@ func setup_from_data(data: Dictionary) -> void:
 	match data.get("target", "enemy"):
 		"self":
 			target = Target.SELF
-		"enemy":
+		"enemy", "single_enemy":
 			target = Target.SINGLE_ENEMY
+		"ally":
+			target = Target.SINGLE_ALLY
+		"allies", "all_allies":
+			target = Target.ALL_ALLIES
 		"all_enemies":
 			target = Target.ALL_ENEMIES
-		"everyone":
-			target = Target.EVERYONE
+		"all":
+			target = Target.ALL
+		"random_enemy":
+			target = Target.RANDOM_ENEMY
+		
 			
 	match data.get("rarity", "common"):
 		"common", "Common":
@@ -156,3 +190,10 @@ func setup_from_data(data: Dictionary) -> void:
 		
 		status_effects.clear()
 		status_effects.append_array(StatusData.get_status_effects_from_ids(typed_ids))
+	
+	self_status.clear()
+	if data.has("self_status"):
+		var raw_ids = data["self_status"]
+		var typed_ids = Utils.to_typed_string_array(raw_ids)
+		self_status.clear()
+		self_status.append_array(StatusData.get_status_effects_from_ids(typed_ids))

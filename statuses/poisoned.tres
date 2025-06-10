@@ -9,7 +9,7 @@ id = "poisoned"
 type = 1
 stack_type = 2
 can_expire = true
-duration = 2
+duration = 1
 stacks = 0
 icon = ExtResource("1_ajid8")
 tooltip = "[color=purple]POISONED:[/color]
