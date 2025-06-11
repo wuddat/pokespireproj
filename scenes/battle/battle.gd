@@ -18,17 +18,22 @@ extends Node2D
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var stat_ui_by_uid: Dictionary = {}
 
+var evolution_in_progress := false
+
+
 
 func _ready() -> void:
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
 	Events.enemy_turn_ended.connect(_on_enemy_turn_ended)
-	
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	Events.player_died.connect(_on_player_died)
 	Events.player_pokemon_switch_completed.connect(_update_stat_ui)
 	Events.player_pokemon_switch_requested.connect(_hide_switch_ui)
 	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
+	Events.evolution_triggered.connect(_on_evolution_triggered)
+	Events.evolution_completed.connect(_on_evolution_completed)
+
 	
 	
 	
@@ -110,9 +115,27 @@ func _update_pokemon_stats_ui(pkmn: PokemonStats, ui: HealthBarUI) -> void:
 
 
 func _on_enemies_child_order_changed() -> void:
+	print("enemies_child_order_changed signal received")
+	await get_tree().create_timer(1).timeout
+	print("evolution in progress is: ",evolution_in_progress)
 	if enemy_handler.get_child_count() == 0:
+		if evolution_in_progress:
+			print("🕐 Waiting for evolution to complete...")
+			var completed := false
+			Events.evolution_completed.connect(func(): completed = true, CONNECT_ONE_SHOT)
+			while not completed:
+				await get_tree().process_frame
 		MusicPlayer.play(music, true)
 		Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
+
+
+func _wait_for_evolution() -> void:
+	var timeout := 5.0
+	while evolution_in_progress and timeout > 0:
+		await get_tree().process_frame
+		timeout -= get_process_delta_time()
+
+
 
 
 func _on_enemy_turn_ended() -> void:
@@ -142,3 +165,40 @@ func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
 func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
 	if pkmn and pkmn.is_inside_tree():
 		pkmn.status_handler.clear_all_statuses()
+
+
+func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
+	if not is_instance_valid(pkmn): return
+
+	evolution_in_progress = true
+	print("Cutscene triggered, playing now")
+	await _play_evolution_cutscene(pkmn)
+	evolution_in_progress = false
+	print("Cutscene completed")
+	Events.evolution_completed.emit()
+
+
+func _on_evolution_completed():
+	evolution_in_progress = false
+	
+
+func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
+	print("pausing tree....")
+	get_tree().paused = true
+	print("loading animation...")
+	var evo_scene := preload("res://scenes/ui/evolution_animation.tscn").instantiate()
+	var evolved_species := pkmn.stats.get_evolved_species_id()
+	print("getting species id...")
+	print("id: ",evolved_species)
+	get_tree().root.add_child(evo_scene)
+	await get_tree().process_frame
+	
+	evo_scene.setup(pkmn.stats.species_id, evolved_species, pkmn.global_position)
+	pkmn.hide()
+	
+	await evo_scene.animation_completed
+	
+	pkmn.stats.evolve_to(evolved_species)
+	pkmn.update_pokemon()
+	pkmn.show()
+	get_tree().paused = false

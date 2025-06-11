@@ -195,11 +195,21 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 	for card in switched_pkmn_cards_to_add.cards:
 		character.draw_pile.add_card(card)
 	character.draw_pile.shuffle()
-	
+
+
+func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
+	hand.disable_hand()
+
+func _on_evolution_completed() -> void:
+	hand.enable_hand()
 
 func _establish_connections() -> void:
 	if not Events.card_played.is_connected(_on_card_played):
 		Events.card_played.connect(_on_card_played)
+	if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
+		Events.evolution_triggered.connect(_on_evolution_triggered)
+	if not Events.evolution_completed.is_connected(_on_evolution_completed):
+		Events.evolution_completed.connect(_on_evolution_completed)
 		
 	#if not Events.player_pokemon_start_status_applied.is_connected(_on_pokemon_start_status_applied):
 		#Events.player_pokemon_start_status_applied.connect(_on_pokemon_start_status_applied)

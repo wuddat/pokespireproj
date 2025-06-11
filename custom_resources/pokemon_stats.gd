@@ -1,7 +1,6 @@
 class_name PokemonStats
 extends Stats
 
-#TODO update to relevant pokemon stats per JSON
 @export var species_id: String
 @export var move_ids: Array[String] = []
 @export var type: Array[String] = []
@@ -10,10 +9,41 @@ extends Stats
 
 @export var evolves_to: String = ""
 @export var evolution_level: int = -1
-
-
 @export var current_exp: int = 0
 @export var level: int = 1
+
+func get_xp_for_next_level(level: int) -> int:
+	return 10 + health * 1.2
+
+func get_evolved_species_id() -> String:
+	return evolves_to
+
+func evolve_to(new_species_id: String):
+	var data := Pokedex.get_pokemon_data(new_species_id)
+	if data.is_empty():
+		push_error("Missing evolution data for: " + new_species_id)
+		return
+
+	species_id = new_species_id
+	art = load(data.get("sprite_path", "res://art/dottedline.png"))
+	icon = load(data.get("icon_path", "res://art/dottedline.png"))
+	max_health += 10
+	health = max_health
+	move_ids = Utils.to_typed_string_array(data.get("move_ids", []))
+	type = Utils.to_typed_string_array(data.get("type", []))
+
+func try_gain_exp_from(enemy: Enemy) -> bool:
+	var gained_exp := enemy.stats.max_health * 2
+	current_exp += gained_exp
+	var did_level := false
+	var level_threshold := await get_xp_for_next_level(level)
+
+	if current_exp >= level_threshold:
+		level += 1
+		max_health += level
+		health += level
+		did_level = true
+	return did_level
 
 
 static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
@@ -39,24 +69,3 @@ func get_draft_cards_from_type() -> Array[String]:
 			if not combined_moves.has(move_id):
 				combined_moves.append(move_id)
 	return combined_moves
-
-func get_xp_for_next_level(level: int) -> int:
-	return 10 + level * 10
-
-func get_evolved_species_id() -> String:
-	return evolves_to
-
-
-func evolve_to(new_species_id: String):
-	var data := Pokedex.get_pokemon_data(new_species_id)
-	if data.is_empty():
-		push_error("Missing evolution data for: " + new_species_id)
-		return
-
-	species_id = new_species_id
-	art = load(data.get("sprite_path", "res://art/dottedline.png"))
-	icon = load(data.get("icon_path", "res://art/dottedline.png"))
-	max_health += 10  # or use data.get("max_health") if it's defined
-	health = max_health
-	move_ids = Utils.to_typed_string_array(data.get("move_ids", []))
-	type = Utils.to_typed_string_array(data.get("type", []))

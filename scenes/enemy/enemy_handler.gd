@@ -2,10 +2,12 @@ class_name EnemyHandler
 extends Node2D
 
 @onready var right_panel: VBoxContainer = $"../StatUI/RightPanel"
+@onready var party_handler: PartyHandler = $"../PartyHandler"
 
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var acting_enemies: Array[Enemy] = []
 var caught_pokemon: Array[PokemonStats] = []
+
 
 
 func _ready() -> void:
@@ -14,7 +16,6 @@ func _ready() -> void:
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)
 	Events.player_hand_discarded.connect(_on_player_hand_drawn)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
-	
 
 func setup_enemies(battle_stats: BattleStats) -> void:
 	if not battle_stats:
@@ -86,6 +87,14 @@ func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 
 
 func _on_enemy_fainted(enemy: Enemy) -> void:
+	print("Enemy fainted: ", enemy.stats.species_id)
+	
+	var battling_pokemon := party_handler.get_active_pokemon_nodes()
+	if battling_pokemon:
+		for battler in battling_pokemon:
+			if battler.has_method("on_enemy_defeated"):
+				battler.on_enemy_defeated(enemy)
+	
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)
 	

@@ -31,6 +31,10 @@ func disable_hand() -> void:
 	for card in get_children():
 		card.disabled = true
 
+func enable_hand() -> void:
+	for card in get_children():
+		card.disabled = false
+
 
 func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	child.disabled = true

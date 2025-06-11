@@ -1,133 +1,232 @@
 {
-  "pokemon": {
-	"bulbasaur": {
-	  "name": "Bulbasaur",
-	  "species_id": "bulbasaur",
-	  "sprite_path": "res://art/sprites/1.png",
-	  "type": ["grass"],
-	  "icon_path": "res://art/sprites/icons/1.png",
-	  "max_health": 30,
-	  "move_ids": ["razorleaf", "tackle", "synthesis"],
-	  "evolves_to": "ivysaur",
-	  "evolution_level": 2,
-	  "evolution_animation": "classic"
-	},
-	"ivysaur": {
-	  "name": "Ivysaur",
-	  "species_id": "ivysaur",
-	  "sprite_path": "res://art/sprites/2.png",
-	  "icon_path": "res://art/sprites/icons/2.png",
-	  "type": ["grass"],
-	  "max_health": 20,
-	  "move_ids": ["razorleaf", "swordsdance", "slam"]
-	},
-	"venusaur": {
-	  "name": "Venusaur",
-	  "species_id": "venusaur",
-	  "sprite_path": "res://art/sprites/3.png",
-	  "icon_path": "res://art/sprites/icons/3.png",
-	  "type": ["grass"],
-	  "max_health": 26,
-	  "move_ids": ["razorleaf", "seedbomb", "solarbeam"]
-	},
-	"charmander": {
-	  "name": "Charmander",
-	  "species_id": "charmander",
-	  "sprite_path": "res://art/sprites/4.png",
-	  "icon_path": "res://art/sprites/icons/4.png",
-	  "type": ["fire"],
-	  "max_health": 16,
-	  "move_ids": ["ember", "scratch", "quickattack"]
-	},
-	"charmeleon": {
-	  "name": "Charmeleon",
-	  "species_id": "charmeleon",
-	  "sprite_path": "res://art/sprites/5.png",
-	  "icon_path": "res://art/sprites/icons/5.png",
-	  "type": ["fire"],
-	  "max_health": 20,
-	  "move_ids": ["ember", "slam", "bodyslam"]
-	},
-	"charizard": {
-	  "name": "Charizard",
-	  "species_id": "charizard",
-	  "sprite_path": "res://art/sprites/6.png",
-	  "icon_path": "res://art/sprites/icons/6.png",
-	  "type": ["fire", "flying"],
-	  "max_health": 26,
-	  "move_ids": ["ember", "airslash", "laserfocus"]
-	},
-	"squirtle": {
-	  "name": "Squirtle",
-	  "species_id": "squirtle",
-	  "sprite_path": "res://art/sprites/7.png",
-	  "icon_path": "res://art/sprites/icons/7.png",
-	  "type": ["water"],
-	  "max_health": 16,
-	  "move_ids": ["tackle", "defensecurl", "withdraw"]
-	},
-	"wartortle": {
-	  "name": "Wartortle",
-	  "species_id": "wartortle",
-	  "sprite_path": "res://art/sprites/8.png",
-	  "icon_path": "res://art/sprites/icons/8.png",
-	  "type": ["water"],
-	  "max_health": 20,
-	  "move_ids": ["defensecurl", "aquatail", "irondefense"]
-	},
-	"blastoise": {
-	  "name": "Blastoise",
-	  "species_id": "blastoise",
-	  "sprite_path": "res://art/sprites/9.png",
-	  "icon_path": "res://art/sprites/icons/9.png",
-	  "type": ["water"],
-	  "max_health": 26,
-	  "move_ids": ["hydropump", "flashcannon", "irondefense"]
-	},
-	"beedrill": {
-	  "name": "Beedrill",
-	  "species_id": "beedrill",
-	  "sprite_path": "res://art/sprites/15.png",
-	  "icon_path": "res://art/sprites/icons/15.png",
-	  "type": ["bug", "poison"],
-	  "max_health": 20,
-	  "move_ids": ["bugbite", "poisonjab", "swordsdance"]
-	},
-	"butterfree": {
-	  "name": "Butterfree",
-	  "species_id": "butterfree",
-	  "sprite_path": "res://art/sprites/12.png",
-	  "icon_path": "res://art/sprites/icons/12.png",
-	  "type": ["bug", "flying"],
-	  "max_health": 20,
-	  "move_ids": ["airslash", "quiverdance", "poisonsting"]
-	},
-	"rattata": {
-	  "name": "Rattata",
-	  "species_id": "rattata",
-	  "sprite_path": "res://art/sprites/19.png",
-	  "icon_path": "res://art/sprites/icons/19.png",
-	  "type": ["normal"],
-	  "max_health": 14,
-	  "move_ids": ["quickattack", "scratch", "karatechop"]
-	},
-	"raticate": {
-	  "name": "Raticate",
-	  "species_id": "raticate",
-	  "sprite_path": "res://art/sprites/20.png",
-	  "icon_path": "res://art/sprites/icons/20.png",
-	  "type": ["normal"],
-	  "max_health": 20,
-	  "move_ids": ["quickattack", "highkick", "slam"]
-	},
-	"pidgeot": {
-	  "name": "Pidgeot",
-	  "species_id": "pidgeot",
-	  "sprite_path": "res://art/sprites/18.png",
-	  "icon_path": "res://art/sprites/icons/18.png",
-	  "type": ["normal", "flying"],
-	  "max_health": 20,
-	  "move_ids": ["airslash", "quickattack", "karatechop"]
+	"pokemon": {
+		"bulbasaur": {
+			"name": "Bulbasaur",
+			"species_id": "bulbasaur",
+			"sprite_path": "res://art/sprites/1.png",
+			"type": [
+				"grass"
+			],
+			"icon_path": "res://art/sprites/icons/1.png",
+			"max_health": 16,
+			"move_ids": [
+				"razorleaf",
+				"tackle",
+				"vinewhip"
+			],
+			"evolves_to": "ivysaur",
+			"evolution_level": 2
+		},
+		"ivysaur": {
+			"name": "Ivysaur",
+			"species_id": "ivysaur",
+			"sprite_path": "res://art/sprites/2.png",
+			"icon_path": "res://art/sprites/icons/2.png",
+			"type": [
+				"grass"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"razorleaf",
+				"swordsdance",
+				"slam"
+			],
+			"evolves_to": "venusaur",
+			"evolution_level": 4
+		},
+		"venusaur": {
+			"name": "Venusaur",
+			"species_id": "venusaur",
+			"sprite_path": "res://art/sprites/3.png",
+			"icon_path": "res://art/sprites/icons/3.png",
+			"type": [
+				"grass"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"razorleaf",
+				"seedbomb",
+				"solarbeam"
+			]
+		},
+		"charmander": {
+			"name": "Charmander",
+			"species_id": "charmander",
+			"sprite_path": "res://art/sprites/4.png",
+			"icon_path": "res://art/sprites/icons/4.png",
+			"type": [
+				"fire"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"ember",
+				"scratch",
+				"quickattack"
+			],
+			"evolves_to": "charmeleon",
+			"evolution_level": 2
+		},
+		"charmeleon": {
+			"name": "Charmeleon",
+			"species_id": "charmeleon",
+			"sprite_path": "res://art/sprites/5.png",
+			"icon_path": "res://art/sprites/icons/5.png",
+			"type": [
+				"fire"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"ember",
+				"slam",
+				"bodyslam"
+			],
+			"evolves_to": "charizard",
+			"evolution_level": 4
+		},
+		"charizard": {
+			"name": "Charizard",
+			"species_id": "charizard",
+			"sprite_path": "res://art/sprites/6.png",
+			"icon_path": "res://art/sprites/icons/6.png",
+			"type": [
+				"fire",
+				"flying"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"ember",
+				"airslash",
+				"laserfocus"
+			]
+		},
+		"squirtle": {
+			"name": "Squirtle",
+			"species_id": "squirtle",
+			"sprite_path": "res://art/sprites/7.png",
+			"icon_path": "res://art/sprites/icons/7.png",
+			"type": [
+				"water"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"tackle",
+				"defensecurl",
+				"withdraw"
+			],
+			"evolves_to": "wartortle",
+			"evolution_level": 2
+		},
+		"wartortle": {
+			"name": "Wartortle",
+			"species_id": "wartortle",
+			"sprite_path": "res://art/sprites/8.png",
+			"icon_path": "res://art/sprites/icons/8.png",
+			"type": [
+				"water"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"defensecurl",
+				"aquatail",
+				"irondefense"
+			],
+			"evolves_to": "blastoise",
+			"evolution_level": 4
+		},
+		"blastoise": {
+			"name": "Blastoise",
+			"species_id": "blastoise",
+			"sprite_path": "res://art/sprites/9.png",
+			"icon_path": "res://art/sprites/icons/9.png",
+			"type": [
+				"water"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"hydropump",
+				"flashcannon",
+				"irondefense"
+			]
+		},
+		"beedrill": {
+			"name": "Beedrill",
+			"species_id": "beedrill",
+			"sprite_path": "res://art/sprites/15.png",
+			"icon_path": "res://art/sprites/icons/15.png",
+			"type": [
+				"bug",
+				"poison"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"bugbite",
+				"poisonjab",
+				"swordsdance"
+			]
+		},
+		"butterfree": {
+			"name": "Butterfree",
+			"species_id": "butterfree",
+			"sprite_path": "res://art/sprites/12.png",
+			"icon_path": "res://art/sprites/icons/12.png",
+			"type": [
+				"bug",
+				"flying"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"airslash",
+				"quiverdance",
+				"poisonsting"
+			]
+		},
+		"rattata": {
+			"name": "Rattata",
+			"species_id": "rattata",
+			"sprite_path": "res://art/sprites/19.png",
+			"icon_path": "res://art/sprites/icons/19.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 16,
+			"move_ids": [
+				"quickattack",
+				"scratch",
+				"karatechop"
+			],
+			"evolves_to": "raticate",
+			"evolution_level": 3
+		},
+		"raticate": {
+			"name": "Raticate",
+			"species_id": "raticate",
+			"sprite_path": "res://art/sprites/20.png",
+			"icon_path": "res://art/sprites/icons/20.png",
+			"type": [
+				"normal"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"quickattack",
+				"highkick",
+				"slam"
+			]
+		},
+		"pidgeot": {
+			"name": "Pidgeot",
+			"species_id": "pidgeot",
+			"sprite_path": "res://art/sprites/18.png",
+			"icon_path": "res://art/sprites/icons/18.png",
+			"type": [
+				"normal",
+				"flying"
+			],
+			"max_health": 26,
+			"move_ids": [
+				"airslash",
+				"quickattack",
+				"karatechop"
+			]
+		}
 	}
-  }
 }

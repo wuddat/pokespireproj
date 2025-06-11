@@ -19,16 +19,16 @@ var _queued_health_bar_ui: HealthBarUI = null
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
-	if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
-		Events.enemy_fainted.connect(_on_enemy_fainted)
-	if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
-		Events.evolution_triggered.connect(_on_evolution_triggered)
+	
+	#if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
+		#Events.enemy_fainted.connect(_on_enemy_fainted)
+	#if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
+		#Events.evolution_triggered.connect(_on_evolution_triggered)
 	
 	if _queued_health_bar_ui != null:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
 	##status effect testing
-	
 	#var status := preload("res://statuses/critical.tres")
 	#var status1 := preload("res://statuses/attack_power.tres")
 	#var status2 := preload("res://statuses/exposed.tres")
@@ -50,20 +50,14 @@ func start_of_turn():
 
 func set_pokemon_stats(value: PokemonStats) -> void:
 	stats = value
-
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
-
 	update_pokemon()
 
 func update_pokemon() -> void:
-	if not stats is PokemonStats:
-		#print("Invalid stats on PokémonBattleUnit")
-		return
-	if not is_inside_tree():
-		await ready
-		
-	#print("Updating Pokémon: %s with HP %d" % [stats.species_id, stats.health])
+	if not stats is PokemonStats: return
+	if not is_inside_tree(): await ready
+	
 	sprite_2d.texture = stats.art
 	update_stats()
 
@@ -74,11 +68,6 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
 	
-	#var modified_block := modifier_handler.get_modified_value(block, mod_type)
-	#print("MODIFIED BLOCK IS: ", modified_block)
-
-		
-	
 	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	var start := self.global_position
 	var up_position := start + Vector2(0, -10)
@@ -88,8 +77,7 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	tween.tween_interval(0.17)
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
-	if stats.health <= 0:
-		return
+	if stats.health <= 0: return
 
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
@@ -104,7 +92,6 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 		if stats.health <= 0:
 			Events.party_pokemon_fainted.emit(self)
 			hide()
-			
 	)
 
 func set_health_bar_ui(ui:HealthBarUI) -> void:
@@ -121,45 +108,39 @@ func _on_statuses_applied(type: Status.Type) -> void:
 		Events.player_pokemon_end_status_applied.emit(self)
 
 
-func _on_enemy_fainted(enemy: Enemy) -> void:
-	var exp_reward = enemy.stats.max_health * 2
-	stats.current_exp += exp_reward
-	var exp_text:  CombatText = COMBAT_TEXT.instantiate()
-	self.add_child(exp_text)
-	exp_text.show_text("EXP: %s" % exp_reward)
-	await get_tree().create_timer(0.6).timeout
-	var level_up_exp = await stats.get_xp_for_next_level(stats.level)
-	print("xp to level up is", level_up_exp )
-	print("stats.current_exp is", stats.current_exp )
+func on_enemy_defeated(enemy: Enemy) -> void:
+	var exp := enemy.stats.max_health * 2
+	stats.current_exp += exp
+	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, exp])
+	
+
+	var text := COMBAT_TEXT.instantiate()
+	add_child(text)
+	text.show_text("EXP: %s" % exp)
+
+	await get_tree().create_timer(0.4).timeout
+
+	var level_up_exp := await stats.get_xp_for_next_level(stats.level)
+	print("level_up_exp: ", level_up_exp)
+	
 	if stats.current_exp >= level_up_exp:
 		stats.level += 1
+		print("Leveling up!: ", stats.level)
 		stats.max_health += stats.level
 		stats.health += stats.level
-		var level_up_text:  CombatText = COMBAT_TEXT.instantiate()
-		self.add_child(level_up_text)
-		level_up_text.show_text("LEVEL UP!")
-		print("%s LEVEL UP to: %s" % [stats.species_id, stats.level] )
-	if stats.level == stats.evolution_level:
-		Events.evolution_triggered.emit(self)
 
-func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
-	await get_tree().create_timer(0.5).timeout
-	await start_evolution_cutscene(pkmn)
+		var level_text := COMBAT_TEXT.instantiate()
+		add_child(level_text)
+		level_text.show_text("LEVEL UP!")
 
+		if stats.level == stats.evolution_level:
+			print("Evolution TRIGGERED")
+			Events.evolution_triggered.emit(self)
 
-func start_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
-	get_tree().paused = true
-
-	var evolution_scene := preload("res://scenes/ui/evolution_animation.tscn").instantiate()
-	var evolved_species := stats.get_evolved_species_id()
-	get_tree().root.add_child(evolution_scene)
-	await get_tree().process_frame  
-	evolution_scene.setup(stats.species_id, evolved_species, global_position)
-	hide()
-	await evolution_scene.animation_completed
-
-	stats.evolve_to(evolved_species)
-	update_pokemon()  # this updates the sprite/art based on new stats
-	show()
-	get_tree().paused = false
-	Events.evolution_completed.emit()
+	await get_tree().process_frame  # Let evolution trigger finish
+	if get_parent().has_node("EnemyHandler"):
+		var enemy_handler = get_parent().get_node("EnemyHandler")
+		if enemy_handler.get_child_count() == 0:
+			await get_tree().process_frame
+			await get_tree().create_timer(0.2).timeout
+			Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
