@@ -9,6 +9,7 @@ func execute(targets: Array[Node]) -> void:
 		if not target:
 			continue
 		if target is Enemy or target is Player or target is PokemonBattleUnit:
-			target.status_handler.add_status(status)
+			var unique_status = status.duplicate()
+			target.status_handler.add_status(unique_status)
 			SFXPlayer.play(sound)
-			print("%s applied" % status)
+			print("%s applied to %s" % [status.id, target.stats.species_id])
