@@ -37,6 +37,8 @@ signal player_pokemon_end_status_applied(pokemon: PokemonBattleUnit)
 signal added_pkmn_to_party(pokemon: PokemonBattleUnit)
 signal player_pokemon_switch_requested(uid_out: String, uid_in: String)
 signal player_pokemon_switch_completed(pkmn: PokemonStats)
+signal evolution_triggered(pkmn: PokemonStats)
+signal evolution_completed
 
 #Map-related Events
 signal map_exited(room: Room)

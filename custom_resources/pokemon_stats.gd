@@ -8,6 +8,10 @@ extends Stats
 @export var draft_pool: Array[String] = []
 @export var is_battling: bool = false
 
+@export var evolves_to: String = ""
+@export var evolution_level: int = -1
+
+
 @export var current_exp: int = 0
 @export var level: int = 1
 
@@ -38,3 +42,21 @@ func get_draft_cards_from_type() -> Array[String]:
 
 func get_xp_for_next_level(level: int) -> int:
 	return 10 + level * 10
+
+func get_evolved_species_id() -> String:
+	return evolves_to
+
+
+func evolve_to(new_species_id: String):
+	var data := Pokedex.get_pokemon_data(new_species_id)
+	if data.is_empty():
+		push_error("Missing evolution data for: " + new_species_id)
+		return
+
+	species_id = new_species_id
+	art = load(data.get("sprite_path", "res://art/dottedline.png"))
+	icon = load(data.get("icon_path", "res://art/dottedline.png"))
+	max_health += 10  # or use data.get("max_health") if it's defined
+	health = max_health
+	move_ids = Utils.to_typed_string_array(data.get("move_ids", []))
+	type = Utils.to_typed_string_array(data.get("type", []))

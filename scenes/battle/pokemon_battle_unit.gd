@@ -21,6 +21,8 @@ func _ready() -> void:
 	status_handler.statuses_applied.connect(_on_statuses_applied)
 	if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
 		Events.enemy_fainted.connect(_on_enemy_fainted)
+	if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
+		Events.evolution_triggered.connect(_on_evolution_triggered)
 	
 	if _queued_health_bar_ui != null:
 		set_health_bar_ui(_queued_health_bar_ui)
@@ -126,7 +128,9 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	self.add_child(exp_text)
 	exp_text.show_text("EXP: %s" % exp_reward)
 	await get_tree().create_timer(0.6).timeout
-	var level_up_exp = stats.get_xp_for_next_level(stats.level)
+	var level_up_exp = await stats.get_xp_for_next_level(stats.level)
+	print("xp to level up is", level_up_exp )
+	print("stats.current_exp is", stats.current_exp )
 	if stats.current_exp >= level_up_exp:
 		stats.level += 1
 		stats.max_health += stats.level
@@ -135,3 +139,27 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		self.add_child(level_up_text)
 		level_up_text.show_text("LEVEL UP!")
 		print("%s LEVEL UP to: %s" % [stats.species_id, stats.level] )
+	if stats.level == stats.evolution_level:
+		Events.evolution_triggered.emit(self)
+
+func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
+	await get_tree().create_timer(0.5).timeout
+	await start_evolution_cutscene(pkmn)
+
+
+func start_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
+	get_tree().paused = true
+
+	var evolution_scene := preload("res://scenes/ui/evolution_animation.tscn").instantiate()
+	var evolved_species := stats.get_evolved_species_id()
+	get_tree().root.add_child(evolution_scene)
+	await get_tree().process_frame  
+	evolution_scene.setup(stats.species_id, evolved_species, global_position)
+	hide()
+	await evolution_scene.animation_completed
+
+	stats.evolve_to(evolved_species)
+	update_pokemon()  # this updates the sprite/art based on new stats
+	show()
+	get_tree().paused = false
+	Events.evolution_completed.emit()

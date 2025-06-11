@@ -84,6 +84,7 @@ func _setup_event_connections() -> void:
 	Events.added_pkmn_to_party.connect(_update_draftable_cards)
 	Events.party_pokemon_fainted.connect(_update_draftable_cards)
 	Events.party_pokemon_fainted.connect(_update_party_buttons)
+	Events.evolution_completed.connect(_on_evolution_completed)
 	
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
@@ -168,4 +169,7 @@ func _update_party_buttons() -> void:
 
 func _update_draftable_cards(pkmn: PokemonStats) -> void:
 	character.on_added_pkmn_to_party(pkmn)
+	character.update_draftable_cards()
+
+func _on_evolution_completed() -> void:
 	character.update_draftable_cards()

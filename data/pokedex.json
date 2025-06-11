@@ -7,7 +7,10 @@
 	  "type": ["grass"],
 	  "icon_path": "res://art/sprites/icons/1.png",
 	  "max_health": 30,
-	  "move_ids": ["razorleaf", "tackle", "synthesis"]
+	  "move_ids": ["razorleaf", "tackle", "synthesis"],
+	  "evolves_to": "ivysaur",
+	  "evolution_level": 2,
+	  "evolution_animation": "classic"
 	},
 	"ivysaur": {
 	  "name": "Ivysaur",

@@ -2,28 +2,6 @@ extends Node
 
 var pokedex = {}
 
-#var DRAFT_CARD_POOLS := {
-	#"normal":["Raichu", "tackle"],
-	#"fighting":["Raichu", "tackle"],
-	#"flying":["Raichu", "tackle"],
-	#"poison":["Raichu", "tackle"],
-	#"ground":["Raichu", "tackle"],
-	#"rock":["Raichu", "tackle"],
-	#"bug":["Raichu", "tackle"],
-	#"ghost":["Raichu", "tackle"],
-	#"steel":["Raichu", "tackle"],
-	#"fire":["Raichu", "tackle"],
-	#"water":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#"name":["Raichu", "tackle"],
-	#
-#}
-
 func _ready():
 	var file = FileAccess.open("res://data/pokedex.json",FileAccess.READ)
 	pokedex = JSON.parse_string(file.get_as_text())["pokemon"]
@@ -55,6 +33,9 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.art = load(data.get("sprite_path", "res://art/dottedline.png"))
 	pokemon.icon = load(data.get("icon_path", "res://art/dottedline.png"))
 	pokemon.uid = "pkmn_" + str(Time.get_unix_time_from_system())
+	pokemon.evolves_to = data.get("evolves_to", "")
+	pokemon.evolution_level = data.get("evolution_level", -1)
+
 	print("uid generated as: ", pokemon.uid)
 	
 	# WASH IT AND DRY IT BABY

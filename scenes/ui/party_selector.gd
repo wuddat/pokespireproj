@@ -39,6 +39,8 @@ func _ready() -> void:
 		Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 	if not Events.added_pkmn_to_party.is_connected(_on_party_pokemon_added):
 		Events.added_pkmn_to_party.connect(_on_party_pokemon_added)
+	if not Events.evolution_completed.is_connected(update_buttons):
+		Events.evolution_completed.connect(update_buttons)
 	update_buttons()
 
 

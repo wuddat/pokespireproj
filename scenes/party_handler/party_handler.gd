@@ -21,6 +21,7 @@ func _ready():
 
 
 
+
 func initialize_party_for_battle() -> void:
 	await get_tree().process_frame
 	if character_stats == null:

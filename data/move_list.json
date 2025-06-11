@@ -9,7 +9,7 @@
 	  "target": "enemy",
 	  "power": 12,
 	  "accuracy": 100,
-	  "cost": 2,
+	  "cost": 1,
 	  "status_effects": [
 		"flinched"
 	  ],
