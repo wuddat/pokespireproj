@@ -137,9 +137,7 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 		return
 	var new_pokemon_stats := PokemonStats.from_enemy_stats(stats)
 	var pkmn_to_add = Pokedex.create_pokemon_instance(new_pokemon_stats.species_id)
-	character_stats.current_party.append(pkmn_to_add)
-	print("added pkmn to party: ", pkmn_to_add.species_id)
-	Events.added_pkmn_to_party.emit()
+	Events.added_pkmn_to_party.emit(pkmn_to_add)
 
 
 func _on_back_button_pressed() -> void:

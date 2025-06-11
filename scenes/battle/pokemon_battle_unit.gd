@@ -24,11 +24,11 @@ func _ready() -> void:
 		
 	##status effect testing
 	
-	var status := preload("res://statuses/critical.tres")
+	#var status := preload("res://statuses/critical.tres")
 	#var status1 := preload("res://statuses/attack_power.tres")
 	#var status2 := preload("res://statuses/exposed.tres")
 	#var status3 := preload("res://statuses/burned.tres")
-	status_handler.add_status(status)
+	#status_handler.add_status(status)
 	#status_handler.add_status(status1)
 	#status_handler.add_status(status2)
 	#status_handler.add_status(status3)

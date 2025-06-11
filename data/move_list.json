@@ -1067,7 +1067,7 @@
 	  "id": "solarbeam",
 	  "category": "attack",
 	  "subtype": "all_enemies",
-	  "type": "normal",
+	  "type": "grass",
 	  "target": "all_enemies",
 	  "power": 30,
 	  "accuracy": 100,

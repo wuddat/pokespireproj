@@ -166,5 +166,6 @@ func _update_party_buttons() -> void:
 	character.check_if_all_party_fainted()
 
 
-func _update_draftable_cards() -> void:
+func _update_draftable_cards(pkmn: PokemonStats) -> void:
+	character.on_added_pkmn_to_party(pkmn)
 	character.update_draftable_cards()

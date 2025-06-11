@@ -34,7 +34,7 @@ signal pokemon_captured(stats: PokemonStats)
 signal party_pokemon_fainted(pokemon: PokemonBattleUnit)
 signal player_pokemon_start_status_applied(pokemon: PokemonBattleUnit)
 signal player_pokemon_end_status_applied(pokemon: PokemonBattleUnit)
-signal added_pkmn_to_party
+signal added_pkmn_to_party(pokemon: PokemonBattleUnit)
 signal player_pokemon_switch_requested(uid_out: String, uid_in: String)
 signal player_pokemon_switch_completed(pkmn: PokemonStats)
 

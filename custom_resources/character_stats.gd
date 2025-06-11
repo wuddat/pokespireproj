@@ -210,6 +210,38 @@ func update_draftable_cards() -> void:
 	draftable_cards = new_draft_deck
 
 
+func on_added_pkmn_to_party(pkmn: PokemonStats) -> void:
+	current_party.append(pkmn)
+	print("Caught Pokémon added to party: %s" % pkmn.species_id)
+
+	var base_cards := build_deck_from_pokemon(pkmn).cards
+	if base_cards.is_empty():
+		push_warning("No cards found for Pokémon: %s" % pkmn.species_id)
+		return
+
+	var result_cards: Array[Card] = []
+
+	while result_cards.size() < 10:
+		base_cards.shuffle()
+		for card in base_cards:
+			var new_card = card.duplicate()
+			
+			# Re-apply move data if available
+			var move_data = MoveData.moves.get(card.id)
+			if move_data and new_card.has_method("setup_from_data"):
+				new_card.setup_from_data(move_data)
+
+			result_cards.append(new_card)
+
+			if result_cards.size() >= 10:
+				break
+
+	for card in result_cards:
+		deck.add_card(card)
+
+
+
+
 func check_if_all_party_fainted() -> void:
 	for pkmn in current_party:
 		if pkmn.health > 0:

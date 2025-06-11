@@ -34,6 +34,9 @@ func populate_shop() -> void:
 func _generate_shop_cards() -> void:
 	var shop_card_array: Array[Card] = []
 	var available_cards := char_stats.draftable_cards.cards.duplicate(true)
+	available_cards = available_cards.filter(func(card: Card) -> bool:
+		return card.rarity != Card.Rarity.COMMON
+	)
 	available_cards.shuffle()
 	shop_card_array = available_cards.slice(0,5)
 	
@@ -86,7 +89,6 @@ func _on_shop_card_bought(card: Card, gold_cost: int) -> void:
 	_update_items()
 
 func _on_shop_pkmn_bought(pkmn: PokemonStats, gold_cost: int) -> void:
-	char_stats.current_party.append(pkmn)
 	run_stats.gold -= gold_cost
 	print("added pkmn to party: ", pkmn.species_id)
-	Events.added_pkmn_to_party.emit()
+	Events.added_pkmn_to_party.emit(pkmn)
