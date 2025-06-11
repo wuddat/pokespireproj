@@ -764,7 +764,7 @@
 	"poisonpowder": {
 	  "name": "Poison Powder",
 	  "id": "poisonpowder",
-	  "category": "attack",
+	  "category": "defense",
 	  "subtype": "all_enemies",
 	  "type": "poison",
 	  "target": "all_enemies",
@@ -1169,7 +1169,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["poisoned", "poisoned", "poisoned"],
+	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,

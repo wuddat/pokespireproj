@@ -2,6 +2,7 @@ class_name PokemonBattleUnit
 extends Node2D
 
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
+const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 
 @export var stats: PokemonStats : set = set_pokemon_stats
 @export var spawn_position: String
@@ -18,6 +19,8 @@ var _queued_health_bar_ui: HealthBarUI = null
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
+	if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
+		Events.enemy_fainted.connect(_on_enemy_fainted)
 	
 	if _queued_health_bar_ui != null:
 		set_health_bar_ui(_queued_health_bar_ui)
@@ -114,3 +117,21 @@ func _on_statuses_applied(type: Status.Type) -> void:
 		Events.player_pokemon_start_status_applied.emit(self)
 	elif type == Status.Type.END_OF_TURN:
 		Events.player_pokemon_end_status_applied.emit(self)
+
+
+func _on_enemy_fainted(enemy: Enemy) -> void:
+	var exp_reward = enemy.stats.max_health * 2
+	stats.current_exp += exp_reward
+	var exp_text:  CombatText = COMBAT_TEXT.instantiate()
+	self.add_child(exp_text)
+	exp_text.show_text("EXP: %s" % exp_reward)
+	await get_tree().create_timer(0.6).timeout
+	var level_up_exp = stats.get_xp_for_next_level(stats.level)
+	if stats.current_exp >= level_up_exp:
+		stats.level += 1
+		stats.max_health += stats.level
+		stats.health += stats.level
+		var level_up_text:  CombatText = COMBAT_TEXT.instantiate()
+		self.add_child(level_up_text)
+		level_up_text.show_text("LEVEL UP!")
+		print("%s LEVEL UP to: %s" % [stats.species_id, stats.level] )

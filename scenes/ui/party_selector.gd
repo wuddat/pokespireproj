@@ -37,6 +37,8 @@ func _ready() -> void:
 		Events.player_pokemon_switch_completed.connect(_on_pokemon_switch)
 	if not Events.party_pokemon_fainted.is_connected(_on_party_pokemon_fainted):
 		Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
+	if not Events.added_pkmn_to_party.is_connected(_on_party_pokemon_added):
+		Events.added_pkmn_to_party.connect(_on_party_pokemon_added)
 	update_buttons()
 
 
@@ -173,6 +175,8 @@ func _on_pokemon_switch(pkmn: PokemonStats) -> void:
 	sync_highlight_to_battling_pokemon()
 	update_buttons()
 
+func _on_party_pokemon_added(pkmn: PokemonStats) -> void:
+	update_buttons() 
 
 func _on_party_pokemon_fainted(unit: PokemonBattleUnit):
 	var uid = unit.stats.uid

@@ -8,6 +8,9 @@ extends Stats
 @export var draft_pool: Array[String] = []
 @export var is_battling: bool = false
 
+@export var current_exp: int = 0
+@export var level: int = 1
+
 
 static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
 	var new_stats := PokemonStats.new()
@@ -32,3 +35,6 @@ func get_draft_cards_from_type() -> Array[String]:
 			if not combined_moves.has(move_id):
 				combined_moves.append(move_id)
 	return combined_moves
+
+func get_xp_for_next_level(level: int) -> int:
+	return 10 + level * 10

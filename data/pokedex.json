@@ -6,7 +6,7 @@
 	  "sprite_path": "res://art/sprites/1.png",
 	  "type": ["grass"],
 	  "icon_path": "res://art/sprites/icons/1.png",
-	  "max_health": 16,
+	  "max_health": 30,
 	  "move_ids": ["razorleaf", "tackle", "synthesis"]
 	},
 	"ivysaur": {

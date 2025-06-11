@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://dixq55fwxr3b6"]
+
+[ext_resource type="Script" uid="uid://dtsxxriyutt4n" path="res://scenes/ui/combat_text_label.gd" id="1_cs3vn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnw6l"]
+font_size = 8
+
+[sub_resource type="Animation" id="Animation_m7kvm"]
+resource_name = "rise_and_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.225313, 0.217638),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:label_settings:font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.797924),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1o31j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:label_settings:font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qn4eb"]
+_data = {
+&"RESET": SubResource("Animation_1o31j"),
+&"rise_and_fade": SubResource("Animation_m7kvm")
+}
+
+[node name="CombatTextLabel" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = -29.0
+offset_top = -5.0
+offset_right = -29.0
+offset_bottom = -5.0
+script = ExtResource("1_cs3vn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_right = 68.0
+offset_bottom = 9.0
+text = "Exp Gained!"
+label_settings = SubResource("LabelSettings_tnw6l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qn4eb")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
