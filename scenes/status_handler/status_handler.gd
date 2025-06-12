@@ -81,8 +81,11 @@ func add_status(status: Status) -> void:
 
 	# If intensity stackable
 	if status.stack_type == Status.StackType.INTENSITY:
-		_get_status(status.id).stacks += status.stacks
+		var existing := _get_status(status.id)
+		existing.stacks += status.stacks
 		print(status.id, " effect stacked")
+		existing.apply_status(status_owner)
+		return
 
 
 
@@ -110,8 +113,15 @@ func has_status(id: String) -> bool:
 			return true
 			
 	return false
-	
-	
+
+
+func get_status_stacks(id: String) -> int:
+	var status := _get_status(id)
+	if status:
+		return status.stacks
+	return 0
+
+
 func _get_status(id: String) -> Status:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:

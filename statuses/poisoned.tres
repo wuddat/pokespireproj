@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_x0rus")
 id = "poisoned"
-type = 1
+type = 0
 stack_type = 2
 can_expire = true
 duration = 1

@@ -74,7 +74,7 @@ func _start_next_enemy_turn() -> void:
 		Events.enemy_turn_ended.emit()
 		return
 	
-	acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+	await acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
 func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:

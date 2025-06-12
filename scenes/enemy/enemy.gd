@@ -20,6 +20,7 @@ var current_action: EnemyAction : set = set_current_action
 var is_catchable: bool = false
 var is_caught: bool = false
 var skip_turn: bool = false
+var has_slept: bool = false
 
 func _ready():
 	await get_tree().process_frame
@@ -112,17 +113,20 @@ func update_intent() -> void:
 
 func do_turn() -> void:
 	stats.block = 0
-	skip_turn = false
+
+	print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
 
 	if status_handler.has_status("flinched"):
-		print("Enemy flinched and will skip turn.")
+		print("😬 Enemy flinched and will skip turn.")
 		status_handler.remove_status("flinched")
 		skip_turn = true
 	if status_handler.has_status("catching"):
-		print("%s is being caught, will skip turn." % self)
+		print("🎯 %s is being caught, will skip turn." % self)
 		skip_turn = true
+
 	if skip_turn:
-		print("Enemy skipping turn due to skip_turn flag.")
+		print("⛔️ Enemy skipping turn due to skip_turn flag.")
+		skip_turn = false  # Reset for next round
 		Events.enemy_action_completed.emit(self)
 		return
 
@@ -141,6 +145,7 @@ func do_turn() -> void:
 	current_action.update_intent_text()
 	intent_ui.update_intent(current_action.intent)
 	current_action.perform_action()
+	skip_turn = false
 
 
 
