@@ -21,3 +21,16 @@ func stop() -> void:
 	for player in get_children():
 		player = player as AudioStreamPlayer
 		player.stop()
+
+
+func pause() -> void:
+	for player in get_children():
+		player = player as AudioStreamPlayer
+		if player.playing:
+			player.stream_paused = true
+
+func resume() -> void:
+	for player in get_children():
+		player = player as AudioStreamPlayer
+		if player.stream_paused:
+			player.stream_paused = false

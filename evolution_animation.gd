@@ -8,6 +8,9 @@ signal animation_completed
 @onready var sprite_current_white: Sprite2D = %sprite_current_white
 @onready var sprite_evolved_white: Sprite2D = %sprite_evolved_white
 
+const EVOLUTION_FINISH = preload("res://art/music/evolution_finish.mp3")
+const EVOLUTION_START = preload("res://art/music/evolution_start.mp3")
+const EVO_DING_START = preload("res://art/music/evo_ding_start.mp3")
 
 var start_position: Vector2
 var from_texture: Texture2D
@@ -53,7 +56,11 @@ func setup(from_species: String, to_species: String, origin_position: Vector2):
 
 func animate(from_species: String, to_species: String):
 	print("🌀 Evolution animation starting...")
-
+	MusicPlayer.pause()
+	await SFXPlayer.play(EVO_DING_START, true)  
+	
+	
+	
 	var screen_center = Vector2(get_viewport().get_visible_rect().size / 2)
 	print("🌍 Screen center is:", screen_center)
 	print("📍 Start position is:", start_position)
@@ -84,7 +91,7 @@ func animate(from_species: String, to_species: String):
 	var pkmn_is_evolving_tween = create_tween()
 	pkmn_is_evolving_tween.tween_property(label, "text", "%s is evolving!" % from_species.capitalize() , 0.4)
 	await pkmn_is_evolving_tween.finished
-	
+	await SFXPlayer.play(EVOLUTION_START)
 	#hide original sprite
 	tween.tween_callback(func(): sprite_current.visible = false)
 	
@@ -95,9 +102,10 @@ func animate(from_species: String, to_species: String):
 	await play_flash_sequence()
 	sprite_current_white.visible = false
 	sprite_current.visible = false
-	sprite_evolved_white.visible = true
+	sprite_evolved_white.visible = false
 	sprite_evolved.visible = true
-	await get_tree().create_timer(0.2).timeout
+	SFXPlayer.play(EVOLUTION_FINISH, true)  
+	await get_tree().create_timer(0.5).timeout
 	
 	var fade_tween = create_tween()
 	fade_tween.tween_property(sprite_evolved_white, "modulate:a", 0.0, 0.6)	
@@ -113,7 +121,8 @@ func animate(from_species: String, to_species: String):
 	var return_tween := create_tween()
 	return_tween.tween_property(sprite_evolved, "global_position", start_position, 0.5).set_trans(Tween.TRANS_SINE)
 	await return_tween.finished
-
+	await get_tree().create_timer(0.5).timeout
+	MusicPlayer.resume()
 	print("🏁 Evolution animation complete.")
 	emit_signal("animation_completed")
 	queue_free()
@@ -127,7 +136,7 @@ func play_flash_sequence() -> void:
 	sprite_evolved_white.visible = true
 	sprite_evolved.visible = false
 	for i in range(flashes):
-		var wait_time = 1 / pow(1.4, i)
+		var wait_time = 1 / pow(1.2, i)
 		await get_tree().create_timer(wait_time).timeout
 
 		var show_current = i % 2 == 0
