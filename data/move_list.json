@@ -7,7 +7,7 @@
 	  "subtype": "single_target",
 	  "type": "flying",
 	  "target": "enemy",
-	  "power": 12,
+	  "power": 10,
 	  "accuracy": 100,
 	  "cost": 0,
 	  "status_effects": [
@@ -15,7 +15,8 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly [b]FLINCH[/b].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "Common",
+	  "multiplay": 1,
 	},
 	"acidspray": {
 	  "name": "Acid Spray",
@@ -213,6 +214,22 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]POISON[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "Common"
+	},
+	"confusion": {
+	  "name": "Confusion",
+	  "id": "confusion",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "psychic",
+	  "target": "enemy",
+	  "power": 12,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["confused"],
+	  "description": "[center]Deal [color=red]%s[/color] damage and possibly CONFUSE.[/center]",
+	  "icon_path": "res://art/tile_0107.png",
+	  "sound_path": "res://art/sounds/VineWhip2.wav",
+	  "rarity": "common"
 	},
 	"crosspoison": {
 	  "name": "Cross Poison",
@@ -1108,6 +1125,21 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
+	},
+	"supersonic": {
+	  "name": "Supersonic",
+	  "id": "supersonic",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "normal",
+	  "target": "enemy",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["confused"],
+	  "description": "[center]CONFUSE an enemy![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "uncommon"
 	},
 	"swagger": {
 	  "name": "Swagger",

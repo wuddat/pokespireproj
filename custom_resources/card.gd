@@ -112,6 +112,7 @@ func play(
 				apply_effects(targets, modifiers, battle_unit_owner)
 		else:
 			apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
+		await battle_unit_owner.get_tree().create_timer(0.5).timeout
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, _battle_unit_owner: PokemonBattleUnit) -> void:
