@@ -1,9 +1,11 @@
 class_name IntentUI
-extends HBoxContainer
+extends Control
 
 
-@onready var icon: TextureRect = $Icon
-@onready var label: Label = $Label
+@onready var icon: TextureRect = $HBoxContainer2/HBoxContainer/Icon
+@onready var label: Label = $HBoxContainer2/HBoxContainer/Label
+@onready var target: TextureRect = $HBoxContainer2/Target
+
 
 
 func update_intent(intent: Intent) -> void:
@@ -15,4 +17,7 @@ func update_intent(intent: Intent) -> void:
 	icon.visible = icon.texture != null
 	label.text = str(intent.current_text)
 	label.visible = intent.current_text.length() > 0
+	target.texture = intent.target
+	target.visible = target.texture != null
 	show()
+	

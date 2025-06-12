@@ -17,7 +17,7 @@ func set_status_ui_container(container: Node) -> void:
 	health_ui_status_container = container
 
 
-func apply_statuses_by_type(type:Status.Type) -> void:
+func apply_statuses_by_type(type: Status.Type) -> void:
 	if type == Status.Type.EVENT_BASED:
 		return
 	
@@ -28,13 +28,23 @@ func apply_statuses_by_type(type:Status.Type) -> void:
 	if status_queue.is_empty():
 		statuses_applied.emit(type)
 		return
-		
+
 	var tween := create_tween()
 	for status: Status in status_queue:
-		tween.tween_callback(status.apply_status.bind(status_owner))
+		tween.tween_callback(func():
+			status.apply_status(status_owner)
+			match status.type:
+				Status.Type.START_OF_TURN:
+					if status.has_method("on_start_of_turn"):
+						status.on_start_of_turn(status_owner)
+				Status.Type.END_OF_TURN:
+					if status.has_method("on_end_of_turn"):
+						status.on_end_of_turn(status_owner)
+		)
 		tween.tween_interval(STATUS_APPLY_INTERVAL)
-		
+
 	tween.finished.connect(func(): statuses_applied.emit(type))
+
 
 
 func add_status(status: Status) -> void:

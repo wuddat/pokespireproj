@@ -39,7 +39,7 @@ func perform_action() -> void:
 	else:
 		# Fallback to single target because we be error catching
 		if not is_instance_valid(target):
-			print("Invalid target detected. Attempting to retarget...")
+			#print("Invalid target detected. Attempting to retarget...")
 			if enemy and enemy.enemy_action_picker:
 				enemy.enemy_action_picker.select_valid_target()
 				target = enemy.enemy_action_picker.target
@@ -47,7 +47,7 @@ func perform_action() -> void:
 		if is_instance_valid(target):
 			targets_to_hit.append(target)
 		else:
-			print("Still no valid target. Skipping action.")
+			#print("Still no valid target. Skipping action.")
 			Events.enemy_action_completed.emit(enemy)
 			return
 
@@ -57,9 +57,21 @@ func update_intent_text() -> void:
 	if not is_instance_valid(target):
 		return
 
-	var target_pkmn := target as PokemonBattleUnit
+	intent.current_text = intent.base_text  # default fallback
+
+	if enemy and enemy.status_handler.has_status("confused"):
+		#print("🌀 Setting intent.target to CONFUSED ??? for:", enemy.stats.species_id)
+		intent.target = preload("res://art/statuseffects/confused-effect.png")
+		# intent.icon remains untouched
+		intent.current_text = str(damage)
+		return
+
+
+	var target_pkmn := target
 	if not target_pkmn:
 		return
 
-	var modified_dmg := target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	#print("📦 Calculating damage for target:", target_pkmn.stats.species_id, "→", modified_dmg)
 	intent.current_text = intent.base_text % modified_dmg
+	intent.target = target_pkmn.stats.icon

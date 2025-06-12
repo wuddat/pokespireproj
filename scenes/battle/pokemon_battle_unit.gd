@@ -121,11 +121,11 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 	await get_tree().create_timer(0.4).timeout
 
 	var level_up_exp := await stats.get_xp_for_next_level(stats.level)
-	print("level_up_exp: ", level_up_exp)
+	#print("level_up_exp: ", level_up_exp)
 	
 	if stats.current_exp >= level_up_exp:
 		stats.level += 1
-		print("Leveling up!: ", stats.level)
+		#print("Leveling up!: ", stats.level)
 		stats.max_health += stats.level
 		stats.health += stats.level
 
@@ -134,7 +134,7 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		level_text.show_text("LEVEL UP!")
 
 		if stats.level == stats.evolution_level:
-			print("Evolution TRIGGERED")
+			#print("Evolution TRIGGERED")
 			Events.evolution_triggered.emit(self)
 
 	await get_tree().process_frame  # Let evolution trigger finish

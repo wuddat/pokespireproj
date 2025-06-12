@@ -12,4 +12,4 @@ func execute(targets: Array[Node]) -> void:
 		if target.has_method("take_damage"):
 			target.take_damage(amount, receiver_mod_type)
 			SFXPlayer.play(sound)
-			print("dealt %s damage." % amount)
+			print("dealt %s damage to %s." % [amount,target.stats.species_id])

@@ -889,6 +889,13 @@ script = ExtResource("1_p200p")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pmsee")
 
+[node name="IntentUI" parent="Sprite2D" instance=ExtResource("6_1wwld")]
+unique_name_in_owner = true
+offset_left = -58.5
+offset_top = -54.0
+offset_right = -6.5
+offset_bottom = -34.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_iygdd")
@@ -911,10 +918,6 @@ offset_left = -48.0
 offset_top = 17.0
 offset_right = 49.0
 offset_bottom = 33.0
-
-[node name="IntentUI" parent="." instance=ExtResource("6_1wwld")]
-offset_top = -37.0
-offset_bottom = -17.0
 
 [node name="StatusHandler" parent="." node_paths=PackedStringArray("status_owner") instance=ExtResource("7_nbhyu")]
 anchors_preset = 5

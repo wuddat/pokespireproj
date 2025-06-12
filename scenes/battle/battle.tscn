@@ -47,7 +47,7 @@ position = Vector2(256, 89)
 shape = SubResource("RectangleShape2D_7gynk")
 debug_color = Color(0, 0.6, 0.701961, 0.0666667)
 
-[node name="EnemyHandler" type="Node2D" parent="."]
+[node name="EnemyHandler" type="Node2D" parent="." groups=["enemy_handler"]]
 script = ExtResource("4_kd6yx")
 
 [node name="Rattata" parent="EnemyHandler" instance=ExtResource("2_oiw7q")]

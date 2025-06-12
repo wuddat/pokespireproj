@@ -6,6 +6,8 @@ extends Node
 
 @onready var total_weight := 0.0
 var target_pool: Array[PokemonBattleUnit] = []
+var confused_target_pool := []
+
 
 func _ready() -> void:
 	await wait_for_party_handler()
@@ -18,13 +20,33 @@ func wait_for_party_handler() -> void:
 	while get_tree().get_first_node_in_group("party_handler") == null:
 		await get_tree().process_frame
 
+
 func refresh_target_pool() -> void:
 	var party_handler = get_tree().get_first_node_in_group("party_handler")
-	if party_handler and party_handler.has_method("get_active_pokemon_nodes"):
+	var enemy_handler = get_tree().get_first_node_in_group("enemy_handler")
+	
+	target_pool.clear()
+	confused_target_pool.clear()
+	
+	if party_handler:
 		target_pool = party_handler.get_active_pokemon_nodes().filter(
 			func(unit): return is_instance_valid(unit) and unit.stats and unit.stats.health > 0
 		)
-		select_valid_target()
+		confused_target_pool += target_pool.map(func(n): return n as Node)
+		
+	if enemy_handler:
+		var enemies = enemy_handler.get_children().filter(
+			func(n): return n is Enemy and n.stats and n.stats.health > 0
+		)
+		confused_target_pool += enemies.map(func(n): return n as Node)
+		
+	confused_target_pool = confused_target_pool.filter(
+		func(n): return is_instance_valid(n)
+	)
+	#print("🎯 Refreshed target_pool:", target_pool.map(func(n): return n.name))
+	print("🤪 Refreshed confused_target_pool:", confused_target_pool.map(func(n): return n.name))
+	select_valid_target()
+
 
 func select_valid_target() -> void:
 	var valid_targets = target_pool.filter(
@@ -34,20 +56,37 @@ func select_valid_target() -> void:
 		target = null
 		for action in get_children():
 			action.target = null
-		print("No valid Pokémon to target!")
+		#print("🚫 No valid targets in target_pool!")
 		return
+	
 	target = valid_targets.pick_random()
+	#print("🎯 Selected valid target:", target.stats.species_id)
 	for action in get_children():
 		action.target = target
 
+
+func select_confused_target() -> void:
+	if confused_target_pool.is_empty():
+		target = null
+		#print("🤯 No valid targets in confused_target_pool!")
+	else:
+		refresh_target_pool()
+		target = confused_target_pool.pick_random()
+		print("🤪 CONFUSED! Selected target:", target.stats.species_id)
+	for action in get_children():
+		action.target = target
+
+
 func _on_pokemon_fainted(_fainted_pokemon: Node) -> void:
 	refresh_target_pool()
+
 
 func get_action() -> EnemyAction:
 	var action := get_first_conditional_action()
 	if action:
 		return action
 	return get_chance_based_action()
+
 
 func get_first_conditional_action() -> EnemyAction:
 	for child in get_children():
@@ -56,6 +95,7 @@ func get_first_conditional_action() -> EnemyAction:
 			return action
 	return null
 
+
 func get_chance_based_action() -> EnemyAction:
 	var roll := randf_range(0.0, total_weight)
 	for child in get_children():
@@ -63,6 +103,7 @@ func get_chance_based_action() -> EnemyAction:
 		if action and action.type == EnemyAction.Type.CHANCE_BASED and action.accumulated_weight > roll:
 			return action
 	return null
+
 
 func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void:
 	enemy = enemy_ref

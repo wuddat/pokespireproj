@@ -12,4 +12,4 @@ func _ready():
 		if not type_to_moves.has(move["type"]):
 			type_to_moves[move["type"]] = []
 		type_to_moves[move["type"]].append(move_id)
-	print(type_to_moves)
+	#print(type_to_moves)

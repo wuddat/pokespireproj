@@ -9,7 +9,8 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var arrow: Sprite2D = $Arrow
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
-@onready var intent_ui: IntentUI = $IntentUI as IntentUI
+@onready var intent_ui: IntentUI = %IntentUI as IntentUI
+
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
@@ -24,6 +25,7 @@ func _ready():
 	await get_tree().process_frame
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	
 	if stats and stats.species_id != "":
 		#print("READY: species_id = ", stats.species_id)
 		var poke_data = Pokedex.get_pokemon_data(stats.species_id)
@@ -36,11 +38,6 @@ func _ready():
 			print("No Pokedex data found for: " + stats.species_id)
 	else:
 		print("Stats or species_id not set yet.")
-	
-		#status effect testing
-	#status_handler.status_owner = self
-	#var status := preload("res://statuses/critical.tres")
-	#status_handler.add_status(status)
 
 
 func set_current_action(value: EnemyAction) -> void:
@@ -107,34 +104,42 @@ func update_enemy() -> void:
 
 
 func update_intent() -> void:
-	if current_action:
-		current_action.update_intent_text()
-		intent_ui.update_intent(current_action.intent)
+	if not current_action:
+		return
+	current_action.update_intent_text()
+	intent_ui.update_intent(current_action.intent)
 
 
 func do_turn() -> void:
 	stats.block = 0
+	skip_turn = false
 
-	# Check and process skip-related statuses first
 	if status_handler.has_status("flinched"):
 		print("Enemy flinched and will skip turn.")
 		status_handler.remove_status("flinched")
 		skip_turn = true
-	
 	if status_handler.has_status("catching"):
 		print("%s is being caught, will skip turn." % self)
 		skip_turn = true
-	
-	# If any reason caused a skip, end the turn here
 	if skip_turn:
 		print("Enemy skipping turn due to skip_turn flag.")
 		Events.enemy_action_completed.emit(self)
 		return
-	
-	# Otherwise, perform the action as usual
+
+	if enemy_action_picker:
+		if status_handler.has_status("confused"):
+			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
+			enemy_action_picker.select_confused_target()
+			
+		else:
+			print("✅ %s is NOT confused — selecting from target_pool" % stats.species_id)
+			enemy_action_picker.select_valid_target()
+
+	# Then perform action
 	if not current_action:
 		return
-	
+	current_action.update_intent_text()
+	intent_ui.update_intent(current_action.intent)
 	current_action.perform_action()
 
 

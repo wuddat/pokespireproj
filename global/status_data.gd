@@ -5,6 +5,7 @@ const STATUS_LOOKUP := {
 	"burned": preload("res://statuses/burned.tres"),
 	"catching": preload("res://statuses/catching.tres"),
 	"cleanse": preload("res://statuses/cleanse.tres"),
+	"confused": preload("res://statuses/confused.tres"),
 	"critical": preload("res://statuses/critical.tres"),
 	"despair": preload("res://statuses/despair.tres"),
 	"dexterity": preload("res://statuses/dexterity.tres"),
