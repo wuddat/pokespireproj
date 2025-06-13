@@ -17,6 +17,7 @@ pkmn_owner_uid = ""
 pkmn_owner_name = ""
 tooltip_text = ""
 status_effects = Array[ExtResource("2_s6ybl")]([])
+self_heal = 0
 self_damage = 0
 self_status = Array[ExtResource("2_s6ybl")]([])
 multiplay = 1

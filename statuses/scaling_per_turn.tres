@@ -10,5 +10,7 @@ stack_type = 0
 can_expire = false
 duration = 0
 stacks = 0
+max_stacks = 999
+max_duration = 999
 tooltip = ""
 metadata/_custom_type_script = "uid://breq3elxr1644"

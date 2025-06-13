@@ -11,6 +11,8 @@ stack_type = 2
 can_expire = true
 duration = 2
 stacks = 0
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_0rmh8")
 tooltip = "[color=sandybrown]EXPOSED:[/color]
 Receive 50% more damage."

@@ -11,6 +11,8 @@ stack_type = 1
 can_expire = false
 duration = 0
 stacks = 1
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_6f63l")
 tooltip = "[color=dimgray]FEEBLE:[/color]
 Reduce [color=blue][b]BLOCK[/b][/color] gained by %s."

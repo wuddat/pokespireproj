@@ -14,6 +14,8 @@ enum StackType {NONE, INTENSITY, DURATION}
 @export var can_expire: bool
 @export var duration: int : set = set_duration
 @export var stacks: int : set = set_stacks
+@export var max_stacks: int = 999
+@export var max_duration: int = 999
 
 @export_group("Status Visuals")
 @export var icon: Texture
@@ -33,12 +35,20 @@ func get_tooltip() -> String:
 
 
 func set_duration(new_duration: int) -> void:
-	duration = new_duration
+	if max_duration > 0:
+		duration = min(new_duration, max_duration)
+	else:
+		duration = new_duration
+
 	status_changed.emit()
 
 
 func set_stacks(new_stacks: int) -> void:
-	stacks = new_stacks
+	if max_stacks > 0:
+		stacks = min(new_stacks, max_stacks)
+	else:
+		stacks = new_stacks
+
 	status_changed.emit()
 	
 	

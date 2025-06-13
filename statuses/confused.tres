@@ -11,6 +11,8 @@ stack_type = 2
 can_expire = true
 duration = 2
 stacks = 0
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_fm4q2")
 tooltip = "[color=rosybrown]CONFUSE: [/color]
 This unit is confused and may attack the wrong target!"

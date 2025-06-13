@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackDown" load_steps=3 format=3 uid="uid://c5idcxcdkloms"]
+
+[ext_resource type="Texture2D" uid="uid://bqdll34u7vxxx" path="res://art/statuseffects/splash.png" id="1_m4vm0"]
+[ext_resource type="Script" uid="uid://cvg0hnbj8vi8u" path="res://statuses/attack_down.gd" id="2_sjxwl"]
+
+[resource]
+script = ExtResource("2_sjxwl")
+id = "attack_down"
+type = 2
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_m4vm0")
+tooltip = "[color=rosybrown]ATKDWN: [/color]
+Attacks deal [color=blue]%s[/color] LESS damage."
+metadata/_custom_type_script = "uid://breq3elxr1644"

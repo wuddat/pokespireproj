@@ -1,7 +1,7 @@
 class_name EnragedStatus
 extends Status
 
-const ATTACK_POWER_STATUS = preload("res://statuses/attack_power.tres")
+const ATTACK_POWER_STATUS = preload("res://statuses/attack_up.tres")
 
 var stacks_per_turn := 2
 

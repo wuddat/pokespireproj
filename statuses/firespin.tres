@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FireSpin" load_steps=3 format=3 uid="uid://cyua0b1afooc3"]
+
+[ext_resource type="Texture2D" uid="uid://we077unk7u3w" path="res://art/statuseffects/flame.png" id="1_pmeu8"]
+[ext_resource type="Script" uid="uid://d1fd5v52pnm2a" path="res://statuses/firespin.gd" id="2_jruo5"]
+
+[resource]
+script = ExtResource("2_jruo5")
+id = "firespin"
+type = 0
+stack_type = 2
+can_expire = true
+duration = 3
+stacks = 0
+max_stacks = 999
+max_duration = 3
+icon = ExtResource("1_pmeu8")
+tooltip = "[color=peru]FIRE SPIN:[/color]
+Apply +4 BURN to the target for 3 turns"
+metadata/_custom_type_script = "uid://breq3elxr1644"

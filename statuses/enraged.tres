@@ -11,6 +11,8 @@ stack_type = 0
 can_expire = false
 duration = 0
 stacks = 0
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_wdi67")
 tooltip = "[color=tomato]ENRAGED: [/color]
 At the start of turn, gain %s AtkPwr."

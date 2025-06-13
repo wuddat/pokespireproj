@@ -1,7 +1,7 @@
 class_name Scaling
 extends Status
 
-const ATK_PWR = preload("res://statuses/attack_power.tres")
+const ATK_PWR = preload("res://statuses/attack_up.tres")
 const DEX = preload("res://statuses/dexterity.tres")
 
 var stacks_per_turn := 2

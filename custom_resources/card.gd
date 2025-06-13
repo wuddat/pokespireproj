@@ -3,7 +3,7 @@ extends Resource
 
 enum Type {ATTACK, SKILL, POWER}
 enum Rarity {COMMON, UNCOMMON, RARE}
-enum Target {SELF, SINGLE_ENEMY, SINGLE_ALLY, ALL_ENEMIES, ALL_ALLIES, ALL, RANDOM_ENEMY}
+enum Target {SELF, SINGLE_ENEMY, SINGLE_ALLY, ALL_ENEMIES, ALL_ALLIES, ALL, RANDOM_ENEMY, SPLASH}
 
 const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
@@ -44,15 +44,18 @@ var base_power: int
 @export var self_damage: int = 0
 @export var self_status: Array[Status] = []
 @export var multiplay: int = 1
+@export var randomplay: int = 0
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
+@export var splash_damage: int = 0
+
 
 
 var random_targets = []
 
 
 func is_single_targeted() -> bool:
-	return target in [Target.SINGLE_ENEMY, Target.SINGLE_ALLY]
+	return target in [Target.SINGLE_ENEMY, Target.SINGLE_ALLY, Target.SPLASH]
 
 
 func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) -> Array[Node]:
@@ -68,6 +71,8 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		if pkmn.stats.uid != battle_unit_owner.stats.uid:
 			allies_group.append(pkmn)
 	var enemy_group := tree.get_nodes_in_group("enemies")
+	print("💥 enemy_group contents: ", enemy_group)
+	print("💥 target passed in: ", targets[0])
 	
 	match target:
 		Target.SELF:
@@ -80,6 +85,12 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 			return allies_group
 		Target.ALL:
 			return player_party + enemy_group
+		Target.SPLASH:
+			var splash_targets: Array[Node] = enemy_group.duplicate()
+			splash_targets = splash_targets.filter(func(enemy): return enemy != targets[0])
+			return targets + splash_targets
+
+			return targets + splash_targets
 		Target.RANDOM_ENEMY:
 			print("RANDOM_ENEMY group:", enemy_group)
 			if enemy_group.size() > 0:
@@ -104,11 +115,16 @@ func play(
 	if target == Target.RANDOM_ENEMY:
 		for i in multiplay:
 			random_targets.append(_get_targets([], battle_unit_owner))
-	
+
+	if randomplay > 0:
+		var random_attacks_amount = randi_range(2, randomplay)
+		multiplay = random_attacks_amount
 	for i in multiplay:
 		if is_single_targeted():
 			if target == Target.RANDOM_ENEMY:
 				apply_effects(random_targets[i], modifiers, battle_unit_owner)
+			elif target == Target.SPLASH:
+				apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
 			else:
 				apply_effects(targets, modifiers, battle_unit_owner)
 		else:
@@ -140,8 +156,10 @@ func setup_from_data(data: Dictionary) -> void:
 	var iconpath = data.get("icon_path", "res://art/arrow.png")
 	icon = load(iconpath)
 	multiplay = data.get("multiplay", 1)
+	randomplay = data.get("randomplay", 0)
 	self_damage = data.get("self_damage", 0)
 	self_heal = data.get("self_heal", 0)
+	splash_damage = data.get("splash_damage", 0)
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 
@@ -168,6 +186,8 @@ func setup_from_data(data: Dictionary) -> void:
 			target = Target.ALL_ENEMIES
 		"all":
 			target = Target.ALL
+		"splash":
+			target = Target.SPLASH
 		"random_enemy":
 			target = Target.RANDOM_ENEMY
 		

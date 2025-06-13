@@ -19,6 +19,7 @@ pkmn_owner_name = ""
 icon = ExtResource("1_gnc2q")
 tooltip_text = "power test"
 status_effects = Array[ExtResource("3_tw1pb")]([])
+self_heal = 0
 self_damage = 0
 self_status = Array[ExtResource("3_tw1pb")]([])
 multiplay = 1

@@ -7,9 +7,14 @@ func get_tooltip() -> String:
 
 func initialize_status(target: Node) -> void:
 	assert(target.get("modifier_handler"), "No modifiers on %s" % target)
-
+	check_and_apply_burn_mods(target)
+	
 
 func apply_status(target: Node) -> void:
+	check_and_apply_burn_mods(target)
+
+
+func check_and_apply_burn_mods(target: Node) -> void:
 	var dmg_taken_modifier: Modifier = target.modifier_handler.get_modifier(Modifier.Type.DMG_TAKEN)
 	assert(dmg_taken_modifier, "No dmg taken modifier on %s" % target)
 

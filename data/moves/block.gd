@@ -24,6 +24,13 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	block_effect.sound = sound
 	print("block targets are: ", [targets])
 	block_effect.execute(targets)
+	
+	if self_heal > 0:
+		var self_heal_effect := HealEffect.new()
+		self_heal_effect.amount = self_heal
+		#TODO add heal effect sfx
+		self_heal_effect.sound = null
+		self_heal_effect.execute([battle_unit_owner])
 
 	for status_effect in status_effects:
 		if status_effect:

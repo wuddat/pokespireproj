@@ -16,10 +16,10 @@ func _on_status_changed(target: Node) -> void:
 	var dmg_dealt_modifier: Modifier = target.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
 	assert(dmg_dealt_modifier, "No dmg dealt modifier on %s" % target)
 	
-	var atk_pwr_mod_value := dmg_dealt_modifier.get_value("attack_power")
+	var atk_pwr_mod_value := dmg_dealt_modifier.get_value("attack_up")
 	
 	if not atk_pwr_mod_value:
-		atk_pwr_mod_value = ModifierValue.create_new_modifier("attack_power", ModifierValue.Type.FLAT)
+		atk_pwr_mod_value = ModifierValue.create_new_modifier("attack_up", ModifierValue.Type.FLAT)
 	
 	atk_pwr_mod_value.flat_value = stacks
 	dmg_dealt_modifier.add_new_value(atk_pwr_mod_value)

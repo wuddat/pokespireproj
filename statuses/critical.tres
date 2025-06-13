@@ -11,6 +11,8 @@ stack_type = 2
 can_expire = true
 duration = 1
 stacks = 0
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_6cj1j")
 tooltip = "[color=goldenrod]CRITICAL:[/color]
 Receives [b]X2[/b] damage!"

@@ -29,12 +29,20 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var base_damage = base_power
+	var primary_target = targets[0]
+	var splash_targets: Array[Node]
 	
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)
 		return
+	print([targets])
+	if splash_damage > 0:
+		splash_targets = targets.slice(1)
+	
 	
 	var final_damage = base_damage
+	var final_splash = splash_damage
+	var total_damage_dealt = 0
 
 # Check for conditional bonus
 	# Check for conditional bonus
@@ -49,11 +57,20 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 						final_damage *= bonus_damage_multiplier
 						break
 
-	#damage to enemy
+	#Primary Hit
 	var damage_effect := DamageEffect.new()
 	damage_effect.amount = modifiers.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
-	damage_effect.execute(targets)
+	total_damage_dealt += damage_effect.amount
+	damage_effect.execute([primary_target])
+	
+	#Splash Hit
+	for splash_target in splash_targets:
+		var splash_effect := DamageEffect.new()
+		splash_effect.amount = modifiers.get_modified_value(final_splash, Modifier.Type.DMG_DEALT)
+		splash_effect.execute([splash_target])
+		total_damage_dealt += splash_effect.amount
+		print("the execute has been executed for splash")
 	
 	if battle_unit_owner != null:
 		if battle_unit_owner.status_handler.has_status("critical"):
@@ -64,7 +81,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 				print("critical consumed")
 
 	
-	#apply status effect if any to enemy
+	#apply status effect if any to ALL ENEMIES
 	for status_effect in status_effects:
 		if status_effect:
 			var stat_effect := StatusEffect.new()
@@ -78,11 +95,11 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		self_dmg_effect.amount = self_damage
 		self_dmg_effect.sound = null
 		self_dmg_effect.execute([battle_unit_owner])
+		total_damage_dealt += self_dmg_effect.amount
 	
-	print("self heal on card is: ",self_heal)
 	if self_heal > 0:
 		var self_heal_effect := HealEffect.new()
-		self_heal_effect.amount = self_heal
+		self_heal_effect.amount = total_damage_dealt/2
 		#TODO add heal effect sfx
 		self_heal_effect.sound = null
 		self_heal_effect.execute([battle_unit_owner])

@@ -11,6 +11,8 @@ stack_type = 1
 can_expire = false
 duration = 0
 stacks = 1
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_qyxwe")
 tooltip = "[color=orangered]BURNED: [/color]
 Receives +1 DMG per stack."
