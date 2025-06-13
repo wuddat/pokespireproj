@@ -67,8 +67,9 @@ func animate(from_species: String, to_species: String):
 	
 	var bg_tween = create_tween()
 	
+	
 	#fade in bg
-	bg_tween.tween_property(background, "modulate:a", 0.5, 0.4)
+	bg_tween.tween_property(background, "modulate:a", 0.8, 0.4)
 	
 
 	bg_tween.tween_property(label, "text", "What...?" % from_species.capitalize() , 0.4)
@@ -85,7 +86,7 @@ func animate(from_species: String, to_species: String):
 	tween.tween_property(sprite_current, "global_position", screen_center, 0.5).set_trans(Tween.TRANS_SINE)
 	
 	#fade in white
-	tween.tween_property(sprite_current_white, "modulate:a", 1.0, 0.6)
+	tween.tween_property(sprite_current_white, "modulate:a", 1.0, 0.2)
 	
 	#show text
 	var pkmn_is_evolving_tween = create_tween()
@@ -97,31 +98,35 @@ func animate(from_species: String, to_species: String):
 	
 	await tween.finished
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	await play_flash_sequence()
 	sprite_current_white.visible = false
 	sprite_current.visible = false
 	sprite_evolved_white.visible = false
 	sprite_evolved.visible = true
-	SFXPlayer.play(EVOLUTION_FINISH, true)  
-	await get_tree().create_timer(0.5).timeout
-	
-	var fade_tween = create_tween()
-	fade_tween.tween_property(sprite_evolved_white, "modulate:a", 0.0, 0.6)	
-	await fade_tween.finished
 	
 	var evolved_text_tween = create_tween()
-	evolved_text_tween.tween_property(label, "text", "%s evolved into %s!" % [from_species.capitalize(),to_species.capitalize()], 0.4)
+	evolved_text_tween.tween_property(label, "text", "%s evolved into %s!" % [from_species.capitalize(),to_species.capitalize()], 0.1)
 	await evolved_text_tween.finished
+	SFXPlayer.play(EVOLUTION_FINISH, true)  
+	await get_tree().create_timer(1).timeout
+	#
+	#var fade_tween = create_tween()
+	#fade_tween.tween_property(sprite_evolved_white, "modulate:a", 0.0, 0.6)	
+	#await fade_tween.finished
 	
-	await get_tree().create_timer(0.5).timeout
+
+	
+	await get_tree().create_timer(2).timeout
 	
 	#return to start
 	var return_tween := create_tween()
 	return_tween.tween_property(sprite_evolved, "global_position", start_position, 0.5).set_trans(Tween.TRANS_SINE)
 	await return_tween.finished
-	await get_tree().create_timer(0.5).timeout
+	var bg_tween_out = create_tween()
+	bg_tween_out.tween_property(background, "modulate:a",0, 0.4)
+	await bg_tween_out.finished
 	MusicPlayer.resume()
 	print("🏁 Evolution animation complete.")
 	emit_signal("animation_completed")
@@ -132,11 +137,13 @@ func animate(from_species: String, to_species: String):
 
 
 func play_flash_sequence() -> void:
-	var flashes = 25
-	sprite_evolved_white.visible = true
+	var flashes = 40
+	sprite_evolved_white.visible = false
 	sprite_evolved.visible = false
+	sprite_current_white.visible = true
+	sprite_current.visible = false
 	for i in range(flashes):
-		var wait_time = 1 / pow(1.2, i)
+		var wait_time = .4 / pow(1.07, i)
 		await get_tree().create_timer(wait_time).timeout
 
 		var show_current = i % 2 == 0

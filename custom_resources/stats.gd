@@ -32,7 +32,8 @@ func take_damage(damage : int) -> void:
 
 
 func heal(amount : int) -> void:
-	health += amount
+	health = min(health + amount, max_health)
+	stats_changed.emit()
 
 func gain_block(amount: int) -> void:
 	block += amount

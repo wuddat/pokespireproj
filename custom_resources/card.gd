@@ -40,6 +40,7 @@ var base_power: int
 
 @export_group("Card Effects")
 @export var status_effects: Array[Status]
+@export var self_heal: int
 @export var self_damage: int = 0
 @export var self_status: Array[Status] = []
 @export var multiplay: int = 1
@@ -112,7 +113,7 @@ func play(
 				apply_effects(targets, modifiers, battle_unit_owner)
 		else:
 			apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
-		await battle_unit_owner.get_tree().create_timer(0.5).timeout
+		
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, _battle_unit_owner: PokemonBattleUnit) -> void:
@@ -140,6 +141,7 @@ func setup_from_data(data: Dictionary) -> void:
 	icon = load(iconpath)
 	multiplay = data.get("multiplay", 1)
 	self_damage = data.get("self_damage", 0)
+	self_heal = data.get("self_heal", 0)
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 

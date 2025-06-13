@@ -78,6 +78,14 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		self_dmg_effect.amount = self_damage
 		self_dmg_effect.sound = null
 		self_dmg_effect.execute([battle_unit_owner])
+	
+	print("self heal on card is: ",self_heal)
+	if self_heal > 0:
+		var self_heal_effect := HealEffect.new()
+		self_heal_effect.amount = self_heal
+		#TODO add heal effect sfx
+		self_heal_effect.sound = null
+		self_heal_effect.execute([battle_unit_owner])
 		
 	#status effects on user if any
 	for self_stat in self_status:

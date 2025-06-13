@@ -81,18 +81,39 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
-
+	
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
 	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
-
+	
+	
+	if modified_damage > 0:
+		var dmg_text := COMBAT_TEXT.instantiate()
+		add_child(dmg_text)
+		dmg_text.show_text("%s" % modified_damage)
+	
 	tween.finished.connect(func():
 		sprite_2d.material = null
 		if stats.health <= 0:
 			Events.party_pokemon_fainted.emit(self)
 			hide()
 	)
+	
+func heal(amount: int) -> void:
+	if stats:
+		var health_before := stats.health
+		stats.heal(amount)
+		var actual_heal := stats.health - health_before
+		if actual_heal > 0:
+			var heal_text := COMBAT_TEXT.instantiate()
+			add_child(heal_text)
+			heal_text.show_text("+ %s HP" % amount, Color.GREEN)
+	
+	
+
+	# Optional: Add UI or feedback here
+	print("%s healed for %d!" % [stats.species_id, amount])
 
 func set_health_bar_ui(ui:HealthBarUI) -> void:
 	if is_inside_tree() and is_instance_valid(status_handler):

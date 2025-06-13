@@ -1,5 +1,22 @@
 {
   "moves": {
+	"absorb": {
+	  "name": "Absorb",
+	  "id": "absorb",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "grass",
+	  "target": "enemy",
+	  "power": 10,
+	  "accuracy": 100,
+	  "cost": 0,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage and [color=green]HEAL[/color] for HALF.[/center]",
+	  "icon_path": "res://art/heart.png",
+	  "rarity": "Common",
+	  "multiplay": 1,
+	  "self_heal": 5,
+	},
 	"airslash": {
 	  "name": "Air Slash",
 	  "id": "airslash",
@@ -1111,6 +1128,21 @@
 	  "self_status": ["exposed"],
 	  "rarity": "uncommon",
 	},
+	"sleeppowder": {
+	  "name": "Sleep Powder",
+	  "id": "sleeppowder",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "grass",
+	  "target": "enemy",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["sleep"],
+	  "description": "[center]Put an enemy to SLEEP![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "uncommon"
+	},
 	"surf": {
 	  "name": "Surf",
 	  "id": "surf",
@@ -1320,6 +1352,22 @@
 	  "description": "[center]Deals [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common"
+	},
+	"waterpulse": {
+	  "name": "Water Pulse",
+	  "id": "waterpulse",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "water",
+	  "target": "enemy",
+	  "power": 8,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["confuse"],
+	  "description": "[center]Deal [color=red]%s[/color] damage and possibly CONFUSE.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "self_damage": 0,
+	  "self_status": [],
 	},
 	"wingattack": {
 	  "name": "Wing Attack",
