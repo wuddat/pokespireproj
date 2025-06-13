@@ -665,6 +665,22 @@
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "uncommon"
 	},
+	"leechseed": {
+	  "name": "Leech Seed",
+	  "id": "leechseed",
+	  "category": "attack",
+	  "subtype": "debuff",
+	  "type": "grass",
+	  "target": "all_enemies",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 0,
+	  "status_effects": ["seeded"],
+	  "description": "[center]SEED enemies causing them to [color=green]HEAL[/color] your team each turn![/center]",
+	  "icon_path": "res://art/heart.png",
+	  "rarity": "Common",
+	  "multiplay": 1,
+	},
 	"leer": {
 	  "name": "Leer",
 	  "id": "leer",

@@ -20,6 +20,9 @@ func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
 	
+	if not Events.enemy_seeded.is_connected(_on_enemy_seeded_turn_start):
+		Events.enemy_seeded.connect(_on_enemy_seeded_turn_start)
+	
 	#if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
 		#Events.enemy_fainted.connect(_on_enemy_fainted)
 	#if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
@@ -128,6 +131,8 @@ func _on_statuses_applied(type: Status.Type) -> void:
 	elif type == Status.Type.END_OF_TURN:
 		Events.player_pokemon_end_status_applied.emit(self)
 
+func _on_enemy_seeded_turn_start(seeded: Status) -> void:
+	heal(seeded.heal_strength)
 
 func on_enemy_defeated(enemy: Enemy) -> void:
 	var exp := enemy.stats.max_health * 2

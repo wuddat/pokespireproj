@@ -113,7 +113,10 @@ func update_intent() -> void:
 
 func do_turn() -> void:
 	stats.block = 0
-
+	if status_handler.has_status("seeded"):
+		var seeded := status_handler.get_status("seeded")
+		Events.enemy_seeded.emit(seeded)
+		
 	print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
 
 	if status_handler.has_status("flinched"):

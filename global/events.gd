@@ -21,6 +21,7 @@ signal player_died
 signal enemy_action_completed(enemy: Enemy)
 signal enemy_turn_ended
 signal enemy_fainted(enemy: Enemy)
+signal enemy_seeded(seeded: Status)
 
 
 #Battle-related Events

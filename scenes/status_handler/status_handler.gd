@@ -75,13 +75,13 @@ func add_status(status: Status) -> void:
 
 	# If duration stackable
 	if status.can_expire and status.stack_type == Status.StackType.DURATION:
-		_get_status(status.id).duration += status.duration
+		get_status(status.id).duration += status.duration
 		print(status.id, " effect duration stacked")
 		return
 
 	# If intensity stackable
 	if status.stack_type == Status.StackType.INTENSITY:
-		var existing := _get_status(status.id)
+		var existing := get_status(status.id)
 		existing.stacks += status.stacks
 		print(status.id, " effect stacked")
 		existing.apply_status(status_owner)
@@ -116,13 +116,13 @@ func has_status(id: String) -> bool:
 
 
 func get_status_stacks(id: String) -> int:
-	var status := _get_status(id)
+	var status := get_status(id)
 	if status:
 		return status.stacks
 	return 0
 
 
-func _get_status(id: String) -> Status:
+func get_status(id: String) -> Status:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			return status_ui.status

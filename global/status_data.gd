@@ -15,6 +15,7 @@ const STATUS_LOOKUP := {
 	"feeble": preload("res://statuses/feeble.tres"),
 	"poisoned": preload("res://statuses/poisoned.tres"),
 	"scaling": preload("res://statuses/scaling_per_turn.tres"),
+	"seeded": preload("res://statuses/seeded.tres"),
 	"sleep": preload("res://statuses/sleep.tres"),
 }
 
