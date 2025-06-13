@@ -935,5 +935,11 @@ status_owner = NodePath("..")
 [node name="DamageTakenModifier" parent="ModifierHandler" instance=ExtResource("9_hvxgb")]
 type = 1
 
+[node name="BlockGainedModifier" parent="ModifierHandler" instance=ExtResource("9_hvxgb")]
+type = 4
+
+[node name="HealModifier" parent="ModifierHandler" instance=ExtResource("9_hvxgb")]
+type = 5
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

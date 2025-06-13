@@ -169,4 +169,4 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		if enemy_handler.get_child_count() == 0:
 			await get_tree().process_frame
 			await get_tree().create_timer(0.2).timeout
-			Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
+			#Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)

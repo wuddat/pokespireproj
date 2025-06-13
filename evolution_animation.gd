@@ -111,12 +111,6 @@ func animate(from_species: String, to_species: String):
 	await evolved_text_tween.finished
 	SFXPlayer.play(EVOLUTION_FINISH, true)  
 	await get_tree().create_timer(1).timeout
-	#
-	#var fade_tween = create_tween()
-	#fade_tween.tween_property(sprite_evolved_white, "modulate:a", 0.0, 0.6)	
-	#await fade_tween.finished
-	
-
 	
 	await get_tree().create_timer(2).timeout
 	
@@ -129,7 +123,7 @@ func animate(from_species: String, to_species: String):
 	await bg_tween_out.finished
 	MusicPlayer.resume()
 	print("🏁 Evolution animation complete.")
-	emit_signal("animation_completed")
+	animation_completed.emit()
 	queue_free()
 
 

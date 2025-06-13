@@ -8,7 +8,7 @@
 				"grass"
 			],
 			"icon_path": "res://art/sprites/icons/1.png",
-			"max_health": 50,
+			"max_health": 20,
 			"move_ids": [
 				"razorleaf",
 				"tackle",

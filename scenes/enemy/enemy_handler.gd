@@ -98,6 +98,8 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)
 	
+	child_order_changed.emit()
+	
 	if is_enemy_turn:
 		_start_next_enemy_turn()
 

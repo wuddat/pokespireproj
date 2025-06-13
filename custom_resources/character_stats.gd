@@ -198,7 +198,8 @@ func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:
 
 
 func update_draftable_cards() -> void:
-	draftable_cards.cards.clear()
+	if draftable_cards.cards.size() > 0:
+		draftable_cards.cards.clear()
 
 	var new_draft_deck := CardPile.new()
 	
