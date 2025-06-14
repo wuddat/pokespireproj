@@ -1,3 +1,4 @@
+#status_effect.gd
 class_name StatusEffect
 extends Effect
 

@@ -1,3 +1,4 @@
+#status_handler.gd
 class_name StatusHandler
 extends GridContainer
 

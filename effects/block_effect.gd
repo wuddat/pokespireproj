@@ -1,3 +1,4 @@
+#block_effect.gd
 class_name BlockEffect
 extends Effect
 

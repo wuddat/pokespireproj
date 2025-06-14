@@ -1,3 +1,4 @@
+#character_stats.gd
 class_name CharacterStats
 extends Stats
 

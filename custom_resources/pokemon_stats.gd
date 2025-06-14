@@ -1,3 +1,4 @@
+#pokemon_stats.gd
 class_name PokemonStats
 extends Stats
 

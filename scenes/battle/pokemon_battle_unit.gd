@@ -1,3 +1,4 @@
+#pokemon_battle_unit.gd
 class_name PokemonBattleUnit
 extends Node2D
 

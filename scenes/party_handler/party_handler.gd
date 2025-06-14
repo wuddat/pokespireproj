@@ -1,3 +1,4 @@
+#party_handler.gd
 class_name PartyHandler
 extends Node
 #152,192 location - test 284, 124

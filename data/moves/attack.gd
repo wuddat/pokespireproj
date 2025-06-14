@@ -1,3 +1,4 @@
+#attack.gd
 extends Card
 
 

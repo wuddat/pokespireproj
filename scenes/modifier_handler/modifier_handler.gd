@@ -1,3 +1,4 @@
+#modifier_handler.gd
 class_name ModifierHandler
 extends Node
 

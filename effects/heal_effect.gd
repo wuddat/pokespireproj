@@ -1,3 +1,4 @@
+#heal_effect.gd
 class_name HealEffect
 extends Effect
 

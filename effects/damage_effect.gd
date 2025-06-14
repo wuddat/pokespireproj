@@ -1,3 +1,4 @@
+#damage_effect.gd
 class_name DamageEffect
 extends Effect
 

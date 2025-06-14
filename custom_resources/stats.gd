@@ -1,3 +1,4 @@
+#stats.gd
 class_name Stats
 extends Resource
 

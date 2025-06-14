@@ -1,3 +1,4 @@
+#modifier_value.gd
 class_name ModifierValue
 extends Node
 

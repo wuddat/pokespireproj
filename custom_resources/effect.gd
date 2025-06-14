@@ -1,3 +1,4 @@
+#effect.gd
 class_name Effect
 extends RefCounted
 
