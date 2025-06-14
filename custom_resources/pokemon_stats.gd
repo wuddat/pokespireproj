@@ -31,6 +31,8 @@ func evolve_to(new_species_id: String):
 	health = max_health
 	move_ids = Utils.to_typed_string_array(data.get("move_ids", []))
 	type = Utils.to_typed_string_array(data.get("type", []))
+	evolves_to = data.get("evolves_to", "")
+	evolution_level = data.get("evolution_level", -1)
 
 func try_gain_exp_from(enemy: Enemy) -> bool:
 	var gained_exp := enemy.stats.max_health * 2

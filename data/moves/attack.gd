@@ -62,7 +62,10 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	damage_effect.amount = modifiers.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	total_damage_dealt += damage_effect.amount
-	damage_effect.execute([primary_target])
+	if targets.size() < 2:
+		damage_effect.execute([primary_target])
+	else: damage_effect.execute(targets)
+		
 	
 	#Splash Hit
 	for splash_target in splash_targets:

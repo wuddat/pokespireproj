@@ -23,10 +23,8 @@ func _ready() -> void:
 	if not Events.enemy_seeded.is_connected(_on_enemy_seeded_turn_start):
 		Events.enemy_seeded.connect(_on_enemy_seeded_turn_start)
 	
-	#if not Events.enemy_fainted.is_connected(_on_enemy_fainted):
-		#Events.enemy_fainted.connect(_on_enemy_fainted)
-	#if not Events.evolution_triggered.is_connected(_on_evolution_triggered):
-		#Events.evolution_triggered.connect(_on_evolution_triggered)
+	if not Events.evolution_completed.is_connected(_on_evolution_completed):
+		Events.evolution_completed.connect(_on_evolution_completed)
 	
 	if _queued_health_bar_ui != null:
 		set_health_bar_ui(_queued_health_bar_ui)
@@ -50,6 +48,8 @@ func start_of_turn():
 	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	#print(">>> END OF TURN LOGIC FOR:", stats.species_id, "| Block After Reset:", stats.block)
 
+func _on_evolution_completed() -> void:
+	Utils.print_resource(self.stats)
 
 func set_pokemon_stats(value: PokemonStats) -> void:
 	stats = value
@@ -169,4 +169,3 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		if enemy_handler.get_child_count() == 0:
 			await get_tree().process_frame
 			await get_tree().create_timer(0.2).timeout
-			#Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)

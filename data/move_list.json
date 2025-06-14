@@ -7,7 +7,7 @@
 	  "subtype": "single_target",
 	  "type": "grass",
 	  "target": "enemy",
-	  "power": 10,
+	  "power": 5,
 	  "accuracy": 100,
 	  "cost": 0,
 	  "status_effects": [],
@@ -24,9 +24,9 @@
 	  "subtype": "single_target",
 	  "type": "flying",
 	  "target": "enemy",
-	  "power": 10,
+	  "power": 12,
 	  "accuracy": 100,
-	  "cost": 0,
+	  "cost": 1,
 	  "status_effects": [
 		"flinched"
 	  ],
