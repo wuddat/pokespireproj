@@ -47,6 +47,7 @@ func set_current_action(value: EnemyAction) -> void:
 	update_intent()
 
 
+
 func set_enemy_stats(value: EnemyStats) -> void:
 	stats = value.create_instance()
 	
@@ -91,6 +92,8 @@ func update_action() -> void:
 	var new_conditional_action := enemy_action_picker.get_first_conditional_action()
 	if new_conditional_action and current_action != new_conditional_action:
 		current_action = new_conditional_action
+	
+	update_intent()
 
 
 func update_enemy() -> void:
@@ -106,19 +109,24 @@ func update_enemy() -> void:
 
 
 func update_intent() -> void:
+	await get_tree().process_frame
 	if not current_action:
+		#print("ENEMY.GD update_intent: No current_action for enemy %s" % self.name)
 		return
+	#print("ENEMY.GD target BEFORE intent update: %s" % current_action.target.stats.species_id)
 	current_action.update_intent_text()
+	#print("ENEMY.GD target AFTER intent update: %s" % current_action.target.stats.species_id)
 	intent_ui.update_intent(current_action.intent)
 
 
 func do_turn() -> void:
 	stats.block = 0
+	enemy_action_picker._on_party_shifted()
 	if status_handler.has_status("seeded"):
 		var seeded := status_handler.get_status("seeded")
 		Events.enemy_seeded.emit(seeded)
 		
-	print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
+	#print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
 
 	if status_handler.has_status("flinched"):
 		print("😬 Enemy flinched and will skip turn.")
@@ -138,10 +146,6 @@ func do_turn() -> void:
 		if status_handler.has_status("confused"):
 			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
 			enemy_action_picker.select_confused_target()
-			
-		else:
-			print("✅ %s is NOT confused — selecting from target_pool" % stats.species_id)
-			enemy_action_picker.select_valid_target()
 
 	# Then perform action
 	if not current_action:
@@ -149,6 +153,7 @@ func do_turn() -> void:
 	current_action.update_intent_text()
 	intent_ui.update_intent(current_action.intent)
 	current_action.perform_action()
+	enemy_action_picker.select_valid_target()
 	skip_turn = false
 
 

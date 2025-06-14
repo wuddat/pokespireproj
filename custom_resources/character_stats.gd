@@ -92,7 +92,8 @@ func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
 	var move_to_resource_map = {
 		"attack": preload("res://data/moves/attack.tres"),
 		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres")
+		"power": preload("res://data/moves/power.tres"),
+		"shift": preload("res://data/moves/shift.tres")
 	}
 	
 	var move_ids = starting_moves
@@ -130,7 +131,8 @@ func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
 	var move_to_resource_map = {
 		"attack": preload("res://data/moves/attack.tres"),
 		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres")
+		"power": preload("res://data/moves/power.tres"),
+		"shift": preload("res://data/moves/shift.tres")
 	}
 	
 	var move_ids = pkmn.move_ids
@@ -157,7 +159,8 @@ func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
 	var move_to_resource_map = {
 		"attack": preload("res://data/moves/attack.tres"),
 		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres")
+		"power": preload("res://data/moves/power.tres"),
+		"shift": preload("res://data/moves/shift.tres")
 	}
 
 	for move_id in move_ids:

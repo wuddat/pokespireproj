@@ -129,12 +129,25 @@ func exhaust_cards_on_faint(uid: String) -> void:
 		func(c): return c.pkmn_owner_uid != uid
 	)
 
+	for card_ui in hand.get_children():
+		if card_ui.card.pkmn_owner_uid == uid:
+			cards_to_exhaust.add_card(card_ui.card)
+			hand.discard_card(card_ui)
+			draw_card()
+			
+			
+
 	for card: Card in character.discard.cards:
 		if card.pkmn_owner_uid == uid:
 			cards_to_exhaust.add_card(card)
 	character.discard.cards = character.discard.cards.filter(
 		func(c): return c.pkmn_owner_uid != uid
 	)
+	
+	for card_ui in hand.get_children():
+		if card_ui.card.pkmn_owner_uid == uid:
+			cards_to_exhaust.add_card(card_ui.card)
+			hand.discard_card(card_ui)
 
 	for card in cards_to_exhaust.cards:
 		character.faint_pile[uid].add_card(card)

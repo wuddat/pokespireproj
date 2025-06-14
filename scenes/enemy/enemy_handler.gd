@@ -17,6 +17,7 @@ func _ready() -> void:
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)
 	Events.player_hand_discarded.connect(_on_player_hand_drawn)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
+	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 
 func setup_enemies(battle_stats: BattleStats) -> void:
 	if not battle_stats:
@@ -108,6 +109,11 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 func _on_enemy_action_completed(enemy: Enemy) -> void:
 	enemy.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 
+func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
+	if acting_enemies.size() > 0:
+		for enemy in acting_enemies:
+			if enemy.current_action.target == pkmn:
+				enemy.enemy_action_picker.select_valid_target()
 
 func _on_player_hand_drawn() -> void:
 	for enemy: Enemy in get_children():

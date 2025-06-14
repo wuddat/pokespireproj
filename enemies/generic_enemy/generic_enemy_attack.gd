@@ -1,3 +1,4 @@
+#generic_enemy_attack
 extends EnemyAction
 
 @export var damage := 2
@@ -39,7 +40,7 @@ func perform_action() -> void:
 	else:
 		# Fallback to single target because we be error catching
 		if not is_instance_valid(target):
-			#print("Invalid target detected. Attempting to retarget...")
+			print("Invalid target detected. Attempting to retarget...")
 			if enemy and enemy.enemy_action_picker:
 				enemy.enemy_action_picker.select_valid_target()
 				target = enemy.enemy_action_picker.target
@@ -47,10 +48,10 @@ func perform_action() -> void:
 		if is_instance_valid(target):
 			targets_to_hit.append(target)
 		else:
-			#print("Still no valid target. Skipping action.")
+			print("Still no valid target. Skipping action.")
 			Events.enemy_action_completed.emit(enemy)
 			return
-
+	print("Valid Target attacking.....")
 	animate_to_targets(targets_to_hit, 0, damage, status_effects)
 
 func update_intent_text() -> void:
@@ -75,3 +76,4 @@ func update_intent_text() -> void:
 	#print("📦 Calculating damage for target:", target_pkmn.stats.species_id, "→", modified_dmg)
 	intent.current_text = intent.base_text % modified_dmg
 	intent.target = target_pkmn.stats.icon
+	#print("🧪 GENERIC_ATTACK.GD current target in generic_enemy_attack: ", target_pkmn.stats.species_id)

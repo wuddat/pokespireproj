@@ -117,7 +117,7 @@ func _update_pokemon_stats_ui(pkmn: PokemonStats, ui: HealthBarUI) -> void:
 
 
 func _on_enemies_child_order_changed() -> void:
-	print("enemies_child_order_changed signal received")
+	#print("enemies_child_order_changed signal received")
 	await get_tree().create_timer(1).timeout
 	print("evolution in progress is: ", evolution_in_progress)
 

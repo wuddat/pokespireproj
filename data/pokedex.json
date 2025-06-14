@@ -45,8 +45,8 @@
 			"max_health": 26,
 			"move_ids": [
 				"razorleaf",
-				"seedbomb",
-				"solarbeam"
+				"tackle"
+				
 			]
 		},
 		"charmander": {
@@ -61,7 +61,7 @@
 			"move_ids": [
 				"ember",
 				"scratch",
-				"quickattack"
+				
 			],
 			"evolves_to": "charmeleon",
 			"evolution_level": 2

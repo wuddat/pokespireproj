@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BlockEffect" load_steps=2 format=3 uid="uid://dlmohi4g8my8d"]
+
+[ext_resource type="Script" uid="uid://de1cujq4e5rcq" path="res://data/moves/shift.gd" id="1_71c7b"]
+
+[resource]
+script = ExtResource("1_71c7b")
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

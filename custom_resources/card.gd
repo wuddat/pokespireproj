@@ -2,7 +2,7 @@
 class_name Card
 extends Resource
 
-enum Type {ATTACK, SKILL, POWER}
+enum Type {ATTACK, SKILL, POWER, SHIFT}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, SINGLE_ALLY, ALL_ENEMIES, ALL_ALLIES, ALL, RANDOM_ENEMY, SPLASH}
 
@@ -15,7 +15,8 @@ const RARITY_COLORS := {
 const TYPE_COLORS := {
 	Card.Type.ATTACK: Color.RED,
 	Card.Type.SKILL: Color.DARK_BLUE,
-	Card.Type.POWER: Color.PURPLE
+	Card.Type.POWER: Color.PURPLE,
+	Card.Type.SHIFT: Color.GREEN
 }
 
 
@@ -173,6 +174,8 @@ func setup_from_data(data: Dictionary) -> void:
 			type = Type.SKILL
 		"power","buff":
 			type = Type.POWER
+		"shift":
+			type = Type.SHIFT
 
 	match data.get("target", "enemy"):
 		"self":

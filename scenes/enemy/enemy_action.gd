@@ -15,6 +15,7 @@ var enemy: Enemy
 var target: Node2D
 var targets: Array[PokemonBattleUnit] = []
 
+
 var confused_icon = preload("res://art/statuseffects/confused-effect.png")
 
 
@@ -27,9 +28,21 @@ func perform_action() -> void:
 
 
 func update_intent_text() -> void:
+	print("ENEMY_ACTION.GD update_intent_text called for action:", self)
+	if not is_instance_valid(target):
+		return
+
 	intent.current_text = intent.base_text
 	if enemy.status_handler.has_status("confused"):
+		print("ENEMY_ACTION.GD 😵 Enemy is confused, setting confused icon.")
 		intent.icon = confused_icon
+		intent.current_text = str(0)  # or damage fallback
+		intent.target = confused_icon
+		return
+
+	var target_pkmn := target
+	print("ENEMY_ACTION.GD current target  in enemy_action.gd: ", target_pkmn.stats.species_id)
+
 
 func animate_to_targets(targets_to_hit: Array[Node], index: int, damage:int, status_effects:Array[Status]) -> void:
 	if index >= targets_to_hit.size():

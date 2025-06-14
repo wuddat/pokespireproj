@@ -8,12 +8,14 @@ extends Node
 @onready var total_weight := 0.0
 var target_pool: Array[PokemonBattleUnit] = []
 var confused_target_pool := []
+var current_target_pos: String
 
 
 func _ready() -> void:
 	await wait_for_party_handler()
 	_initialize_connections()
 	refresh_target_pool()
+	select_valid_target()
 
 
 func wait_for_party_handler() -> void:
@@ -30,7 +32,9 @@ func refresh_target_pool() -> void:
 	confused_target_pool.clear()
 	
 	if party_handler:
-		target_pool = party_handler.get_active_pokemon_nodes().filter(
+		target_pool = party_handler.get_active_pokemon_nodes()
+		target_pool.sort_custom(func(a, b): return a.spawn_position < b.spawn_position)
+		target_pool = target_pool.filter(
 			func(unit): return is_instance_valid(unit) and unit.stats and unit.stats.health > 0
 		)
 		confused_target_pool += target_pool.map(func(n): return n as Node)
@@ -44,9 +48,10 @@ func refresh_target_pool() -> void:
 	confused_target_pool = confused_target_pool.filter(
 		func(n): return is_instance_valid(n)
 	)
-	#print("🎯 Refreshed target_pool:", target_pool.map(func(n): return n.name))
-	print("🤪 Refreshed confused_target_pool:", confused_target_pool.map(func(n): return n.name))
-	select_valid_target()
+	
+	#print("🤪 Refreshed confused_target_pool:", confused_target_pool.map(func(n): return n.name))
+	
+
 
 
 func select_valid_target() -> void:
@@ -54,16 +59,44 @@ func select_valid_target() -> void:
 		func(pkmn): return is_instance_valid(pkmn) and pkmn.stats and pkmn.stats.health > 0
 	)
 	if valid_targets.is_empty():
+		#print("🚫 ENEMY_ACTION_PICKER.GD No valid targets found!")
 		target = null
 		for action in get_children():
 			action.target = null
-		#print("🚫 No valid targets in target_pool!")
 		return
 	
 	target = valid_targets.pick_random()
-	#print("🎯 Selected valid target:", target.stats.species_id)
+	current_target_pos = target.spawn_position
+	#print("🎯 ENEMY_ACTION_PICKER.GD Picker selected new valid target: %s" % target.stats.species_id)
+#
 	for action in get_children():
 		action.target = target
+		#print("ENEMY_ACTION_PICKER.GD Applied new target to action: %s" % action)
+#
+
+func _on_party_shifted() -> void:
+	refresh_target_pool()
+	for target in target_pool:
+		print("target_pool: ", target.stats.species_id)
+	var new_target: PokemonBattleUnit = null
+	print("current_target_pos is: ", current_target_pos)
+	
+	for target_candidate in target_pool:
+		if target_candidate.spawn_position == current_target_pos:
+			print("target candidate found its: ", target_candidate.stats.species_id)
+			new_target = target_candidate
+			break
+
+	if new_target:
+		print("🔄 _on_party_shifted: matched new target at position %s -> %s" % [current_target_pos, new_target.stats.species_id])
+		target = new_target
+		for action in get_children():
+			action.target = new_target
+			print("🎯 Updated action %s to new target: %s" % [action.name, new_target.stats.species_id])
+	else:
+		print("⚠️ _on_party_shifted: no target found for position %s" % current_target_pos)
+
+
 
 
 func select_confused_target() -> void:
@@ -73,14 +106,14 @@ func select_confused_target() -> void:
 	else:
 		refresh_target_pool()
 		target = confused_target_pool.pick_random()
-		print("🤪 CONFUSED! Selected target:", target.stats.species_id)
+		#print("🤪 CONFUSED! Selected target:", target.stats.species_id)
 	for action in get_children():
 		action.target = target
 
 
 func _on_pokemon_fainted(_fainted_pokemon: Node) -> void:
 	refresh_target_pool()
-
+	select_valid_target()
 
 func get_action() -> EnemyAction:
 	var action := get_first_conditional_action()
@@ -168,7 +201,7 @@ func _set_target(value: Node2D) -> void:
 
 func _on_pokemon_switch(pkmn: PokemonStats) -> void:
 	refresh_target_pool()
-	select_valid_target()
+	_on_party_shifted()
 
 func _initialize_connections() -> void:
 	if not Events.player_pokemon_switch_completed.is_connected(_on_pokemon_switch):
@@ -176,3 +209,6 @@ func _initialize_connections() -> void:
 		
 	if not Events.party_pokemon_fainted.is_connected(_on_pokemon_fainted):
 		Events.party_pokemon_fainted.connect(_on_pokemon_fainted)
+	
+	if not Events.party_shifted.is_connected(_on_party_shifted):
+		Events.party_shifted.connect(_on_party_shifted)

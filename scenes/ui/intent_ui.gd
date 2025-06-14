@@ -13,6 +13,9 @@ func update_intent(intent: Intent) -> void:
 		hide()
 		return
 	
+	#print("🧠 IntentUI.update_intent called with:", intent)
+	#print("📊 Text: %s | Icon: %s | Target: %s" % [intent.current_text, intent.icon, intent.target])
+
 	icon.texture = intent.icon
 	icon.visible = icon.texture != null
 	label.text = str(intent.current_text)
@@ -20,4 +23,5 @@ func update_intent(intent: Intent) -> void:
 	target.texture = intent.target
 	target.visible = target.texture != null
 	show()
+
 	

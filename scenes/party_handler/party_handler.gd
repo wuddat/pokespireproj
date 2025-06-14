@@ -94,6 +94,39 @@ func get_pkmn_by_uid(uid: String) -> PokemonBattleUnit:
 	return
 
 
+func shift_active_party() -> void:
+	var units := get_active_pokemon_nodes()
+	if units.size() < 2:
+		return
+
+	var positions := [POS_0, POS_1, POS_2]
+	var current_units: Array[PokemonBattleUnit] = []
+	for unit in units:
+		current_units.append(unit)
+
+	current_units.sort_custom(func(a, b): return a.spawn_position < b.spawn_position)
+	var new_order := current_units.duplicate()
+	new_order.push_front(new_order.pop_back())
+
+	for i in range(new_order.size()):
+		var unit = new_order[i]
+		unit.spawn_position = "POS_%d" % i
+
+		var new_position := Vector2.ZERO
+		match i:
+			0:
+				new_position = POS_0
+			1:
+				new_position = POS_1
+			2:
+				new_position = POS_2
+
+		# Animate to new position
+		var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(unit, "position", new_position, 0.25)
+
+
+
 func sync_battle_health_to_party_data() -> void:
 	if character_stats == null:
 		return

@@ -1,5 +1,21 @@
 {
   "moves": {
+	"shift": {
+	  "name": "shift",
+	  "id": "shift",
+	  "category": "shift",
+	  "subtype": "shift",
+	  "type": "grass",
+	  "target": "self",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 0,
+	  "status_effects": [],
+	  "description": "[center]shift.[/center]",
+	  "icon_path": "res://art/heart.png",
+	  "rarity": "Common",
+	  "multiplay": 1,
+	},
 	"absorb": {
 	  "name": "Absorb",
 	  "id": "absorb",

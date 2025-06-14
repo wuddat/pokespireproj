@@ -165,9 +165,9 @@ func get_selected_pokemon() -> Array[PokemonStats]:
 	for pkmn in char_stats.current_party:
 		if pkmn.uid in highlighted_in_bar_pkmn:
 			selected.append(pkmn)
-	print("get_selected_pokemon() returning:")
-	for p in selected:
-		print("- %s | UID: %s | HP: %d" % [p.species_id, p.uid, p.health])
+	#print("get_selected_pokemon() returning:")
+	#for p in selected:
+		#print("- %s | UID: %s | HP: %d" % [p.species_id, p.uid, p.health])
 	return selected
 
 
