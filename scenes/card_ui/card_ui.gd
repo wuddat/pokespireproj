@@ -48,8 +48,10 @@ func animate_to_position(new_position: Vector2, duration: float) -> void:
 func play() -> void:
 	if not card:
 		return
-		
-	card.play(targets, char_stats, player_pkmn_modifiers, battle_unit_owner)
+	
+	Events.card_play_initiated.emit()
+	await play_card_with_delay(card)
+	Events.card_play_completed.emit()
 	queue_free()
 
 
@@ -128,3 +130,34 @@ func _on_card_drag_or_aiming_ended(_card: CardUI) -> void:
 
 func _on_char_stats_changed() -> void:
 	playable = char_stats.card_playable(card)
+
+
+func play_card_with_delay(card: Card) -> void:
+	Events.card_played.emit(self)
+	char_stats.mana -= card.cost
+	card.random_targets.clear()
+
+	# Handle randomplay roll
+	if card.randomplay > 0:
+		card.multiplay = randi_range(2, card.randomplay)
+
+	# Pre-select random targets if needed
+	if card.target == Card.Target.RANDOM_ENEMY:
+		for i in range(card.multiplay):
+			card.random_targets.append(card._get_targets([], battle_unit_owner))
+
+	print("🔁 Playing card %s %s times..." % [card.name, card.multiplay])
+
+	# Play card with delays between
+	for i in range(card.multiplay):
+		if card.is_single_targeted():
+			if card.target == Card.Target.RANDOM_ENEMY:
+				card.apply_effects(card.random_targets[i], player_pkmn_modifiers, battle_unit_owner)
+			elif card.target == Card.Target.SPLASH:
+				card.apply_effects(card._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
+			else:
+				card.apply_effects(targets, player_pkmn_modifiers, battle_unit_owner)
+		else:
+			card.apply_effects(card._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
+
+		await get_tree().create_timer(0.2).timeout

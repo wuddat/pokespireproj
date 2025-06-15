@@ -44,7 +44,7 @@ layout_mode = 2
 
 [node name="SkipButton" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 18)
+custom_minimum_size = Vector2(100, 28)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -67,7 +67,7 @@ background_color = Color(0.101961, 0.101961, 0, 0.929412)
 
 [node name="TakeButton" type="Button" parent="CardDetailOverlay"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 18)
+custom_minimum_size = Vector2(100, 28)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

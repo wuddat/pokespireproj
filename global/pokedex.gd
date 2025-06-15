@@ -60,13 +60,13 @@ func get_species_for_tier(tier: int) -> Array[String]:
 
 		match tier:
 			0:
-				if evo_level >= 0 and evo_level < 16:
+				if evo_level >= 0 and evo_level < 4:
 					valid_species.append(species_id)
 			1:
-				if evo_level >= 16 and evo_level < 24:
+				if evo_level >= 4 and evo_level < 6:
 					valid_species.append(species_id)
 			2:
-				if evo_level >= 24 or evo_level == -1:
+				if evo_level >= 6 or evo_level == -1:
 					valid_species.append(species_id)
 
 	return valid_species

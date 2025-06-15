@@ -102,33 +102,35 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 			return[]
 
 
-func play(
-	targets: Array[Node], 
-	char_stats: CharacterStats, 
-	modifiers: ModifierHandler,
-	battle_unit_owner: PokemonBattleUnit
-) -> void:
-	Events.card_played.emit(self)
-	char_stats.mana -= cost
-	
-	random_targets.clear()
-	if target == Target.RANDOM_ENEMY:
-		for i in multiplay:
-			random_targets.append(_get_targets([], battle_unit_owner))
-
-	if randomplay > 0:
-		var random_attacks_amount = randi_range(2, randomplay)
-		multiplay = random_attacks_amount
-	for i in multiplay:
-		if is_single_targeted():
-			if target == Target.RANDOM_ENEMY:
-				apply_effects(random_targets[i], modifiers, battle_unit_owner)
-			elif target == Target.SPLASH:
-				apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
-			else:
-				apply_effects(targets, modifiers, battle_unit_owner)
-		else:
-			apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
+#func play(
+	#targets: Array[Node], 
+	#char_stats: CharacterStats, 
+	#modifiers: ModifierHandler,
+	#battle_unit_owner: PokemonBattleUnit
+#) -> void:
+	#Events.card_played.emit(self)
+	#char_stats.mana -= cost
+	#
+	#random_targets.clear()
+	#
+	#if randomplay > 0:
+		#multiplay = randi_range(2, randomplay)
+	#
+	#if target == Target.RANDOM_ENEMY:
+		#for i in range(multiplay):
+			#random_targets.append(_get_targets([], battle_unit_owner))
+#
+	#print("Playing card %s %s times" % [name, multiplay])
+	#for i in range(multiplay):
+		#if is_single_targeted():
+			#if target == Target.RANDOM_ENEMY:
+				#apply_effects(random_targets[i], modifiers, battle_unit_owner)
+			#elif target == Target.SPLASH:
+				#apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
+			#else:
+				#apply_effects(targets, modifiers, battle_unit_owner)
+		#else:
+			#apply_effects(_get_targets(targets, battle_unit_owner), modifiers, battle_unit_owner)
 		
 
 

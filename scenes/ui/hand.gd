@@ -7,7 +7,10 @@ extends HBoxContainer
 
 @onready var card_ui := preload("res://scenes/card_ui/card_ui.tscn")
 
-	
+
+func _ready():
+	_establish_connections()
+
 func add_card(card: Card) -> void:
 	var new_card_ui := card_ui.instantiate()
 	add_child(new_card_ui)
@@ -59,3 +62,9 @@ func _assign_modifiers_when_battle_pkmn_ready(card_ui: CardUI, uid: String) -> v
 		tries +=1
 	
 	push_warning("Couldn't find pkmnnbattleunits for card uid")
+
+func _establish_connections() -> void:
+	if not Events.card_play_initiated.is_connected(disable_hand):
+		Events.card_play_initiated.connect(disable_hand)
+	if not Events.card_play_completed.is_connected(enable_hand):
+		Events.card_play_completed.connect(enable_hand)

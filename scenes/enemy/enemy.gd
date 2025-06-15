@@ -122,9 +122,6 @@ func update_intent() -> void:
 func do_turn() -> void:
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
-	if status_handler.has_status("seeded"):
-		var seeded := status_handler.get_status("seeded")
-		Events.enemy_seeded.emit(seeded)
 		
 	#print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
 
@@ -155,6 +152,10 @@ func do_turn() -> void:
 	current_action.perform_action()
 	enemy_action_picker.select_valid_target()
 	skip_turn = false
+	if status_handler.has_status("seeded"):
+		get_tree().create_timer(.5).timeout
+		var seeded := status_handler.get_status("seeded")
+		Events.enemy_seeded.emit(seeded)
 
 
 
@@ -169,7 +170,7 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
 	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
-	
+	update_intent()
 	tween.finished.connect(
 		func():
 			sprite_2d.material = null

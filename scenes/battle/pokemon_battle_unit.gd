@@ -16,6 +16,8 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 var health_bar_ui: HealthBarUI
 var _queued_health_bar_ui: HealthBarUI = null
 
+var skip_turn = false
+var has_slept = false
 
 func _ready() -> void:
 	status_handler.status_owner = self

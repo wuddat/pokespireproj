@@ -19,6 +19,8 @@ const CAUGHT_TEXT := "Pkmn Captured!"
 
 @onready var rewards: VBoxContainer = %Rewards
 
+const COINGAIN = preload("res://art/sounds/sfx/coingain.wav")
+
 var card_reward_total_weight := 0.0
 var card_rarity_weights := {
 	Card.Rarity.COMMON: 0.0,
@@ -122,7 +124,7 @@ func _get_random_available_card(available_cards: Array[Card], with_rarity: Card.
 func _on_gold_reward_taken(amount: int) -> void:
 	if not run_stats:
 		return
-	
+	SFXPlayer.play(COINGAIN)
 	run_stats.gold += amount
 
 

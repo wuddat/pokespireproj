@@ -10,15 +10,16 @@ func initialize_status(target: Node) -> void:
 	if not target.has_slept:
 		target.skip_turn = true
 		target.has_slept = true
+		
+		if target is Enemy:
+			var enemy_target := target as Enemy
+			enemy_target.intent_ui.icon.texture = SLEEP_ICON
+			enemy_target.intent_ui.label.text = ""
+			enemy_target.intent_ui.target.texture = null
 
-		var enemy_target := target as Enemy
-		enemy_target.intent_ui.icon.texture = SLEEP_ICON
-		enemy_target.intent_ui.label.text = ""
-		enemy_target.intent_ui.target.texture = null
-
-		print("🟡 Sleep: first time - skipping turn")
-		print("🟡 initialize_status stacks: %d" % stacks)
-		target.status_handler.remove_status("sleep")
+			print("🟡 Sleep: first time - skipping turn")
+			print("🟡 initialize_status stacks: %d" % stacks)
+			target.status_handler.remove_status("sleep")
 
 	status_applied.emit(self)
 
@@ -34,14 +35,15 @@ func apply_status(target: Node) -> void:
 	if target.has_slept:
 		if stacks > 1:
 			target.skip_turn = true
+			
+			if target is Enemy:
+				var enemy_target := target as Enemy
+				enemy_target.intent_ui.icon.texture = SLEEP_ICON
+				enemy_target.intent_ui.label.text = ""
+				enemy_target.intent_ui.target.texture = null
 
-			var enemy_target := target as Enemy
-			enemy_target.intent_ui.icon.texture = SLEEP_ICON
-			enemy_target.intent_ui.label.text = ""
-			enemy_target.intent_ui.target.texture = null
-
-			print("🔴 Sleep: second skip triggered - removing status")
-			target.status_handler.remove_status("sleep") # 💥 Now safe to remove
+				print("🔴 Sleep: second skip triggered - removing status")
+				target.status_handler.remove_status("sleep") # 💥 Now safe to remove
 		else:
 			print("🟢 Sleep: stacked up, but not enough to re-trigger sleep")
 	else:

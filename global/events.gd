@@ -15,6 +15,8 @@ signal player_hand_discarded
 signal player_turn_ended
 signal player_hit
 signal player_died
+signal card_play_initiated
+signal card_play_completed
 
 
 #Enemy-related Events
