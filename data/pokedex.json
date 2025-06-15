@@ -46,7 +46,6 @@
 			"move_ids": [
 				"razorleaf",
 				"tackle"
-				
 			]
 		},
 		"charmander": {
@@ -61,7 +60,6 @@
 			"move_ids": [
 				"ember",
 				"scratch",
-				
 			],
 			"evolves_to": "charmeleon",
 			"evolution_level": 2

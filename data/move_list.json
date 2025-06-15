@@ -921,7 +921,8 @@
 	  "status_effects": ["poisoned"],
 	  "description": "[center]Deal [color=red]%s[/color] damage 5X RANDOMLY and [color=purple]POISON[/color]!.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "uncommon"
+	  "rarity": "uncommon",
+	  "randomplay": 5
 	},
 	"poisongas": {
 	  "name": "Poison Gas",

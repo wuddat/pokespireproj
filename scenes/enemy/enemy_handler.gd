@@ -27,7 +27,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		enemy.queue_free()
 	
 	var all_new_enemies := battle_stats.enemies.instantiate()
-	var species_ids = Pokedex.pokedex.keys()
+	var species_ids = Pokedex.get_species_for_tier(battle_stats.battle_tier)
 	
 	for new_enemy: Node2D in all_new_enemies.get_children():
 		var new_enemy_child := new_enemy.duplicate() as Enemy

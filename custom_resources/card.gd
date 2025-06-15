@@ -73,8 +73,6 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		if pkmn.stats.uid != battle_unit_owner.stats.uid:
 			allies_group.append(pkmn)
 	var enemy_group := tree.get_nodes_in_group("enemies")
-	print("💥 enemy_group contents: ", enemy_group)
-	print("💥 target passed in: ", targets[0])
 	
 	match target:
 		Target.SELF:

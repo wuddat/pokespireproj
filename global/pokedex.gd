@@ -51,9 +51,26 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	return pokemon
 
 
-	# Optional: Add sprite_path or type if needed later
-	# 
-	# pokemon.type = data.get("type", [])  # assuming type is also an array
+func get_species_for_tier(tier: int) -> Array[String]:
+	var valid_species: Array[String] = []
+
+	for species_id in pokedex.keys():
+		var data = pokedex[species_id]
+		var evo_level = data.get("evolution_level", 101)
+
+		match tier:
+			0:
+				if evo_level >= 0 and evo_level < 16:
+					valid_species.append(species_id)
+			1:
+				if evo_level >= 16 and evo_level < 24:
+					valid_species.append(species_id)
+			2:
+				if evo_level >= 24 or evo_level == -1:
+					valid_species.append(species_id)
+
+	return valid_species
+
 
 	# DEBUG PRINTS
 	#print("Created Pokemon:", species_id)
