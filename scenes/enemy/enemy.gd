@@ -130,13 +130,42 @@ func update_intent() -> void:
 func do_turn() -> void:
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
-		
-	#print("🧪 [Enemy Turn Check] %s → has_slept: %s | skip_turn: %s" % [stats.species_id, has_slept, skip_turn])
+	status_effect_checks()
+	await catch_check()
 
+	if skip_turn:
+		print("⛔️ Enemy skipping turn due to skip_turn flag.")
+		skip_turn = false  # Reset for next round
+		Events.enemy_action_completed.emit(self)
+		return
+
+	if not current_action:
+		return
+		
+	current_action.update_intent_text()
+	intent_ui.update_intent(current_action.intent)
+	current_action.perform_action()
+	enemy_action_picker.select_valid_target()
+	skip_turn = false
+	
+	if status_handler.has_status("seeded"):
+		get_tree().create_timer(.5).timeout
+		var seeded := status_handler.get_status("seeded")
+		Events.enemy_seeded.emit(seeded)
+
+
+func status_effect_checks() -> void:
 	if status_handler.has_status("flinched"):
 		print("😬 Enemy flinched and will skip turn.")
 		status_handler.remove_status("flinched")
 		skip_turn = true
+		
+	if status_handler.has_status("confused"):
+			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
+			enemy_action_picker.select_confused_target()
+
+
+func catch_check() -> void:
 	if status_handler.has_status("catching"):
 		print("🎯 %s is being caught, will skip turn." % self)
 		catch_animator.animated_sprite_2d.play("shakes")
@@ -166,32 +195,7 @@ func do_turn() -> void:
 		else:
 			skip_turn = true
 			catch_animator.animated_sprite_2d.play("rest")
-
-	if skip_turn:
-		print("⛔️ Enemy skipping turn due to skip_turn flag.")
-		skip_turn = false  # Reset for next round
-		Events.enemy_action_completed.emit(self)
-		return
-
-	if enemy_action_picker:
-		if status_handler.has_status("confused"):
-			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
-			enemy_action_picker.select_confused_target()
-
-	# Then perform action
-	if not current_action:
-		return
-	current_action.update_intent_text()
-	intent_ui.update_intent(current_action.intent)
-	current_action.perform_action()
-	enemy_action_picker.select_valid_target()
-	skip_turn = false
-	if status_handler.has_status("seeded"):
-		get_tree().create_timer(.5).timeout
-		var seeded := status_handler.get_status("seeded")
-		Events.enemy_seeded.emit(seeded)
-
-
+	
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0:
