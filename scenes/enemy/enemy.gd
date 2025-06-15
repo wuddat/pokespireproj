@@ -166,6 +166,10 @@ func status_effect_checks() -> void:
 
 
 func catch_check() -> void:
+	if stats.health <= 0:
+			print("❌ Skipping catch check: %s already fainted." % stats.species_id)
+			return
+
 	if status_handler.has_status("catching"):
 		print("🎯 %s is being caught, will skip turn." % self)
 		catch_animator.animated_sprite_2d.play("shakes")
