@@ -13,7 +13,7 @@ const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
 
 @export var battle_unit_owner: PokemonBattleUnit
 
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_visuals: CardVisuals = $CardVisuals
 @onready var drop_point_detector: Area2D = $DropPointDetector
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
@@ -74,6 +74,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	card_state_machine.on_mouse_entered()
+	
 
 
 func _on_mouse_exited() -> void:

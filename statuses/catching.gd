@@ -8,6 +8,7 @@ func initialize_status(target: Node) -> void:
 	if target is Enemy:
 		target.is_catchable = true
 		target.skip_turn = true
+		target.enter_catching_state()
 	
 
 func apply_status(target: Node) -> void:
@@ -16,5 +17,3 @@ func apply_status(target: Node) -> void:
 		if target is Enemy:
 			print("mark_as_caught run from status")
 			target.mark_as_caught()
-	
-	#status_applied.emit(self)

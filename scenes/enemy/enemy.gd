@@ -4,6 +4,9 @@ extends Area2D
 
 const ARROW_OFFSET := 20
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
+const WOBBLE: AudioStream = preload("res://art/sounds/sfx/wobble.wav")
+const BREAKOUT = preload("res://art/sounds/sfx/pokeball_release.wav")
+const CAUGHT = preload("res://art/sounds/sfx/caught.wav")
 
 @export var stats: EnemyStats : set = set_enemy_stats
 
@@ -14,6 +17,8 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
+@onready var catch_animator_tscn = preload("res://scenes/enemy/catch_animator.tscn")
+var catch_animator: Node2D = null
 
 var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
@@ -22,6 +27,9 @@ var is_catchable: bool = false
 var is_caught: bool = false
 var skip_turn: bool = false
 var has_slept: bool = false
+
+var max_wobble = 3
+var current_wobble = 0
 
 func _ready():
 	await get_tree().process_frame
@@ -131,7 +139,33 @@ func do_turn() -> void:
 		skip_turn = true
 	if status_handler.has_status("catching"):
 		print("🎯 %s is being caught, will skip turn." % self)
-		skip_turn = true
+		catch_animator.animated_sprite_2d.play("shakes")
+		SFXPlayer.play(WOBBLE)
+		await get_tree().create_timer(.5).timeout
+		SFXPlayer.play(WOBBLE)
+		await catch_animator.animated_sprite_2d.animation_finished
+		
+		if did_escape_catch():
+			print("💥 %s broke free!" % stats.species_id)
+			catch_animator.animated_sprite_2d.play("breakout")
+			SFXPlayer.play(BREAKOUT)
+			await catch_animator.animated_sprite_2d.animation_finished
+			sprite_2d.visible = true
+			catch_animator.queue_free()
+			catch_animator = null
+			status_handler.remove_status("catching")
+			current_wobble = 0
+		elif was_caught():
+			await get_tree().create_timer(.2).timeout
+			print("✅ %s was caught!" % stats.species_id)
+			catch_animator.animated_sprite_2d.play("success")
+			SFXPlayer.play(CAUGHT)
+			await catch_animator.animated_sprite_2d.animation_finished
+			take_damage(stats.health, Modifier.Type.DMG_TAKEN)
+			skip_turn = true
+		else:
+			skip_turn = true
+			catch_animator.animated_sprite_2d.play("rest")
 
 	if skip_turn:
 		print("⛔️ Enemy skipping turn due to skip_turn flag.")
@@ -177,6 +211,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 			
 			if stats.health <= 0 and status_handler.has_status("catching"):
 				is_catchable = true
+				catch_animator.animated_sprite_2d.play("success")
+				await catch_animator.animated_sprite_2d.animation_finished
 				print("enemy was caught ", is_catchable)
 				print("Emitting captured signal with:", self.stats)
 				mark_as_caught()
@@ -203,15 +239,45 @@ func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	tween.tween_interval(0.17)
 
 
+func enter_catching_state():
+	if catch_animator:
+		return
+	catch_animator = catch_animator_tscn.instantiate()
+	catch_animator.name = "CatchAnimator"
+	add_child(catch_animator)	
+	catch_animator.global_position = sprite_2d.global_position
+	sprite_2d.visible = false
+	catch_animator.visible = true
+	catch_animator.animated_sprite_2d.play("catch")
+	await catch_animator.animated_sprite_2d.animation_finished
+	catch_animator.animated_sprite_2d.play("rest")
+
+func did_escape_catch() -> bool:
+	# TODO catchrate formula
+	var hp_ratio := float(stats.health) / float(stats.max_health)
+	var base_chance := 0.4  # Base 40% chance to break free
+	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
+	var escape_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
+	
+	return randf() < escape_chance
+
+func was_caught() -> bool:
+	if current_wobble >= max_wobble:
+		return true
+	var hp_ratio := float(stats.health) / float(stats.max_health)
+	var base_chance := 0.4  # Base 40% chance to break free
+	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
+	var catch_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
+	current_wobble += 1
+	return randf() < catch_chance
+
+
 func mark_as_caught() -> void:
 	if is_caught:
 		return
 	is_caught = true
 	skip_turn = true
 	is_catchable = false
-	
-	if sprite_2d:
-		sprite_2d.texture = preload("res://art/pokeball.png")
 	
 	print("mark_as_caught signal with:", stats)
 	var pkmn_to_add = Pokedex.create_pokemon_instance(stats.species_id)
