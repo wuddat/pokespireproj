@@ -1,3 +1,4 @@
+#map_generator.gd
 class_name MapGenerator
 extends Node
 # BE WARNED, ALL YE WHO ENTER HERE...

@@ -5,6 +5,9 @@
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="3_fht25"]
 
 [node name="HealthUI" type="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+offset_right = 105.0
+offset_bottom = 9.0
 theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("1_6rypn")
@@ -33,7 +36,7 @@ vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 3)
+custom_minimum_size = Vector2(50, 3)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("3_fht25")

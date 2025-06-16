@@ -1,3 +1,4 @@
+#events.gd
 extends Node
 
 #Card-related Events

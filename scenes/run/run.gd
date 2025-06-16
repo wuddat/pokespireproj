@@ -1,3 +1,4 @@
+#run.gd
 class_name Run
 extends Node
 

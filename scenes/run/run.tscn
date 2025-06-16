@@ -75,6 +75,7 @@ alignment = 1
 
 [node name="HealthUI" parent="TopBar/BarItems" instance=ExtResource("4_ux63y")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 show_max_hp = true
 

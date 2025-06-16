@@ -1,3 +1,4 @@
+#move_data.gd
 extends Node
 
 var moves = {}

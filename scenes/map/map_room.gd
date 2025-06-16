@@ -1,3 +1,4 @@
+#map_room.gd
 class_name MapRoom
 extends Area2D
 
@@ -10,6 +11,7 @@ const ICONS:={
 	Room.Type.POKECENTER:[preload("res://art/nurse.png"), Vector2(0.5, 0.5)],
 	Room.Type.SHOP: [preload("res://art/shop.png"), Vector2(1.4, 1.4)],
 	Room.Type.BOSS: [preload("res://art/tile_0092.png"), Vector2(1.25, 1.25)],
+	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
 }
 
 @export var music: AudioStream
