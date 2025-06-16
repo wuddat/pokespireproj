@@ -1757,7 +1757,7 @@
 	  "rarity": "Common",
 	},
 	"vinewhip": {
-	  "name": "Wine Whip",
+	  "name": "Vine Whip",
 	  "id": "vinewhip",
 	  "category": "attack",
 	  "subtype": "single_target",

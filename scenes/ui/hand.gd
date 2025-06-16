@@ -19,6 +19,8 @@ func add_card(card: Card) -> void:
 	new_card_ui.parent = self
 	new_card_ui.char_stats = char_stats
 	
+	if card.pkmn_owner_uid == null:
+		return
 	if card.pkmn_owner_uid == "":
 		new_card_ui.player_pkmn_modifiers = player.modifier_handler
 	if card.pkmn_owner_uid  != "":

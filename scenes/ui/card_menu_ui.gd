@@ -31,4 +31,5 @@ func set_card(value: Card) -> void:
 	visuals.card = card
 
 func set_char_stats(value: CharacterStats) -> void:
+	print_stack()
 	visuals.char_stats = value

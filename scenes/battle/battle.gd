@@ -192,4 +192,25 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	pkmn.stats.evolve_to(evolved_species)
 	pkmn.update_pokemon()
 	pkmn.show()
+	# 🎁 Inject EvolutionReward Screen
+	var evo_reward := preload("res://scenes/ui/evolution_rewards.tscn").instantiate()
+	evo_reward.char_stats = char_stats
+	var pokemon_uid := pkmn.stats.uid
+	var deck := char_stats.deck.cards  
+
+	# 🔥 Filter new card learn options
+	var learn_options = Utils.get_evolution_options(pkmn.stats)
+
+	# Plug in the evolved Pokémon unit
+	print("awaiting evo ready:")
+	await get_tree().create_timer(0.02).timeout  # ✅ allow idle frame
+	print("awaiting evo is now ready:")
+	
+	$BattleOverLayer.add_child(evo_reward)
+	await get_tree().process_frame  # Let @onready vars resolve
+	await get_tree().process_frame  
+	evo_reward.setup(pkmn, deck, Utils.get_evolution_options(pkmn.stats))
+
+	# Wait for reward to finish before resuming battle
+	await evo_reward.tree_exited
 	get_tree().paused = false

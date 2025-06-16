@@ -59,19 +59,15 @@ func animate(from_species: String, to_species: String):
 	MusicPlayer.pause()
 	await SFXPlayer.play(EVO_DING_START, true)  
 	
-	
-	
 	var screen_center = Vector2(get_viewport().get_visible_rect().size / 2)
 	print("🌍 Screen center is:", screen_center)
 	print("📍 Start position is:", start_position)
 	
 	var bg_tween = create_tween()
 	
-	
 	#fade in bg
 	bg_tween.tween_property(background, "modulate:a", 0.8, 0.4)
 	
-
 	bg_tween.tween_property(label, "text", "What...?" % from_species.capitalize() , 0.4)
 	bg_tween.tween_interval(1)
 	await bg_tween.finished
@@ -97,7 +93,6 @@ func animate(from_species: String, to_species: String):
 	tween.tween_callback(func(): sprite_current.visible = false)
 	
 	await tween.finished
-	
 	await get_tree().create_timer(0.2).timeout
 	
 	await play_flash_sequence()
@@ -110,9 +105,7 @@ func animate(from_species: String, to_species: String):
 	evolved_text_tween.tween_property(label, "text", "%s evolved into %s!" % [from_species.capitalize(),to_species.capitalize()], 0.1)
 	await evolved_text_tween.finished
 	SFXPlayer.play(EVOLUTION_FINISH, true)  
-	await get_tree().create_timer(1).timeout
-	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3).timeout
 	
 	#return to start
 	var return_tween := create_tween()
@@ -125,9 +118,6 @@ func animate(from_species: String, to_species: String):
 	print("🏁 Evolution animation complete.")
 	animation_completed.emit()
 	queue_free()
-
-
-
 
 
 func play_flash_sequence() -> void:

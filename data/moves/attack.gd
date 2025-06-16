@@ -6,25 +6,25 @@ func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-		var mod_dmg := await player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
+	var mod_dmg := await player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
-		if enemy_modifiers:
-			mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
+	if enemy_modifiers:
+		mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
 		
 		# Check for conditional bonus
-		if bonus_damage_if_target_has_status != "":
-			for target in targets:
-				var handler = target.get_node_or_null("StatusHandler")
-				if handler:
-					var statuses = handler.get_statuses()
-					print("statuses on unit are: %s" % [statuses])
-					for status in statuses:
-						if status.id == bonus_damage_if_target_has_status:
-							mod_dmg *= bonus_damage_multiplier
-							break
+	if bonus_damage_if_target_has_status != "":
+		for target in targets:
+			var handler = target.get_node_or_null("StatusHandler")
+			if handler:
+				var statuses = handler.get_statuses()
+				print("statuses on unit are: %s" % [statuses])
+				for status in statuses:
+					if status.id == bonus_damage_if_target_has_status:
+						mod_dmg *= bonus_damage_multiplier
+						break
 
 		
-		return tooltip_text % mod_dmg
+	return tooltip_text % mod_dmg
 
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:

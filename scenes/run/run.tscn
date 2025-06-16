@@ -112,3 +112,6 @@ vertical_alignment = 1
 [node name="DeckView" parent="TopBar" instance=ExtResource("7_yeia0")]
 unique_name_in_owner = true
 visible = false
+
+[node name="EvolutionRewardsUI" type="CanvasLayer" parent="."]
+layer = 5

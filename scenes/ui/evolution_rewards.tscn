@@ -1,0 +1,203 @@
+[gd_scene load_steps=7 format=3 uid="uid://diaylkglmhm4n"]
+
+[ext_resource type="Script" uid="uid://dha2lktffgkxl" path="res://scenes/ui/evolution_rewards.gd" id="1_h527p"]
+[ext_resource type="PackedScene" uid="uid://bq8ebkvp2okor" path="res://scenes/ui/card_menu_ui.tscn" id="2_h527p"]
+[ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="3_cowsq"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="4_h527p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cowsq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2wue3"]
+
+[node name="EvolutionReward" type="Control"]
+process_mode = 3
+z_index = 20
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h527p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -143.0
+offset_right = 257.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.686275)
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -104.0
+offset_right = 106.5
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(106, 0)
+text = "Bulbasaur wants to learn a NEW move!"
+
+[node name="Label2" type="Label" parent="."]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -89.0
+offset_right = 106.5
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(106, 0)
+text = "Forget ALL of one move to  learn another?"
+
+[node name="Forget" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -35.5
+offset_right = -66.5
+offset_bottom = -17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "FORGET"
+label_settings = SubResource("LabelSettings_cowsq")
+horizontal_alignment = 1
+
+[node name="Learn" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 93.0
+offset_top = -35.5
+offset_right = 174.0
+offset_bottom = -17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LEARN"
+label_settings = SubResource("LabelSettings_2wue3")
+horizontal_alignment = 1
+
+[node name="CardsToForget" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -73.0
+offset_right = -198.0
+offset_bottom = 127.0
+grow_vertical = 2
+pivot_offset = Vector2(18, 100)
+theme_override_constants/separation = 0
+
+[node name="Cards to Learn" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 197.5
+offset_top = -73.0
+offset_right = 234.5
+offset_bottom = 127.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(18, 100)
+theme_override_constants/separation = 0
+
+[node name="ForgetCard" parent="." instance=ExtResource("2_h527p")]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+offset_left = -145.0
+offset_top = -16.0
+offset_right = -108.0
+offset_bottom = 46.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Learn Card" parent="." instance=ExtResource("2_h527p")]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+offset_left = 107.5
+offset_top = -16.0
+offset_right = 144.5
+offset_bottom = 46.0
+scale = Vector2(1.5, 1.5)
+
+[node name="ConfirmButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 95.0
+offset_right = 50.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 0)
+size_flags_horizontal = 4
+text = "Confirm"
+
+[node name="CardDetailOverlay" parent="." instance=ExtResource("3_cowsq")]
+visible = false
+layout_mode = 1
+background_color = Color(0.101961, 0.101961, 0, 0.929412)
+
+[node name="TakeButton" type="Button" parent="CardDetailOverlay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = 80.0
+offset_right = 50.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Take"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_h527p")

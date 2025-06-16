@@ -72,7 +72,7 @@ func create_instance() -> Resource:
 		instance.deck.cards.append_array(pkmn_cards.cards)
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
-	instance.draftable_cards = build_deck_from_move_ids(draftable_move_ids)
+	instance.draftable_cards = build_deck_from_pokemon(instance.current_party[0])
 	return instance
 
 

@@ -818,7 +818,7 @@
 		"bug",
 		"poison"
 	  ],
-	  "max_health": 60,
+	  "max_health": 16,
 	  "move_ids": [
 		"tackle",
 		"poisonpowder",

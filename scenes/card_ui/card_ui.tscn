@@ -68,6 +68,7 @@ _data = {
 }
 
 [node name="CardUI" type="Control"]
+process_mode = 3
 custom_minimum_size = Vector2(37, 48)
 layout_mode = 3
 anchors_preset = 15
