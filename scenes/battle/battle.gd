@@ -36,9 +36,7 @@ func _ready() -> void:
 	Events.evolution_triggered.connect(_on_evolution_triggered)
 	Events.evolution_completed.connect(_on_evolution_completed)
 
-	
-	
-	
+
 func start_battle() -> void:
 	get_tree().paused = false
 
@@ -55,7 +53,6 @@ func start_battle() -> void:
 	party_handler.stat_ui_by_uid = stat_ui_by_uid  
 	party_handler.finalize_battle_party(selected_party)
 	party_handler.initialize_party_for_battle()
-	
 	
 	pkmn_fainted_ui.char_stats = char_stats
 	
@@ -127,6 +124,7 @@ func _on_enemies_child_order_changed() -> void:
 			await Events.evolution_completed
 		
 		MusicPlayer.play(music, true)
+		
 		Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
 
 
@@ -191,26 +189,44 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	
 	pkmn.stats.evolve_to(evolved_species)
 	pkmn.update_pokemon()
+	char_stats.update_draftable_cards()
 	pkmn.show()
 	# 🎁 Inject EvolutionReward Screen
 	var evo_reward := preload("res://scenes/ui/evolution_rewards.tscn").instantiate()
-	evo_reward.char_stats = char_stats
-	var pokemon_uid := pkmn.stats.uid
-	var deck := char_stats.deck.cards  
-
-	# 🔥 Filter new card learn options
-	var learn_options = Utils.get_evolution_options(pkmn.stats)
-
-	# Plug in the evolved Pokémon unit
-	print("awaiting evo ready:")
-	await get_tree().create_timer(0.02).timeout  # ✅ allow idle frame
-	print("awaiting evo is now ready:")
-	
 	$BattleOverLayer.add_child(evo_reward)
-	await get_tree().process_frame  # Let @onready vars resolve
-	await get_tree().process_frame  
-	evo_reward.setup(pkmn, deck, Utils.get_evolution_options(pkmn.stats))
+	var evo_card_rewards: Array[Card] = []
+	var forgettable_cards: Array[Card] = char_stats.deck.cards.duplicate(true)
+	var learnable_cards: Array[Card] = char_stats.draftable_cards.cards.duplicate(true)
+	
+	forgettable_cards = forgettable_cards.filter(
+		func(card: Card) -> bool:
+			return card.pkmn_owner_uid == pkmn.stats.uid
+	)
+	#print check
+	var forgettable_card_ids := forgettable_cards.map(
+		func(card: Card) -> String:
+			return card.id
+	)
+	print("forgettable_card_ids for %s: %s" % [pkmn.stats.species_id, forgettable_card_ids])
+	
+	learnable_cards = learnable_cards.filter(
+		func(card: Card) -> bool:
+			return card.pkmn_owner_uid == pkmn.stats.uid
+	)
+	#print check
+	var learnable_cards_ids := learnable_cards.map(
+		func(card: Card) -> String:
+			return card.id
+	)
+	print("learnable_cards_ids for %s: %s" % [pkmn.stats.species_id, learnable_cards_ids])
+	evo_reward.player_deck = char_stats.deck
+	evo_reward.pokemon = pkmn.stats
+	evo_reward.sprite_2d.texture= pkmn.stats.art
+	evo_reward.label.text = "%s wants to learn a NEW move!" % pkmn.stats.species_id.capitalize()
+	evo_reward.forgettable_cards = forgettable_cards
+	evo_reward.learnable_cards = learnable_cards
 
 	# Wait for reward to finish before resuming battle
 	await evo_reward.tree_exited
+	
 	get_tree().paused = false

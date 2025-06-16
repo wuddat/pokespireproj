@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://spupfh640ekm" path="res://scenes/ui/card_visuals.tscn" id="3_5nlic"]
 
 [node name="CardMenuUI" type="CenterContainer"]
+process_mode = 3
 offset_right = 37.0
 offset_bottom = 69.0
 size_flags_horizontal = 3

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="7_yeia0"]
 
 [node name="Run" type="Node"]
+process_mode = 3
 script = ExtResource("1_l7o68")
 run_startup = ExtResource("2_wdonh")
 

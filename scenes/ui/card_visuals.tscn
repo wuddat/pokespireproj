@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_m3e03"]
 
 [node name="CardVisuals" type="Control"]
+process_mode = 3
 custom_minimum_size = Vector2(37, 62)
 layout_mode = 3
 anchors_preset = 0
@@ -19,6 +20,7 @@ script = ExtResource("2_imfec")
 card = ExtResource("3_m3e03")
 
 [node name="Panel" type="Panel" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +32,7 @@ mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_jxbv6")
 
 [node name="Cost" type="Label" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 1.0
 offset_top = 16.0
@@ -39,6 +42,7 @@ text = "99"
 vertical_alignment = 1
 
 [node name="Effect" type="Label" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 21.0
 offset_top = 16.0
@@ -49,6 +53,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,6 +72,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Rarity" type="TextureRect" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -82,6 +88,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="OwnerIcon" type="TextureRect" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

@@ -118,3 +118,4 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			var status_to_apply := self_stat.duplicate()
 			self_effect.status = status_to_apply
 			self_effect.execute([battle_unit_owner])
+	Utils.print_resource(self)

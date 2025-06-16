@@ -121,7 +121,7 @@ func animate(from_species: String, to_species: String):
 
 
 func play_flash_sequence() -> void:
-	var flashes = 40
+	var flashes = 5
 	sprite_evolved_white.visible = false
 	sprite_evolved.visible = false
 	sprite_current_white.visible = true

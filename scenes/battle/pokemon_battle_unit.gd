@@ -162,7 +162,7 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		add_child(level_text)
 		level_text.show_text("LEVEL UP!")
 
-		if stats.level == stats.evolution_level:
+		if stats.level >= stats.evolution_level:
 			#print("Evolution TRIGGERED")
 			Events.evolution_triggered.emit(self)
 

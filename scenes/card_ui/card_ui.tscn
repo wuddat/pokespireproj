@@ -83,6 +83,7 @@ theme = ExtResource("1_gy3gl")
 script = ExtResource("2_els2s")
 
 [node name="CardVisuals" parent="." instance=ExtResource("3_ci03s")]
+process_mode = 3
 mouse_filter = 2
 
 [node name="DropPointDetector" type="Area2D" parent="."]

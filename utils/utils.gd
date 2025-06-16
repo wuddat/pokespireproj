@@ -35,7 +35,7 @@ static func print_node(node: Node) -> void:
 
 
 static func get_evolution_options(pkmn: PokemonStats) -> Array[Card]:
-	var options: Array[Card] = []
+	var options := CardPile.new()
 
 	# Filter rare/uncommon moves
 	var rare_ids := pkmn.move_ids.filter(func(id: String) -> bool:
@@ -72,6 +72,7 @@ static func get_evolution_options(pkmn: PokemonStats) -> Array[Card]:
 			card.pkmn_owner_uid = pkmn.uid
 			card.pkmn_owner_name = pkmn.species_id
 			card.pkmn_icon = pkmn.icon
-			options.append(card)
+			print_stack()
+			options.add_card(card)
 
 	return options.slice(0, 3)

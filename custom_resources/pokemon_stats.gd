@@ -9,7 +9,7 @@ extends Stats
 @export var is_battling: bool = false
 
 @export var evolves_to: String = ""
-@export var evolution_level: int = -1
+@export var evolution_level: int = 101
 @export var current_exp: int = 0
 @export var level: int = 1
 
@@ -33,7 +33,7 @@ func evolve_to(new_species_id: String):
 	move_ids = Utils.to_typed_string_array(data.get("move_ids", []))
 	type = Utils.to_typed_string_array(data.get("type", []))
 	evolves_to = data.get("evolves_to", "")
-	evolution_level = data.get("evolution_level", -1)
+	evolution_level = data.get("evolution_level", 101)
 
 func try_gain_exp_from(enemy: Enemy) -> bool:
 	var gained_exp := enemy.stats.max_health * 2
@@ -42,10 +42,11 @@ func try_gain_exp_from(enemy: Enemy) -> bool:
 	var level_threshold := await get_xp_for_next_level(level)
 
 	if current_exp >= level_threshold:
-		level += 1
-		max_health += level
-		health += level
-		did_level = true
+		if level != 100:
+			level += 1
+			max_health += level
+			health += level
+			did_level = true
 	return did_level
 
 

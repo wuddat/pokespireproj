@@ -17,7 +17,7 @@
 		"poisonpowder"
 	  ],
 	  "evolves_to": "ivysaur",
-	  "evolution_level": 3
+	  "evolution_level": 2
 	},
 	"ivysaur": {
 	  "name": "Ivysaur",
@@ -36,7 +36,7 @@
 		"razorleaf"
 	  ],
 	  "evolves_to": "venusaur",
-	  "evolution_level": 6
+	  "evolution_level": 3
 	},
 	"venusaur": {
 	  "name": "Venusaur",
