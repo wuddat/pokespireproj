@@ -1,6 +1,7 @@
 class_name HealthBarUI
 extends PanelContainer
 
+@onready var icon: Sprite2D = %Icon
 @onready var health: HealthUI = %HealthUI
 @onready var label: Label = %Label
 @onready var block_label: Label = %BlockLabel
@@ -27,7 +28,7 @@ func update_stats(stats: Stats) -> void:
 	
 	health.update_stats(stats)
 	health.health_image.visible = false
-	label.text = str(stats.species_id)
+	icon.texture = stats.icon
 	fainted.visible = stats.health <= 0
 	block.visible = stats.block > 0
 

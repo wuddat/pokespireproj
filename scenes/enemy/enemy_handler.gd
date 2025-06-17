@@ -40,8 +40,10 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		add_child(new_enemy_child)
 		
 		var ui := stats_ui_scn.instantiate() as HealthBarUI
+
 		
 		right_panel.add_child(ui)
+		ui.icon.position = Vector2(60,7)
 		
 		ui.update_stats(new_enemy_child.stats)
 

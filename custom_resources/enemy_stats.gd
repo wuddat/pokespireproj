@@ -14,6 +14,7 @@ func load_from_pokedex(data: Dictionary) -> void:
 	
 	max_health = data.get("max_health", 10)
 	art = load(data.get("sprite_path", "res://default.png"))
+	icon = load(data.get("icon_path", "res://art/dottedline.png"))
 	
 	#clean pokedex move array so it play nice
 	var raw_ids = data.get("move_ids", ["tackle"])

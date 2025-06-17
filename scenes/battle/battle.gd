@@ -6,6 +6,7 @@ extends Node2D
 @export var char_stats: CharacterStats
 @export var music: AudioStream
 @export var party_selector: HBoxContainer
+@onready var status_view: StatusView = $StatusUI/StatusView
 
 @onready var battle_ui: BattleUI = $BattleUI
 @onready var player_handler: PlayerHandler = $PlayerHandler
@@ -39,7 +40,7 @@ func _ready() -> void:
 
 func start_battle() -> void:
 	get_tree().paused = false
-
+	status_view.visible = true
 	battle_ui.char_stats = char_stats
 	
 	player.stats = char_stats

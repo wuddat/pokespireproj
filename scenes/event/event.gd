@@ -3,9 +3,8 @@ extends Control
 
 @export var char_stats: CharacterStats
 @export var run_stats: RunStats
-
-@onready var description_label := %DescriptionLabel
-@onready var choices_container := %ChoicesVBox
+@onready var description_label := $UILayer/UI/Description
+@onready var choices_container := $UILayer/UI 
 
 var event_data := {}  # Loaded from JSON or hardcoded dictionary
 

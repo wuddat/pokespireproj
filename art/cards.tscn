@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfpha8epbuew"]
+
+[ext_resource type="Texture2D" uid="uid://p7u7k2d1gbhm" path="res://art/cardback.png" id="1_th7jd"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+offset_left = -49.0
+offset_top = -28.6861
+offset_right = 451.0
+offset_bottom = 728.314
+rotation = -0.380331
+scale = Vector2(0.104054, 0.11634)
+texture = ExtResource("1_th7jd")
+
+[node name="Sprite2D3" type="TextureRect" parent="."]
+offset_left = -43.0
+offset_top = -30.686
+offset_right = 457.0
+offset_bottom = 726.314
+rotation = -0.380331
+scale = Vector2(0.104054, 0.11634)
+texture = ExtResource("1_th7jd")
+
+[node name="Sprite2D2" type="TextureRect" parent="."]
+offset_left = -38.0
+offset_top = -32.6861
+offset_right = 462.0
+offset_bottom = 724.314
+rotation = -0.380331
+scale = Vector2(0.104054, 0.11634)
+texture = ExtResource("1_th7jd")

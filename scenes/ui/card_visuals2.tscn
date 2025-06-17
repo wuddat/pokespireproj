@@ -1,0 +1,166 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg2v1l5lfxso8"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_hst6n"]
+[ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_51dnd"]
+[ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="3_5qpi3"]
+[ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="5_kbvgy"]
+[ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="6_t7hou"]
+[ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_b5iqc"]
+[ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="7_hst6n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51dnd"]
+bg_color = Color(0.921569, 0.921569, 0.87451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 0.0980392, 1)
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_5qpi3"]
+font_color = Color(0.787542, 4.16331e-06, 5.77569e-07, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_75g4t"]
+font_color = Color(0.212841, 0.439923, 1, 1)
+
+[node name="CardVisuals" type="Control"]
+process_mode = 3
+custom_minimum_size = Vector2(58, 76)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 58.0
+offset_bottom = 86.0
+theme = ExtResource("1_hst6n")
+script = ExtResource("2_51dnd")
+card = ExtResource("3_5qpi3")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_51dnd")
+
+[node name="Effect" type="Label" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 19.4818
+offset_top = 53.4818
+offset_right = 51.4818
+offset_bottom = 71.4818
+text = "9"
+label_settings = SubResource("LabelSettings_5qpi3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 10.0
+offset_right = -4.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_kbvgy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rarity" type="TextureRect" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 9.5
+offset_top = 20.0
+offset_right = 29.5
+offset_bottom = 40.0
+grow_horizontal = 2
+rotation = 3.14159
+texture = ExtResource("6_t7hou")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rarity2" type="TextureRect" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 9.5
+offset_top = 20.0
+offset_right = 29.5
+offset_bottom = 40.0
+grow_horizontal = 2
+rotation = 3.14159
+texture = ExtResource("6_t7hou")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rarity3" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.01815
+offset_top = 26.4818
+offset_right = 15.9818
+offset_bottom = 46.4818
+grow_horizontal = 2
+rotation = 3.14159
+scale = Vector2(1.32409, 1.32409)
+texture = ExtResource("6_t7hou")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OwnerIcon" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = 25.0
+grow_horizontal = 2
+scale = Vector2(2.60894, 2.52224)
+texture = ExtResource("7_b5iqc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cost" type="Label" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 20.0
+offset_bottom = 20.0
+text = "9"
+label_settings = SubResource("LabelSettings_75g4t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Type" type="Sprite2D" parent="."]
+position = Vector2(56.4818, 12.4818)
+scale = Vector2(0.498768, 0.498768)
+texture = ExtResource("7_hst6n")
+region_enabled = true
+region_rect = Rect2(394, 16, 38, 38)

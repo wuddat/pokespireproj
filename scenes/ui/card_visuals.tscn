@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://spupfh640ekm"]
+[gd_scene load_steps=9 format=3 uid="uid://spupfh640ekm"]
 
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_x0ouv"]
 [ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_imfec"]
@@ -7,6 +7,10 @@
 [ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="3_m3e03"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="6_imfec"]
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_m3e03"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m3e03"]
+font_size = 8
+font_color = Color(0.212841, 0.439923, 1, 1)
 
 [node name="CardVisuals" type="Control"]
 process_mode = 3
@@ -31,23 +35,13 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_jxbv6")
 
-[node name="Cost" type="Label" parent="."]
-process_mode = 3
-layout_mode = 0
-offset_left = 1.0
-offset_top = 16.0
-offset_right = 17.0
-offset_bottom = 28.0
-text = "99"
-vertical_alignment = 1
-
 [node name="Effect" type="Label" parent="."]
 process_mode = 3
 layout_mode = 0
-offset_left = 21.0
-offset_top = 16.0
-offset_right = 37.0
-offset_bottom = 28.0
+offset_left = 18.0
+offset_top = 35.0
+offset_right = 34.0
+offset_bottom = 47.0
 text = "99"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -60,10 +54,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -9.5
-offset_top = -1.0
-offset_right = 10.5
-offset_bottom = 19.0
+offset_left = -17.5
+offset_top = 1.0
+offset_right = 2.5
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -77,9 +71,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 9.5
+offset_left = -7.5
 offset_top = 20.0
-offset_right = 29.5
+offset_right = 12.5
 offset_bottom = 40.0
 grow_horizontal = 2
 rotation = 3.14159
@@ -87,16 +81,28 @@ texture = ExtResource("6_imfec")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Cost" type="Label" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = -3.0
+offset_top = 5.0
+offset_right = 5.0
+offset_bottom = 14.0
+text = "9"
+label_settings = SubResource("LabelSettings_m3e03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="OwnerIcon" type="TextureRect" parent="."]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -10.5
-offset_top = -2.0
-offset_right = 9.5
-offset_bottom = 18.0
+offset_left = -20.5
+offset_top = -5.0
+offset_right = 19.5
+offset_bottom = 35.0
 grow_horizontal = 2
 texture = ExtResource("7_m3e03")
 expand_mode = 1

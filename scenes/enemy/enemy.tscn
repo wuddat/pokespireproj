@@ -923,8 +923,10 @@ offset_bottom = 33.0
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_top = 33.0
-offset_bottom = 33.0
+offset_left = -5.0
+offset_top = 28.0
+offset_right = -5.0
+offset_bottom = 28.0
 grow_horizontal = 2
 status_owner = NodePath("..")
 
