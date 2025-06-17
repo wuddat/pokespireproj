@@ -2,37 +2,34 @@
 extends Node
 
 var events := {
-	"mysterious_statue": {
-		"description": "You find a crumbling statue of an ancient Pokémon. It radiates a gentle warmth.",
-		"choices": [
-			{
-				"text": "Offer a Pokéball",
-				"effects": {
-					"remove_item": "pokeball",
-					"gain_card": "blessing_of_mew"
-				}
-			},
-			{
-				"text": "Leave it alone",
-				"effects": {}
-			}
-		]
+	"move_tutor": {
+		"description": "An expert offers to teach your Pokémon a rare move of their specialty.",
+		"dynamic_choices": true,
+		"special_type": "move_tutor"
 	},
-	"ancient_book": {
-		"description": "A dusty tome lies open. It speaks of forgotten techniques...",
+	"imbued_stone": {
+		"description": "You find a strange stone glowing faintly with the symbol for TYPE...",
+		"dynamic_choices": true,
+		"special_type": "imbued_stone"
+	},
+	"tm_found": {
+		"description": "You stumble upon a TM...",
+		"dynamic_choices": true,
+		"special_type": "tm"
+	},
+	"strange_man": {
+		"description": "You stumble upon a mysterious man offering you a rare Pokémon...",
 		"choices": [
 			{
-				"text": "Study the book (-10 HP, gain random move card)",
+				"text": "Pay 20% of your gold.",
 				"effects": {
-					"lose_hp": 10,
-					"gain_random_move_card": true
+					"add_pokemon": "magikarp",
+					"gold_percent_cost": 20
 				}
 			},
 			{
-				"text": "Burn the book (gain gold)",
-				"effects": {
-					"gain_gold": 30
-				}
+				"text": "Walk away",
+				"effects": {}
 			}
 		]
 	}

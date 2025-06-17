@@ -12,11 +12,29 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.212841, 0.439923, 1, 1)
+border_color = Color(0.501524, 0.783101, 0.997451, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.290196)
+shadow_size = 1
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="Animation" id="Animation_jvjc4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_rdgft"]
 resource_name = "hover"
@@ -35,21 +53,6 @@ tracks/0/keys = {
 "values": [Vector2(-25, -54), Vector2(-25, -59), Vector2(-25, -54)]
 }
 
-[sub_resource type="Animation" id="Animation_jvjc4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(256, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ove1y"]
 _data = {
 &"RESET": SubResource("Animation_jvjc4"),
@@ -61,10 +64,6 @@ layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -281.0
-offset_top = -54.0
-offset_right = -281.0
-offset_bottom = -54.0
 grow_horizontal = 2
 script = ExtResource("1_sg8ul")
 

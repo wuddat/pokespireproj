@@ -100,19 +100,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Description" type="Label" parent="UILayer/UI"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "Would you choose an option below?"
 horizontal_alignment = 1
-
-[node name="RestButton" type="Button" parent="UILayer/UI"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Heal"
+autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_kdyuv")
 }
-
-[connection signal="pressed" from="UILayer/UI/RestButton" to="." method="_on_rest_button_pressed"]

@@ -89,63 +89,25 @@ func get_all_party_members() -> Array[PokemonStats]:
 
 func build_deck_from_starter(pkmn: PokemonStats) -> CardPile:
 	var pile := CardPile.new()
-	var move_to_resource_map = {
-		"attack": preload("res://data/moves/attack.tres"),
-		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres"),
-		"shift": preload("res://data/moves/shift.tres")
-	}
-	
-	var move_ids = starting_moves
-	for move_id in move_ids:
-		var move_data = MoveData.moves.get(move_id)
-		if move_data == null:
-			continue
-		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
-		if card_type == null:
-			continue
-		var card: Card = card_type.duplicate()
-		if card.has_method("setup_from_data"):
-			card.setup_from_data(move_data)
+	var move_cards := Utils.create_card_pile(starting_moves).cards
+	for card in move_cards:
 		card.pkmn_owner_uid = pkmn.uid
 		card.pkmn_icon = pkmn.icon
 		card.pkmn_owner_name = pkmn.species_id
 		pile.add_card(card)
-	move_ids = starting_items
-	for move_id in move_ids:
-		var move_data = MoveData.moves.get(move_id)
-		if move_data == null:
-			continue
-		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
-		if card_type == null:
-			continue
-		var card: Card = card_type.duplicate()
-		if card.has_method("setup_from_data"):
-			card.setup_from_data(move_data)
-			pile.add_card(card)
+	
+	var item_cards := Utils.create_card_pile(starting_items).cards
+	for card in item_cards:
+		pile.add_card(card)
+		
 	return pile
 
 
 func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
 	var pile := CardPile.new()
-	var move_to_resource_map = {
-		"attack": preload("res://data/moves/attack.tres"),
-		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres"),
-		"shift": preload("res://data/moves/shift.tres")
-	}
+	var cards := Utils.create_card_pile(pkmn.move_ids).cards
 	
-	var move_ids = pkmn.move_ids
-	for move_id in move_ids:
-		var move_data = MoveData.moves.get(move_id)
-		if move_data == null:
-			continue
-		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
-		if card_type == null:
-			continue
-		var card: Card = card_type.duplicate()
-		if card.has_method("setup_from_data"):
-			card.setup_from_data(move_data)
+	for card: Card in cards:
 		card.pkmn_owner_uid = pkmn.uid
 		card.pkmn_icon = pkmn.icon
 		card.pkmn_owner_name = pkmn.species_id
@@ -154,34 +116,7 @@ func build_deck_from_pokemon(pkmn: PokemonStats) -> CardPile:
 
 
 func build_deck_from_move_ids(move_ids: Array[String]) -> CardPile:
-	var pile := CardPile.new()
-	
-	var move_to_resource_map = {
-		"attack": preload("res://data/moves/attack.tres"),
-		"defense": preload("res://data/moves/block.tres"),
-		"power": preload("res://data/moves/power.tres"),
-		"shift": preload("res://data/moves/shift.tres")
-	}
-
-	for move_id in move_ids:
-		var move_data = MoveData.moves.get(move_id)
-		if move_data == null:
-			push_warning("Move ID '%s' not found" % move_id)
-			continue
-			
-		var card_type: Card = move_to_resource_map.get(move_data.get("category", "attack"))
-		if card_type == null:
-			push_warning("Move ID '%s' for category '%s' " % move_data.get("category"))
-			continue
-			
-		var card := card_type.duplicate()
-		if card.has_method("setup_from_data"):
-			card.setup_from_data(move_data)
-		pile.add_card(card)
-		#pile.add_card(preload("res://characters/bulbasaur/cards/bulbasaur_vinewhip.tres"))
-		#pile.add_card(preload("res://characters/bulbasaur/cards/powerTest.tres"))
-		
-	return pile
+	return Utils.create_card_pile(move_ids)
 
 
 func build_battle_deck(selected_pokemon: Array[PokemonStats]) -> CardPile:

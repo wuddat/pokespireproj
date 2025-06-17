@@ -7,6 +7,7 @@ const rewardscene := preload("res://scenes/battle_reward/battle_reward.tscn")
 const pokecenterscene := preload("res://scenes/pokecenter/pokecenter.tscn")
 const shopscene := preload("res://scenes/shop/shop.tscn")
 const treasurescene := preload("res://scenes/treasure/treasure.tscn")
+const eventscene := preload("res://scenes/event/event.tscn")
 
 @export var run_startup: RunStartup
 
@@ -77,6 +78,7 @@ func _setup_event_connections() -> void:
 	Events.battle_won.connect(_on_battle_won)
 	Events.battle_reward_exited.connect(_show_map)
 	Events.pokecenter_exited.connect(_show_map)
+	Events.event_room_exited.connect(_show_map)
 	Events.map_exited.connect(_on_map_exited)
 	Events.shop_exited.connect(_show_map)
 	Events.treasure_room_exited.connect(_show_map)
@@ -127,6 +129,11 @@ func _on_pokecenter_entered() -> void:
 	var pokecenter_scene: Pokecenter = _change_view(pokecenterscene) as Pokecenter
 	pokecenter_scene.char_stats = character
 
+func _on_event_entered() -> void:
+	var scene := _change_view(eventscene) as EventScene
+	scene.char_stats = character
+	scene.run_stats = stats
+
 
 func _on_battle_won() -> void:
 	var reward_scene := _change_view(rewardscene) as BattleReward
@@ -154,6 +161,8 @@ func _on_map_exited(room: Room) -> void:
 			_on_shop_entered()
 		Room.Type.BOSS:
 			_on_battle_room_entered(room)
+		Room.Type.EVENT:
+			_on_event_entered()
 
 
 func _on_pokemon_captured(stats: PokemonStats) -> void:
