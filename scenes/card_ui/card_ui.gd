@@ -134,7 +134,7 @@ func _on_char_stats_changed() -> void:
 
 
 func play_card_with_delay(card: Card) -> void:
-	Events.card_played.emit(self)
+	Events.card_played.emit(card)
 	char_stats.mana -= card.cost
 	card.random_targets.clear()
 

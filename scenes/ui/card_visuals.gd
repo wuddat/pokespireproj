@@ -10,9 +10,36 @@ extends Control
 @onready var rarity: TextureRect = $Rarity
 @onready var effect: Label = $Effect
 @onready var owner_icon: TextureRect = $OwnerIcon
+@onready var type: Sprite2D = $Type
 
 var card_set := false
 var stats_set := false
+
+const TYPE_ICON_INDEX := {
+	"normal": 0,
+	"grass": 1,
+	"fire": 2,
+	"water": 3,
+	"fighting": 4,
+	"electric": 5,
+	"flying": 6,
+	"bug": 7,
+	"poison": 8,
+	"ice": 9,
+	"rock": 10,
+	"ground": 11,
+	"steel": 12,
+	"psychic": 13,
+	"ghost": 14,
+	"dark": 15,
+	"fairy": 16,
+	"dragon": 17
+}
+
+const ICON_SIZE := Vector2(38, 38)
+const ICON_START := Vector2(16, 16)
+const ICON_SPACING := Vector2(54, 54) 
+const ICONS_PER_ROW := 9
 
 func _ready():
 	await get_tree().process_frame
@@ -39,7 +66,7 @@ func _update_visuals() -> void:
 	if not is_instance_valid(card):
 		return
 
-
+	update_type_icon(card.damage_type)
 	cost.text = str(card.cost)
 	effect.text = str(card.power)
 	effect.modulate = Card.TYPE_COLORS[card.type]
@@ -62,3 +89,20 @@ func get_owner_pokemon(uid: String) -> PokemonStats:
 		if pkmn.uid == uid:
 			return pkmn
 	return null
+
+
+func update_type_icon(damage_type: String) -> void:
+	var type := damage_type.to_lower()
+	if not TYPE_ICON_INDEX.has(type):
+		$Type.visible = false
+		return
+
+	var index = TYPE_ICON_INDEX[type]
+	var col = index % ICONS_PER_ROW
+	var row = index / ICONS_PER_ROW
+
+	var region_x = ICON_START.x + col * ICON_SPACING.x
+	var region_y = ICON_START.y + row * ICON_SPACING.y
+	
+	$Type.visible = true
+	$Type.region_rect = Rect2(region_x, region_y, ICON_SIZE.x, ICON_SIZE.y)

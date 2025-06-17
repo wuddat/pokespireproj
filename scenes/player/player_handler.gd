@@ -175,7 +175,7 @@ func restore_fainted_cards(uid: String) -> void:
 
 func _on_card_played(card: Card) -> void:
 	if card.exhausts or card.type == Card.Type.POWER:
-		return	
+		return
 	character.discard.add_card(card)
 
 

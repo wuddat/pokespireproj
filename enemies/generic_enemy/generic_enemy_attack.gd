@@ -9,6 +9,7 @@ extends EnemyAction
 @export var self_status: Array[Status] = []
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
+@export var damage_type: String
 
 func setup_from_data(data: Dictionary) -> void:
 	status_effects = []
@@ -21,6 +22,7 @@ func setup_from_data(data: Dictionary) -> void:
 	splash_damage = data.get("splash_damage", 0)
 	self_damage = data.get("self_damage", 0)
 	self_heal = data.get("self_heal", 0)
+	damage_type = data.get("type", "normal")
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 	type = EnemyAction.Type.CHANCE_BASED
@@ -32,6 +34,7 @@ func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
 	intent.base_text = damage_display
 	intent.current_text = str(damage)
+	intent.damage_type = damage_type
 	if damage <= 5:
 		intent.icon = preload("res://art/tile_0103.png")
 	elif damage > 5 and damage <= 10:
@@ -84,7 +87,8 @@ func perform_action() -> void:
 	self_damage,
 	self_heal,
 	self_status,
-	enemy
+	enemy,
+	damage_type
 )
 
 func update_intent_text() -> void:

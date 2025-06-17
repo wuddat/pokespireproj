@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://spupfh640ekm"]
+[gd_scene load_steps=10 format=3 uid="uid://spupfh640ekm"]
 
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_x0ouv"]
 [ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_imfec"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bltcdih6elcop" path="res://characters/bulbasaur/cards/powerTest.tres" id="3_m3e03"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="6_imfec"]
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_m3e03"]
+[ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="8_bp74k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m3e03"]
 font_size = 8
@@ -14,10 +15,10 @@ font_color = Color(0.212841, 0.439923, 1, 1)
 
 [node name="CardVisuals" type="Control"]
 process_mode = 3
-custom_minimum_size = Vector2(37, 62)
+custom_minimum_size = Vector2(45, 62)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 37.0
+offset_right = 45.0
 offset_bottom = 62.0
 theme = ExtResource("1_x0ouv")
 script = ExtResource("2_imfec")
@@ -30,6 +31,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 11.0
+offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -54,9 +56,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -17.5
+offset_left = -21.4999
 offset_top = 1.0
-offset_right = 2.5
+offset_right = -1.49995
 offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -71,9 +73,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -7.5
+offset_left = -11.4999
 offset_top = 20.0
-offset_right = 12.5
+offset_right = 8.50005
 offset_bottom = 40.0
 grow_horizontal = 2
 rotation = 3.14159
@@ -99,11 +101,18 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.5
-offset_top = -5.0
-offset_right = 19.5
-offset_bottom = 35.0
+offset_left = -22.4999
+offset_top = -3.0
+offset_right = 12.5001
+offset_bottom = 32.0
 grow_horizontal = 2
 texture = ExtResource("7_m3e03")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Type" type="Sprite2D" parent="."]
+position = Vector2(37, 23)
+scale = Vector2(0.421053, 0.421053)
+texture = ExtResource("8_bp74k")
+region_enabled = true
+region_rect = Rect2(16, 70, 38, 38)

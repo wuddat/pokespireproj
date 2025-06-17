@@ -1,35 +1,95 @@
-[gd_scene load_steps=4 format=3 uid="uid://djn4clek6m1mn"]
+[gd_scene load_steps=10 format=3 uid="uid://djn4clek6m1mn"]
 
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_mub4x"]
 [ext_resource type="Script" uid="uid://dp28gj3v4djpn" path="res://scenes/ui/intent_ui.gd" id="1_sg8ul"]
 [ext_resource type="Texture2D" uid="uid://bkc5qr388q57w" path="res://art/sprites/icons/25-cosplay.png" id="2_rdgft"]
+[ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_jvjc4"]
+[ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="4_ove1y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdgft"]
+bg_color = Color(0.76662, 0.76662, 0.76662, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.212841, 0.439923, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Animation" id="Animation_rdgft"]
+resource_name = "hover"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.43333),
+"transitions": PackedFloat32Array(0.594604, 1.68179, 0.615572),
+"update": 0,
+"values": [Vector2(-25, -54), Vector2(-25, -59), Vector2(-25, -54)]
+}
+
+[sub_resource type="Animation" id="Animation_jvjc4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ove1y"]
+_data = {
+&"RESET": SubResource("Animation_jvjc4"),
+&"hover": SubResource("Animation_rdgft")
+}
 
 [node name="IntentUI" type="Control"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_left = -281.0
+offset_top = -54.0
+offset_right = -281.0
+offset_bottom = -54.0
 grow_horizontal = 2
 script = ExtResource("1_sg8ul")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rdgft")
+
+[node name="Target" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-12, 17)
+texture = ExtResource("2_rdgft")
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 44.0
 offset_bottom = 40.0
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="Target" type="TextureRect" parent="HBoxContainer2"]
-z_index = 1
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("2_rdgft")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2"]
 layout_mode = 2
-theme_override_constants/separation = -4
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer2/HBoxContainer"]
@@ -44,3 +104,24 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "888"
 vertical_alignment = 1
+
+[node name="TypeIcon" type="Sprite2D" parent="HBoxContainer2"]
+position = Vector2(53, 20)
+scale = Vector2(0.394737, 0.394737)
+texture = ExtResource("4_jvjc4")
+region_enabled = true
+region_rect = Rect2(16, 16, 38, 38)
+
+[node name="arrow" type="Sprite2D" parent="HBoxContainer2"]
+modulate = Color(1, 0.287307, 0.225237, 1)
+position = Vector2(31, 35)
+rotation = 3.14159
+scale = Vector2(0.701956, 0.701956)
+texture = ExtResource("4_ove1y")
+region_rect = Rect2(16, 16, 38, 38)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ove1y")
+}
+autoplay = "hover"

@@ -211,6 +211,9 @@ func update_draftable_cards() -> void:
 		var pkmn_draft_cards: CardPile = build_deck_from_pokemon(pkmn)
 		for card: Card in pkmn_draft_cards.cards:
 			new_draft_deck.add_card(card)
+		for card in deck.cards:
+			if pkmn.uid == card.pkmn_owner_uid:
+				card.pkmn_icon = pkmn.icon
 	
 	draftable_cards = new_draft_deck
 

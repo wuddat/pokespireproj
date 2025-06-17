@@ -27,6 +27,7 @@ Utils="*res://utils/utils.gd"
 StatusData="*res://global/status_data.gd"
 EventData="*res://global/event_data.gd"
 EventEffectResolver="*res://global/event_effect_resolver.gd"
+Effectiveness="*res://global/type_chart.gd"
 
 [display]
 

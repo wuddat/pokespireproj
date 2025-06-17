@@ -53,7 +53,8 @@ func animate_to_targets(
 	self_damage: int,
 	self_heal: int,
 	self_status: Array[Status],
-	enemy: Node
+	enemy: Node,
+	damage_type: String
 ) -> void:
 	if index >= targets_to_hit.size():
 		# Cleanup effects after final target
@@ -78,7 +79,7 @@ func animate_to_targets(
 
 	var target_node = targets_to_hit[index]
 	if not is_instance_valid(target_node):
-		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy)
+		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
 		return
 
 	var start_pos = enemy.global_position
@@ -88,7 +89,9 @@ func animate_to_targets(
 	tween.tween_property(enemy, "global_position", end_pos, 0.3)
 
 	var dmg_effect := DamageEffect.new()
-	dmg_effect.amount = total_damage
+	var target_types = target_node.stats.type
+	var mult = Effectiveness.get_multiplier(damage_type, target_types)
+	dmg_effect.amount = round(total_damage * mult)
 	dmg_effect.sound = sound
 
 	tween.tween_callback(func():
@@ -115,5 +118,5 @@ func animate_to_targets(
 	tween.tween_property(enemy, "global_position", start_pos, 0.3)
 
 	tween.finished.connect(func():
-		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy)
+		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
 	)

@@ -7,14 +7,14 @@
 [node name="Tier03Enemies" type="Node2D"]
 script = ExtResource("1_cuwp1")
 
-[node name="Enemy" parent="." instance=ExtResource("2_4ksjp")]
-position = Vector2(387, 150)
-stats = ExtResource("3_3hlcy")
-
 [node name="Enemy2" parent="." instance=ExtResource("2_4ksjp")]
-position = Vector2(285, 151)
+position = Vector2(284, 118)
 stats = ExtResource("3_3hlcy")
 
 [node name="Enemy3" parent="." instance=ExtResource("2_4ksjp")]
 position = Vector2(337, 138)
+stats = ExtResource("3_3hlcy")
+
+[node name="Enemy" parent="." instance=ExtResource("2_4ksjp")]
+position = Vector2(387, 160)
 stats = ExtResource("3_3hlcy")

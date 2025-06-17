@@ -28,6 +28,7 @@ const TYPE_COLORS := {
 @export var target: Target
 @export var cost: int
 @export var power: int
+@export var damage_type: String
 @export var exhausts: bool = false
 @export var pkmn_owner_uid: String
 @export var pkmn_owner_name: String
@@ -121,6 +122,7 @@ func setup_from_data(data: Dictionary) -> void:
 	name = data.get("name", "CardNameError")
 	power = data.get("power", 88)
 	base_power = power
+	damage_type = data.get("type", "normal")
 	cost = data.get("cost", 88)
 	tooltip_text = data.get("description", "CardToolTipError")
 	var iconpath = data.get("icon_path", "res://art/arrow.png")

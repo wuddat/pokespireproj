@@ -6,7 +6,6 @@ func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-	print_stack()
 	var mod_dmg := await player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
 	if enemy_modifiers:
@@ -23,6 +22,11 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 					if status.id == bonus_damage_if_target_has_status:
 						mod_dmg *= bonus_damage_multiplier
 						break
+	if targets:
+		var target_types = targets[0].stats.type
+		var type_multiplier = Effectiveness.get_multiplier(damage_type, target_types)
+		mod_dmg *= type_multiplier
+		mod_dmg = round(mod_dmg)
 
 		
 	return tooltip_text % mod_dmg
@@ -64,8 +68,14 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 
 	#Primary Hit
 	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
+	var type_multiplier := Effectiveness.get_multiplier(damage_type, primary_target.stats.type)
+	print("Damage type is: %s against target: %s for multiplyer of %s" % [damage_type, primary_target.stats.type, type_multiplier])
+	var effectiveness_damage = modifiers.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = round(effectiveness_damage * type_multiplier)
+	if type_multiplier > 1:
+		damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
+	else:
+		damage_effect.sound = sound
 	total_damage_dealt += damage_effect.amount
 	if targets.size() < 2:
 		damage_effect.execute([primary_target])

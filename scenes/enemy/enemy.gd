@@ -4,6 +4,7 @@ extends Area2D
 
 const ARROW_OFFSET := 20
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
+const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 const WOBBLE: AudioStream = preload("res://art/sounds/sfx/wobble.wav")
 const BREAKOUT = preload("res://art/sounds/sfx/pokeball_release.wav")
 const CAUGHT = preload("res://art/sounds/sfx/caught.wav")
@@ -207,6 +208,11 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
+	
+	if modified_damage > 0:
+		var dmg_text := COMBAT_TEXT.instantiate()
+		add_child(dmg_text)
+		dmg_text.show_text("%s" % modified_damage)
 	
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
