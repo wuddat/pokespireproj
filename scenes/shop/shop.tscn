@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6nj6yoyul55h"]
+[gd_scene load_steps=6 format=3 uid="uid://c6nj6yoyul55h"]
 
 [ext_resource type="Script" uid="uid://d0h304pp8xh1m" path="res://scenes/shop/shop.gd" id="1_100s2"]
+[ext_resource type="AudioStream" uid="uid://cepml4sqwiirn" path="res://art/music/shop.mp3" id="2_jp048"]
 [ext_resource type="Texture2D" uid="uid://dt2fk18r22nhw" path="res://art/shop.png" id="2_qaxay"]
 [ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="4_jp048"]
 
@@ -15,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_100s2")
+music = ExtResource("2_jp048")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=26 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
 [ext_resource type="PackedScene" uid="uid://b7kjap0xllfyb" path="res://scenes/enemy/enemy.tscn" id="2_oiw7q"]
 [ext_resource type="Script" uid="uid://7r3b56mpfc5e" path="res://scenes/ui/hand.gd" id="2_xd4uy"]
 [ext_resource type="AudioStream" uid="uid://c41t7pan2dphc" path="res://art/music/19 Victory (VS Wild Pokemon).mp3" id="3_fe4ja"]
+[ext_resource type="AudioStream" uid="uid://bcqjsytvyxds5" path="res://art/music/18 Battle (VS Wild Pokemon).mp3" id="3_pyfix"]
 [ext_resource type="Script" uid="uid://cqwjjgje4sygp" path="res://scenes/enemy/enemy_handler.gd" id="4_kd6yx"]
 [ext_resource type="PackedScene" uid="uid://bru5ajayecy0k" path="res://scenes/player/player.tscn" id="4_oiw7q"]
 [ext_resource type="PackedScene" uid="uid://ih1u373ufo54" path="res://scenes/card_target_selector/card_target_selector.tscn" id="4_py4tk"]
@@ -30,6 +31,7 @@ size = Vector2(512, 178)
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_kd6yx")
 music = ExtResource("3_fe4ja")
+battle_music = ExtResource("3_pyfix")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="."]

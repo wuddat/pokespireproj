@@ -5,6 +5,7 @@ extends Node2D
 @export var battle_stats: BattleStats
 @export var char_stats: CharacterStats
 @export var music: AudioStream
+@export var battle_music: AudioStream
 @export var party_selector: HBoxContainer
 @onready var status_view: StatusView = $StatusUI/StatusView
 
@@ -61,6 +62,8 @@ func start_battle() -> void:
 	
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
+
+	MusicPlayer.play(battle_music, true)
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()

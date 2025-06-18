@@ -8,6 +8,8 @@ const SHOP_PKMN = preload("res://scenes/shop/shop_pkmn.tscn")
 @export var char_stats: CharacterStats
 @export var run_stats: RunStats
 
+@export var music: AudioStream
+
 @onready var cards: HBoxContainer = %Cards
 @onready var card_detail_overlay: CardDetailOverlay = %CardDetailOverlay
 @onready var pokemon: HBoxContainer = %Pokemon
@@ -30,6 +32,7 @@ func _input(event: InputEvent) -> void:
 func populate_shop() -> void:
 	_generate_shop_cards()
 	_generate_shop_pkmn()
+	MusicPlayer.play(music, true)
 
 func _generate_shop_cards() -> void:
 	var shop_card_array: Array[Card] = []
