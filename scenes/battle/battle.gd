@@ -2,6 +2,8 @@
 class_name Battle
 extends Node2D
 
+signal evolution_queue_completed
+
 @export var battle_stats: BattleStats
 @export var char_stats: CharacterStats
 @export var music: AudioStream
@@ -23,6 +25,8 @@ var stat_ui_by_uid: Dictionary = {}
 
 var evolution_in_progress := false
 
+var evolution_queue: Array[PokemonBattleUnit] = []
+var is_processing_evolution := false
 
 
 func _ready() -> void:
@@ -123,10 +127,10 @@ func _on_enemies_child_order_changed() -> void:
 	print("evolution in progress is: ", evolution_in_progress)
 
 	if enemy_handler.get_child_count() == 0:
-		if evolution_in_progress:
-			print("🕐 Evolution in progress, waiting...")
-			await Events.evolution_completed
-		
+		if is_processing_evolution or evolution_queue.size() > 0:
+			print("🕐 Waiting for evolution queue to finish...")
+			await evolution_queue_completed
+			
 		MusicPlayer.play(music, true)
 		
 		Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)
@@ -164,10 +168,29 @@ func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
 func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
 	if not is_instance_valid(pkmn): return
 
-	evolution_in_progress = true
-	await _play_evolution_cutscene(pkmn)
-	evolution_in_progress = false
-	Events.evolution_completed.emit()
+	#evolution_in_progress = true
+	#await _play_evolution_cutscene(pkmn)
+	#evolution_in_progress = false
+	#Events.evolution_completed.emit()
+	
+	evolution_queue.append(pkmn)
+
+	if not is_processing_evolution:
+			_process_evolution_queue()
+
+
+func _process_evolution_queue() -> void:
+	is_processing_evolution = true
+	
+	while evolution_queue.size() > 0:
+		var pkmn = evolution_queue.pop_front()
+		evolution_in_progress = true
+		await _play_evolution_cutscene(pkmn)
+		evolution_in_progress = false
+		Events.evolution_completed.emit()
+		await get_tree().create_timer(0.5).timeout
+	is_processing_evolution = false
+	evolution_queue_completed.emit()
 
 
 func _on_evolution_completed():
