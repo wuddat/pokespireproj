@@ -2,6 +2,7 @@ class_name CardPileView
 extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
+const PKMN_CARD_DISPLAYER := preload("res://scenes/ui/pkmn_card_displayer.tscn")
 
 @export var card_pile: CardPile
 @export var char_stats: CharacterStats
@@ -10,6 +11,7 @@ const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 @onready var cards: GridContainer = %Cards
 @onready var card_detail_overlay: CardDetailOverlay = %CardDetailOverlay
 @onready var backbtn: Button = %BackButton
+@onready var scroll_container: VBoxContainer = %VBoxContainer
 
 
 func _ready() -> void:
@@ -30,7 +32,33 @@ func _input(event: InputEvent) -> void:
 			hide()
 
 
-func show_current_view(new_title: String, randomized: bool = false) -> void:
+func show_current_view(new_title: String, deck_view: bool = false, randomized: bool = false) -> void:
+	if deck_view:
+		scroll_container.show()
+		for pokemon: Node in scroll_container.get_children():
+			pokemon.queue_free()
+		for  pkmn in char_stats.current_party:
+			var pkmn_display := PKMN_CARD_DISPLAYER.instantiate() as PkmnCardDisplayer
+			scroll_container.add_child(pkmn_display)
+			var matching_cards := card_pile.cards.filter(func(c): return c.pkmn_owner_uid == pkmn.uid)
+			pkmn_display.pkmn = pkmn
+			pkmn_display.char_stats = char_stats
+			pkmn_display.card_detail_overlay = card_detail_overlay
+			pkmn_display.update_visuals()
+			
+			for card in matching_cards:
+				var card_ui := CARD_MENU_UI_SCENE.instantiate()
+				card_ui.card = card
+				card_ui.set_char_stats(char_stats)
+				card_ui.tooltip_requested.connect(card_detail_overlay.show_tooltip)
+				pkmn_display.add_card(card_ui)
+			
+		cards.hide()
+	if deck_view == false:
+		cards.show()
+		scroll_container.hide()
+		
+		
 	for card: Node in cards.get_children():
 		card.queue_free()
 		

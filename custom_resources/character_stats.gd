@@ -197,3 +197,13 @@ func print_faint_pile():
 		print("UID:", uid)
 		for card in faint_pile[uid].cards:
 			print(" -", card.move_id)
+
+
+func get_party_pkmn_cards(pkmn_uid: String) -> CardPile:
+	var card_pile = CardPile.new()
+	for card: Card in deck.cards:
+		if card.pkmn_owner_uid == pkmn_uid:
+			card_pile.add_card(card)
+	return card_pile
+			
+			

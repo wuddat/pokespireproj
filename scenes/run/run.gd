@@ -104,7 +104,8 @@ func 	_setup_top_bar():
 	gold_ui.run_stats = stats
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
-	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
+	deck_view.char_stats = character
+	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))
 	party_selector.char_stats = character
 	party_selector.update_buttons()
 

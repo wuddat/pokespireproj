@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvwwlm2ng1you"]
+
+[ext_resource type="Script" uid="uid://clofu2s5o0fkc" path="res://scenes/ui/pkmn_card_displayer.gd" id="1_4hupk"]
+[ext_resource type="Texture2D" uid="uid://rjfylssdvk1q" path="res://art/sprites/1.png" id="2_74y5o"]
+
+[node name="PkmnCardDisplayer" type="HBoxContainer"]
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_4hupk")
+
+[node name="PkmnTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_74y5o")
+stretch_mode = 5
+
+[node name="PkmnName" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Execuggator"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cards" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -21
+columns = 15
