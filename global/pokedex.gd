@@ -34,7 +34,7 @@ func create_pokemon_instance(species_id: String) -> PokemonStats:
 	pokemon.icon = load(data.get("icon_path", "res://art/dottedline.png"))
 	pokemon.uid = "pkmn_" + str(Time.get_unix_time_from_system())
 	pokemon.evolves_to = data.get("evolves_to", "")
-	pokemon.evolution_level = data.get("evolution_level", -1)
+	pokemon.evolution_level = data.get("evolution_level", 101)
 
 	print("uid generated as: ", pokemon.uid)
 	

@@ -12,6 +12,7 @@ rarity = 0
 target = 0
 cost = 0
 power = 0
+damage_type = ""
 exhausts = false
 pkmn_owner_uid = ""
 pkmn_owner_name = ""

@@ -74,6 +74,8 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	damage_effect.amount = round(effectiveness_damage * type_multiplier)
 	if type_multiplier > 1:
 		damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
+	elif type_multiplier < 1:
+		damage_effect.sound = preload("res://art/sounds/not_effective.wav")
 	else:
 		damage_effect.sound = sound
 	total_damage_dealt += damage_effect.amount
@@ -129,4 +131,3 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			var status_to_apply := self_stat.duplicate()
 			self_effect.status = status_to_apply
 			self_effect.execute([battle_unit_owner])
-	Utils.print_resource(self)
