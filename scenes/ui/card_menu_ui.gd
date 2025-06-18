@@ -13,6 +13,8 @@ const BASE_Z_INDEX := 0
 @onready var visuals: CardVisuals = $Visuals
 @onready var tween := create_tween()
 
+var is_floatable: bool = false
+
 func _on_visuals_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
 		tooltip_requested.emit(card)
@@ -22,17 +24,19 @@ func _on_visuals_mouse_entered() -> void:
 		visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 		set_z_index(HOVER_Z_INDEX)
 		
-		tween.kill()  # stop any current tween
-		tween = create_tween()
-		tween.tween_property(self, "position:y", HOVER_OFFSET, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		if is_floatable:
+			tween.kill()  # stop any current tween
+			tween = create_tween()
+			tween.tween_property(self, "position:y", HOVER_OFFSET, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_visuals_mouse_exited() -> void:
 		visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
 		set_z_index(BASE_Z_INDEX)
 		
-		tween.kill()
-		tween = create_tween()
-		tween.tween_property(self, "position:y", 0, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		if is_floatable:
+			tween.kill()
+			tween = create_tween()
+			tween.tween_property(self, "position:y", 0, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
 func set_card(value: Card) -> void:

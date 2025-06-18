@@ -227,7 +227,7 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	
 	forgettable_cards = forgettable_cards.filter(
 		func(card: Card) -> bool:
-			return card.pkmn_owner_uid == pkmn.stats.uid
+			return card.pkmn_owner_uid == pkmn.stats.uid and card.rarity == Card.Rarity.COMMON
 	)
 	#print check
 	var forgettable_card_ids := forgettable_cards.map(

@@ -49,6 +49,7 @@ func show_current_view(new_title: String, deck_view: bool = false, randomized: b
 			for card in matching_cards:
 				var card_ui := CARD_MENU_UI_SCENE.instantiate()
 				card_ui.card = card
+				card_ui.is_floatable = true
 				card_ui.set_char_stats(char_stats)
 				card_ui.tooltip_requested.connect(card_detail_overlay.show_tooltip)
 				pkmn_display.add_card(card_ui)
