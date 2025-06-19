@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ConfusedStatus" load_steps=3 format=3 uid="uid://bebna4wp0e6l0"]
 
-[ext_resource type="Texture2D" uid="uid://bnkw8kvauiocm" path="res://art/statuseffects/confused-effect.png" id="1_fm4q2"]
+[ext_resource type="Texture2D" uid="uid://brn8mapqoabtw" path="res://art/status_effects/confused.png" id="1_fm4q2"]
 [ext_resource type="Script" uid="uid://csdxd7wtbydii" path="res://statuses/confused.gd" id="1_knqsm"]
 
 [resource]

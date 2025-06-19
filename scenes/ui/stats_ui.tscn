@@ -37,7 +37,6 @@ vertical_alignment = 1
 
 [node name="Health" parent="." instance=ExtResource("4_3ktwi")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 size_flags_vertical = 4
-show_max_hp = false
-bar_type = false

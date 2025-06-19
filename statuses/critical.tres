@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Critical" load_steps=3 format=3 uid="uid://cgqnwayjcve0s"]
 
-[ext_resource type="Texture2D" uid="uid://lh34tx5gsyqv" path="res://art/statuseffects/zap.png" id="1_6cj1j"]
+[ext_resource type="Texture2D" uid="uid://bxgmcxkvnq6bm" path="res://art/status_effects/critical.png" id="1_6cj1j"]
 [ext_resource type="Script" uid="uid://donccitvahriq" path="res://statuses/critical.gd" id="2_6cj1j"]
 
 [resource]

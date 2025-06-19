@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Seeded" load_steps=3 format=3 uid="uid://4bprwjxtocky"]
 
 [ext_resource type="Script" uid="uid://cvv8jxururss" path="res://statuses/seeded.gd" id="1_8eagu"]
-[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="1_i4nkq"]
+[ext_resource type="Texture2D" uid="uid://8rrl8wkb4bvs" path="res://art/status_effects/seeded.png" id="1_i4nkq"]
 
 [resource]
 script = ExtResource("1_8eagu")

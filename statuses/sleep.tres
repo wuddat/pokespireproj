@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Sleep" load_steps=3 format=3 uid="uid://cl87vn8yr2ok6"]
 
-[ext_resource type="Texture2D" uid="uid://ddjhwyndadle" path="res://art/statuseffects/sleep.png" id="1_t2tmk"]
+[ext_resource type="Texture2D" uid="uid://dvty6ru1m8pjf" path="res://art/status_effects/sleepy.png" id="1_t2tmk"]
 [ext_resource type="Script" uid="uid://rqfti8auyk0u" path="res://statuses/sleep.gd" id="2_hhqu3"]
 
 [resource]

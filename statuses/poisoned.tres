@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://iiiifcxxm1ri"]
 
-[ext_resource type="Texture2D" uid="uid://bxubjoq70bgfq" path="res://art/statuseffects/toxic.png" id="1_ajid8"]
+[ext_resource type="Texture2D" uid="uid://bux11a8ux54cv" path="res://art/status_effects/PoisonedIC_Masters.png" id="1_ajid8"]
 [ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="1_x0rus"]
 
 [resource]

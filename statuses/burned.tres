@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Burned" load_steps=3 format=3 uid="uid://cgl5qmgapsrnm"]
 
 [ext_resource type="Script" uid="uid://th5wflomgs70" path="res://statuses/burned.gd" id="1_a7vnf"]
-[ext_resource type="Texture2D" uid="uid://5p1m5qw5o8lp" path="res://art/statuseffects/fist.png" id="1_qyxwe"]
+[ext_resource type="Texture2D" uid="uid://83d17iteqdm" path="res://art/status_effects/BurnedIC_Masters.png" id="1_qyxwe"]
 
 [resource]
 script = ExtResource("1_a7vnf")

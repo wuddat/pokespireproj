@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AttackPower" load_steps=3 format=3 uid="uid://bnjj3deir31e3"]
 
-[ext_resource type="Texture2D" uid="uid://c8wlp4gswn3km" path="res://art/statuseffects/spooky.png" id="1_mv4ol"]
+[ext_resource type="Texture2D" uid="uid://coj4mhxug6ia6" path="res://art/status_effects/atkup.png" id="1_mv4ol"]
 [ext_resource type="Script" uid="uid://cvxirryx7k44x" path="res://statuses/attack_up.gd" id="2_cr3f4"]
 
 [resource]

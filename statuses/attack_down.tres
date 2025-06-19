@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AttackDown" load_steps=3 format=3 uid="uid://c5idcxcdkloms"]
 
-[ext_resource type="Texture2D" uid="uid://bqdll34u7vxxx" path="res://art/statuseffects/splash.png" id="1_m4vm0"]
+[ext_resource type="Texture2D" uid="uid://cjh3r50rj7bqf" path="res://art/status_effects/atkdwn.png" id="1_m4vm0"]
 [ext_resource type="Script" uid="uid://cvg0hnbj8vi8u" path="res://statuses/attack_down.gd" id="2_sjxwl"]
 
 [resource]
