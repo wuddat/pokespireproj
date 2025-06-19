@@ -28,6 +28,7 @@ var is_catchable: bool = false
 var is_caught: bool = false
 var is_asleep: bool = false
 var is_confused: bool = false
+var is_froze: bool = false
 var skip_turn: bool = false
 var has_slept: bool = false
 
@@ -160,9 +161,11 @@ func do_turn() -> void:
 
 
 func status_effect_checks() -> void:
-	if status_handler.has_status("flinched"):
-		print("😬 Enemy flinched and will skip turn.")
+	if status_handler.has_status("flinched") or status_handler.has_status("froze"):
+		print("😬 Enemy flinched or froze and will skip turn.")
 		status_handler.remove_status("flinched")
+		status_handler.remove_status("froze")
+		is_froze = false
 		skip_turn = true
 		
 	if status_handler.has_status("confused"):
@@ -316,7 +319,6 @@ func mark_as_caught() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	arrow.show()
-
 
 func _on_area_exited(_area: Area2D) -> void:
 	arrow.hide()

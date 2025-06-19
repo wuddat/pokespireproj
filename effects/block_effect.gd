@@ -16,3 +16,5 @@ func execute(targets: Array[Node]) -> void:
 				target.gain_block(amount, receiver_mod_type)
 				print("block EFFECT script says the amount is: ", amount)
 				SFXPlayer.play(sound)
+			if target.status_handler.has_and_consume_status("feeble"):
+				print("Feeble detected — block is reduced %s!" % target.stats.species_id)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Froze" load_steps=3 format=3 uid="uid://dc2u4d6gd2umx"]
+
+[ext_resource type="Texture2D" uid="uid://p1ed05xdmoab" path="res://art/status_effects/FrozenIC_Masters.png" id="1_02wy5"]
+[ext_resource type="Script" uid="uid://c0akhhyvv4aq5" path="res://statuses/froze.gd" id="1_hpuf1"]
+
+[resource]
+script = ExtResource("1_hpuf1")
+id = "froze"
+type = 2
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_02wy5")
+tooltip = "[color=aqua ]FROZE:[/color]
+The next attack will [color=red ]SHATTER[/color] for [color=red ]2X[/color] damage!"
+metadata/_custom_type_script = "uid://breq3elxr1644"

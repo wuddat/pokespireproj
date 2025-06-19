@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf40ljrl6qjwu"]
+
+[ext_resource type="Shader" uid="uid://p7aqhk62jt6d" path="res://test.gdshader" id="1_8uh7m"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="2_6uqi0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37kl0"]
+shader = ExtResource("1_8uh7m")
+shader_parameter/enabled = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.166
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Node2D" type="TextureRect"]
+material = SubResource("ShaderMaterial_37kl0")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -18.5
+offset_right = 18.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6uqi0")

@@ -85,6 +85,7 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		Target.ALL_ENEMIES:
 			return enemy_group
 		Target.ALL_ALLIES:
+			allies_group.append(battle_unit_owner)
 			return allies_group
 		Target.ALL:
 			return player_party + enemy_group
@@ -134,6 +135,7 @@ func setup_from_data(data: Dictionary) -> void:
 	self_damage = data.get("self_damage", 0)
 	self_heal = data.get("self_heal", 0)
 	splash_damage = data.get("splash_damage", 0)
+	requires_status = data.get("requires_status", "")
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 

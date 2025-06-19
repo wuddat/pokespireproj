@@ -61,7 +61,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		if requires_status != "":
 			var handler = target.get_node_or_null("StatusHandler")
 			if not handler or not handler.has_status(requires_status):
-				print("❌ Skipping %s due to missing required status: %s" % [target.name, requires_status])
+				print("❌ Skipping %s due to missing required status: %s" % [target.stats.species_id, requires_status])
 				continue
 
 		var handler = target.get_node_or_null("StatusHandler")

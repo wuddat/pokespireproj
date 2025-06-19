@@ -663,6 +663,26 @@
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
 	},
+	"gunkshot": {
+	  "name": "Gunk Shot",
+	  "id": "gunkshot",
+	  "category": "attack",
+	  "subtype": "all_enemies",
+	  "type": "poison",
+	  "target": "all_enemies",
+	  "power": 15,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage to a RANDOM enemy.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "self_damage": 0,
+	  "self_status": [],
+	  "bonus_damage_if_target_has_status": "",
+	  "bonus_damage_multiplier": 1,
+	  "rarity": "common",
+	  "requires_status": "poisoned"
+	},
 	"gust": {
 	  "name": "Gust",
 	  "id": "gust",
@@ -694,6 +714,22 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center][b]BLOCK[/b] for [color=blue]%s[/color] damage.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "common"
+	},
+	"haze": {
+	  "name": "Haze",
+	  "id": "haze",
+	  "category": "attack",
+	  "subtype": "all_allies",
+	  "type": "normal",
+	  "target": "allies",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["cleanse"],
+	  "self_status": ["cleanse"],
+	  "description": "[center]CLEANSE allies of ALL Status Effects![/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common"
 	},
@@ -842,6 +878,24 @@
 	  "description": "[center]Attempt to SLEEP a target![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "uncommon"
+	},
+	"iceshard": {
+	  "name": "Ice Shard",
+	  "id": "iceshard",
+	  "category": "attack",
+	  "subtype": "debuff",
+	  "type": "ice",
+	  "target": "enemy",
+	  "power": 2,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [
+		"chill"
+	  ],
+	  "description": "[center]Deal [color=red]%s[/color] damage  [color=red]2X[/color]and CHILL![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "common",
+	  "multiplay": 2
 	},
 	"irondefense": {
 	  "name": "Iron Defense",

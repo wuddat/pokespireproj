@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("2_fcnd0")
 id = "cleanse"
-type = 1
+type = 2
 stack_type = 1
-can_expire = true
-duration = 1
-stacks = 0
+can_expire = false
+duration = 0
+stacks = 1
 max_stacks = 999
 max_duration = 999
 icon = ExtResource("1_fcnd0")

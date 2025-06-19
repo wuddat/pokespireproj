@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Chill" load_steps=3 format=3 uid="uid://blq2qi3j7c0cp"]
+
+[ext_resource type="Texture2D" uid="uid://p1ed05xdmoab" path="res://art/status_effects/FrozenIC_Masters.png" id="1_cdris"]
+[ext_resource type="Script" uid="uid://ddg3bnbpa5n03" path="res://statuses/chill.gd" id="2_tpxjk"]
+
+[resource]
+script = ExtResource("2_tpxjk")
+id = "chill"
+type = 1
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+max_stacks = 4
+max_duration = 999
+icon = ExtResource("1_cdris")
+tooltip = "[color=aquamarine ]CHILL:[/color]
+Causes [color=aqua ]FROZE[/color] at 3 stacks. When [color=aqua ]FROZE[/color], [color=red ]SHATTER[/color] for [color=red ]2X[/color] damage!"
+metadata/_custom_type_script = "uid://breq3elxr1644"
