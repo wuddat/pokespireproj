@@ -49,6 +49,7 @@ var base_power: int
 @export var self_status: Array[Status] = []
 @export var multiplay: int = 1
 @export var randomplay: int = 0
+@export var requires_status: String = ""
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
 @export var splash_damage: int = 0

@@ -67,6 +67,7 @@ func update_intent(intent: Intent) -> void:
 	#print("🧠 IntentUI.update_intent called with:", intent)
 	#print("📊 Text: %s | Icon: %s | Target: %s" % [intent.current_text, intent.icon, intent.target])
 
+	
 	panel.visible = true
 	icon.texture = intent.icon
 	icon.visible = icon.texture != null

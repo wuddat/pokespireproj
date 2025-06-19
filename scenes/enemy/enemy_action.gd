@@ -81,9 +81,14 @@ func animate_to_targets(
 	if not is_instance_valid(target_node):
 		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
 		return
-
-	var start_pos = enemy.global_position
-	var end_pos = target_node.global_position + Vector2.RIGHT * 32
+	var start_pos
+	var end_pos
+	if total_damage <= 0:
+		start_pos = enemy.global_position
+		end_pos = enemy.global_position + Vector2.LEFT * 32
+	else:
+		start_pos = enemy.global_position
+		end_pos = target_node.global_position + Vector2.RIGHT * 32
 
 	var tween = create_tween().set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(enemy, "global_position", end_pos, 0.3)
