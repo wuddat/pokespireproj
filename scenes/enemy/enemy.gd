@@ -26,6 +26,8 @@ var current_action: EnemyAction : set = set_current_action
 
 var is_catchable: bool = false
 var is_caught: bool = false
+var is_asleep: bool = false
+var is_confused: bool = false
 var skip_turn: bool = false
 var has_slept: bool = false
 
@@ -49,6 +51,8 @@ func _ready():
 			print("No Pokedex data found for: " + stats.species_id)
 	else:
 		print("Stats or species_id not set yet.")
+	intent_ui.parent = self
+	intent_ui.status_handler = status_handler
 
 
 func set_current_action(value: EnemyAction) -> void:
@@ -142,12 +146,12 @@ func do_turn() -> void:
 
 	if not current_action:
 		return
-		
+	
 	current_action.update_intent_text()
 	intent_ui.update_intent(current_action.intent)
 	current_action.perform_action()
 	enemy_action_picker.select_valid_target()
-	skip_turn = false
+
 	
 	if status_handler.has_status("seeded"):
 		get_tree().create_timer(.5).timeout
@@ -164,6 +168,14 @@ func status_effect_checks() -> void:
 	if status_handler.has_status("confused"):
 			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
 			enemy_action_picker.select_confused_target()
+			is_confused = true
+	else:
+		is_confused = false
+	
+	if is_asleep and not status_handler.has_status("sleep"):
+		is_asleep = false
+		has_slept = true
+		print("🌅 Enemy woke up.")
 
 
 func catch_check() -> void:

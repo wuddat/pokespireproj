@@ -78,6 +78,7 @@ func perform_action() -> void:
 	if enemy and enemy.modifier_handler:
 		final_damage = enemy.modifier_handler.get_modified_value(final_damage, Modifier.Type.DMG_DEALT)
 	
+	
 	animate_to_targets(
 	targets_to_hit,
 	0,

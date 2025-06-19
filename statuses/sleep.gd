@@ -7,43 +7,33 @@ func get_tooltip() -> String:
 	return tooltip % duration
 
 func initialize_status(target: Node) -> void:
-	if not target.has_slept:
-		target.skip_turn = true
-		target.has_slept = true
-		
-		if target is Enemy:
-			var enemy_target := target as Enemy
-			enemy_target.intent_ui.icon.texture = SLEEP_ICON
-			enemy_target.intent_ui.label.text = ""
-			enemy_target.intent_ui.target.texture = null
-
-			print("🟡 Sleep: first time - skipping turn")
-			print("🟡 initialize_status stacks: %d" % stacks)
+	if target is Enemy:
+		if target.is_asleep:
 			target.status_handler.remove_status("sleep")
-
-	status_applied.emit(self)
-
-
-	
+			return
+		if not target.has_slept:
+			target.skip_turn = true
+			target.is_asleep = true
+			target.status_handler.remove_status("sleep")
+			print("🟢 Sleep: First application - skipping and flagging")
 
 
 func apply_status(target: Node) -> void:
 	print("🔵 Sleep: apply_status() called on %s" % target.name)
 	print("🔵 Current stacks: %d" % stacks)
 	print("🔵 Target has_slept: %s" % target.has_slept)
-
-	if target.has_slept:
-		if stacks > 1:
-			target.skip_turn = true
-			
-			if target is Enemy:
+	
+	
+	if target is Enemy:
+		if target.is_asleep:
+			target.status_handler.remove_status("sleep")
+			return
+		if target.has_slept:
+			if stacks > 1:
+				target.skip_turn = true
+				target.is_asleep = true
 				var enemy_target := target as Enemy
-				enemy_target.intent_ui.icon.texture = SLEEP_ICON
-				enemy_target.intent_ui.label.text = ""
-				enemy_target.intent_ui.target.texture = null
-
-				print("🔴 Sleep: second skip triggered - removing status")
-				target.status_handler.remove_status("sleep") # 💥 Now safe to remove
+				target.status_handler.remove_status("sleep")
 		else:
 			print("🟢 Sleep: stacked up, but not enough to re-trigger sleep")
 	else:

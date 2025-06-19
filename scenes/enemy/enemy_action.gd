@@ -36,7 +36,7 @@ func update_intent_text() -> void:
 	if enemy.status_handler.has_status("confused"):
 		print("ENEMY_ACTION.GD 😵 Enemy is confused, setting confused icon.")
 		intent.icon = confused_icon
-		intent.current_text = str(0)  # or damage fallback
+		intent.current_text = ""  # or damage fallback
 		intent.target = confused_icon
 		return
 

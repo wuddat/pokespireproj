@@ -11,7 +11,7 @@ func initialize_status(target: Node) -> void:
 		return
 
 	var enemy_target := target as Enemy
-
+	enemy_target.is_confused = true
 	if enemy_target.enemy_action_picker:
 		print("[CONFUSE] applied to: ", enemy_target.stats.species_id)
 		enemy_target.enemy_action_picker.select_confused_target()
@@ -20,8 +20,6 @@ func initialize_status(target: Node) -> void:
 			var confused_target = enemy_target.enemy_action_picker.target
 			enemy_target.current_action.target = confused_target
 			print("[CONFUSE] updated enemy target to: ", enemy_target.stats.species_id)
-	enemy_target.intent_ui.target.texture = CONFUSED_ICON
-	enemy_target.intent_ui.target.visible = true
 	enemy_target.current_action.update_intent_text()
 	
 

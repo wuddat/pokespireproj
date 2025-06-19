@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ConfusedStatus" load_steps=3 format=3 uid="uid://bebna4wp0e6l0"]
 
-[ext_resource type="Texture2D" uid="uid://b4jcbhse8oskj" path="res://art/statuseffects/mind.png" id="1_fm4q2"]
+[ext_resource type="Texture2D" uid="uid://bnkw8kvauiocm" path="res://art/statuseffects/confused-effect.png" id="1_fm4q2"]
 [ext_resource type="Script" uid="uid://csdxd7wtbydii" path="res://statuses/confused.gd" id="1_knqsm"]
 
 [resource]
@@ -15,5 +15,5 @@ max_stacks = 999
 max_duration = 999
 icon = ExtResource("1_fm4q2")
 tooltip = "[color=rosybrown]CONFUSE: [/color]
-This unit is confused and may attack the wrong target!"
+May attack the wrong target!"
 metadata/_custom_type_script = "uid://breq3elxr1644"
