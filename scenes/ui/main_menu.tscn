@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://bk6msjyit0kj7" path="res://art/Pokemon Solid.ttf" id="1_m1kxf"]
 [ext_resource type="Script" uid="uid://b2u82br2igokl" path="res://scenes/ui/main_menu.gd" id="1_x2yvf"]
-[ext_resource type="AudioStream" uid="uid://dripp72vg3t7w" path="res://art/music/TitleTheme.mp3" id="2_uhagc"]
+[ext_resource type="AudioStream" uid="uid://d4fb3s0fs3iud" path="res://art/music/8bit_pkmn_theme_.ogg" id="2_uhagc"]
 [ext_resource type="Texture2D" uid="uid://dflgoqc1mu7ql" path="res://art/bulbasaur_spritesheet.png" id="3_uhagc"]
 [ext_resource type="SpriteFrames" uid="uid://c5jw45j5u78xf" path="res://art/frames/charmander_frames.tres" id="3_x2yvf"]
 [ext_resource type="SpriteFrames" uid="uid://cwpej1o1muuub" path="res://art/frames/squirtle_frames.tres" id="5_uhagc"]

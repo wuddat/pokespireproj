@@ -14,7 +14,7 @@ const ICONS:={
 	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
 }
 
-@export var music = preload("res://art/sounds/sfx/ui_window_close.wav")
+@export var music = preload("res://art/sounds/sfx/ui_window_open.wav")
 
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
 @onready var line_2d: Line2D = $Visuals/Line2D

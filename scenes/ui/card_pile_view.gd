@@ -3,6 +3,7 @@ extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 const PKMN_CARD_DISPLAYER := preload("res://scenes/ui/pkmn_card_displayer.tscn")
+const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 
 @export var card_pile: CardPile
 @export var char_stats: CharacterStats
@@ -15,7 +16,7 @@ const PKMN_CARD_DISPLAYER := preload("res://scenes/ui/pkmn_card_displayer.tscn")
 
 
 func _ready() -> void:
-	backbtn.pressed.connect(hide)
+	backbtn.pressed.connect(_on_back_pressed)
 	
 	for card: Node in cards.get_children():
 		card.queue_free()
@@ -29,10 +30,12 @@ func _input(event: InputEvent) -> void:
 		if card_detail_overlay.visible:
 			card_detail_overlay.hide_tooltip()
 		else:
+			SFXPlayer.play(OPEN_SOUND, true)
 			hide()
 
 
 func show_current_view(new_title: String, deck_view: bool = false, randomized: bool = false) -> void:
+	SFXPlayer.play(OPEN_SOUND)
 	if deck_view:
 		scroll_container.show()
 		for pokemon: Node in scroll_container.get_children():
@@ -87,3 +90,7 @@ func _update_view(randomized: bool) -> void:
 
 		
 	show()
+
+func _on_back_pressed() -> void:
+	SFXPlayer.play(OPEN_SOUND, true)
+	hide()
