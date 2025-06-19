@@ -2,6 +2,8 @@
 class_name EnemyStatus
 extends EnemyAction
 
+const STATUS_ICON := preload("res://art/status_effects/status_1.png")
+
 @export var damage := 2
 @export var splash_damage := 0
 @export var self_damage := 0
@@ -36,6 +38,7 @@ func setup_from_data(data: Dictionary) -> void:
 	intent.base_text = damage_display
 	intent.current_text = status_effects[0].id
 	intent.damage_type = damage_type
+	intent.target = STATUS_ICON
 	intent.icon = status_effects[0].icon
 	if sound == null:
 		sound = preload("res://art/sounds/VineWhip2.wav")
