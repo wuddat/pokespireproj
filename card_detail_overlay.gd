@@ -44,7 +44,11 @@ func show_tooltip(card: Card) -> void:
 	
 	# Show statuses if available
 	if card.status_effects.size() > 0:
+		var seen_ids := {}
 		for status in card.status_effects:
+			if status.id in seen_ids:
+				continue
+			seen_ids[status.id] = true
 			var tooltip := STATUS_TOOLTIP_SCENE.instantiate() as StatusTooltip
 			tooltip.status = status
 			status_box.add_child(tooltip)

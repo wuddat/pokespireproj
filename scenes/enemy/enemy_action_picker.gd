@@ -161,6 +161,8 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 				action_scene = preload("res://enemies/generic_enemy/generic_enemy_attack.gd")
 			"defense":
 				action_scene = preload("res://enemies/generic_enemy/generic_enemy_block.gd")
+			"status":
+				action_scene = preload("res://enemies/generic_enemy/generic_enemy_status.gd")
 			_:
 				push_warning("Unknown move category for: " + move_id)
 				continue

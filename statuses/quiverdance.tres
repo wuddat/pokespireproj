@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="QuiverDance" load_steps=3 format=3 uid="uid://doem1h6fn6chi"]
+
+[ext_resource type="Script" uid="uid://lbl6qdbrl1xj" path="res://statuses/quiverdance.gd" id="1_0qfyo"]
+[ext_resource type="Texture2D" uid="uid://no7ba2bkkoly" path="res://icon.png" id="1_u5vaq"]
+
+[resource]
+script = ExtResource("1_0qfyo")
+id = "quiverdance"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_u5vaq")
+tooltip = "[color=tomato]QUIVERDANCE: [/color]
+At the start of turn, gain 2 ATKPWR and 2 DEXTERITY."
+metadata/_custom_type_script = "uid://breq3elxr1644"

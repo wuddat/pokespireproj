@@ -16,6 +16,7 @@ const STATUS_LOOKUP := {
 	"firespin": preload("res://statuses/firespin.tres"),
 	"flinched": preload("res://statuses/flinched.tres"),
 	"poisoned": preload("res://statuses/poisoned.tres"),
+	"quiverdance": preload("res://statuses/quiverdance.tres"),
 	"scaling": preload("res://statuses/scaling_per_turn.tres"),
 	"seeded": preload("res://statuses/seeded.tres"),
 	"sleep": preload("res://statuses/sleep.tres"),

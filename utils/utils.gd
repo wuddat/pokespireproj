@@ -64,6 +64,8 @@ static func get_evolution_options(pkmn: PokemonStats) -> Array[Card]:
 				card_type = preload("res://data/moves/power.tres")
 			"shift":
 				card_type = preload("res://data/moves/shift.tres")
+			"status":
+				card_type = preload("res://data/moves/status.tres")
 			_:
 				card_type = null
 
@@ -83,7 +85,8 @@ var move_to_resource_map := {
 	"attack": preload("res://data/moves/attack.tres"),
 	"defense": preload("res://data/moves/block.tres"),
 	"power": preload("res://data/moves/power.tres"),
-	"shift": preload("res://data/moves/shift.tres")
+	"shift": preload("res://data/moves/shift.tres"),
+	"status": preload("res://data/moves/status.tres"),
 }
 
 func create_card(move_id: String) -> Card:

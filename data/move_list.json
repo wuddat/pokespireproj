@@ -13,7 +13,7 @@
 	  "status_effects": [],
 	  "description": "[center]shift.[/center]",
 	  "icon_path": "res://art/heart.png",
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 1,
 	},
 	"absorb": {
@@ -29,7 +29,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=green]HEAL[/color] for HALF.[/center]",
 	  "icon_path": "res://art/heart.png",
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 1,
 	  "self_heal": 1,
 	},
@@ -48,7 +48,7 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly [b]FLINCH[/b].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 1,
 	},
 	"acidspray": {
@@ -66,7 +66,7 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [b]POISON[/b].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"accupressure": {
 	  "name": "Accupressure",
@@ -81,7 +81,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [b]POISON[/b].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"aerialace": {
 	  "name": "Aerial Ace",
@@ -96,7 +96,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"aquatail": {
 	  "name": "Aqua Tail",
@@ -129,7 +129,7 @@
 	  "description": "[center]Bite for [color=red]%s[/color] damage and apply possibly FLINCH.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"bodyslam": {
 	  "name": "bodyslam",
@@ -147,7 +147,7 @@
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"bubble": {
 	  "name": "Bubble",
@@ -184,15 +184,15 @@
 	"bulkup": {
 	  "name": "Bulk Up",
 	  "id": "bulkup",
-	  "category": "defense",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "fighting",
 	  "target": "self",
-	  "power": 10,
+	  "power": 5,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up",],
-	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
+	  "description": "[center]Apply [color=red]5 ATKUP[/color] to self.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common"
@@ -212,7 +212,7 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]POISON[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"bugbuzz": {
 	  "name": "Bug Buzz",
@@ -244,9 +244,9 @@
 	  "status_effects": [
 		"attack_up","attack_up","attack_up","attack_up","attack_up",
 	  ],
-	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]POISON[/color].[/center]",
+	  "description": "[center]Gain [color=blue]%s[/color] BLOCK and [color=red]5 ATKUP[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"cometpunch": {
 	  "name": "CometPunch",
@@ -328,7 +328,7 @@
 	  "description": "[center]Apply Block to self for [color=blue]%s[/color][/center].",
 	  "icon_path": "res://art/tile_0102.png",
 	  "sound_path": "res://art/block.ogg",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"dizzypunch": {
 	  "name": "Dizzy Punch",
@@ -344,7 +344,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage. Leaves the user and enemy CONFUSED[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_status": ["confused"],
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"doubleedge": {
 	  "name": "Double Edge",
@@ -363,7 +363,7 @@
 	  "self_status": ["exposed"],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"doubleslap": {
 	  "name": "Double Slap",
@@ -381,7 +381,7 @@
 	  "self_damage": 0,
 	  "self_status": [],
 	  "multiplay": 2,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"dreameater": {
 	  "name": "Dream Eater",
@@ -413,7 +413,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage[/center].",
 	  "icon_path": "res://art/tile_0102.png",
 	  "sound_path": "res://art/block.ogg",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"earthpower": {
 	  "name": "Earth Power",
@@ -429,7 +429,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"earthquake": {
 	  "name": "Earth Quake",
@@ -445,7 +445,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to EVERYTHING.[/center]",
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"ember": {
 	  "name": "Ember",
@@ -478,16 +478,16 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"featherdance": {
 	  "name": "Feather Dance",
 	  "id": "featherdance",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "flying",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 5,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
@@ -537,15 +537,15 @@
 	"firespin": {
 	  "name": "Fire Spin",
 	  "id": "firespin",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "all_enemies",
 	  "type": "fire",
-	  "target": "enemy",
-	  "power": 0,
+	  "target": "all_enemies",
+	  "power": 4,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["firespin"],
-	  "description": "[center]Apply [color=orange]4 BURN[/color] to ALL enemies for 3 turns MAX.[/center]",
+	  "description": "[center]Apply [color=orange]4 BURN[/color] to ALL enemies each turn for 3 turns MAX.[/center]",
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common"
@@ -636,15 +636,15 @@
 	"growl": {
 	  "name": "Growl",
 	  "id": "growl",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 2,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["attack_down","attack_down"],
-	  "description": "[center]Inflict [color=red]ATKDWN[/color] on an enemy![/center]",
+	  "description": "[center]Inflict [color=red]2 ATKDWN[/color] on an enemy![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
 	},
@@ -680,7 +680,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"harden": {
 	  "name": "Harden",
@@ -695,7 +695,7 @@
 	  "status_effects": [],
 	  "description": "[center][b]BLOCK[/b] for [color=blue]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"headbutt": {
 	  "name": "Headbutt",
@@ -710,25 +710,25 @@
 	  "status_effects": ["flinched"],
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly FLINCH.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"helpinghand": {
 	  "name": "Helping Hand",
 	  "id": "helpinghand",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 7,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
 	  "description": "[center]Apply 7 ATKPWR to the target foe or ally.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"highkick": {
-	  "name": "highkick",
+	  "name": "High Kick",
 	  "id": "highkick",
 	  "category": "attack",
 	  "subtype": "single_target",
@@ -743,10 +743,10 @@
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 		"hijumpkick": {
-	  "name": "hijumpkick",
+	  "name": "Hi-Jump Kick",
 	  "id": "hijumpkick",
 	  "category": "attack",
 	  "subtype": "single_target",
@@ -761,7 +761,7 @@
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"hornattack": {
 	  "name": "Horn Attack",
@@ -792,10 +792,10 @@
 	  "status_effects": [
 		"exposed"
 	  ],
-	  "description": "[center]Deal [color=red]%s[/color] damage to ALL ENEMIES apply 2 [color=green]Exposed[/color].[/center]",
+	  "description": "[center]Deal [color=red]%s[/color] damage to ALL ENEMIES and apply [color=green]2 EXPOSED[/color].[/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"hydropump": {
 	  "name": "Hydro Pump",
@@ -831,11 +831,11 @@
 	"hypnosis": {
 	  "name": "Hypnosis",
 	  "id": "hypnosis",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "debuff",
 	  "type": "psychic",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 1,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["sleep"],
@@ -861,7 +861,7 @@
 	  "rarity": "common"
 	},
 	"karatechop": {
-	  "name": "karatechop",
+	  "name": "Karate Chop",
 	  "id": "karatechop",
 	  "category": "attack",
 	  "subtype": "single_target",
@@ -874,7 +874,7 @@
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0124.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"laserfocus": {
 	  "name": "Laser Focus",
@@ -889,24 +889,24 @@
 	  "status_effects": [
 		"critical"
 	  ],
-	  "description": "[center]Next attack deals [color=red]X2[/color] damage.[/center]",
+	  "description": "[center]Next attack deals [color=goldenrod]X2[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "uncommon"
 	},
 	"leechseed": {
 	  "name": "Leech Seed",
 	  "id": "leechseed",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "debuff",
 	  "type": "grass",
 	  "target": "all_enemies",
-	  "power": 0,
+	  "power": 3,
 	  "accuracy": 100,
 	  "cost": 0,
 	  "status_effects": ["seeded"],
-	  "description": "[center]SEED enemies causing them to [color=green]HEAL[/color] your team each turn![/center]",
+	  "description": "[center]SEED enemies causing them to [color=green]HEAL[/color] your team 3 each turn![/center]",
 	  "icon_path": "res://art/heart.png",
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 1,
 	},
 	"leechlife": {
@@ -922,27 +922,27 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage then [color=green]HEAL[/color] for HALF the amount![/center]",
 	  "icon_path": "res://art/heart.png",
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "self_heal": 1,
 	},
 	"leer": {
 	  "name": "Leer",
 	  "id": "leer",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 5,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["feeble","feeble","feeble","feeble","feeble",],
-	  "description": "[center]Apply [color=dimgray]5[/color] FEEBLE.[/center]",
+	  "description": "[center]Apply [color=dimgray]5 FEEBLE[/color]![/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"lick": {
 	  "name": "Lick",
@@ -970,7 +970,7 @@
 	  "power": 13,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": ["exposed"],
+	  "status_effects": ["exposed", "exposed"],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=green] 2 EXPOSED[/color].[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
@@ -1091,19 +1091,20 @@
 	"poisonpowder": {
 	  "name": "Poison Powder",
 	  "id": "poisonpowder",
-	  "category": "defense",
+	  "category": "status",
 	  "subtype": "all_enemies",
 	  "type": "poison",
 	  "target": "all_enemies",
-	  "power": 0,
+	  "power": 5,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
 		"poisoned","poisoned","poisoned","poisoned","poisoned",
 	  ],
-	  "description": "[center]Deals [color=red]%s[/color] damage and applies [color=purple]POISON[/color].[/center]",
+	  "description": "[center]Applies [color=purple]5 POISON[/color] to ALL enemies![/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "rare"
+	  "rarity": "rare",
+	  "sound_path": "res://art/sounds/move_sfx/poison_powder.mp3"
 	},
 	"poisonsting": {
 	  "name": "Poison Sting",
@@ -1112,24 +1113,24 @@
 	  "subtype": "single_target",
 	  "type": "poison",
 	  "target": "enemy",
-	  "power": 1,
+	  "power": 2,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
 		"poisoned","poisoned","poisoned",
 	  ],
-	  "description": "[center]Sting your foe dealing [color=red]%s[/color] damage and apply 2 [color=purple] POISON[/color].[/center]",
+	  "description": "[center]Sting your foe dealing [color=red]%s[/color] damage and apply [color=purple]2 POISON[/color].[/center]",
 	  "icon_path": "res://art/tile_0114.png",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"pokeball": {
 	  "name": "Pokeball",
 	  "id": "pokeball",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "grass",
 	  "target": "enemy",
-	  "power": 8,
+	  "power": 1,
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": [
@@ -1137,7 +1138,8 @@
 	  ],
 	  "description": "[center]Attempt to [color=gold]CATCH[/color] a pokemon![/center]",
 	  "icon_path": "res://art/pokeball.png",
-	  "rarity": "Rare"
+	  "rarity": "rare",
+	  "sound_path": "res://art/sounds/move_sfx/jump.wav"
 	},
 	"pound": {
 	  "name": "Pound",
@@ -1198,7 +1200,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Rare"
+	  "rarity": "rare"
 	},
 	"quiverdance": {
 	  "name": "Quiver Dance",
@@ -1211,7 +1213,7 @@
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": [
-		"flinched"
+		"quiverdance"
 	  ],
 	  "description": "[center]Gain Dexterity AND AtkPwr per turn[/center]",
 	  "icon_path": "res://art/tile_0103.png",
@@ -1234,7 +1236,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 4,
 	},
 	"razorleaf": {
@@ -1255,15 +1257,15 @@
 	"rest": {
 	  "name": "Rest",
 	  "id": "rest",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "self",
 	  "type": "normal",
 	  "target": "self",
 	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": ["sleep"],
-	"  self_status": ["sleep"],
+	  "status_effects": [],
+	  "self_status": ["sleep", "sleep"],
 	  "description": "[center]The user falls ASLEEP![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
@@ -1281,7 +1283,7 @@
 	  "status_effects": [],
 	  "description": "[center]Gain [color=blue]%s[/color] BLOCK![/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	  "rarity": "Uncommon"
+	  "rarity": "uncommon"
 	},
 	"rockthrow": {
 	  "name": "Rock Throw",
@@ -1296,7 +1298,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	  "rarity": "Uncommon"
+	  "rarity": "uncommon"
 	},
 	"safeguard": {
 	  "name": "Safeguard",
@@ -1316,11 +1318,11 @@
 	"scaryface": {
 	  "name": "Scary Face",
 	  "id": "scaryface",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "all_enemies",
 	  "type": "normal",
 	  "target": "all_enemies",
-	  "power": 0,
+	  "power": 1,
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": [
@@ -1348,8 +1350,8 @@
 	"screech": {
 	  "name": "Screech",
 	  "id": "screech",
-	  "category": "attack",
-	  "subtype": "aoe",
+	  "category": "status",
+	  "subtype": "all_enemies",
 	  "type": "normal",
 	  "target": "all_enemies",
 	  "power": 0,
@@ -1388,7 +1390,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"slash": {
 	  "name": "Slash",
@@ -1455,7 +1457,7 @@
 	"sleeppowder": {
 	  "name": "Sleep Powder",
 	  "id": "sleeppowder",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "grass",
 	  "target": "enemy",
@@ -1463,14 +1465,14 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["sleep"],
-	  "description": "[center]Put an enemy to SLEEP![/center]",
+	  "description": "[center]Attempt to put an enemy to SLEEP![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "uncommon"
 	},
 	"sing": {
 	  "name": "Sing",
 	  "id": "sing",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "debuff",
 	  "type": "normal",
 	  "target": "all",
@@ -1521,7 +1523,7 @@
 	  "target": "all_enemies",
 	  "power": 0,
 	  "accuracy": 100,
-	  "cost": 3,
+	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]This attack does nothing but flop around - may SHIFT.[/center]",
 	  "icon_path": "res://art/tile_0101.png",
@@ -1545,30 +1547,31 @@
 	"supersonic": {
 	  "name": "Supersonic",
 	  "id": "supersonic",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 1,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["confused"],
 	  "description": "[center]CONFUSE an enemy![/center]",
-	  "icon_path": "res://art/tile_0101.png",
-	  "rarity": "uncommon"
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
+	  "rarity": "uncommon",
+	  "sound_path": "res://art/sounds/move_sfx/supersonic.mp3"
 	},
 	"swagger": {
 	  "name": "Swagger",
 	  "id": "swagger",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 10,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
-	  "description": "[center]Apply [color=red]10[/color] AtkPwr to the user AND an enemy.[/center]",
+	  "description": "[center]Apply [color=red]10 ATKUP[/color] to the user AND an enemy.[/center]",
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "self_status": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
@@ -1587,7 +1590,7 @@
 	  "status_effects": [
 		"attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",
 	  ],
-	  "description": "[center]Become [color=red]Enraged[/color].[/center]",
+	  "description": "[center]Gain [color=red]10 ATKUP[/color].[/center]",
 	  "icon_path": "res://art/tile_0118.png",
 	  "sound_path": "res://art/enemy_attack.ogg",
 	  "rarity": "rare"
@@ -1595,7 +1598,7 @@
 	"synthesis": {
 	  "name": "Synthesis",
 	  "id": "synthesis",
-	  "category": "defense",
+	  "category": "status",
 	  "subtype": "heal",
 	  "type": "normal",
 	  "target": "self",
@@ -1625,22 +1628,22 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"tailwhip": {
 	  "name": "Tail Whip",
 	  "id": "tailwhip",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
 	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["feeble"],
-	  "description": "[center]Inflict[color=red]FEEBLE[/color].[/center]",
+	  "status_effects": ["feeble", "feeble"],
+	  "description": "[center]Inflict[color=blue]2 FEEBLE[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "Common"
+	  "rarity": "common"
 	},
 	"takedown": {
 	  "name": "Takedown",
@@ -1657,7 +1660,7 @@
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 3,
 	  "self_status": [],
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"thunder": {
 	  "name": "Thunder",
@@ -1708,14 +1711,14 @@
 	"thunderwave": {
 	  "name": "Thunder Wave",
 	  "id": "thunderwave",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "all_enemies",
 	  "type": "electric",
 	  "target": "all_enemies",
 	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": [],
+	  "status_effects": ["flinched"],
 	  "description": "[center]Apply [color=red]FLINCH[/color] to ALL enemies.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "uncommon"
@@ -1754,7 +1757,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "poisoned",
 	  "bonus_damage_multiplier": 2,
-	  "rarity": "Common",
+	  "rarity": "common",
 	},
 	"vinewhip": {
 	  "name": "Vine Whip",
@@ -1819,7 +1822,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "Common",
+	  "rarity": "common",
 	  "multiplay": 2,
 	},
 	"withdraw": {

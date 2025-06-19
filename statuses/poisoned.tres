@@ -15,5 +15,5 @@ max_stacks = 999
 max_duration = 999
 icon = ExtResource("1_ajid8")
 tooltip = "[color=purple]POISONED:[/color]
-End of turn: take [color=red]%s[/color] damage."
+End of turn: take [color=red]%s[/color] damage per stack."
 metadata/_custom_type_script = "uid://breq3elxr1644"
