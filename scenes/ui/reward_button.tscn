@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cott03dqe8ord"]
 
-[ext_resource type="Texture2D" uid="uid://d056agsiro50a" path="res://art/gold.png" id="1_v4dxu"]
 [ext_resource type="Script" uid="uid://crwnnmeg6ry6" path="res://scenes/ui/reward_button.gd" id="1_y2wrr"]
+[ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="2_y2wrr"]
 
 [node name="RewardButton" type="Button"]
 custom_minimum_size = Vector2(0, 28)
@@ -26,11 +26,11 @@ layout_mode = 2
 
 [node name="CustomIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = ExtResource("1_v4dxu")
+texture = ExtResource("2_y2wrr")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="CustomText" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true

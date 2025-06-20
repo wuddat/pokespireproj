@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Chill" load_steps=2 format=3 uid="uid://dmwa8ii5updpr"]
+[gd_resource type="Resource" script_class="Double" load_steps=2 format=3 uid="uid://dmwa8ii5updpr"]
 
 [ext_resource type="Script" uid="uid://36xogpabudhi" path="res://statuses/double.gd" id="1_ev7o3"]
 
@@ -6,6 +6,7 @@
 script = ExtResource("1_ev7o3")
 id = "double"
 type = 2
+chance = 1.0
 stack_type = 0
 can_expire = false
 duration = 0

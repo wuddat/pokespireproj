@@ -22,7 +22,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_d75l8")
 character_stats = ExtResource("2_gdsnt")
-caught_pokemon = null
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

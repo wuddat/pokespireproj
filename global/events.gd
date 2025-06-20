@@ -34,6 +34,7 @@ signal status_tooltip_requested(statuses: Array[Status])
 signal status_tooltip_hide_requested()
 signal pokemon_captured(stats: PokemonStats)
 signal party_shifted
+signal add_leveled_pkmn_to_rewards(pkmn_stats: PokemonStats)
 
 #Pokemon-related Events
 signal party_pokemon_fainted(pokemon: PokemonBattleUnit)

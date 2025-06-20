@@ -49,6 +49,10 @@ func start_battle() -> void:
 	battle_ui.char_stats = char_stats
 	
 	player.stats = char_stats
+	
+	for pkmn in char_stats.current_party:
+		pkmn.leveled_up_in_battle = false
+	
 	party_handler.character_stats = char_stats
 	var selected_party = party_selector.get_selected_pokemon()
 	for p in selected_party:

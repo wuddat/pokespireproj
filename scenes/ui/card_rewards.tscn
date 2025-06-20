@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.623529)
+color = Color(0, 0, 0, 0.823529)
 script = ExtResource("1_chmpv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -52,9 +52,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -50.0
-offset_top = -56.0
+offset_top = -46.0
 offset_right = 50.0
-offset_bottom = -38.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4

@@ -36,9 +36,8 @@ func setup_from_data(data: Dictionary) -> void:
 
 	intent = Intent.new()
 	intent.base_text = damage_display
-	intent.current_text = status_effects[0].id
+	intent.current_text = ""
 	intent.damage_type = damage_type
-	intent.target = STATUS_ICON
 	intent.icon = status_effects[0].icon
 	if sound == null:
 		sound = preload("res://art/sounds/VineWhip2.wav")

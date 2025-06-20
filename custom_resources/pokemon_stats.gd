@@ -7,6 +7,7 @@ extends Stats
 @export var type: Array[String] = []
 @export var draft_pool: Array[String] = []
 @export var is_battling: bool = false
+@export var leveled_up_in_battle = false
 
 @export var evolves_to: String = ""
 @export var evolution_level: int = 101

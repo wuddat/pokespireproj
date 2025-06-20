@@ -15,6 +15,7 @@ const CAUGHT_TEXT := "Pkmn Captured!"
 @export var run_stats: RunStats
 @export var character_stats: CharacterStats
 @export var caught_pokemon: Array[PokemonStats] = []
+@export var leveled_pkmn_in_battle: Array[PokemonStats] = []
 
 
 @onready var rewards: VBoxContainer = %Rewards
@@ -61,6 +62,54 @@ func add_pkmn_reward() -> void:
 		pkmn_reward.pressed.connect(_on_pokemon_reward_taken.bind(stats))
 		rewards.add_child.call_deferred(pkmn_reward)
 		print("Reward button added for:", stats.species_id)
+
+func add_leveled_pkmn_rewards(pkmn_stats: Array[PokemonStats]) -> void:
+	for pkmn in pkmn_stats:
+		var card_reward := REWARD_BUTTON.instantiate() as RewardButton
+		card_reward.reward_icon = pkmn.icon
+		card_reward.reward_text = "%s Reached LVL %s!" % [pkmn.species_id.capitalize(), pkmn.level]
+		card_reward.pressed.connect(_show_leveled_card_rewards.bind(str(pkmn.uid)))
+		rewards.add_child.call_deferred(card_reward)
+
+func _show_leveled_card_rewards(pkmn_uid: String) -> void:
+	if not run_stats or not character_stats:
+		return
+	
+	var card_rewards := CARD_REWARDS.instantiate() as CardRewards
+	add_child(card_rewards)
+	card_rewards.card_reward_selected.connect(_on_card_reward_taken)
+	
+	var card_reward_array: Array[Card] = []
+	var available_cards: Array [Card] = character_stats.draftable_cards.cards.duplicate(true)
+	print("📛 Looking for cards owned by UID:", pkmn_uid)
+	for card in available_cards:
+		print("🔍 Card UID:", card.pkmn_owner_uid)
+	available_cards = available_cards.filter(func(c): return c.pkmn_owner_uid == pkmn_uid)
+	print("✅ Filtered cards:", available_cards.size())
+	
+	for i in run_stats.card_rewards:
+		_setup_card_chances()
+		var roll := randf_range(0.0, card_reward_total_weight)
+		
+		for rarity: Card.Rarity in card_rarity_weights:
+			if card_rarity_weights[rarity] > roll:
+				_modify_weights(rarity)
+				var picked_card := _get_random_available_card(available_cards, rarity)
+				
+				if picked_card != null:
+					print("picked Card" , picked_card, picked_card)
+					card_reward_array.append(picked_card)
+					available_cards.erase(picked_card)
+				else:
+					print("picked Card" , picked_card, picked_card)
+					picked_card = available_cards.pick_random()
+					card_reward_array.append(picked_card)
+				break
+	print("Cards in reward array are: ")
+	for card in card_reward_array:
+		Utils.print_resource(card)
+	card_rewards.rewards = card_reward_array
+	card_rewards.show()
 
 
 func _show_card_rewards() -> void:

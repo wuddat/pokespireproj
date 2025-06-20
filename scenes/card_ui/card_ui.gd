@@ -84,9 +84,12 @@ func play() -> void:
 
 
 func get_active_enemy_modifiers() -> ModifierHandler:
-	if targets.is_empty() or targets.size() > 1 or not targets[0] is Enemy:
+	if targets.is_empty() or targets.size() > 1:
 		return null
-	
+
+	if not is_instance_valid(targets[0]) or not targets[0] is Enemy:
+		return null
+
 	return targets[0].modifier_handler
 
 

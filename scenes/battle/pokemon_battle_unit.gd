@@ -153,6 +153,9 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 	#print("level_up_exp: ", level_up_exp)
 	
 	if stats.current_exp >= level_up_exp:
+		if stats.leveled_up_in_battle == false:
+			stats.leveled_up_in_battle = true
+			Events.add_leveled_pkmn_to_rewards.emit(stats)
 		stats.level += 1
 		#print("Leveling up!: ", stats.level)
 		stats.max_health += stats.level

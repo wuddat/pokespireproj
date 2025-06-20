@@ -30,6 +30,7 @@ const eventscene := preload("res://scenes/event/event.tscn")
 var stats: RunStats
 var character: CharacterStats
 var caught_pokemon: Array[PokemonStats] = []
+var leveled_in_battle_pkmn: Array[PokemonStats] = []
 
 
 func _ready() -> void:
@@ -88,6 +89,7 @@ func _setup_event_connections() -> void:
 	Events.party_pokemon_fainted.connect(_update_draftable_cards)
 	Events.party_pokemon_fainted.connect(_update_party_buttons)
 	Events.evolution_completed.connect(_on_evolution_completed)
+	Events.add_leveled_pkmn_to_rewards.connect(_on_leveled_pkmn_to_rewards)
 	
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
@@ -111,6 +113,7 @@ func 	_setup_top_bar():
 
 
 func _on_battle_room_entered(room: Room) -> void:
+	leveled_in_battle_pkmn.clear()
 	var battle_scene: Battle = _change_view(battlescene) as Battle
 	battle_scene.char_stats = character
 	battle_scene.party_selector = party_selector
@@ -141,11 +144,14 @@ func _on_battle_won() -> void:
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
 	reward_scene.caught_pokemon = caught_pokemon
+	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
 	print("caught pokemon in _on_battle_won: ", caught_pokemon)
-
-	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
-	reward_scene.add_card_reward()
+	
 	reward_scene.add_pkmn_reward()
+	reward_scene.add_card_reward()
+	reward_scene.add_leveled_pkmn_rewards(leveled_in_battle_pkmn)
+	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
+	
 	party_selector.in_battle = false
 	
 	caught_pokemon.clear() 
@@ -184,3 +190,6 @@ func _update_draftable_cards(pkmn: PokemonStats) -> void:
 
 func _on_evolution_completed() -> void:
 	character.update_draftable_cards()
+
+func _on_leveled_pkmn_to_rewards(pkmn: PokemonStats) -> void:
+	leveled_in_battle_pkmn.append(pkmn)
