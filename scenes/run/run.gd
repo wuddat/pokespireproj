@@ -147,10 +147,8 @@ func _on_battle_won() -> void:
 	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
 	print("caught pokemon in _on_battle_won: ", caught_pokemon)
 	
-	reward_scene.add_pkmn_reward()
-	reward_scene.add_card_reward()
-	reward_scene.add_leveled_pkmn_rewards(leveled_in_battle_pkmn)
-	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
+	reward_scene._play_reward_sequence()
+	reward_scene.gold_reward = (map.last_room.battle_stats.roll_gold_reward())
 	
 	party_selector.in_battle = false
 	

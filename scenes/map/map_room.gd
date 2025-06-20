@@ -10,7 +10,7 @@ const ICONS:={
 	Room.Type.TREASURE: [preload("res://art/tile_0089.png"), Vector2(1.25, 1.25)],
 	Room.Type.POKECENTER:[preload("res://art/nurse.png"), Vector2(0.5, 0.5)],
 	Room.Type.SHOP: [preload("res://art/shop.png"), Vector2(1.4, 1.4)],
-	Room.Type.BOSS: [preload("res://art/tile_0092.png"), Vector2(1.25, 1.25)],
+	Room.Type.BOSS: [preload("res://art/sprites/items/ball/master.png"), Vector2(1.25, 1.25)],
 	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
 }
 
@@ -46,8 +46,12 @@ func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
 	line_2d.rotation_degrees = randi_range(-10, 10)
-	sprite_2d.texture = ICONS[room.type][0]
 	sprite_2d.scale = ICONS[room.type][1]
+	if room.type == Room.Type.MONSTER:
+		sprite_2d.texture = _get_monster_icon(room.tier)
+	else:
+		sprite_2d.texture = ICONS[room.type][0]
+	
 
 
 func show_selected() -> void:
@@ -61,6 +65,15 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	room.selected = true
 	animation_player.play("select")
 	MusicPlayer.play(music, true)
+
+
+func _get_monster_icon(tier: int) -> Texture:
+	match tier:
+		0: return preload("res://art/sprites/items/ball/poke.png")
+		1: return preload("res://art/sprites/items/ball/great.png")
+		2: return preload("res://art/sprites/items/ball/ultra.png")
+		_: return preload("res://art/sprites/items/ball/poke.png")
+
 
 
 #called by animatioplayer when 'select' animation finishes

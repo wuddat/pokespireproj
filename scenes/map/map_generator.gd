@@ -157,6 +157,7 @@ func _setup_room_types() -> void:
 	for room: Room in map_data[0]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.MONSTER
+			room.tier = 0
 			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(0)
 		
 	#9th floor is always treasure
@@ -204,7 +205,8 @@ func _set_room_randomly(room_to_set: Room) -> void:
 		
 		if room_to_set.row > 5:
 			tier_for_monster_rooms = 1
-			
+		
+		room_to_set.tier = tier_for_monster_rooms  
 		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
 	
 	

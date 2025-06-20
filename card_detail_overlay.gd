@@ -3,6 +3,7 @@ extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 const STATUS_TOOLTIP_SCENE := preload("res://scenes/ui/status_tooltip.tscn")
+const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 
 @export var background_color: Color = Color("000000b0")
 
@@ -59,7 +60,7 @@ func show_tooltip(card: Card) -> void:
 func hide_tooltip() -> void:
 	if not visible:
 		return
-	
+	#SFXPlayer.play(OPEN_SOUND, true)
 	for card: CardMenuUI in tooltip_card.get_children():
 		card.queue_free()
 	hide()

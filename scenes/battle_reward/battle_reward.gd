@@ -12,10 +12,14 @@ const CARD_TEXT := "Add New Card"
 const CAUGHT_ICON := preload("res://art/pokeball.png")
 const CAUGHT_TEXT := "Pkmn Captured!"
 
+const REWARD_POP = preload("res://art/sounds/sfx/pokeball5.wav")
+const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")  
+
 @export var run_stats: RunStats
 @export var character_stats: CharacterStats
 @export var caught_pokemon: Array[PokemonStats] = []
 @export var leveled_pkmn_in_battle: Array[PokemonStats] = []
+@export var gold_reward: int = 0
 
 
 @onready var rewards: VBoxContainer = %Rewards
@@ -64,16 +68,17 @@ func add_pkmn_reward() -> void:
 		print("Reward button added for:", stats.species_id)
 
 func add_leveled_pkmn_rewards(pkmn_stats: Array[PokemonStats]) -> void:
-	for pkmn in pkmn_stats:
 		var card_reward := REWARD_BUTTON.instantiate() as RewardButton
-		card_reward.reward_icon = pkmn.icon
-		card_reward.reward_text = "%s Reached LVL %s!" % [pkmn.species_id.capitalize(), pkmn.level]
-		card_reward.pressed.connect(_show_leveled_card_rewards.bind(str(pkmn.uid)))
+		card_reward.reward_icon = pkmn_stats[0].icon
+		card_reward.reward_text = "%s Reached LVL %s!" % [pkmn_stats[0].species_id.capitalize(), pkmn_stats[0].level]
+		card_reward.pressed.connect(_show_leveled_card_rewards.bind(str(pkmn_stats[0].uid)))
 		rewards.add_child.call_deferred(card_reward)
 
 func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 	if not run_stats or not character_stats:
 		return
+		
+	SFXPlayer.play(PING_SOUND, true)
 	
 	var card_rewards := CARD_REWARDS.instantiate() as CardRewards
 	add_child(card_rewards)
@@ -110,6 +115,7 @@ func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 		Utils.print_resource(card)
 	card_rewards.rewards = card_reward_array
 	card_rewards.show()
+	
 
 
 func _show_card_rewards() -> void:
@@ -192,4 +198,26 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	SFXPlayer.play(PING_SOUND, true)
 	Events.battle_reward_exited.emit()
+
+
+
+func _play_reward_sequence() -> void:
+	await _reward_delay()
+	if caught_pokemon.size() > 0:
+		add_pkmn_reward()
+		await _reward_delay()
+	
+	if leveled_pkmn_in_battle.size() > 0:
+		for pkmn in leveled_pkmn_in_battle:
+			add_leveled_pkmn_rewards([pkmn])
+			await _reward_delay()
+	
+	add_gold_reward(gold_reward)
+	await _reward_delay()
+
+
+func _reward_delay(duration := 0.6) -> void:
+	SFXPlayer.play(REWARD_POP)
+	await get_tree().create_timer(duration).timeout

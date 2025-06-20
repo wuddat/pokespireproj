@@ -11,6 +11,8 @@ enum Type {NOT_ASSIGNED, MONSTER, TREASURE, POKECENTER, SHOP, BOSS, EVENT}
 @export var selected := false
 # only used for MONSTER and BOSS types
 @export var battle_stats: BattleStats
+@export var tier: int = 0
+
 
 func _to_string() -> String:
 	return "%s (%s)" % [column, Type.keys()[type][0]]

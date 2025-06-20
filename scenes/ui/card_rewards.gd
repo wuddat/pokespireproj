@@ -4,6 +4,8 @@ extends ColorRect
 signal card_reward_selected(card: Card)
 
 const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
+const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
+const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 
 @export var rewards: Array[Card] : set = set_rewards
 
@@ -21,12 +23,14 @@ func _ready()-> void:
 	take_button.pressed.connect(
 		func():
 			card_reward_selected.emit(selected_card)
+			SFXPlayer.play(PING_SOUND, true)
 			queue_free()
 	)
 	
 	skip_button.pressed.connect(
 		func():
 			card_reward_selected.emit(null)
+			SFXPlayer.play(OPEN_SOUND, true)
 			queue_free()
 	)
 
@@ -46,7 +50,9 @@ func _clear_rewards() -> void:
 
 
 func _show_tooltip(card: Card) -> void:
+	
 	selected_card = card
+	SFXPlayer.play(PING_SOUND, true)
 	card_detail_overlay.show_tooltip(card)
 
 
