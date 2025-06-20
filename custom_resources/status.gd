@@ -11,6 +11,7 @@ enum StackType {NONE, INTENSITY, DURATION}
 @export_group("Status Data")
 @export var id: String
 @export var type: Type
+@export var chance: float = 1
 @export var stack_type: StackType
 @export var can_expire: bool
 @export var duration: int : set = set_duration

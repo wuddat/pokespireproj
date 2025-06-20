@@ -7,11 +7,11 @@
 script = ExtResource("2_83vvv")
 id = "flinched"
 type = 2
-stack_type = 1
+stack_type = 0
 can_expire = false
 duration = 0
 stacks = 1
-max_stacks = 999
+max_stacks = 1
 max_duration = 999
 icon = ExtResource("1_dvj8p")
 tooltip = "FLINCHED: 

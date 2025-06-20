@@ -50,7 +50,35 @@ func play() -> void:
 		return
 	
 	Events.card_play_initiated.emit()
-	await play_card_with_delay(card)
+	if card.id != "metronome":
+		await play_card_with_delay(card)
+		Events.card_play_completed.emit()
+		queue_free()
+		return
+
+	var player_handler := get_node("/root/Run/CurrentView/Battle/PlayerHandler") as PlayerHandler
+	var hand := get_node("/root/Run/CurrentView/Battle/BattleUI/Hand") as Hand
+	if not player_handler:
+		print("❌ PlayerHandler not found in scene tree.")
+		Events.card_play_completed.emit()
+		queue_free()
+		return
+
+	var discard := player_handler.character.discard
+	if discard.empty():
+		print("❌ Discard pile is empty. Metronome fizzled!")
+		Events.card_play_completed.emit()
+		queue_free()
+		return
+
+	# 🧬 Select a random card from discard
+	var random_card := discard.cards[randi() % discard.cards.size()]
+	print("🎲 Metronome selected:", random_card.id)
+
+	discard.cards.erase(random_card)
+	random_card.cost = 0
+	hand.add_card(random_card)
+	discard.add_card(card)
 	Events.card_play_completed.emit()
 	queue_free()
 

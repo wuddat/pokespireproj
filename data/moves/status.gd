@@ -77,6 +77,13 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			self_dmg_effect.sound = null
 			self_dmg_effect.execute([battle_unit_owner])
 			total_damage_dealt += self_dmg_effect.amount
+			
+		if self_damage_percent_hp > 0:
+			var self_dmg := DamageEffect.new()
+			self_dmg.amount = battle_unit_owner.stats.max_health * self_damage_percent_hp
+			self_dmg.sound = null
+			self_dmg.execute([battle_unit_owner])
+			total_damage_dealt += self_dmg.amount
 		
 		if self_heal > 0:
 			var self_heal_effect := HealEffect.new()

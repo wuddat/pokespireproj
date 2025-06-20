@@ -891,9 +891,10 @@ texture = ExtResource("2_pmsee")
 
 [node name="IntentUI" parent="Sprite2D" instance=ExtResource("6_1wwld")]
 unique_name_in_owner = true
-offset_left = 238.5
-offset_right = 290.5
-offset_bottom = 20.0
+offset_left = -58.5
+offset_top = -54.0
+offset_right = -6.5
+offset_bottom = -34.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Chill" load_steps=2 format=3 uid="uid://dmwa8ii5updpr"]
+
+[ext_resource type="Script" uid="uid://36xogpabudhi" path="res://statuses/double.gd" id="1_ev7o3"]
+
+[resource]
+script = ExtResource("1_ev7o3")
+id = "double"
+type = 2
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+max_stacks = 999
+max_duration = 999
+tooltip = "Double all status effects on the enemy"
+metadata/_custom_type_script = "uid://breq3elxr1644"

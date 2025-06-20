@@ -176,7 +176,12 @@ func restore_fainted_cards(uid: String) -> void:
 func _on_card_played(card: Card) -> void:
 	if card.exhausts or card.type == Card.Type.POWER:
 		return
-	character.discard.add_card(card)
+	if card.id == "nightshade":
+		character.discard.add_card(card)
+		character.discard.add_card(card)
+		return
+	else:
+		character.discard.add_card(card)
 
 
 func _on_statuses_applied(type: Status.Type) -> void:

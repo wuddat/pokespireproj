@@ -58,14 +58,21 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			continue
 
 		# ❌ Skip if requires a status the target doesn't have
-		if requires_status != "":
+		if requires_status != "" and requires_status != "sleep":
 			var handler = target.get_node_or_null("StatusHandler")
 			if not handler or not handler.has_status(requires_status):
 				print("❌ Skipping %s due to missing required status: %s" % [target.stats.species_id, requires_status])
 				continue
+		if requires_status == "sleep":
+			if !target.is_asleep:
+				print("❌ Skipping %s because target is not asleep (Dream Eater requirement)" % target.stats.species_id)
+				continue
 
 		var handler = target.get_node_or_null("StatusHandler")
 		var target_damage = final_damage
+		
+		if target_damage_percent_hp > 0:
+			target_damage = round(target.stats.health * target_damage_percent_hp)
 
 		# 🎯 Bonus if target has a specific status
 		if bonus_damage_if_target_has_status != "":
@@ -125,14 +132,35 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	# 🧬 Apply status effects to targets
 	for status_effect in status_effects:
 		if status_effect:
-			var stat_effect := StatusEffect.new()
-			stat_effect.status = status_effect.duplicate()
-			stat_effect.execute(targets)
-
+			var applied = randf() <= effect_chance
+			if applied:
+				var stat_effect := StatusEffect.new()
+				stat_effect.status = status_effect.duplicate()
+				stat_effect.execute(targets)
+			else:
+				print("🎲 %s status failed to apply (%.0f%% chance) and applied was: %s" % [status_effect.id, effect_chance * 100, applied])	
+				
+	if self_block > 0:
+		var block = BlockEffect.new()
+		block.amount = self_block
+		block.execute([battle_unit_owner])
+		
+	if dmg_block > 0:
+		var block = BlockEffect.new()
+		block.amount = total_damage_dealt
+		block.execute([battle_unit_owner])
+	
 	# 🩸 Self damage
 	if self_damage > 0:
 		var self_dmg := DamageEffect.new()
 		self_dmg.amount = self_damage
+		self_dmg.sound = null
+		self_dmg.execute([battle_unit_owner])
+		total_damage_dealt += self_dmg.amount
+	
+	if self_damage_percent_hp > 0:
+		var self_dmg := DamageEffect.new()
+		self_dmg.amount = battle_unit_owner.stats.max_health * self_damage_percent_hp
 		self_dmg.sound = null
 		self_dmg.execute([battle_unit_owner])
 		total_damage_dealt += self_dmg.amount

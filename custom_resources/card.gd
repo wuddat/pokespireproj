@@ -29,6 +29,7 @@ const TYPE_COLORS := {
 @export var target: Target
 @export var cost: int
 @export var power: int
+@export var target_damage_percent_hp: float = 0.0
 @export var damage_type: String
 @export var exhausts: bool = false
 @export var pkmn_owner_uid: String
@@ -44,9 +45,13 @@ var base_power: int
 
 @export_group("Card Effects")
 @export var status_effects: Array[Status]
+@export var effect_chance: float = 1
 @export var self_heal: int
 @export var self_damage: int = 0
+@export var self_damage_percent_hp: float = 0
 @export var self_status: Array[Status] = []
+@export var self_block: int = 0
+@export var dmg_block: int = 0
 @export var multiplay: int = 1
 @export var randomplay: int = 0
 @export var requires_status: String = ""
@@ -126,6 +131,7 @@ func setup_from_data(data: Dictionary) -> void:
 	power = data.get("power", 88)
 	base_power = power
 	damage_type = data.get("type", "normal")
+	target_damage_percent_hp = data.get("target_damage_percent_hp", 0.0)
 	cost = data.get("cost", 88)
 	tooltip_text = data.get("description", "CardToolTipError")
 	var iconpath = data.get("icon_path", "res://art/arrow.png")
@@ -133,7 +139,11 @@ func setup_from_data(data: Dictionary) -> void:
 	multiplay = data.get("multiplay", 1)
 	randomplay = data.get("randomplay", 0)
 	self_damage = data.get("self_damage", 0)
+	self_damage_percent_hp = data.get("self_damage_percent_hp", 0)
 	self_heal = data.get("self_heal", 0)
+	self_block = data.get("self_block", 0)
+	dmg_block = data.get("dmg_block", 0)
+	effect_chance = data.get("effect_chance", 1.0)
 	splash_damage = data.get("splash_damage", 0)
 	requires_status = data.get("requires_status", "")
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
