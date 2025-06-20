@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://b7kjap0xllfyb"]
+[gd_scene load_steps=136 format=3 uid="uid://b7kjap0xllfyb"]
 
 [ext_resource type="Texture2D" uid="uid://prme8llsdi5h" path="res://art/weedle_spritesheet.png" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://crgb1qoc5vdgn" path="res://scenes/enemy/enemy.gd" id="1_p200p"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://covk5qel4dban" path="res://scenes/status_handler/status_handler.tscn" id="7_nbhyu"]
 [ext_resource type="PackedScene" uid="uid://cinaas1i56ukh" path="res://scenes/modifier_handler/modifier_handler.tscn" id="8_4efjx"]
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="9_hvxgb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4efjx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pll4o"]
 atlas = ExtResource("1_ofsxj")
@@ -887,14 +889,14 @@ collision_layer = 4
 script = ExtResource("1_p200p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4efjx")
 texture = ExtResource("2_pmsee")
 
 [node name="IntentUI" parent="Sprite2D" instance=ExtResource("6_1wwld")]
 unique_name_in_owner = true
-offset_left = -58.5
-offset_top = -54.0
-offset_right = -6.5
-offset_bottom = -34.0
+offset_left = 238.5
+offset_right = 290.5
+offset_bottom = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false

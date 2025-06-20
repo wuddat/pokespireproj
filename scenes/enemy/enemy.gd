@@ -9,6 +9,8 @@ const WOBBLE: AudioStream = preload("res://art/sounds/sfx/wobble.wav")
 const BREAKOUT = preload("res://art/sounds/sfx/pokeball_release.wav")
 const CAUGHT = preload("res://art/sounds/sfx/caught.wav")
 
+const PULSE_SHADER := preload("res://pulse.gdshader")
+
 @export var stats: EnemyStats : set = set_enemy_stats
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -54,6 +56,12 @@ func _ready():
 		print("Stats or species_id not set yet.")
 	intent_ui.parent = self
 	intent_ui.status_handler = status_handler
+	
+	var pulse_material := ShaderMaterial.new()
+	pulse_material.shader = PULSE_SHADER
+	pulse_material.set_shader_parameter("highlight_strength", 0.0)  # start with no highlight
+	sprite_2d.material = pulse_material
+	
 
 
 func set_current_action(value: EnemyAction) -> void:
@@ -319,6 +327,12 @@ func mark_as_caught() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	arrow.show()
+	var mat := sprite_2d.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("highlight_strength", 0.7)
 
 func _on_area_exited(_area: Area2D) -> void:
 	arrow.hide()
+	var mat := sprite_2d.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("highlight_strength", 0.0)
