@@ -7,6 +7,7 @@
 script = ExtResource("1_a7vnf")
 id = "burned"
 type = 2
+chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0

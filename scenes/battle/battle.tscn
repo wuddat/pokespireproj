@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=32 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cqwjjgje4sygp" path="res://scenes/enemy/enemy_handler.gd" id="4_kd6yx"]
 [ext_resource type="PackedScene" uid="uid://bru5ajayecy0k" path="res://scenes/player/player.tscn" id="4_oiw7q"]
 [ext_resource type="PackedScene" uid="uid://ih1u373ufo54" path="res://scenes/card_target_selector/card_target_selector.tscn" id="4_py4tk"]
+[ext_resource type="Texture2D" uid="uid://b8uka45vccpd1" path="res://art/leaf2.png" id="5_8eh2s"]
 [ext_resource type="Resource" uid="uid://dw7iw834ey8jm" path="res://characters/bulbasaur/bulbasaur.tres" id="5_fisqk"]
 [ext_resource type="Resource" uid="uid://cht4tnwnmt5nj" path="res://enemies/rattata/rattata.tres" id="5_icoan"]
 [ext_resource type="Script" uid="uid://c2fu3iiht4n15" path="res://scenes/ui/battle_ui.gd" id="7_icoan"]
@@ -27,6 +28,41 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gynk"]
 size = Vector2(512, 178)
+
+[sub_resource type="Gradient" id="Gradient_e48mi"]
+colors = PackedColorArray(1, 1, 1, 1, 0.299547, 0.299547, 0.299547, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ueicy"]
+gradient = SubResource("Gradient_e48mi")
+
+[sub_resource type="Curve" id="Curve_8eh2s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5291, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e48mi"]
+width = 64
+curve = SubResource("Curve_8eh2s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n5ix6"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(300, 1, 1)
+angle_min = 1.07288e-05
+angle_max = 57.1
+direction = Vector3(-100, 0, 0)
+initial_velocity_max = 2.0
+angular_velocity_min = -228.37
+angular_velocity_max = 145.9
+gravity = Vector3(0, 5, 0)
+linear_accel_min = 2.64
+linear_accel_max = 27.46
+radial_accel_min = -2.23517e-06
+radial_accel_max = 7.9
+scale_min = 0.3
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_e48mi")
+color_ramp = SubResource("GradientTexture1D_ueicy")
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_kd6yx")
@@ -77,6 +113,15 @@ hand = NodePath("../BattleUI/Hand")
 player = NodePath("../Player")
 
 [node name="PartyHandler" parent="." groups=["PartyHandler"] instance=ExtResource("12_156m4")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(265, 46)
+scale = Vector2(0.486984, 0.532598)
+amount = 4
+texture = ExtResource("5_8eh2s")
+lifetime = 6.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_n5ix6")
 
 [node name="StatUI" type="CanvasLayer" parent="."]
 

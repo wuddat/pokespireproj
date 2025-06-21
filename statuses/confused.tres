@@ -7,6 +7,7 @@
 script = ExtResource("1_knqsm")
 id = "confused"
 type = 0
+chance = 1.0
 stack_type = 2
 can_expire = true
 duration = 2

@@ -7,6 +7,7 @@
 script = ExtResource("2_fcnd0")
 id = "cleanse"
 type = 2
+chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0

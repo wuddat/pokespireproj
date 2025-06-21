@@ -8,6 +8,7 @@ script = ExtResource("1_8eagu")
 heal_strength = 3
 id = "seeded"
 type = 1
+chance = 1.0
 stack_type = 0
 can_expire = false
 duration = 0

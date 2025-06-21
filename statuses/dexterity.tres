@@ -7,6 +7,7 @@
 script = ExtResource("2_8fou5")
 id = "dexterity"
 type = 2
+chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0

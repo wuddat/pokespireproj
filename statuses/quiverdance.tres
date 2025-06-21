@@ -7,6 +7,7 @@
 script = ExtResource("1_0qfyo")
 id = "quiverdance"
 type = 0
+chance = 1.0
 stack_type = 0
 can_expire = false
 duration = 0

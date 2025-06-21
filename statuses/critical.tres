@@ -7,6 +7,7 @@
 script = ExtResource("2_6cj1j")
 id = "critical"
 type = 1
+chance = 1.0
 stack_type = 2
 can_expire = true
 duration = 1
