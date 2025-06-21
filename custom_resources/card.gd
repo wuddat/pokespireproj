@@ -210,3 +210,8 @@ func setup_from_data(data: Dictionary) -> void:
 		var typed_ids = Utils.to_typed_string_array(raw_ids)
 		self_status.clear()
 		self_status.append_array(StatusData.get_status_effects_from_ids(typed_ids))
+
+func emit_dialogue(texts: Array[String]) -> void:
+	for text in texts:
+		Events.battle_text_requested.emit(text)
+		print(text)

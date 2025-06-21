@@ -127,6 +127,8 @@ func _update_pokemon_stats_ui(pkmn: PokemonStats, ui: HealthBarUI) -> void:
 
 func _on_enemies_child_order_changed() -> void:
 	#print("enemies_child_order_changed signal received")
+	if not is_instance_valid(get_tree()):
+		return
 	await get_tree().create_timer(1).timeout
 	print("evolution in progress is: ", evolution_in_progress)
 
@@ -165,8 +167,20 @@ func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
 
 
 func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
+	print("OH NOOOOO  A PKMN DONE DID FAINTED")
 	if pkmn and pkmn.is_inside_tree():
 		pkmn.status_handler.clear_all_statuses()
+	var fainted_pkmn = 0
+	print("char stats:", char_stats)
+	print("char_stats_size: ", char_stats.current_party.size())
+	for poke in char_stats.current_party:
+		print(poke.species_id)
+	for poke in char_stats.current_party:
+		if poke.health <= 0:
+			fainted_pkmn += 1
+			print("Fainted pkmn: %s / %s" % [fainted_pkmn, char_stats.current_party.size()])
+	if fainted_pkmn == char_stats.current_party.size():
+		Events.player_died.emit()
 
 
 func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:

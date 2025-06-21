@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_83vvv")
 id = "flinched"
+display_string = " may flinch!"
 type = 2
 chance = 1.0
 stack_type = 0

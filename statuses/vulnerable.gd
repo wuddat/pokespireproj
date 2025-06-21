@@ -1,6 +1,6 @@
 class_name Vulnerable
 extends Status
-
+#TODO status eeffect
 const BONUS_MULTIPLIER := 1.0 # Makes it 2x total
 
 func get_tooltip() -> String:

@@ -6,11 +6,15 @@
 [resource]
 script = ExtResource("2_sys84")
 id = "dodge"
+display_string = " may be harder to hit!"
 type = 1
+chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0
 stacks = 1
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_3g1bk")
 tooltip = "[color=aquamarine]DODGE:[/color]
 Each stack gives [b]+10% chance[/b] to EVADE an attack."

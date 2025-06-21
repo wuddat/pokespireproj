@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_cr3f4")
 id = "attack_up"
+display_string = " gained ATKPWR!"
 type = 2
 chance = 1.0
 stack_type = 1

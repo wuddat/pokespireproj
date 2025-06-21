@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_lw75y")
 id = "feeble"
+display_string = " had its [color=blue]BLOCK[/color] abilities weakened!"
 type = 1
 chance = 1.0
 stack_type = 1

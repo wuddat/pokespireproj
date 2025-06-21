@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_fcnd0")
 id = "cleanse"
+display_string = " was cleansed of ALL status effects!"
 type = 2
 chance = 1.0
 stack_type = 1

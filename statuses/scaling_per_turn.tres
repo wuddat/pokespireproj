@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_doryd")
 id = "scaling"
+display_string = ""
 type = 0
 chance = 1.0
 stack_type = 0

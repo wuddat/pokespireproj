@@ -30,7 +30,7 @@ func setup_from_data(data: Dictionary) -> void:
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
-
+	action_name = data.get("name", "SOMETHING!")
 	var damage_display = "%s"
 
 

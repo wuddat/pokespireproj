@@ -11,6 +11,8 @@ func execute(targets: Array[Node]) -> void:
 			continue
 		if target is Enemy or target is Player or target is PokemonBattleUnit:
 			var unique_status = status.duplicate()
+			if not target.status_handler.has_status(status.id):
+				Events.battle_text_requested.emit("%s%s" % [target.stats.species_id.capitalize(),status.display_string])
 			target.status_handler.add_status(unique_status)
 			SFXPlayer.play(sound)
 			print("%s applied to %s" % [status.id, target.stats.species_id])

@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_hpuf1")
 id = "froze"
+display_string = " was FROZEN!"
 type = 2
 chance = 1.0
 stack_type = 0

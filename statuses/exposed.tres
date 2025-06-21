@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_gtvil")
 id = "exposed"
+display_string = " is looking vulnerable!"
 type = 1
 chance = 1.0
 stack_type = 2

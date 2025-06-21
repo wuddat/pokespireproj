@@ -139,6 +139,13 @@ func _get_all_statuses() -> Array[Status]:
 	return statuses
 
 
+func has_any_status() -> bool:
+	for child in get_children():
+		if child is StatusUI:
+			return true
+	return false
+
+
 func _on_status_applied(status: Status) -> void:
 	if status.can_expire:
 		status.duration -= 1

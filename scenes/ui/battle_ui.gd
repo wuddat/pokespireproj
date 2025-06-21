@@ -14,6 +14,9 @@ extends CanvasLayer
 
 func _ready() -> void:
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)
+	Events.battle_text_requested.connect(_on_battle_text_requested)
+	Events.battle_text_completed.connect(_on_battle_text_completed)
+	
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	draw_pile_button.pressed.connect(draw_pile_view.show_current_view.bind("Draw Pile", false, true))
 	discard_pile_button.pressed.connect(discard_pile_view.show_current_view.bind("Discard Pile"))
@@ -42,3 +45,11 @@ func _on_player_hand_drawn() -> void:
 func _on_end_turn_button_pressed() -> void:
 	end_turn_button.disabled = true
 	Events.player_turn_ended.emit()
+
+func _on_battle_text_requested(string: String) -> void:
+	end_turn_button.disabled = true
+	hand.disable_hand()
+
+func _on_battle_text_completed() -> void:
+	end_turn_button.disabled = false
+	hand.enable_hand()

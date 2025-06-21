@@ -7,6 +7,7 @@
 script = ExtResource("1_8eagu")
 heal_strength = 3
 id = "seeded"
+display_string = " was SEEDED!"
 type = 1
 chance = 1.0
 stack_type = 0

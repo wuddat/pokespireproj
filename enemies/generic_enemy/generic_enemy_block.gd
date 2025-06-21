@@ -7,7 +7,7 @@ func setup_from_data(data: Dictionary) -> void:
 	sound = preload("res://art/block.ogg")
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
-	
+	action_name = data.get("name", "SOMETHING!")
 	intent = Intent.new()
 	intent.icon = preload("res://art/tile_0102.png")  # 🛡️ block icon
 

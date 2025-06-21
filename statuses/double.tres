@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ev7o3")
 id = "double"
+display_string = " had ALL of its status effects DOUBLED!"
 type = 2
 chance = 1.0
 stack_type = 0

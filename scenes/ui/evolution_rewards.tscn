@@ -223,6 +223,9 @@ pivot_offset = Vector2(50, 14)
 size_flags_horizontal = 4
 text = "Confirm"
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_h527p")
+
 [node name="CardDetailOverlay" parent="." instance=ExtResource("3_cowsq")]
 visible = false
 layout_mode = 1
@@ -230,6 +233,7 @@ background_color = Color(0.101961, 0.101961, 0, 0.929412)
 
 [node name="TakeButton" type="Button" parent="CardDetailOverlay"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 1
 anchors_preset = 7
@@ -244,6 +248,3 @@ offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Take"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_h527p")

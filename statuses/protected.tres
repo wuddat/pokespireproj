@@ -6,11 +6,15 @@
 [resource]
 script = ExtResource("2_8w6ds")
 id = "protected"
+display_string = " is being PROTECTED!"
 type = 1
+chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0
 stacks = 1
+max_stacks = 999
+max_duration = 999
 icon = ExtResource("1_tkp1y")
 tooltip = "[color=peru]PROTECTED:[/color]
 Ignore the [b]NEXT[/b] instance of damage."

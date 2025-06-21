@@ -28,22 +28,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_js3ux"]
-resource_name = "select"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(0.297302, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -18)]
-}
-
 [sub_resource type="Animation" id="Animation_qeblu"]
 resource_name = "deselect"
 length = 0.2
@@ -58,6 +42,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.297302, 1),
 "update": 0,
 "values": [Vector2(0, -18), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_js3ux"]
+resource_name = "select"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.297302, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -18)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_opj8w"]
@@ -83,7 +83,6 @@ theme = ExtResource("1_gy3gl")
 script = ExtResource("2_els2s")
 
 [node name="CardVisuals" parent="." instance=ExtResource("3_ci03s")]
-process_mode = 3
 mouse_filter = 2
 
 [node name="DropPointDetector" type="Area2D" parent="."]

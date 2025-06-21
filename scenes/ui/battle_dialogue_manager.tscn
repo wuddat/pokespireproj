@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://domqaoyk0ywyl"]
+
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_lhbj7"]
+[ext_resource type="Script" uid="uid://dqdg8wpcnmmnb" path="res://scenes/ui/battle_dialogue_manager.gd" id="2_lhbj7"]
+[ext_resource type="PackedScene" uid="uid://6anpharx7w3c" path="res://scenes/ui/ui_modules/arrow.tscn" id="3_lhbj7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv0sd"]
+bg_color = Color(0.921569, 0.921569, 0.921569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501524, 0.783101, 0.997451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 3.0
+offset_right = 110.0
+offset_bottom = 53.0
+grow_horizontal = 2
+
+[node name="BattleDialogueManager" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_lhbj7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kv0sd")
+script = ExtResource("2_lhbj7")
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleDialogueManager"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="BattleText" type="RichTextLabel" parent="BattleDialogueManager/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_lhbj7")
+theme_override_colors/default_color = Color(0.212841, 0.439923, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_constants/line_separation = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="BattleDialogueManager"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 12
+
+[node name="Control" type="Control" parent="BattleDialogueManager/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="arrow2" parent="BattleDialogueManager/MarginContainer2/Control" instance=ExtResource("3_lhbj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2

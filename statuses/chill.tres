@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_tpxjk")
 id = "chill"
+display_string = " was CHILLED!"
 type = 1
 chance = 1.0
 stack_type = 1

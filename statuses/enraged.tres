@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_arq51")
 id = "enraged"
+display_string = " looks angry!"
 type = 0
 chance = 1.0
 stack_type = 0

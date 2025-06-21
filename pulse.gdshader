@@ -1,32 +1,62 @@
 shader_type canvas_item;
+uniform float enabled = 1.0;
+uniform vec4 color : source_color = vec4(1.0);
+uniform float width : hint_range(0, 10) = 1.0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+uniform bool inside = false;
+uniform bool add_margins = true; // only useful when inside is false
 
-uniform sampler2D vertical_gradient; // used to set alpha values. So you can use this to make the effect dis-/re-appear at points
-uniform sampler2D color_gradient; // sets the effect color, supports 2d gradients
-uniform float size_effect: hint_range(-5.0, 5.0, 0.05) = 0.1; // size of the effect
-uniform float speed = 1; // effect speed; Will reverse effect is set to negative
-uniform float highlight_strength: hint_range(-4.0, 4.0, 0.05) = 0.5; // how strong the color overides the base color
-uniform bool color_mode_toggle = false; // changes how the color gradient is applied. Default is on the entire texture, if set to true it is only applied to the effect
-uniform bool is_horizontal = false; //changes direction from vertical to horizontal 
+void vertex() {
+	if (add_margins) {
+		VERTEX += (UV * 2.0 - 1.0) * width;
+	}
+}
+
+bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
+	for (float i = -ceil(width); i <= ceil(width); i++) {
+		float x = abs(i) > width ? width * sign(i) : i;
+		float offset;
+
+		if (pattern == 0) {
+			offset = width - abs(x);
+		} else if (pattern == 1) {
+			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+		} else if (pattern == 2) {
+			offset = width;
+		}
+
+		for (float j = -ceil(offset); j <= ceil(offset); j++) {
+			float y = abs(j) > offset ? offset * sign(j) : j;
+			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
 
 void fragment() {
-	// set up base parameters
-	vec4 old_color = COLOR;
-	float time = TIME * speed;
-	float current_time = fract(-time);
-	// sets time to fit better with the effect. (Barely detectable change) 
-	current_time = mix(0. - size_effect, 1. + size_effect, current_time);
-	float effect_lower_bound = current_time - size_effect;
-	float effect_upper_bound = current_time + size_effect;
-	float position_value = (is_horizontal) ? UV.x : UV.y;
-	// smoothes out the lower/upper bounds with the UV values to calculate how far from the middle point(the effect) the pixel is away
-	float effect_distance = smoothstep(effect_lower_bound, current_time, position_value) - smoothstep(current_time, effect_upper_bound, position_value);
-	// gets the position of the pixel within the effect for the inner_gradient color mode
-	float inner_effect_position = smoothstep(effect_lower_bound, effect_upper_bound, position_value);
-	vec2 color_position = (color_mode_toggle) ? vec2(UV.x, inner_effect_position) : vec2(current_time);
-	// gets the new color from the gradient
-	vec4 new_color = vec4(texture(color_gradient, color_position));
-	// this step calculates the vertical gradient and alpha_values
-	new_color = mix(old_color, new_color, vec4(texture(vertical_gradient, vec2(current_time))));
-	// apply the color to the texture
-	COLOR.rgb = mix(old_color.rgb, new_color.rgb, vec3(effect_distance * highlight_strength));
+	vec2 uv = UV;
+
+	if (add_margins) {
+		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
+
+		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
+
+		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
+			COLOR.a = 0.0;
+		} else {
+			COLOR = texture(TEXTURE, uv);
+		}
+	} else {
+		COLOR = texture(TEXTURE, uv);
+	}
+
+	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * color.a;
+	}
 }

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_pbqbr")
 id = "ohko"
+display_string = "was KNOCKED OUT in a single hit!"
 type = 2
 chance = 1.0
 stack_type = 0

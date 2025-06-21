@@ -10,6 +10,7 @@ enum StackType {NONE, INTENSITY, DURATION}
 
 @export_group("Status Data")
 @export var id: String
+@export_multiline var display_string: String
 @export var type: Type
 @export var chance: float = 1
 @export var stack_type: StackType

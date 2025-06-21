@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_x0rus")
 id = "poisoned"
+display_string = " was [color=purple]POISONED[/color]!"
 type = 0
 chance = 1.0
 stack_type = 2

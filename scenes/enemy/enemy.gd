@@ -37,6 +37,8 @@ var has_slept: bool = false
 var max_wobble = 3
 var current_wobble = 0
 
+var enemy_text_delay: float = 0.4
+
 func _ready():
 	await get_tree().process_frame
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
@@ -59,7 +61,7 @@ func _ready():
 	
 	var pulse_material := ShaderMaterial.new()
 	pulse_material.shader = PULSE_SHADER
-	pulse_material.set_shader_parameter("highlight_strength", 0.0)  # start with no highlight
+	pulse_material.set_shader_parameter("width", 0.0)  # start with no highlight
 	sprite_2d.material = pulse_material
 	
 
@@ -142,6 +144,7 @@ func update_intent() -> void:
 
 
 func do_turn() -> void:
+
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
 	status_effect_checks()
@@ -158,6 +161,8 @@ func do_turn() -> void:
 	
 	current_action.update_intent_text()
 	intent_ui.update_intent(current_action.intent)
+	Events.battle_text_requested.emit("Enemy [color=red]%s[/color] used %s!" % [stats.species_id.capitalize(), current_action.action_name])
+	await get_tree().create_timer(enemy_text_delay).timeout
 	current_action.perform_action()
 	enemy_action_picker.select_valid_target()
 
@@ -170,31 +175,44 @@ func do_turn() -> void:
 
 func status_effect_checks() -> void:
 	if status_handler.has_status("flinched") or status_handler.has_status("froze"):
-		print("😬 Enemy flinched or froze and will skip turn.")
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] flinched!" % stats.species_id.capitalize())
+		await get_tree().create_timer(enemy_text_delay).timeout
+		print("😬 Enemy flinched will skip turn.")
 		status_handler.remove_status("flinched")
+		skip_turn = true
+	if status_handler.has_status("froze"):
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is FROZEN!" % stats.species_id.capitalize())
+		await get_tree().create_timer(enemy_text_delay).timeout
+		print("🥶 Enemy is FROZE will skip turn.")
 		status_handler.remove_status("froze")
 		is_froze = false
 		skip_turn = true
-		
 	if status_handler.has_status("confused"):
 			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is CONFUSED!" % stats.species_id.capitalize())
+			await get_tree().create_timer(enemy_text_delay).timeout
 			enemy_action_picker.select_confused_target()
 			is_confused = true
 	else:
 		is_confused = false
 	
 	if is_asleep and not status_handler.has_status("sleep"):
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] WOKE UP!" % stats.species_id.capitalize())
+		await get_tree().create_timer(enemy_text_delay).timeout
 		is_asleep = false
 		has_slept = true
-		print("🌅 Enemy woke up.")
+		print("🌅 Enemy %s woke up." % stats.species_id.capitalize())
 
 
 func catch_check() -> void:
+	await get_tree().create_timer(enemy_text_delay).timeout
 	if stats.health <= 0:
 			print("❌ Skipping catch check: %s already fainted." % stats.species_id)
 			return
 
 	if status_handler.has_status("catching"):
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is trying to break free!" % stats.species_id.capitalize())
+		await get_tree().create_timer(enemy_text_delay).timeout
 		print("🎯 %s is being caught, will skip turn." % self)
 		catch_animator.animated_sprite_2d.play("shakes")
 		SFXPlayer.play(WOBBLE)
@@ -205,19 +223,21 @@ func catch_check() -> void:
 		if did_escape_catch():
 			print("💥 %s broke free!" % stats.species_id)
 			catch_animator.animated_sprite_2d.play("breakout")
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] BROKE FREE!" % stats.species_id.capitalize())
 			SFXPlayer.play(BREAKOUT)
 			await catch_animator.animated_sprite_2d.animation_finished
 			sprite_2d.visible = true
 			catch_animator.queue_free()
 			catch_animator = null
 			status_handler.remove_status("catching")
-			current_wobble = 0
 		elif was_caught():
 			await get_tree().create_timer(.2).timeout
 			print("✅ %s was caught!" % stats.species_id)
 			catch_animator.animated_sprite_2d.play("success")
 			SFXPlayer.play(CAUGHT)
 			await catch_animator.animated_sprite_2d.animation_finished
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] was caught!" % stats.species_id.capitalize())
+			await get_tree().create_timer(enemy_text_delay).timeout
 			take_damage(stats.health, Modifier.Type.DMG_TAKEN)
 			skip_turn = true
 		else:
@@ -326,13 +346,13 @@ func mark_as_caught() -> void:
 	
 
 func _on_area_entered(_area: Area2D) -> void:
-	arrow.show()
-	var mat := sprite_2d.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("highlight_strength", 0.7)
+	var pulse_material := ShaderMaterial.new()
+	pulse_material.shader = PULSE_SHADER
+	pulse_material.set_shader_parameter("width", 1.5)  # start with no highlight
+	sprite_2d.material = pulse_material
 
 func _on_area_exited(_area: Area2D) -> void:
-	arrow.hide()
-	var mat := sprite_2d.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("highlight_strength", 0.0)
+	var pulse_material := ShaderMaterial.new()
+	pulse_material.shader = PULSE_SHADER
+	pulse_material.set_shader_parameter("width", 0)  # start with no highlight
+	sprite_2d.material = pulse_material

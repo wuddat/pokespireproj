@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_6cj1j")
 id = "critical"
+display_string = " will [color=goldenrod]CRIT[/color] on their next attack for [color=red]X2:[/color] damage!"
 type = 1
 chance = 1.0
 stack_type = 2
@@ -16,5 +17,5 @@ max_stacks = 999
 max_duration = 999
 icon = ExtResource("1_6cj1j")
 tooltip = "[color=goldenrod]CRITICAL:[/color]
-Receives [b]X2[/b] damage!"
+User of this mod deals  [b]X2[/b] damage!"
 metadata/_custom_type_script = "uid://breq3elxr1644"

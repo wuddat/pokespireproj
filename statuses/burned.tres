@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_a7vnf")
 id = "burned"
+display_string = " was BURNED!"
 type = 2
 chance = 1.0
 stack_type = 1

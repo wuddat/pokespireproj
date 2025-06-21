@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_0qfyo")
 id = "quiverdance"
+display_string = " begins vibrating intensely..."
 type = 0
 chance = 1.0
 stack_type = 0

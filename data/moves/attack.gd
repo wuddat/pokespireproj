@@ -40,6 +40,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	var move_data = MoveData.moves.get(id)
 	var base_damage = base_power
 	var splash_targets: Array[Node]
+	var battle_text: Array[String] = []
 
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)
@@ -88,15 +89,31 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		damage_effect.amount = total
 
 		# 🎵 Set sound based on effectiveness
+		var effective_text: String
+		var effectiveness: bool = false
 		if type_multiplier > 1:
 			damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
+			effective_text = "It's [color=goldenrod]SUPER EFFECTIVE![/color]!"
+			effectiveness = true
 		elif type_multiplier < 1:
 			damage_effect.sound = preload("res://art/sounds/not_effective.wav")
+			effectiveness = true
+			effective_text = "It's not very effective..!"
 		else:
 			damage_effect.sound = sound
 
 		damage_effect.execute([target])
-		total_damage_dealt += total
+		if multiplay == 1:
+			battle_text.insert(0,"%s dealt [color=red]%s[/color] damage to %s!"
+				% [
+					battle_unit_owner.stats.species_id.capitalize(),
+					damage_effect.amount,
+					target.stats.species_id.capitalize()]
+				)
+			
+			if effectiveness:
+				battle_text.append(effective_text)
+			total_damage_dealt += total
 
 	# 💦 Splash Damage (unaffected by effectiveness or statuses)
 	for splash_target in splash_targets:
@@ -128,6 +145,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		var crit_mod := battle_unit_owner.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
 		if crit_mod:
 			crit_mod.remove_value("critical")
+			Events.battle_text_requested.emit("It's a [color=goldenrod]CRITICAL HIT[/color]!")
 			print("✅ Critical consumed")
 
 	# 🧬 Apply status effects to targets
@@ -179,3 +197,4 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			var self_effect := StatusEffect.new()
 			self_effect.status = self_stat.duplicate()
 			self_effect.execute([battle_unit_owner])
+	emit_dialogue(battle_text)

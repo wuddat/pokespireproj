@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_5p1ex")
 id = "despair"
+display_string = " feels [color=gray]DESPAIR[/color] and lets its guard down!"
 type = 2
 chance = 1.0
 stack_type = 0

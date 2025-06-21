@@ -90,7 +90,7 @@ func _setup_event_connections() -> void:
 	Events.party_pokemon_fainted.connect(_update_party_buttons)
 	Events.evolution_completed.connect(_on_evolution_completed)
 	Events.add_leveled_pkmn_to_rewards.connect(_on_leveled_pkmn_to_rewards)
-	
+	Events.return_to_main_menu.connect(_on_return_to_main_menu)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -191,3 +191,7 @@ func _on_evolution_completed() -> void:
 
 func _on_leveled_pkmn_to_rewards(pkmn: PokemonStats) -> void:
 	leveled_in_battle_pkmn.append(pkmn)
+
+func _on_return_to_main_menu() -> void:
+	await get_tree().create_timer(0.1).timeout  # Let current frame/signal stack finish
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

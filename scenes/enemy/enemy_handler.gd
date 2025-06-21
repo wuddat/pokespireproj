@@ -9,7 +9,7 @@ var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var acting_enemies: Array[Enemy] = []
 var caught_pokemon: Array[PokemonStats] = []
 
-
+var enemy_text_delay: float = 0.4
 
 func _ready() -> void:
 	Events.enemy_fainted.connect(_on_enemy_fainted)
@@ -78,12 +78,16 @@ func _start_next_enemy_turn() -> void:
 		Events.enemy_turn_ended.emit()
 		return
 	
+	Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
+	await get_tree().create_timer(1).timeout
 	await acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
 func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 	match type:
 		Status.Type.START_OF_TURN:
+			if enemy.status_handler.has_any_status():
+				await get_tree().create_timer(2).timeout
 			enemy.do_turn()
 		Status.Type.END_OF_TURN:
 			acting_enemies.erase(enemy)
@@ -92,6 +96,7 @@ func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 
 func _on_enemy_fainted(enemy: Enemy) -> void:
 	print("Enemy fainted: ", enemy.stats.species_id)
+	Events.battle_text_requested.emit("Enemy [color=red]%s[/color] FAINTED!" % enemy.stats.species_id.capitalize())
 	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:

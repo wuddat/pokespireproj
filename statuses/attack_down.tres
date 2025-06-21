@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_sjxwl")
 id = "attack_down"
+display_string = "'s ATKPWR has fallen!"
 type = 2
 chance = 1.0
 stack_type = 1

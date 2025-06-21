@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cot5y2etanmqp" path="res://scenes/ui/tooltip.gd" id="2_kv0sd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv0sd"]
-bg_color = Color(1, 1, 1, 0.890196)
+bg_color = Color(0.921569, 0.921569, 0.921569, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2

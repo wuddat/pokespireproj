@@ -12,6 +12,8 @@ func get_tooltip() -> String:
 func apply_status(target: Node) -> void:
 	print("applied enraged and increased atk pwr ")
 	
+	Events.battle_text_requested.emit("%s is getting STRONGER!" % [target.stats.species_id.capitalize()])
+	
 	var status_effect := StatusEffect.new()
 	var atkpwr := ATK_PWR.duplicate()
 	atkpwr.stacks = stacks_per_turn

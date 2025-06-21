@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_knqsm")
 id = "confused"
+display_string = " was CONFUSED and may attack the wrong target!"
 type = 0
 chance = 1.0
 stack_type = 2

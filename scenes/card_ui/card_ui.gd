@@ -19,13 +19,15 @@ const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var targets: Array[Node] = []
 
+var play_card_delay: float = 0.4
+
 
 
 var original_index := 0
 var parent: Control
 var tween: Tween
 var playable := true : set = _set_playable
-var disabled := false
+var disabled := false : set = _set_disabled
 
 
 func _ready() -> void:
@@ -52,7 +54,7 @@ func play() -> void:
 	Events.card_play_initiated.emit()
 	if card.id != "metronome":
 		await play_card_with_delay(card)
-		Events.card_play_completed.emit()
+		#Events.card_play_completed.emit()
 		queue_free()
 		return
 
@@ -60,14 +62,14 @@ func play() -> void:
 	var hand := get_node("/root/Run/CurrentView/Battle/BattleUI/Hand") as Hand
 	if not player_handler:
 		print("❌ PlayerHandler not found in scene tree.")
-		Events.card_play_completed.emit()
+		#Events.card_play_completed.emit()
 		queue_free()
 		return
 
 	var discard := player_handler.character.discard
 	if discard.empty():
 		print("❌ Discard pile is empty. Metronome fizzled!")
-		Events.card_play_completed.emit()
+		#Events.card_play_completed.emit()
 		queue_free()
 		return
 
@@ -79,7 +81,7 @@ func play() -> void:
 	random_card.cost = 0
 	hand.add_card(random_card)
 	discard.add_card(card)
-	Events.card_play_completed.emit()
+	#Events.card_play_completed.emit()
 	queue_free()
 
 
@@ -166,9 +168,12 @@ func _on_char_stats_changed() -> void:
 
 
 func play_card_with_delay(card: Card) -> void:
+	hide()
 	Events.card_played.emit(card)
+	#Events.battle_text_requested.emit("Played %s!" % card.name)
 	char_stats.mana -= card.cost
 	card.random_targets.clear()
+	#await get_tree().create_timer(play_card_delay).timeout
 	
 	#handle confusion if any:
 	if _should_hit_self_due_to_confusion(card):
@@ -188,6 +193,9 @@ func play_card_with_delay(card: Card) -> void:
 		print("🔁 Playing card %s %s times..." % [card.name, card.multiplay])
 
 		# Play card with delays between
+		if card.multiplay > 1:
+				Events.battle_text_requested.emit("Hit [color=red]%s[/color] times!" % card.multiplay)
+				await get_tree().create_timer(play_card_delay).timeout
 		for i in range(card.multiplay):
 			if card.is_single_targeted():
 				if card.target == Card.Target.RANDOM_ENEMY:
@@ -208,7 +216,7 @@ func _should_hit_self_due_to_confusion(card: Card) -> bool:
 		return false
 	if not battle_unit_owner.status_handler.has_status("confused"):
 		return false
-	
+	Events.battle_text_requested.emit("%s is CONFUSED!" % battle_unit_owner.stats.species_id.capitalize())
 	var chance := 0.3
 	var roll := randf()
 	if roll < chance:
@@ -221,8 +229,17 @@ func _should_hit_self_due_to_confusion(card: Card) -> bool:
 
 func _handle_confusion_self_hit(card: Card) -> void:
 	var damage = round(battle_unit_owner.stats.max_health * 0.2)
-
+	Events.battle_text_requested.emit("Played %s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
+	await get_tree().create_timer(play_card_delay).timeout
 	var effect := DamageEffect.new()
 	effect.amount = damage
 	effect.sound = preload("res://art/sounds/Tackle.wav")
 	effect.execute([battle_unit_owner])
+	
+
+
+func _set_disabled(value: bool) -> void:
+	disabled = value
+	mouse_filter = Control.MOUSE_FILTER_IGNORE if value else Control.MOUSE_FILTER_STOP
+	# Optional: make it visually obvious
+	modulate.a = 0.5 if value else 1.0

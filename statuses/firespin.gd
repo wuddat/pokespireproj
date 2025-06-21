@@ -8,6 +8,13 @@ func apply_status(target: Node) -> void:
 	var burn = StatusData.STATUS_LOOKUP["burned"].duplicate()
 	burn.stacks = burn_stacks
 	
+	if target is Enemy:
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] [color=orange]BURNS[/color] in the flames!" 
+	% [target.stats.species_id.capitalize()])
+	
+	if target is PokemonBattleUnit:
+		Events.battle_text_requested.emit("Ally %s [color=orange]BURNS[/color] in the flames!" 
+	% [target.stats.species_id.capitalize()])
 	var burn_effect := StatusEffect.new()
 	burn_effect.status = burn
 	burn_effect.execute([target])
