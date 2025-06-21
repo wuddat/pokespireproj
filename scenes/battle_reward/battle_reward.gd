@@ -21,7 +21,7 @@ const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 @export var leveled_pkmn_in_battle: Array[PokemonStats] = []
 @export var gold_reward: int = 0
 
-
+@onready var back_button: Button = $VBoxContainer/BackButton
 @onready var rewards: VBoxContainer = %Rewards
 
 const COINGAIN = preload("res://art/sounds/sfx/coingain.wav")
@@ -37,7 +37,7 @@ var card_rarity_weights := {
 func _ready() -> void:
 	for node: Node in rewards.get_children():
 		node.queue_free()
-
+	back_button.disabled = true
 
 
 func add_gold_reward(amount: int) -> void:
@@ -46,6 +46,7 @@ func add_gold_reward(amount: int) -> void:
 	gold_reward.reward_text = GOLD_TEXT % amount
 	gold_reward.pressed.connect(_on_gold_reward_taken.bind(amount))
 	rewards.add_child.call_deferred(gold_reward)
+	back_button.disabled = true
 
 
 func add_card_reward() -> void:
@@ -181,13 +182,14 @@ func _on_gold_reward_taken(amount: int) -> void:
 		return
 	SFXPlayer.play(COINGAIN)
 	run_stats.gold += amount
+	back_button.disabled = false
 
 
 func _on_card_reward_taken(card: Card) -> void:
 	if not character_stats or not card:
 		return
 	character_stats.deck.add_card(card)
-
+	back_button.disabled = false
 
 func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	if not character_stats:
@@ -195,6 +197,7 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	var new_pokemon_stats := PokemonStats.from_enemy_stats(stats)
 	var pkmn_to_add = Pokedex.create_pokemon_instance(new_pokemon_stats.species_id)
 	Events.added_pkmn_to_party.emit(pkmn_to_add)
+	back_button.disabled = false
 
 
 func _on_back_button_pressed() -> void:

@@ -167,7 +167,6 @@ func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
 
 
 func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
-	print("OH NOOOOO  A PKMN DONE DID FAINTED")
 	if pkmn and pkmn.is_inside_tree():
 		pkmn.status_handler.clear_all_statuses()
 	var fainted_pkmn = 0

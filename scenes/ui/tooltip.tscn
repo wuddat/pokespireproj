@@ -15,6 +15,9 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.290196)
+shadow_size = 5
+shadow_offset = Vector2(3, 6)
 
 [node name="Tooltip" type="PanelContainer"]
 anchors_preset = 5

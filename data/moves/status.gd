@@ -40,6 +40,8 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	var base_damage = 0
 	var primary_target = targets[0]
 	var splash_targets: Array[Node]
+	var battle_text: Array[String] = []
+
 	
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)

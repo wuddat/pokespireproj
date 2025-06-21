@@ -31,12 +31,13 @@ func _ready() -> void:
 	seen_ids = {}
 	print("🟩 EvolutionReward _ready fired")
 	confirm_button.pressed.connect(_on_confirm)
+	confirm_button.disabled = true
 	
 
 
 func set_forgettable_cards(new_cards: Array[Card]) -> void:
 	forgettable_cards = new_cards
-	
+	confirm_button.disabled = true
 	if not is_node_ready():
 		await ready
 		

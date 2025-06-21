@@ -93,7 +93,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		var effectiveness: bool = false
 		if type_multiplier > 1:
 			damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
-			effective_text = "It's [color=goldenrod]SUPER EFFECTIVE![/color]!"
+			effective_text = "It's [color=goldenrod]SUPER EFFECTIVE[/color]!"
 			effectiveness = true
 		elif type_multiplier < 1:
 			damage_effect.sound = preload("res://art/sounds/not_effective.wav")

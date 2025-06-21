@@ -79,7 +79,7 @@ func _start_next_enemy_turn() -> void:
 		return
 	
 	Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(.5).timeout
 	await acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
@@ -96,7 +96,8 @@ func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 
 func _on_enemy_fainted(enemy: Enemy) -> void:
 	print("Enemy fainted: ", enemy.stats.species_id)
-	Events.battle_text_requested.emit("Enemy [color=red]%s[/color] FAINTED!" % enemy.stats.species_id.capitalize())
+	if !enemy.is_caught:
+		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] FAINTED!" % enemy.stats.species_id.capitalize())
 	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:

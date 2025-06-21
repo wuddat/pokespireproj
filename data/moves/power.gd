@@ -17,4 +17,4 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, _battle_un
 			stat_effect.status = status_to_apply
 			stat_effect.sound = sound
 			stat_effect.execute(targets)
-	
+	emit_dialogue(["ERROR in POWER.GD!"])

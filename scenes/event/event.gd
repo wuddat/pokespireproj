@@ -6,6 +6,8 @@ extends Control
 @onready var description_label := $UILayer/UI/Description
 @onready var choices_container := $UILayer/UI 
 
+const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
+
 var event_data := {}  # Loaded from JSON or hardcoded dictionary
 
 func _ready():
@@ -41,6 +43,7 @@ func _ready():
 
 func _on_choice_selected(effects: Dictionary) -> void:
 	EventEffectResolver.apply(effects, char_stats, run_stats)
+	SFXPlayer.play(PC_MENU_SELECT)
 	Events.event_room_exited.emit()
 	queue_free()
 

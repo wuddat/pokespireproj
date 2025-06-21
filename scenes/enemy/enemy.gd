@@ -226,6 +226,7 @@ func catch_check() -> void:
 			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] BROKE FREE!" % stats.species_id.capitalize())
 			SFXPlayer.play(BREAKOUT)
 			await catch_animator.animated_sprite_2d.animation_finished
+			await get_tree().create_timer(enemy_text_delay).timeout
 			sprite_2d.visible = true
 			catch_animator.queue_free()
 			catch_animator = null

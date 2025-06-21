@@ -8,6 +8,7 @@ const HAND_DISCARD_INTERVAL := 0.2
 @export var hand: Hand
 @export var player: Player
 
+@onready var end_turn_button: Button = %EndTurnButton
 @onready var party_handler: PartyHandler = $"../PartyHandler"
 
 var character: CharacterStats
@@ -42,7 +43,7 @@ func start_turn() -> void:
 	player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	character.block = 0
 	character.reset_mana()
-	
+	end_turn_button.show()
 	var pkmn_with_turns = party_handler.get_active_pokemon_nodes()
 	var pkmn_status_execution = pkmn_with_turns.duplicate()
 	
@@ -60,6 +61,7 @@ func start_turn() -> void:
 
 func end_turn() -> void:
 	hand.disable_hand()
+	end_turn_button.hide()
 	player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 	var pkmn_with_turns = party_handler.get_active_pokemon_nodes()
 	var pkmn_status_execution = pkmn_with_turns.duplicate()
@@ -232,12 +234,6 @@ func _establish_connections() -> void:
 		Events.evolution_triggered.connect(_on_evolution_triggered)
 	if not Events.evolution_completed.is_connected(_on_evolution_completed):
 		Events.evolution_completed.connect(_on_evolution_completed)
-		
-	#if not Events.player_pokemon_start_status_applied.is_connected(_on_pokemon_start_status_applied):
-		#Events.player_pokemon_start_status_applied.connect(_on_pokemon_start_status_applied)
-		#
-	#if not Events.player_pokemon_end_status_applied.is_connected(_on_pokemon_end_status_applied):
-		#Events.player_pokemon_end_status_applied.connect(_on_pokemon_end_status_applied)
 		
 	if not player.status_handler.statuses_applied.is_connected(_on_statuses_applied):
 		player.status_handler.statuses_applied.connect(_on_statuses_applied)

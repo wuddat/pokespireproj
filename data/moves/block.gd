@@ -13,6 +13,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var base_block = base_power
+	var battle_text: Array[String] = []
+
 	
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)
@@ -38,3 +40,4 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			var status_to_apply := status_effect.duplicate()
 			stat_effect.status = status_to_apply
 			stat_effect.execute(targets)
+	emit_dialogue(["%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), name]])

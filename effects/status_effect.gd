@@ -13,6 +13,8 @@ func execute(targets: Array[Node]) -> void:
 			var unique_status = status.duplicate()
 			if not target.status_handler.has_status(status.id):
 				Events.battle_text_requested.emit("%s%s" % [target.stats.species_id.capitalize(),status.display_string])
+			else:
+				Events.battle_text_requested.emit("")
 			target.status_handler.add_status(unique_status)
 			SFXPlayer.play(sound)
 			print("%s applied to %s" % [status.id, target.stats.species_id])

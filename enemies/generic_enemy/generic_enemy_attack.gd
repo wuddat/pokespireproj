@@ -34,7 +34,9 @@ func setup_from_data(data: Dictionary) -> void:
 
 	intent = Intent.new()
 	intent.base_text = damage_display
-	intent.current_text = str(damage)
+	intent.current_text = "[color=red]%s[/color]" % str(damage)
+	if damage <= 0:
+		intent.current_text = ""
 	intent.damage_type = damage_type
 	if damage <= 5:
 		intent.icon = preload("res://art/tile_0103.png")

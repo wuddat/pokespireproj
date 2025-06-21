@@ -25,6 +25,8 @@ const eventscene := preload("res://scenes/event/event.tscn")
 @onready var treasurebtn: Button = %TreasureButton
 @onready var health_ui: HealthUI = %HealthUI
 @onready var party_selector: HBoxContainer = %PartySelector
+@onready var fade: ColorRect = %Fade
+@onready var fade_tween := create_tween()
 
 
 var stats: RunStats
@@ -112,7 +114,24 @@ func 	_setup_top_bar():
 	party_selector.update_buttons()
 
 
+func fade_in(duration := 0.5) -> void:
+	fade.visible = true
+	fade_tween = create_tween()
+	fade_tween.tween_property(fade, "modulate:a", 0.0, duration)
+	await fade_tween.finished
+	fade.visible = false
+
+
+func fade_out(duration := 0.5) -> void:
+	fade.visible = true
+	fade.modulate.a = 0.0
+	fade_tween = create_tween()
+	fade_tween.tween_property(fade, "modulate:a", 1.0, duration)
+	await fade_tween.finished
+
+
 func _on_battle_room_entered(room: Room) -> void:
+	await fade_out()
 	leveled_in_battle_pkmn.clear()
 	var battle_scene: Battle = _change_view(battlescene) as Battle
 	battle_scene.char_stats = character
@@ -120,23 +139,30 @@ func _on_battle_room_entered(room: Room) -> void:
 	battle_scene.battle_stats = room.battle_stats
 	battle_scene.start_battle()
 	party_selector.in_battle = true
+	await fade_in()
 
 
 func _on_shop_entered() -> void:
+	await fade_out()
 	var shop  := _change_view(shopscene) as Shop
 	shop.char_stats = character
 	shop.run_stats = stats
 	shop.populate_shop()
+	await fade_in()
 
 
 func _on_pokecenter_entered() -> void:
+	await fade_out()
 	var pokecenter_scene: Pokecenter = _change_view(pokecenterscene) as Pokecenter
 	pokecenter_scene.char_stats = character
+	await fade_in()
 
 func _on_event_entered() -> void:
+	await fade_out()
 	var scene := _change_view(eventscene) as EventScene
 	scene.char_stats = character
 	scene.run_stats = stats
+	await fade_in()
 
 
 func _on_battle_won() -> void:
