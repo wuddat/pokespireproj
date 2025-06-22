@@ -10,10 +10,12 @@ extends Control
 @onready var label: Label = $Label
 @onready var forget_card_name: Label = %ForgetCardName
 @onready var learn_card_name: Label = %LearnCardName
+@onready var skip_button: Button = %SkipButton
 
 @export var char_stats: CharacterStats
 @export var forgettable_cards: Array[Card] : set = set_forgettable_cards
 @export var learnable_cards: Array[Card] : set = set_learnable_cards
+
 
 const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
 
@@ -31,6 +33,8 @@ func _ready() -> void:
 	seen_ids = {}
 	print("🟩 EvolutionReward _ready fired")
 	confirm_button.pressed.connect(_on_confirm)
+	skip_button.pressed.connect(_on_skip)
+	
 	confirm_button.disabled = true
 	
 
@@ -125,6 +129,8 @@ func _on_confirm() -> void:
 
 	queue_free()
 
+func _on_skip() -> void:
+	queue_free()
 
 func _update_confirm_button() -> void:
 	confirm_button.disabled = forget_slot_selected == false or learn_slot_selected == false
