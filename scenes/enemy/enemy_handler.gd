@@ -79,15 +79,15 @@ func _start_next_enemy_turn() -> void:
 		return
 	
 	Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
-	await get_tree().create_timer(.5).timeout
+	#await get_tree().create_timer(.5).timeout
 	await acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
 func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 	match type:
 		Status.Type.START_OF_TURN:
-			if enemy.status_handler.has_any_status():
-				await get_tree().create_timer(2).timeout
+			#if enemy.status_handler.has_any_status():
+				#await get_tree().create_timer(2).timeout
 			enemy.do_turn()
 		Status.Type.END_OF_TURN:
 			acting_enemies.erase(enemy)
