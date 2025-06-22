@@ -94,6 +94,8 @@ func _fade_out() -> void:
 	tween.tween_property(self, "modulate:a", 0.0, fade_duration)
 	await tween.finished
 	hide()
+	if !is_typing and !is_displaying and message_queue.size() <= 0: #TODO use for battle manager timing
+		return
 
 
 func _input(event: InputEvent) -> void:

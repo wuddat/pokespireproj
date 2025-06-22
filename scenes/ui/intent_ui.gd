@@ -76,6 +76,7 @@ func update_intent(intent: Intent) -> void:
 	target.visible = target.texture != null
 	target.scale = Vector2(1,1)
 	particles.emitting = intent.particles_on
+	#particles.process_material.color = Color(1,1,1,1) #TODO can change particle color maybe by type?
 	if particles.emitting:
 		swirl.visible = true
 	else:
