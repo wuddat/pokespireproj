@@ -70,7 +70,7 @@ func update_pokemon() -> void:
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
 
-func gain_block(block: int, mod_type:Modifier.Type) -> void:
+func gain_block(block: int, _mod_type:Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
 	
@@ -138,18 +138,18 @@ func _on_enemy_seeded_turn_start(seeded: Status) -> void:
 	heal(seeded.heal_strength)
 
 func on_enemy_defeated(enemy: Enemy) -> void:
-	var exp := enemy.stats.max_health * 2
-	stats.current_exp += exp
-	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, exp])
+	var xp := enemy.stats.max_health * 2
+	stats.current_exp += xp
+	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, xp])
 	
 
 	var text := COMBAT_TEXT.instantiate()
 	add_child(text)
-	text.show_text("EXP: %s" % exp)
+	text.show_text("EXP: %s" % xp)
 
 	await get_tree().create_timer(0.4).timeout
 
-	var level_up_exp := await stats.get_xp_for_next_level(stats.level)
+	var level_up_exp := stats.get_xp_for_next_level(stats.level)
 	#print("level_up_exp: ", level_up_exp)
 	
 	if stats.current_exp >= level_up_exp:

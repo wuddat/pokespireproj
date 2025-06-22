@@ -92,12 +92,12 @@ func get_owner_pokemon(uid: String) -> PokemonStats:
 
 
 func update_type_icon(damage_type: String) -> void:
-	var type := damage_type.to_lower()
+	var dam_type := damage_type.to_lower()
 	if not TYPE_ICON_INDEX.has(type):
 		$Type.visible = false
 		return
 
-	var index = TYPE_ICON_INDEX[type]
+	var index = TYPE_ICON_INDEX[dam_type]
 	var col = index % ICONS_PER_ROW
 	var row = index / ICONS_PER_ROW
 

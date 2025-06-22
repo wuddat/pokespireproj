@@ -32,7 +32,6 @@ func apply_status(target: Node) -> void:
 			if stacks > 1:
 				target.skip_turn = true
 				target.is_asleep = true
-				var enemy_target := target as Enemy
 				target.status_handler.remove_status("sleep")
 		else:
 			print("🟢 Sleep: stacked up, but not enough to re-trigger sleep")

@@ -7,9 +7,9 @@ static func print_resource(resource: Resource) -> void:
 
 	print("----- Resource Properties -----")
 	for prop in resource.get_property_list():
-		var name = prop.name
-		var value = resource.get(name)
-		print("%s: %s" % [name, value])
+		var prop_name = prop.name
+		var value = resource.get(prop_name)
+		print("%s: %s" % [prop_name, value])
 	print("------------------------------")
 
 
@@ -30,9 +30,9 @@ static func print_node(node: Node) -> void:
 	# Print exported and internal properties
 	var property_list := node.get_property_list()
 	for prop in property_list:
-		var name = prop.name
-		var value = node.get(name)
-		print("%s: %s" % [name, value])
+		var prop_name = prop.name
+		var value = node.get(prop_name)
+		print("%s: %s" % [prop_name, value])
 
 
 static func get_evolution_options(pkmn: PokemonStats) -> Array[Card]:

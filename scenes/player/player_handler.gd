@@ -45,7 +45,7 @@ func start_turn() -> void:
 	character.reset_mana()
 	end_turn_button.show()
 	var pkmn_with_turns = party_handler.get_active_pokemon_nodes()
-	var pkmn_status_execution = pkmn_with_turns.duplicate()
+	var _pkmn_status_execution = pkmn_with_turns.duplicate()
 	
 	#print("pkmn_with_turns are: %s" % [pkmn_with_turns])
 	if pkmn_with_turns.is_empty():
@@ -221,7 +221,7 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 	character.draw_pile.shuffle()
 
 
-func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
+func _on_evolution_triggered(_pkmn: PokemonBattleUnit) -> void:
 	hand.disable_hand()
 
 func _on_evolution_completed() -> void:

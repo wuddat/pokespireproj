@@ -10,5 +10,5 @@ func initialize_status(target: Node) -> void:
 	mod_val.percent_value = 1.0
 	crit_mod.add_new_value(mod_val)
 
-func apply_status(target: Node) -> void:
+func apply_status(_target: Node) -> void:
 	status_applied.emit(self)

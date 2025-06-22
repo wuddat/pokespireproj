@@ -99,7 +99,7 @@ func shift_active_party() -> void:
 	if units.size() < 2:
 		return
 
-	var positions := [POS_0, POS_1, POS_2]
+	var _positions := [POS_0, POS_1, POS_2]
 	var current_units: Array[PokemonBattleUnit] = []
 	for unit in units:
 		current_units.append(unit)

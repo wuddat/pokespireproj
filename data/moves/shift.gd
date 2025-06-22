@@ -13,8 +13,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		
 		# Check for conditional bonus
 		if bonus_damage_if_target_has_status != "":
-			for target in targets:
-				var handler = target.get_node_or_null("StatusHandler")
+			for tar in targets:
+				var handler = tar.get_node_or_null("StatusHandler")
 				if handler:
 					var statuses = handler.get_statuses()
 					print("statuses on unit are: %s" % [statuses])
@@ -27,8 +27,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		return tooltip_text % mod_dmg
 
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
-	var move_data = MoveData.moves.get(id)
+func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
+	#var _move_data = MoveData.moves.get(id)
 	var tree := battle_unit_owner.get_tree()
 	var party_handler = tree.get_first_node_in_group("party_handler")
 	party_handler.shift_active_party()

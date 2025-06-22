@@ -5,7 +5,6 @@ extends HBoxContainer
 @export var bar_type: bool
 
 
-@onready var block: HBoxContainer = $"../Block"
 @onready var health_label: Label = %HealthLabel
 @onready var max_health_label: Label = %MaxHealthLabel
 @onready var progress_bar: ProgressBar = %ProgressBar

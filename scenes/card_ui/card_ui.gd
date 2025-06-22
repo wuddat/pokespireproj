@@ -167,51 +167,51 @@ func _on_char_stats_changed() -> void:
 	playable = char_stats.card_playable(card)
 
 
-func play_card_with_delay(card: Card) -> void:
+func play_card_with_delay(crd: Card) -> void:
 	hide()
-	Events.card_played.emit(card)
+	Events.card_played.emit(crd)
 	#Events.battle_text_requested.emit("Played %s!" % card.name)
-	char_stats.mana -= card.cost
-	card.random_targets.clear()
+	char_stats.mana -= crd.cost
+	crd.random_targets.clear()
 	#await get_tree().create_timer(play_card_delay).timeout
 	
 	#handle confusion if any:
-	if _should_hit_self_due_to_confusion(card):
-		_handle_confusion_self_hit(card)
+	if _should_hit_self_due_to_confusion(crd):
+		_handle_confusion_self_hit(crd)
 		await get_tree().create_timer(0.2).timeout
 	
 	else:
 		# Handle randomplay roll
-		if card.randomplay > 0:
-			card.multiplay = randi_range(2, card.randomplay)
+		if crd.randomplay > 0:
+			crd.multiplay = randi_range(2, crd.randomplay)
 
 		# Pre-select random targets if needed
-		if card.target == Card.Target.RANDOM_ENEMY:
-			for i in range(card.multiplay):
-				card.random_targets.append(card._get_targets([], battle_unit_owner))
+		if crd.target == Card.Target.RANDOM_ENEMY:
+			for i in range(crd.multiplay):
+				crd.random_targets.append(crd._get_targets([], battle_unit_owner))
 
-		print("🔁 Playing card %s %s times..." % [card.name, card.multiplay])
+		print("🔁 Playing card %s %s times..." % [crd.name, crd.multiplay])
 
 		# Play card with delays between
-		if card.multiplay > 1:
-				Events.battle_text_requested.emit("Hit [color=red]%s[/color] times!" % card.multiplay)
+		if crd.multiplay > 1:
+				Events.battle_text_requested.emit("Hit [color=red]%s[/color] times!" % crd.multiplay)
 				await get_tree().create_timer(play_card_delay).timeout
-		for i in range(card.multiplay):
-			if card.is_single_targeted():
-				if card.target == Card.Target.RANDOM_ENEMY:
-					card.apply_effects(card.random_targets[i], player_pkmn_modifiers, battle_unit_owner)
-				elif card.target == Card.Target.SPLASH:
-					card.apply_effects(card._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
+		for i in range(crd.multiplay):
+			if crd.is_single_targeted():
+				if crd.target == Card.Target.RANDOM_ENEMY:
+					crd.apply_effects(crd.random_targets[i], player_pkmn_modifiers, battle_unit_owner)
+				elif crd.target == Card.Target.SPLASH:
+					crd.apply_effects(crd._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
 				else:
-					card.apply_effects(targets, player_pkmn_modifiers, battle_unit_owner)
+					crd.apply_effects(targets, player_pkmn_modifiers, battle_unit_owner)
 			else:
-				card.apply_effects(card._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
+				crd.apply_effects(crd._get_targets(targets, battle_unit_owner), player_pkmn_modifiers, battle_unit_owner)
 
 			await get_tree().create_timer(0.2).timeout
 
 
 
-func _should_hit_self_due_to_confusion(card: Card) -> bool:
+func _should_hit_self_due_to_confusion(_crd: Card) -> bool:
 	if not is_instance_valid(battle_unit_owner):
 		return false
 	if not battle_unit_owner.status_handler.has_status("confused"):
@@ -227,7 +227,7 @@ func _should_hit_self_due_to_confusion(card: Card) -> bool:
 	return false
 
 
-func _handle_confusion_self_hit(card: Card) -> void:
+func _handle_confusion_self_hit(_card: Card) -> void:
 	var damage = round(battle_unit_owner.stats.max_health * 0.2)
 	Events.battle_text_requested.emit("Played %s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
 	await get_tree().create_timer(play_card_delay).timeout

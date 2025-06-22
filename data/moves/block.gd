@@ -4,7 +4,7 @@ extends Card
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets) -> String:
+func get_updated_tooltip(player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler, _targets) -> String:
 	var mod_block := player_modifiers.get_modified_value(base_power, Modifier.Type.BLOCK_GAINED)
 
 	return tooltip_text % mod_block
@@ -13,7 +13,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
 	var base_block = base_power
-	var battle_text: Array[String] = []
+	var _battle_text: Array[String] = []
 
 	
 	if move_data == null:

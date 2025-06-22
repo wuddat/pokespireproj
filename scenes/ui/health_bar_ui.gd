@@ -3,7 +3,6 @@ extends PanelContainer
 
 @onready var icon: Sprite2D = %Icon
 @onready var health: HealthUI = %HealthUI
-@onready var label: Label = %Label
 @onready var block_label: Label = %BlockLabel
 @onready var block: HBoxContainer = %Block
 @onready var fainted: Label = %Fainted

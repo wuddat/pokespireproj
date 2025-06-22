@@ -6,15 +6,15 @@ func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-	var mod_dmg := await player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
+	var mod_dmg := player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
 	if enemy_modifiers:
 		mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
 		
 		# Check for conditional bonus
 	if bonus_damage_if_target_has_status != "":
-		for target in targets:
-			var handler = target.get_node_or_null("StatusHandler")
+		for tar in targets:
+			var handler = tar.get_node_or_null("StatusHandler")
 			if handler:
 				var statuses = handler.get_statuses()
 				print("statuses on unit are: %s" % [statuses])
@@ -24,7 +24,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 						break
 	if targets:
 		var target_types = targets[0].stats.type
-		var type_multiplier = Effectiveness.get_multiplier(damage_type, target_types)
+		var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
 		mod_dmg *= type_multiplier
 		mod_dmg = round(mod_dmg)
 
@@ -32,15 +32,15 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % mod_dmg
 
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
+func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	if targets.is_empty():
 		return
 	
 	var move_data = MoveData.moves.get(id)
 	var base_damage = 0
 	var primary_target = targets[0]
-	var splash_targets: Array[Node]
-	var battle_text: Array[String] = []
+	var _splash_targets: Array[Node]
+	var _battle_text: Array[String] = []
 
 	
 	if move_data == null:
@@ -48,11 +48,11 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		return
 	print([targets])
 	if splash_damage > 0:
-		splash_targets = targets.slice(1)
+		_splash_targets = targets.slice(1)
 	
 	
-	var final_damage = base_damage
-	var final_splash = splash_damage
+	var _final_damage = base_damage
+	var _final_splash = splash_damage
 	var total_damage_dealt = 0
 
 # Check for conditional bonus

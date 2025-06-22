@@ -16,7 +16,7 @@ signal evolution_queue_completed
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var player: Player = $Player
 @onready var party_handler: PartyHandler = $PartyHandler
-@onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
+#@onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
 @onready var left_panel: VBoxContainer = $StatUI/LeftPanel
 @onready var pkmn_fainted_ui: PkmnFaintedUI = $FaintUI/PkmnFainted
 

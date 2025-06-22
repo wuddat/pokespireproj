@@ -14,8 +14,8 @@ extends Stats
 @export var current_exp: int = 0
 @export var level: int = 1
 
-func get_xp_for_next_level(level: int) -> int:
-	return 10 + health * 1.2
+func get_xp_for_next_level(lvl: int) -> int:
+	return 10 + health * 1.2 * lvl
 
 func get_evolved_species_id() -> String:
 	return evolves_to
@@ -40,7 +40,7 @@ func try_gain_exp_from(enemy: Enemy) -> bool:
 	var gained_exp := enemy.stats.max_health * 2
 	current_exp += gained_exp
 	var did_level := false
-	var level_threshold := await get_xp_for_next_level(level)
+	var level_threshold := get_xp_for_next_level(level)
 
 	if current_exp >= level_threshold:
 		if level != 100:

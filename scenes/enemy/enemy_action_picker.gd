@@ -76,8 +76,8 @@ func select_valid_target() -> void:
 
 func _on_party_shifted() -> void:
 	refresh_target_pool()
-	for target in target_pool:
-		print("target_pool: ", target.stats.species_id)
+	for tar in target_pool:
+		print("target_pool: ", tar.stats.species_id)
 	var new_target: PokemonBattleUnit = null
 	print("current_target_pos is: ", current_target_pos)
 	
@@ -201,7 +201,7 @@ func _set_target(value: Node2D) -> void:
 	for action in get_children():
 		action.target = target
 
-func _on_pokemon_switch(pkmn: PokemonStats) -> void:
+func _on_pokemon_switch(_pkmn: PokemonStats) -> void:
 	refresh_target_pool()
 	_on_party_shifted()
 

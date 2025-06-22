@@ -74,7 +74,7 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		
 	var tree := battle_unit_owner.get_tree()
 	
-	var is_player := battle_unit_owner.is_in_group("active_pokemon")
+	var _is_player := battle_unit_owner.is_in_group("active_pokemon")
 	var player_party := tree.get_nodes_in_group("active_pokemon")
 	var allies_group: Array[Node] = []
 	for pkmn in player_party:
@@ -97,8 +97,6 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		Target.SPLASH:
 			var splash_targets: Array[Node] = enemy_group.duplicate()
 			splash_targets = splash_targets.filter(func(enemy): return enemy != targets[0])
-			return targets + splash_targets
-
 			return targets + splash_targets
 		Target.RANDOM_ENEMY:
 			print("RANDOM_ENEMY group:", enemy_group)

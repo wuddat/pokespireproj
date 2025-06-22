@@ -76,9 +76,9 @@ func create_instance() -> Resource:
 	return instance
 
 
-func get_faint_pile(uid: String) -> CardPile:
-	if faint_pile.has(uid):
-		return faint_pile[uid]
+func get_faint_pile(fntd_uid: String) -> CardPile:
+	if faint_pile.has(fntd_uid):
+		return faint_pile[fntd_uid]
 	else:
 		return CardPile.new()
 
@@ -193,9 +193,9 @@ func check_if_all_party_fainted() -> void:
 
 
 func print_faint_pile():
-	for uid in faint_pile.keys():
-		print("UID:", uid)
-		for card in faint_pile[uid].cards:
+	for fnt_uid in faint_pile.keys():
+		print("UID:", fnt_uid)
+		for card in faint_pile[fnt_uid].cards:
 			print(" -", card.move_id)
 
 

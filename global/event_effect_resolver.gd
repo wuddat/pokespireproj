@@ -145,7 +145,7 @@ func _gain_rare_card_of_type_for_pokemon(data: Dictionary, char_stats: Character
 
 
 
-func _add_pokemon(species_id: String, char_stats: CharacterStats) -> void:
+func _add_pokemon(species_id: String, _char_stats: CharacterStats) -> void:
 	var new_pkmn := Pokedex.create_pokemon_instance(species_id)
 	if new_pkmn:
 		Events.added_pkmn_to_party.emit(new_pkmn)

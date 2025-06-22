@@ -34,6 +34,3 @@ func update_intent_text() -> void:
 	if enemy and enemy.status_handler.has_status("confused"):
 		intent.target = preload("res://art/statuseffects/confused-effect.png")
 	intent.current_text = intent.base_text % block
-
-	if is_instance_valid(target):
-		var target_pkmn := target

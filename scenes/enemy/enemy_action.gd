@@ -96,7 +96,7 @@ func animate_to_targets(
 
 	var dmg_effect := DamageEffect.new()
 	var target_types = target_node.stats.type
-	var mult = Effectiveness.get_multiplier(damage_type, target_types)
+	var mult = TypeChart.get_multiplier(damage_type, target_types)
 	dmg_effect.amount = round(total_damage * mult)
 	dmg_effect.sound = sound
 

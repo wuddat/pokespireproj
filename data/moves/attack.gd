@@ -14,8 +14,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		
 		# Check for conditional bonus
 	if bonus_damage_if_target_has_status != "":
-		for target in targets:
-			var handler = target.get_node_or_null("StatusHandler")
+		for tar in targets:
+			var handler = tar.get_node_or_null("StatusHandler")
 			if handler:
 				var statuses = handler.get_statuses()
 				print("statuses on unit are: %s" % [statuses])
@@ -25,7 +25,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 						break
 	if targets:
 		var target_types = targets[0].stats.type
-		var type_multiplier = Effectiveness.get_multiplier(damage_type, target_types)
+		var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
 		mod_dmg *= type_multiplier
 		mod_dmg = round(mod_dmg)
 
@@ -55,33 +55,33 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	var total_damage_dealt = 0
 
 	# 💥 Deal primary damage to each valid target
-	for target in targets:
-		if not is_instance_valid(target):
+	for tar in targets:
+		if not is_instance_valid(tar):
 			continue
 
 		# ❌ Skip if requires a status the target doesn't have
 		if requires_status != "" and requires_status != "sleep":
-			var handler = target.get_node_or_null("StatusHandler")
-			if not handler or not handler.has_status(requires_status):
-				print("❌ Skipping %s due to missing required status: %s" % [target.stats.species_id, requires_status])
+			var status_handler = tar.get_node_or_null("StatusHandler")
+			if not status_handler or not status_handler.has_status(requires_status):
+				print("❌ Skipping %s due to missing required status: %s" % [tar.stats.species_id, requires_status])
 				continue
 		if requires_status == "sleep":
-			if !target.is_asleep:
-				print("❌ Skipping %s because target is not asleep (Dream Eater requirement)" % target.stats.species_id)
+			if !tar.is_asleep:
+				print("❌ Skipping %s because target is not asleep (Dream Eater requirement)" % tar.stats.species_id)
 				continue
 
-		var handler = target.get_node_or_null("StatusHandler")
+		var handler = tar.get_node_or_null("StatusHandler")
 		var target_damage = final_damage
 		
 		if target_damage_percent_hp > 0:
-			target_damage = round(target.stats.health * target_damage_percent_hp)
+			target_damage = round(tar.stats.health * target_damage_percent_hp)
 
 		# 🎯 Bonus if target has a specific status
 		if bonus_damage_if_target_has_status != "":
 			if handler and handler.has_status(bonus_damage_if_target_has_status):
 				target_damage *= bonus_damage_multiplier
 
-		var type_multiplier := Effectiveness.get_multiplier(damage_type, target.stats.type)
+		var type_multiplier := TypeChart.get_multiplier(damage_type, tar.stats.type)
 		var mod_damage := modifiers.get_modified_value(target_damage, Modifier.Type.DMG_DEALT)
 		var total = round(mod_damage * type_multiplier)
 
@@ -102,13 +102,13 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		else:
 			damage_effect.sound = sound
 
-		damage_effect.execute([target])
+		damage_effect.execute([tar])
 		if multiplay == 1:
 			battle_text.insert(0,"%s dealt [color=red]%s[/color] damage to %s!"
 				% [
 					battle_unit_owner.stats.species_id.capitalize(),
 					damage_effect.amount,
-					target.stats.species_id.capitalize()]
+					tar.stats.species_id.capitalize()]
 				)
 			
 			if effectiveness:
@@ -120,7 +120,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		if not is_instance_valid(splash_target):
 			continue
 
-		var splash_type_multiplier := Effectiveness.get_multiplier(damage_type, splash_target.stats.type)
+		var splash_type_multiplier := TypeChart.get_multiplier(damage_type, splash_target.stats.type)
 		var splash_modified := modifiers.get_modified_value(final_splash, Modifier.Type.DMG_DEALT)
 		var splash_total = round(splash_modified * splash_type_multiplier)
 

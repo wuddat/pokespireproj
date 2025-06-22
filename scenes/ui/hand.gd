@@ -51,15 +51,15 @@ func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	child.set_deferred("disabled", false)
 
 
-func _assign_modifiers_when_battle_pkmn_ready(card_ui: CardUI, uid: String) -> void:
+func _assign_modifiers_when_battle_pkmn_ready(cardui: CardUI, uid: String) -> void:
 	await get_tree().process_frame
 	
 	var tries := 0
 	while tries < 10:
 		var unit := party_handler.get_pkmn_by_uid(uid)
 		if unit != null:
-			card_ui.battle_unit_owner = unit
-			card_ui.player_pkmn_modifiers = unit.modifier_handler
+			cardui.battle_unit_owner = unit
+			cardui.player_pkmn_modifiers = unit.modifier_handler
 			return
 		await get_tree().create_timer(.1).timeout
 		tries +=1
