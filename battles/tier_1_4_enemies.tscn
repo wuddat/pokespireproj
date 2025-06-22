@@ -8,17 +8,17 @@
 script = ExtResource("1_3gdq5")
 
 [node name="Enemy" parent="." instance=ExtResource("2_8p560")]
-position = Vector2(409, 154)
+position = Vector2(253, 133)
 stats = ExtResource("3_uvw5w")
 
 [node name="Enemy3" parent="." instance=ExtResource("2_8p560")]
-position = Vector2(359, 134)
-stats = ExtResource("3_uvw5w")
-
-[node name="Enemy2" parent="." instance=ExtResource("2_8p560")]
 position = Vector2(304, 154)
 stats = ExtResource("3_uvw5w")
 
+[node name="Enemy2" parent="." instance=ExtResource("2_8p560")]
+position = Vector2(359, 134)
+stats = ExtResource("3_uvw5w")
+
 [node name="Enemy4" parent="." instance=ExtResource("2_8p560")]
-position = Vector2(253, 133)
+position = Vector2(409, 154)
 stats = ExtResource("3_uvw5w")
