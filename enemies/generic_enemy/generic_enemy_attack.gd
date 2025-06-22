@@ -13,6 +13,8 @@ extends EnemyAction
 @export var requires_status: String = ""
 
 func setup_from_data(data: Dictionary) -> void:
+	intent = Intent.new()
+	
 	status_effects = []
 	if data.has("status_effects"):
 		status_effects.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["status_effects"])))
@@ -33,11 +35,11 @@ func setup_from_data(data: Dictionary) -> void:
 	var damage_display = "%s"
 
 
-	intent = Intent.new()
+	intent.particles_on = true
 	intent.base_text = damage_display
 	intent.current_text = str(damage)
 	if damage <= 0:
-		intent.current_text = ""
+		intent.current_text = intent.base_text % " "
 	intent.damage_type = damage_type
 	if damage <= 5:
 		intent.icon = preload("res://art/tile_0103.png")
@@ -71,26 +73,33 @@ func perform_action() -> void:
 	
 	
 	var valid_targets: Array[Node] = []
+
 	for t in targets_to_hit:
 		if not is_instance_valid(t):
 			continue
-	
-		if requires_status != "" and requires_status != "sleep":
-			var handler = t.get_node_or_null("StatusHandler")
-			if not handler or not handler.has_status(requires_status):
-				print("❌ Skipping %s due to missing required status: %s" % [t.stats.species_id, requires_status])
-				continue
-			elif requires_status == "sleep":
+
+		var skip := false
+
+		if requires_status != "":
+			if requires_status == "sleep":
 				if not t.has_method("is_asleep") or not t.is_asleep:
 					print("❌ Skipping %s because target is not asleep (Dream Eater requirement)" % t.stats.species_id)
-					continue
+					skip = true
+			else:
+				var handler = t.get_node_or_null("StatusHandler")
+				if not handler or not handler.has_status(requires_status):
+					print("❌ Skipping %s due to missing required status: %s" % [t.stats.species_id, requires_status])
+					skip = true
 
+		if not skip:
 			valid_targets.append(t)
-		
-		if valid_targets.is_empty():
-			print("⚠️ No valid targets for generic_enemy_attack due to status requirements.")
-			Events.enemy_action_completed.emit(enemy)
-			return
+			print("✅ valid target appended: ", t.stats.species_id)
+
+	if valid_targets.is_empty():
+		print("⚠️ No valid targets for generic_enemy_attack due to status requirements.")
+		Events.enemy_action_completed.emit(enemy)
+		return
+
 
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = damage
@@ -122,23 +131,25 @@ func perform_action() -> void:
 func update_intent_text() -> void:
 	if not is_instance_valid(target):
 		return
-
-	intent.current_text = intent.base_text  # default fallback
-
-	if enemy and enemy.status_handler.has_status("confused"):
-		#print("🌀 Setting intent.target to CONFUSED ??? for:", enemy.stats.species_id)
-		intent.target = preload("res://art/statuseffects/confused-effect.png")
-		# intent.icon remains untouched
-		intent.current_text = str(damage)
-		return
-
-
+		
+	intent.current_text = intent.base_text #default
+	
 	var target_pkmn := target
 	if not target_pkmn:
 		return
-
-	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
-	#print("📦 Calculating damage for target:", target_pkmn.stats.species_id, "→", modified_dmg)
-	intent.current_text = intent.base_text % modified_dmg
+		
 	intent.target = target_pkmn.stats.icon
-	#print("🧪 GENERIC_ATTACK.GD current target in generic_enemy_attack: ", target_pkmn.stats.species_id)
+	intent.particles_on = status_effects.size() > 0
+	
+	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	if modified_dmg > 0:
+		intent.current_text = intent.base_text % modified_dmg
+	else: 
+		intent.current_text = intent.base_text % " "
+
+	if enemy and enemy.status_handler.has_status("confused"):
+		intent.target = preload("res://art/statuseffects/confused-effect.png")
+		return
+	
+	
+	

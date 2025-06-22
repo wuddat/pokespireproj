@@ -31,8 +31,8 @@ func set_pkmn(new_pkmn: PokemonStats) -> void:
 	
 	pkmn = new_pkmn
 	
-	for PKMN_UI in pkmn_container.get_children():
-		PKMN_UI.queue_free()
+	for pkmn_ui in pkmn_container.get_children():
+		pkmn_ui.queue_free()
 	
 	var new_pkmn_ui := PKMN_UI.instantiate()
 	pkmn_container.add_child(new_pkmn_ui)

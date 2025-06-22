@@ -177,7 +177,7 @@ func _on_pokemon_switch(pkmn: PokemonStats) -> void:
 	sync_highlight_to_battling_pokemon()
 	update_buttons()
 
-func _on_party_pokemon_added(pkmn: PokemonStats) -> void:
+func _on_party_pokemon_added(_pkmn: PokemonStats) -> void:
 	if char_stats.current_party.size() <=3 and highlighted_in_bar_pkmn.size() < 3:
 		for i in range(min(3, char_stats.current_party.size())):
 			var highlight_pkmn = char_stats.current_party[i]

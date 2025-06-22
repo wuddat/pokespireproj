@@ -1289,7 +1289,7 @@
 	  "subtype": "single_target",
 	  "type": "normal",
 	  "target": "enemy",
-	  "power": 5,
+	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["feeble","feeble","feeble","feeble","feeble",],

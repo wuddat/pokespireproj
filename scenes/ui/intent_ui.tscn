@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://djn4clek6m1mn"]
+[gd_scene load_steps=17 format=3 uid="uid://djn4clek6m1mn"]
 
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_mub4x"]
 [ext_resource type="Script" uid="uid://dp28gj3v4djpn" path="res://scenes/ui/intent_ui.gd" id="1_sg8ul"]
 [ext_resource type="Texture2D" uid="uid://bkc5qr388q57w" path="res://art/sprites/icons/25-cosplay.png" id="2_rdgft"]
 [ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_jvjc4"]
+[ext_resource type="Texture2D" uid="uid://ct5nygbymbebx" path="res://art/intent/status.png" id="4_m20oi"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="4_ove1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdgft"]
@@ -20,6 +21,44 @@ corner_radius_bottom_left = 2
 shadow_color = Color(0, 0, 0, 0.290196)
 shadow_size = 1
 shadow_offset = Vector2(3, 3)
+
+[sub_resource type="Gradient" id="Gradient_m20oi"]
+offsets = PackedFloat32Array(0, 0.527607, 1)
+colors = PackedColorArray(1, 1, 1, 0.227451, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v6c5w"]
+gradient = SubResource("Gradient_m20oi")
+
+[sub_resource type="Curve" id="Curve_em7sf"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1x3l4"]
+curve = SubResource("Curve_em7sf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nw2sh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 10, 1)
+angular_velocity_min = -69.78
+angular_velocity_max = 82.47
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 70.48
+gravity = Vector3(0, -50, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 6.52
+radial_accel_min = -2.23517e-06
+radial_accel_max = 12.33
+scale_min = 0.1
+scale_max = 0.2
+scale_over_velocity_curve = SubResource("CurveTexture_1x3l4")
+color = Color(0.796078, 0.709804, 1, 1)
+color_ramp = SubResource("GradientTexture1D_v6c5w")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ove1y"]
+atlas = ExtResource("4_jvjc4")
+region = Rect2(16, 16, 38, 38)
 
 [sub_resource type="Animation" id="Animation_jvjc4"]
 length = 0.001
@@ -50,7 +89,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.43333),
 "transitions": PackedFloat32Array(0.594604, 1.68179, 0.615572),
 "update": 0,
-"values": [Vector2(-25, -54), Vector2(-25, -59), Vector2(-25, -54)]
+"values": [Vector2(-60, -54), Vector2(-60, -59), Vector2(-60, -54)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ove1y"]
@@ -60,66 +99,121 @@ _data = {
 }
 
 [node name="IntentUI" type="Control"]
+custom_minimum_size = Vector2(112, 20)
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_right = 112.0
+offset_bottom = 20.0
 grow_horizontal = 2
 script = ExtResource("1_sg8ul")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_top = 10.0
-offset_right = 62.0
-offset_bottom = 30.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_rdgft")
-
-[node name="Target" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(-12, 17)
-texture = ExtResource("2_rdgft")
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 44.0
-offset_bottom = 40.0
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2"]
+[node name="Target" type="TextureRect" parent="HBoxContainer2"]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-theme_override_constants/separation = 0
+texture = ExtResource("2_rdgft")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 22)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_rdgft")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/Panel"]
+layout_mode = 2
+theme_override_constants/separation = -3
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer2/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 texture = ExtResource("1_mub4x")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="HBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer2/Panel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_vertical = 1
-text = "888"
+text = "88"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TypeIcon" type="Sprite2D" parent="HBoxContainer2"]
-position = Vector2(53, 20)
-scale = Vector2(0.394737, 0.394737)
-texture = ExtResource("4_jvjc4")
-region_enabled = true
-region_rect = Rect2(16, 16, 38, 38)
+[node name="swirl" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer/Label"]
+unique_name_in_owner = true
+modulate = Color(0.627451, 0.505882, 1, 0.709804)
+show_behind_parent = true
+custom_minimum_size = Vector2(25, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_m20oi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Particles" type="GPUParticles2D" parent="HBoxContainer2/Panel/HBoxContainer/Label"]
+unique_name_in_owner = true
+position = Vector2(12, 10)
+amount = 50
+amount_ratio = 0.1145
+texture = ExtResource("4_m20oi")
+lifetime = 0.5
+speed_scale = 0.25
+randomness = 1.0
+fixed_fps = 120
+trail_lifetime = 3.5
+process_material = SubResource("ParticleProcessMaterial_nw2sh")
+
+[node name="TypeIcon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_ove1y")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="arrow" type="Sprite2D" parent="HBoxContainer2"]
+unique_name_in_owner = true
 modulate = Color(1, 0.287307, 0.225237, 1)
-position = Vector2(31, 35)
+position = Vector2(57, 35)
 rotation = 3.14159
 scale = Vector2(0.701956, 0.701956)
 texture = ExtResource("4_ove1y")
 region_rect = Rect2(16, 16, 38, 38)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_ove1y")
 }

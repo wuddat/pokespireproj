@@ -10,6 +10,7 @@ func setup_from_data(data: Dictionary) -> void:
 	action_name = data.get("name", "SOMETHING!")
 	intent = Intent.new()
 	intent.icon = preload("res://art/tile_0102.png")  # 🛡️ block icon
+	intent.particles_on = false
 
 func perform_action() -> void:
 	if not enemy or not is_instance_valid(target):

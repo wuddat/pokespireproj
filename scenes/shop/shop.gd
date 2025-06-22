@@ -95,3 +95,4 @@ func _on_shop_pkmn_bought(pkmn: PokemonStats, gold_cost: int) -> void:
 	run_stats.gold -= gold_cost
 	print("added pkmn to party: ", pkmn.species_id)
 	Events.added_pkmn_to_party.emit(pkmn)
+	_update_items()

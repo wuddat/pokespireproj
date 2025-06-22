@@ -3,7 +3,7 @@ class_name FlatDamageEffect
 extends Effect
 
 var amount := 0
-var _receiver_mod_type
+var _receiver_mod_type = Modifier.Type.NO_MODIFIER
 
 func execute(targets: Array[Node]) -> void:
 	for target in targets:

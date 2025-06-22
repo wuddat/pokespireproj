@@ -44,11 +44,11 @@ func _ready() -> void:
 
 
 func add_gold_reward(amount: int) -> void:
-	var gold_reward:= REWARD_BUTTON.instantiate() as RewardButton
-	gold_reward.reward_icon = GOLD_ICON
-	gold_reward.reward_text = GOLD_TEXT % amount
-	gold_reward.pressed.connect(_on_gold_reward_taken.bind(amount))
-	rewards.add_child.call_deferred(gold_reward)
+	var gold_rew := REWARD_BUTTON.instantiate() as RewardButton
+	gold_rew.reward_icon = GOLD_ICON
+	gold_rew.reward_text = GOLD_TEXT % amount
+	gold_rew.pressed.connect(_on_gold_reward_taken.bind(amount))
+	rewards.add_child.call_deferred(gold_rew)
 	back_button.disabled = true
 
 

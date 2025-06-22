@@ -50,7 +50,7 @@ func _type_text(text: String) -> void:
 		hide()
 		Events.battle_text_completed.emit()
 		return
-		
+	show()
 	is_typing = true
 	label.text = text
 	label.visible_ratio = 0.0

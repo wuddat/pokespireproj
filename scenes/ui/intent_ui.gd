@@ -4,14 +4,17 @@ extends Control
 const SLEEP_ICON := preload("res://art/statuseffects/sleep.png")
 const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 
-@onready var icon: TextureRect = $HBoxContainer2/HBoxContainer/Icon
-@onready var label: Label = $HBoxContainer2/HBoxContainer/Label
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var type_icon: Sprite2D = $HBoxContainer2/TypeIcon
-@onready var target: Sprite2D = $Target
-@onready var panel: Panel = $Panel
-@onready var panel_contents: HBoxContainer = $HBoxContainer2
-@onready var arrow: Sprite2D = $HBoxContainer2/arrow
+@onready var icon: TextureRect = %Icon
+@onready var label: Label = %Label
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var type_icon: TextureRect = %TypeIcon
+@onready var target: TextureRect = %Target
+@onready var panel: PanelContainer = %Panel
+@onready var panel_contents: HBoxContainer = %HBoxContainer2
+@onready var arrow: Sprite2D = %arrow
+@onready var particles: GPUParticles2D = %Particles
+@onready var swirl: TextureRect = %swirl
+
 
 @export var parent: Enemy
 
@@ -63,10 +66,6 @@ func update_intent(intent: Intent) -> void:
 	if not intent:
 		hide()
 		return
-	print("parent is: ", parent)
-	#print("🧠 IntentUI.update_intent called with:", intent)
-	#print("📊 Text: %s | Icon: %s | Target: %s" % [intent.current_text, intent.icon, intent.target])
-
 	
 	panel.visible = true
 	icon.texture = intent.icon
@@ -76,6 +75,11 @@ func update_intent(intent: Intent) -> void:
 	target.texture = intent.target
 	target.visible = target.texture != null
 	target.scale = Vector2(1,1)
+	particles.emitting = intent.particles_on
+	if particles.emitting:
+		swirl.visible = true
+	else:
+		swirl.visible = false
 	
 	var type := intent.damage_type.to_lower()
 	if TYPE_ICON_INDEX.has(type):
@@ -84,12 +88,23 @@ func update_intent(intent: Intent) -> void:
 		var row = index / ICONS_PER_ROW
 		var region_x = ICON_START.x + col * ICON_SPACING.x
 		var region_y = ICON_START.y + row * ICON_SPACING.y
-		type_icon.region_rect = Rect2(region_x, region_y, ICON_SIZE.x, ICON_SIZE.y)
+		var region = Rect2(region_x, region_y, ICON_SIZE.x, ICON_SIZE.y)
+		
+		var original_atlas := type_icon.texture as AtlasTexture
+		if original_atlas:
+			var new_atlas := AtlasTexture.new()
+			new_atlas.atlas = original_atlas.atlas
+			new_atlas.region = region
+			new_atlas.filter_clip = original_atlas.filter_clip
+			type_icon.texture = new_atlas
+			type_icon.visible = true
+		else:
+			type_icon.visible = false
 	else:
 		type_icon.visible = false
 	show()
 	
-	get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.1).timeout
 	if parent.is_asleep:
 		icon.texture = SLEEP_ICON
 		target.texture = SLEEP_ICON
@@ -100,10 +115,11 @@ func update_intent(intent: Intent) -> void:
 		type_icon.visible = false
 		arrow.visible = false
 		return
+		
 	if parent.is_confused:
 		print("intentUI set to CONFUSED")
 		target.visible = true
-		target.scale = Vector2(.6,.6)
+		target.scale = Vector2(0.6,0.6)
 		panel.visible = true
 		type_icon.visible = true
 		arrow.visible = true

@@ -15,13 +15,15 @@ const STATUS_ICON := preload("res://art/status_effects/status_1.png")
 @export var damage_type: String
 
 func setup_from_data(data: Dictionary) -> void:
+	intent = Intent.new()
+	
 	status_effects = []
 	if data.has("status_effects"):
 		status_effects.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["status_effects"])))
 	if data.has("self_status"):
 		self_status.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["self_status"])))
 		
-	damage = data.get("power", 0)
+	damage = 0
 	splash_damage = data.get("splash_damage", 0)
 	self_damage = data.get("self_damage", 0)
 	self_heal = data.get("self_heal", 0)
@@ -31,17 +33,17 @@ func setup_from_data(data: Dictionary) -> void:
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
+	
 	var damage_display = "%s"
 
-
-	intent = Intent.new()
+	intent.particles_on = status_effects.size() > 0
+	print("is intent on?: ", intent.particles_on)
 	intent.base_text = damage_display
-	intent.current_text = str(damage)
+	intent.current_text = intent.base_text % damage
 	if damage <= 0:
-		intent.current_text = ""
+		intent.current_text = intent.base_text % " "
 	intent.damage_type = damage_type
-	#if is_instance_valid(status_effects[0]):
-		#intent.icon = status_effects[0].icon
+
 	if sound == null:
 		sound = preload("res://art/sounds/VineWhip2.wav")
 func perform_action() -> void:
@@ -95,23 +97,22 @@ func perform_action() -> void:
 func update_intent_text() -> void:
 	if not is_instance_valid(target):
 		return
-
-	intent.current_text = intent.base_text  # default fallback
-
-	if enemy and enemy.status_handler.has_status("confused"):
-		#print("🌀 Setting intent.target to CONFUSED ??? for:", enemy.stats.species_id)
-		intent.target = preload("res://art/statuseffects/confused-effect.png")
-		# intent.icon remains untouched
-		intent.current_text = str(damage)
-		return
-
-
+		
+	intent.current_text = intent.base_text #default
+	intent.particles_on = status_effects.size() > 0
+	
 	var target_pkmn := target
 	if not target_pkmn:
 		return
-
-	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
-	#print("📦 Calculating damage for target:", target_pkmn.stats.species_id, "→", modified_dmg)
-	intent.current_text = intent.base_text % modified_dmg
+	
 	intent.target = target_pkmn.stats.icon
-	#print("🧪 GENERIC_ATTACK.GD current target in generic_enemy_attack: ", target_pkmn.stats.species_id)
+	
+	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
+	if modified_dmg > 0:
+		intent.current_text = intent.base_text % modified_dmg
+	else: 
+		intent.current_text = intent.base_text % " "
+
+	if enemy and enemy.status_handler.has_status("confused"):
+		intent.target = preload("res://art/statuseffects/confused-effect.png")
+		return
