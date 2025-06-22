@@ -7,7 +7,7 @@ func get_tooltip() -> String:
 func apply_status(target: Node) -> void:
 	
 
-	var damage_effect:= DamageEffect.new()
+	var damage_effect:= FlatDamageEffect.new()
 	damage_effect.amount = duration
 	damage_effect.sound = preload("res://art/axe.ogg")
 	
