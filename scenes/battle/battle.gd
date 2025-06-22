@@ -246,25 +246,19 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 		func(card: Card) -> bool:
 			return card.pkmn_owner_uid == pkmn.stats.uid and card.rarity == Card.Rarity.COMMON
 	)
-	#print check
-	#var forgettable_card_ids := forgettable_cards.map(
-		#func(card: Card) -> String:
-			#return card.id
-	#)
-	#print("forgettable_card_ids for %s: %s" % [pkmn.stats.species_id, forgettable_card_ids])
-	
+
 	learnable_cards = learnable_cards.filter(
 		func(card: Card) -> bool:
 			return card.pkmn_owner_uid == pkmn.stats.uid and (
 				card.rarity == Card.Rarity.UNCOMMON or card.rarity == Card.Rarity.RARE
 			)
 	)
-	#print check
-	#var learnable_cards_ids := learnable_cards.map(
-		#func(card: Card) -> String:
-			#return card.id
-	#)
-	#print("learnable_cards_ids for %s: %s" % [pkmn.stats.species_id, learnable_cards_ids])
+	
+	learnable_cards.shuffle()
+	forgettable_cards.shuffle()
+	learnable_cards.slice(0, 3)
+	forgettable_cards.slice(0, 3)
+
 	evo_reward.player_deck = char_stats.deck
 	evo_reward.pokemon = pkmn.stats
 	evo_reward.sprite_2d.texture= pkmn.stats.art

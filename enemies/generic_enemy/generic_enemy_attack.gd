@@ -10,6 +10,7 @@ extends EnemyAction
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
 @export var damage_type: String
+@export var requires_status: String = ""
 
 func setup_from_data(data: Dictionary) -> void:
 	status_effects = []
@@ -48,6 +49,9 @@ func setup_from_data(data: Dictionary) -> void:
 		intent.icon = preload("res://art/tile_0117.png")
 	sound = preload("res://art/sounds/VineWhip2.wav")
 func perform_action() -> void:
+	
+	
+	
 	var targets_to_hit: Array[Node] = []
 
 	if targets.size() > 0:
@@ -64,9 +68,29 @@ func perform_action() -> void:
 		else:
 			Events.enemy_action_completed.emit(enemy)
 			return
+	
+	
+	var valid_targets: Array[Node] = []
+	for t in targets_to_hit:
+		if not is_instance_valid(t):
+			continue
+	
+		if requires_status != "" and requires_status != "sleep":
+			var handler = t.get_node_or_null("StatusHandler")
+			if not handler or not handler.has_status(requires_status):
+				print("❌ Skipping %s due to missing required status: %s" % [t.stats.species_id, requires_status])
+				continue
+			elif requires_status == "sleep":
+				if not t.has_method("is_asleep") or not t.is_asleep:
+					print("❌ Skipping %s because target is not asleep (Dream Eater requirement)" % t.stats.species_id)
+					continue
 
-	if targets_to_hit.is_empty():
-		return
+			valid_targets.append(t)
+		
+		if valid_targets.is_empty():
+			print("⚠️ No valid targets for generic_enemy_attack due to status requirements.")
+			Events.enemy_action_completed.emit(enemy)
+			return
 
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = damage

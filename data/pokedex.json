@@ -2201,7 +2201,8 @@
 	  "max_health": 32,
 	  "move_ids": [
 		"smog",
-		"sludge"
+		"sludge",
+		"explosion"
 	  ]
 	},
 	"rhyhorn": {

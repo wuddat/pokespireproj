@@ -159,6 +159,7 @@
 	  "status_effects": [
 		"flinched"
 	  ],
+	  "effect_chance": 0.3,
 	  "description": "[center]Bite for [color=red]%s[/color] damage and apply possibly FLINCH.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
@@ -601,6 +602,21 @@
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common"
+	},
+	"explosion": {
+	  "name": "Explosion",
+	  "id": "explosion",
+	  "category": "attack",
+	  "subtype": "all_enemies",
+	  "type": "normal",
+	  "target": "all_enemies",
+	  "power": 50,
+	  "self_damage_percent_hp": 1.5,
+	  "accuracy": 100,
+	  "cost": 3,
+	  "description": "[center]Deal [color=red]%s[/color] damage in a MASSIVE explosion![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "rare",
 	},
 	"extremespeed": {
 	  "name": "Extremespeed",
@@ -1068,6 +1084,20 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage!![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "rare"
+	},
+	"hyperfang": {
+	  "name": "Hyper Fang",
+	  "id": "hyperfang",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "normal",
+	  "target": "enemy",
+	  "target_damage_percent_hp": 0.5,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "description": "[center]Deal [color=red]50%[/color] of target HP as damage![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "rare",
 	},
 	"hypnosis": {
 	  "name": "Hypnosis",
@@ -1821,7 +1851,7 @@
 	  "cost": 1,
 	  "description": "[center]Deal [color=red]25%[/color] of target HP as damage![/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "rare",
+	  "rarity": "uncommon",
 	},
 	"superpower": {
 	  "name": "Super Power",
@@ -1930,6 +1960,23 @@
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common",
 	  "requires_status": "poisoned"
+	},
+	"stringshot": {
+	  "name": "String Shot",
+	  "id": "stringshot",
+	  "category": "status",
+	  "subtype": "debuff",
+	  "type": "bug",
+	  "target": "random_enemy",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["attack_down"],
+	  "description": "[center]A pathetic move that MAY weaken enemies![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "effect_chance": 0.4,
+	  "rarity": "common",
+	  "randomplay": 2,
 	},
 	"surf": {
 	  "name": "Surf",
