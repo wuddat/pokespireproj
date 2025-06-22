@@ -57,7 +57,7 @@ func setup(from_species: String, to_species: String, origin_position: Vector2):
 func animate(from_species: String, to_species: String):
 	print("🌀 Evolution animation starting...")
 	MusicPlayer.pause()
-	await SFXPlayer.play(EVO_DING_START, true)  
+	SFXPlayer.play(EVO_DING_START, true)  
 	
 	var screen_center = Vector2(get_viewport().get_visible_rect().size / 2)
 	print("🌍 Screen center is:", screen_center)
@@ -88,7 +88,7 @@ func animate(from_species: String, to_species: String):
 	var pkmn_is_evolving_tween = create_tween()
 	pkmn_is_evolving_tween.tween_property(label, "text", "%s is evolving!" % from_species.capitalize() , 0.4)
 	await pkmn_is_evolving_tween.finished
-	await SFXPlayer.play(EVOLUTION_START)
+	SFXPlayer.play(EVOLUTION_START)
 	#hide original sprite
 	tween.tween_callback(func(): sprite_current.visible = false)
 	

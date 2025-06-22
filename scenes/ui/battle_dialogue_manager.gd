@@ -10,9 +10,9 @@ const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 var message_queue: Array[String] = []
 var is_displaying := false
 var is_typing := false
-var waiting_for_input := false
-var auto_advance := true
-var fade_duration := 0.5
+var waiting_for_input := true
+var auto_advance := false
+var fade_duration := 0.2
 var advance_timer: SceneTreeTimer = null
 
 
@@ -76,7 +76,7 @@ func _wait_for_continue() -> void:
 		while waiting_for_input:
 			await get_tree().process_frame
 		waiting_for_input = false
-		SFXPlayer.play(PC_MENU_SELECT)
+		#SFXPlayer.play(PC_MENU_SELECT)
 		if advance_timer:
 			advance_timer.kill()
 			advance_timer = null
@@ -120,7 +120,7 @@ func _on_evolution_triggered() -> void:
 	
 func _on_evolution_completed() -> void:
 	message_queue.clear()
-	show()
+	_fade_out()
 
 func _on_battle_won() -> void:
 	message_queue.clear()

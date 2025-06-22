@@ -40,7 +40,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	var move_data = MoveData.moves.get(id)
 	var base_damage = base_power
 	var splash_targets: Array[Node]
-	var battle_text: Array[String] = []
+	var battle_text: Array[String] = [" "]
 
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)
@@ -103,17 +103,17 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			damage_effect.sound = sound
 
 		damage_effect.execute([tar])
-		if multiplay == 1:
-			battle_text.insert(0,"%s dealt [color=red]%s[/color] damage to %s!"
-				% [
-					battle_unit_owner.stats.species_id.capitalize(),
-					damage_effect.amount,
-					tar.stats.species_id.capitalize()]
-				)
-			
-			if effectiveness:
-				battle_text.append(effective_text)
-			total_damage_dealt += total
+		#if multiplay == 1:
+			#battle_text.insert(0,"%s dealt [color=red]%s[/color] damage to %s!"
+				#% [
+					#battle_unit_owner.stats.species_id.capitalize(),
+					#damage_effect.amount,
+					#tar.stats.species_id.capitalize()]
+				#)
+			#
+			#if effectiveness:
+				#battle_text.append(effective_text)
+			#total_damage_dealt += total
 
 	# 💦 Splash Damage (unaffected by effectiveness or statuses)
 	for splash_target in splash_targets:

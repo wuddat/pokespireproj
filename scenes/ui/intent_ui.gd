@@ -4,6 +4,7 @@ extends Control
 const SLEEP_ICON := preload("res://art/statuseffects/sleep.png")
 const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 
+@onready var icon_2: Sprite2D = %Icon2
 @onready var icon: TextureRect = %Icon
 @onready var label: Label = %Label
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -81,6 +82,13 @@ func update_intent(intent: Intent) -> void:
 		swirl.visible = true
 	else:
 		swirl.visible = false
+	if intent.icon:
+		icon_2.texture = intent.icon
+		animation_player.play("fade_in")
+		await animation_player.animation_finished
+		animation_player.play("hover")
+	else:
+		icon_2.hide()
 	
 	var type := intent.damage_type.to_lower()
 	if TYPE_ICON_INDEX.has(type):

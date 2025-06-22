@@ -18,8 +18,8 @@ func _ready() -> void:
 	for shop_card: ShopCard in cards.get_children():
 		shop_card.queue_free()
 	
-	for shop_pkmn: ShopPkmn in pokemon.get_children():
-		shop_pkmn.queue_free()
+	for in_shop_pkmn: ShopPkmn in pokemon.get_children():
+		in_shop_pkmn.queue_free()
 	
 	Events.shop_card_bought.connect(_on_shop_card_bought)
 	Events.shop_pkmn_bought.connect(_on_shop_pkmn_bought)

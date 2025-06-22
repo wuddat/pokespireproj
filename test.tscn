@@ -1,28 +1,45 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf40ljrl6qjwu"]
 
-[ext_resource type="Shader" uid="uid://jjkitdbqimry" path="res://pulse.gdshader" id="1_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="2_6uqi0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
-shader = ExtResource("1_8uh7m")
-shader_parameter/enabled = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
+[sub_resource type="Shader" id="Shader_37kl0"]
+code = "shader_type canvas_item;
 
-[node name="Node2D" type="TextureRect"]
+uniform sampler2D flowMap; //Displacement map
+uniform float strength;    //Force of the effect
+uniform float speed;       //Speed of the effect
+uniform int frames : hint_range(1, 10); //Frames of the effect
+
+//Returns a value between 0 and 1 depending of the frames -> exemple: frames = 4, frame 1 = 0.25
+float clock(float time){
+	float fframes = float(frames);
+	return floor(mod(time * speed, fframes)) / fframes;
+}
+
+void fragment(){
+	float c = clock(TIME); //Get clock frame
+	vec4 offset = texture(flowMap, vec2(UV.x + c, UV.y + c)) * strength; //Get offset 
+	//COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + normal.xy); //Apply offset
+	COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + offset.xy - vec2(0.5,0.5)*strength); //We need to remove the displacement 
+}
+
+
+// TEST CLOCK
+/*
+void fragment(){
+	float c = clock(TIME);
+	COLOR = vec4( c, c, c, 1);
+}
+*/"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
+shader = SubResource("Shader_37kl0")
+shader_parameter/strength = 0.1
+shader_parameter/speed = 30.0
+shader_parameter/frames = 10
+
+[node name="Node2D" type="Sprite2D"]
 material = SubResource("ShaderMaterial_6uqi0")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -18.5
-offset_top = -18.5
-offset_right = 18.5
-offset_bottom = 18.5
-grow_horizontal = 2
-grow_vertical = 2
+position = Vector2(236, 103)
+scale = Vector2(4.50676, 4.31757)
 texture = ExtResource("2_6uqi0")

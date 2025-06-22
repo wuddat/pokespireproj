@@ -778,10 +778,10 @@
 	  "category": "attack",
 	  "subtype": "single_target",
 	  "type": "fire",
-	  "target": "enemy",
+	  "target": "all_enemies",
 	  "power": 10,
 	  "accuracy": 100,
-	  "cost": 2,
+	  "cost": 3,
 	  "status_effects": [
 		"burned","burned","burned","burned","burned","burned","burned","burned",
 	  ],
