@@ -11,8 +11,6 @@ func enter() -> void:
 		played = true
 		card_ui.play()
 		print("play card for target(s):")
-		for target in card_ui.targets:
-			print("Target %s" % target.stats.species_id)
 	else:
 		transition_requested
 

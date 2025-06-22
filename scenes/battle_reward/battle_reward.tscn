@@ -98,6 +98,7 @@ reward_icon = ExtResource("5_gdsnt")
 reward_text = "Add New Card"
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -40,7 +40,8 @@ func setup_from_data(data: Dictionary) -> void:
 	if damage <= 0:
 		intent.current_text = ""
 	intent.damage_type = damage_type
-	intent.icon = status_effects[0].icon
+	if is_instance_valid(status_effects[0]):
+		intent.icon = status_effects[0].icon
 	if sound == null:
 		sound = preload("res://art/sounds/VineWhip2.wav")
 func perform_action() -> void:

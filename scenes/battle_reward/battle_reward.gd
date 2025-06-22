@@ -12,6 +12,7 @@ const CARD_TEXT := "Add New Card"
 const CAUGHT_ICON := preload("res://art/pokeball.png")
 const CAUGHT_TEXT := "Pkmn Captured!"
 
+const COINGAIN = preload("res://art/sounds/sfx/coingain.wav")
 const REWARD_POP = preload("res://art/sounds/sfx/pokeball5.wav")
 const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")  
 
@@ -23,8 +24,10 @@ const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 
 @onready var back_button: Button = $VBoxContainer/BackButton
 @onready var rewards: VBoxContainer = %Rewards
+var generated_rewards: Array[Control] = []
 
-const COINGAIN = preload("res://art/sounds/sfx/coingain.wav")
+
+
 
 var card_reward_total_weight := 0.0
 var card_rarity_weights := {
@@ -75,6 +78,7 @@ func add_leveled_pkmn_rewards(pkmn_stats: Array[PokemonStats]) -> void:
 		card_reward.pressed.connect(_show_leveled_card_rewards.bind(str(pkmn_stats[0].uid)))
 		rewards.add_child.call_deferred(card_reward)
 
+
 func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 	if not run_stats or not character_stats:
 		return
@@ -116,7 +120,6 @@ func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 		Utils.print_resource(card)
 	card_rewards.rewards = card_reward_array
 	card_rewards.show()
-	
 
 
 func _show_card_rewards() -> void:
@@ -191,6 +194,7 @@ func _on_card_reward_taken(card: Card) -> void:
 	character_stats.deck.add_card(card)
 	back_button.disabled = false
 
+
 func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	if not character_stats:
 		return
@@ -208,15 +212,16 @@ func _on_back_button_pressed() -> void:
 
 func _play_reward_sequence() -> void:
 	await _reward_delay()
-	if caught_pokemon.size() > 0:
-		add_pkmn_reward()
-		await _reward_delay()
 	
 	if leveled_pkmn_in_battle.size() > 0:
 		for pkmn in leveled_pkmn_in_battle:
 			add_leveled_pkmn_rewards([pkmn])
 			await _reward_delay()
-	
+			
+	if caught_pokemon.size() > 0:
+		add_pkmn_reward()
+		await _reward_delay()
+		
 	add_gold_reward(gold_reward)
 	await _reward_delay()
 
@@ -224,3 +229,13 @@ func _play_reward_sequence() -> void:
 func _reward_delay(duration := 0.6) -> void:
 	SFXPlayer.play(REWARD_POP)
 	await get_tree().create_timer(duration).timeout
+
+#func update_caught_pkmn(caughtpkmn) -> void:
+	#print("update_caught_pkmn_stack")
+	#print_stack()
+	#caught_pokemon = caughtpkmn
+	#for pkmn in caught_pokemon:
+		#print("dis be caught, 'mon:")
+		#print(pkmn.species_id)
+	#
+	#call_deferred("_play_reward_sequence")

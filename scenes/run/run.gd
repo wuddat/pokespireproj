@@ -132,6 +132,7 @@ func fade_out(duration := 0.5) -> void:
 
 func _on_battle_room_entered(room: Room) -> void:
 	await fade_out()
+	caught_pokemon.clear() 
 	leveled_in_battle_pkmn.clear()
 	var battle_scene: Battle = _change_view(battlescene) as Battle
 	battle_scene.char_stats = character
@@ -172,13 +173,12 @@ func _on_battle_won() -> void:
 	reward_scene.caught_pokemon = caught_pokemon
 	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
 	print("caught pokemon in _on_battle_won: ", caught_pokemon)
-	
-	reward_scene._play_reward_sequence()
+	for pkmn in caught_pokemon:
+		print(pkmn.species_id)
+		
 	reward_scene.gold_reward = (map.last_room.battle_stats.roll_gold_reward())
-	
+	reward_scene._play_reward_sequence()
 	party_selector.in_battle = false
-	
-	caught_pokemon.clear() 
 
 func _on_map_exited(room: Room) -> void:
 	match room.type:

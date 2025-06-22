@@ -313,11 +313,11 @@ func enter_catching_state():
 func did_escape_catch() -> bool:
 	# TODO catchrate formula
 	var hp_ratio := float(stats.health) / float(stats.max_health)
-	var base_chance := 0.4  # Base 40% chance to break free
+	var base_chance := 0.3 
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
-	var escape_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
-	
-	return randf() < escape_chance
+	var escape_chance = base_chance + (bonus * 0.4)  # 30% to 70% chance to break out
+	current_wobble += 1
+	return randf() > escape_chance
 
 func was_caught() -> bool:
 	if current_wobble >= max_wobble:
@@ -327,7 +327,7 @@ func was_caught() -> bool:
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
 	var catch_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
 	current_wobble += 1
-	return randf() < catch_chance
+	return randf() > catch_chance
 
 
 func mark_as_caught() -> void:
