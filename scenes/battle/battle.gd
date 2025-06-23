@@ -256,8 +256,8 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	
 	learnable_cards.shuffle()
 	forgettable_cards.shuffle()
-	learnable_cards.slice(0, 3)
-	forgettable_cards.slice(0, 3)
+	learnable_cards = learnable_cards.slice(0, 3)
+	forgettable_cards = forgettable_cards.slice(0, 3)
 
 	evo_reward.player_deck = char_stats.deck
 	evo_reward.pokemon = pkmn.stats

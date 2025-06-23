@@ -1,21 +1,21 @@
-[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://lc7itbel0wqn"]
+[gd_resource type="Resource" script_class="DodgeStatus" load_steps=3 format=3 uid="uid://lc7itbel0wqn"]
 
 [ext_resource type="Texture2D" uid="uid://b0h0nbrxeblaa" path="res://art/statuseffects/sky.png" id="1_3g1bk"]
-[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_sys84"]
+[ext_resource type="Script" uid="uid://6mwut31ki167" path="res://statuses/dodge.gd" id="1_nv4u8"]
 
 [resource]
-script = ExtResource("2_sys84")
+script = ExtResource("1_nv4u8")
 id = "dodge"
 display_string = " may be harder to hit!"
-type = 1
+type = 2
 chance = 1.0
 stack_type = 1
 can_expire = false
 duration = 0
 stacks = 1
-max_stacks = 999
+max_stacks = 8
 max_duration = 999
 icon = ExtResource("1_3g1bk")
 tooltip = "[color=aquamarine]DODGE:[/color]
-Each stack gives [b]+10% chance[/b] to EVADE an attack."
+Each stack gives [b]+10% chance[/b] to [color=aquamarine]DODGE:[/color] an attack."
 metadata/_custom_type_script = "uid://breq3elxr1644"

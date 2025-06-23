@@ -75,7 +75,6 @@ static func get_evolution_options(pkmn: PokemonStats) -> Array[Card]:
 			card.pkmn_owner_uid = pkmn.uid
 			card.pkmn_owner_name = pkmn.species_id
 			card.pkmn_icon = pkmn.icon
-			print_stack()
 			options.add_card(card)
 
 	return options.slice(0, 3)

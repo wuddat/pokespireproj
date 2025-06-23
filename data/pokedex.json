@@ -136,6 +136,7 @@
 		"focusenergy",
 		"hurricane",
 		"swagger",
+		"smokescreen",
 	  ]
 	},
 	"squirtle": {
@@ -541,6 +542,7 @@
 		"thunderwave",
 		"nuzzle",
 		"tackle",
+		"doubleteam",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "raichu"
@@ -562,6 +564,7 @@
 		"slam",
 		"thunder",
 		"zapcannon",
+		"doubleteam",
 		
 	  ]
 	},
@@ -643,6 +646,7 @@
 		"leer",
 		"takedown",
 		"bodyslam",
+		"doubleteam",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "nidoqueen"
@@ -705,7 +709,8 @@
 		"bodyslam",
 		"takedown",
 		"hornattack",
-		"leer"
+		"leer",
+		"doubleteam",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "nidoking"
@@ -748,7 +753,9 @@
 		"doubleslap",
 		"growl",
 		"metronome",
+		"minimize",
 		"scratch",
+		"doubleteam",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "clefable"
@@ -778,6 +785,8 @@
 		"icepunch",
 		"firepunch",
 		"helpinghand",
+		"minimize",
+		"doubleteam",
 	  ]
 	},
 	"vulpix": {
@@ -800,7 +809,8 @@
 		"growl",
 		"tackle",
 		"confusion",
-		"bite"
+		"bite",
+		"doubleteam",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "nintetails"
@@ -842,7 +852,8 @@
 		"doubleslap",
 		"tackle",
 		"bulkup",
-		"defensecurl"
+		"defensecurl",
+		"doubleteam",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "wigglytuff"
@@ -873,6 +884,7 @@
 		"absorb",
 		"triattack",
 		"helpinghand",
+		"doubleteam",
 	  ]
 	},
 	"zubat": {
@@ -890,6 +902,7 @@
 		"wingattack",
 		"confuseray",
 		"supersonic",
+		"doubleteam",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "golbat"
@@ -912,6 +925,7 @@
 		"supersonic",
 		"crunch",
 		"hurricane",
+		"doubleteam",
 	  ]
 	},
 	"oddish": {
@@ -1137,6 +1151,7 @@
 		"takedown",
 		"darkpulse",
 		"rest",
+		"doubleteam",
 	  ]
 	},
 	"psyduck": {
@@ -1354,7 +1369,8 @@
 	  "max_health": 16,
 	  "move_ids": [
 		"growl",
-		"rest"
+		"rest",
+		"doubleteam",
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "kadabra"
@@ -1661,7 +1677,8 @@
 		"hornattack",
 		"drillpeck",
 		"takedown",
-		"leer"
+		"leer",
+		"doubleteam",
 	  ]
 	},
 	"slowpoke": {
@@ -1754,7 +1771,8 @@
 	  "move_ids": [
 		"furyswipes",
 		"peck",
-		"karatechop"
+		"karatechop",
+		"aerialace"
 	  ]
 	},
 	"doduo": {
@@ -1803,7 +1821,8 @@
 	  "move_ids": [
 		"headbutt",
 		"growl",
-		"bubblebeam"
+		"bubblebeam",
+		"iceshard"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "dewgong"
@@ -1819,10 +1838,15 @@
 	  ],
 	  "max_health": 30,
 	  "move_ids": [
+		"aurorabeam",
 		"headbutt",
 		"bubblebeam",
 		"bodyslam",
-		"surf"
+		"surf",
+		"iceshard",
+		"haze",
+		"icebeam",
+		
 	  ]
 	},
 	"grimer": {
@@ -1838,7 +1862,11 @@
 		"pound",
 		"poisonpowder",
 		"harden",
-		"acidspray"
+		"acidspray",
+		"smog",
+		"poisonjab",
+		"minimize",
+		"smokescreen"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "muk"
@@ -1856,7 +1884,11 @@
 		"sludgebomb",
 		"poisonpowder",
 		"withdraw",
-		"bodyslam"
+		"bodyslam",
+		"minimize",
+		"acidspray",
+		"smog",
+		"poisongas"
 	  ]
 	},
 	"shellder": {
@@ -1871,7 +1903,8 @@
 	  "move_ids": [
 		"tackle",
 		"withdraw",
-		"confuseray"
+		"confuseray",
+		"iceshard",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "cloyster"
@@ -1890,7 +1923,9 @@
 		"withdraw",
 		"bubblebeam",
 		"flashcannon",
-		"surf"
+		"surf",
+		"iceshard",
+		"icebeam",
 	  ]
 	},
 	"gastly": {
@@ -2155,7 +2190,9 @@
 	  "move_ids": [
 		"cometpunch",
 		"agility",
-		"firepunch"
+		"firepunch",
+		"quickguard",
+		"icepunch"
 	  ]
 	},
 	"lickitung": {
@@ -2565,7 +2602,10 @@
 		"bodyslam",
 		"bubblebeam",
 		"confuseray",
-		"surf"
+		"surf",
+		"aurorabeam",
+		"icebeam",
+		"iceshard"
 	  ]
 	},
 	"ditto": {
@@ -2594,7 +2634,8 @@
 		"tackle",
 		"tailwhip",
 		"quickattack",
-		"bite"
+		"bite",
+		"doubleteam",
 	  ]
 	},
 	"vaporeon": {
@@ -2611,7 +2652,10 @@
 		"watergun",
 		"quickattack",
 		"bubblebeam",
-		"surf"
+		"surf",
+		"icebeam",
+		"iceshard",
+		"doubleteam",
 	  ]
 	},
 	"jolteon": {
@@ -2629,7 +2673,11 @@
 		"quickattack",
 		"pinmissile",
 		"thunderwave",
-		"thunderbolt"
+		"thunderbolt",
+		"extremespeed",
+		"doubleteam",
+		"helpinghand",
+		"thunder",
 	  ]
 	},
 	"flareon": {
@@ -2647,7 +2695,11 @@
 		"quickattack",
 		"smog",
 		"firespin",
-		"flamethrower"
+		"flamethrower",
+		"flamecharge",
+		"extremespeed",
+		"doubleteam",
+		"slam"
 	  ]
 	},
 	"porygon": {
@@ -2662,7 +2714,11 @@
 	  "move_ids": [
 		"tackle",
 		"psybeam",
-		"triattack"
+		"triattack",
+		"minimize",
+		"confusion",
+		"supersonic",
+		"sandattack"
 	  ]
 	},
 	"omanyte": {
@@ -2679,7 +2735,9 @@
 		"withdraw",
 		"watergun",
 		"leer",
-		"bite"
+		"bite",
+		"iceshard",
+		"waterpulse"
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "omastar"
@@ -2700,7 +2758,12 @@
 		"leer",
 		"bite",
 		"hydropump",
-		"surf"
+		"surf",
+		"iceshard",
+		"earthquake",
+		"rockthrow",
+		"icebeam",
+		"haze"
 	  ]
 	},
 	"kabuto": {
@@ -2720,7 +2783,8 @@
 		"leer",
 		"watergun",
 		"megadrain",
-		"leechlife"
+		"leechlife",
+		"furyswipes",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "kabutops"
@@ -2743,7 +2807,10 @@
 		"megadrain",
 		"gigadrain",
 		"furyswipes",
-		"laserfocus"
+		"laserfocus",
+		"furyswipes",
+		"rockthrow",
+		"harden"
 	  ]
 	},
 	"aerodactyl": {
@@ -2779,7 +2846,8 @@
 		"headbutt",
 		"rest",
 		"bodyslam",
-		"hyperbeam"
+		"hyperbeam",
+		"bellydrum",
 	  ]
 	},
 	"articuno": {
@@ -2796,7 +2864,13 @@
 		"gust",
 		"bubblebeam",
 		"hydropump",
-		"barrier"
+		"barrier",
+		"haze",
+		"aerialace",
+		"iceshard",
+		"gust",
+		"whirlwind",
+		"aurorabeam"
 	  ]
 	},
 	"zapdos": {
@@ -2815,7 +2889,11 @@
 		"thunderbolt",
 		"thunderwave",
 		"drillpeck",
-		"thunder"
+		"thunder",
+		"doubleteam",
+		"aerialace",
+		"extremespeed",
+		"laserfocus",
 	  ]
 	},
 	"moltres": {
@@ -2834,7 +2912,10 @@
 		"firefang",
 		"wingattack",
 		"flamethrower",
-		"drillpeck"
+		"drillpeck",
+		"aerialace",
+		"hurricane",
+		"explosion"
 	  ]
 	},
 	"dratini": {
@@ -2850,7 +2931,10 @@
 		"tackle",
 		"leer",
 		"thunderwave",
-		"watergun"
+		"watergun",
+		"slam",
+		"iceshard",
+		"haze",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "dragonair"
@@ -2868,7 +2952,11 @@
 		"bubblebeam",
 		"bodyslam",
 		"peck",
-		"thunderwave"
+		"thunderwave",
+		"icebeam",
+		"haze",
+		"slam",
+		"hornattack"
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "dragonite"
@@ -2888,7 +2976,14 @@
 		"bodyslam",
 		"cometpunch",
 		"hyperbeam",
-		"thunderbolt"
+		"thunderbolt",
+		"icebeam",
+		"thunderbolt",
+		"wingattack",
+		"aerialace",
+		"firepunch",
+		"icepunch",
+		"supersonic",
 	  ]
 	},
 	"mewtwo": {
@@ -2921,7 +3016,10 @@
 		"pound",
 		"psychic",
 		"hypnosis",
-		"triattack"
+		"triattack",
+		"psybeam",
+		"minimize",
+		"rest",
 	  ]
 	}
   }

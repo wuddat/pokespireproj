@@ -11,6 +11,7 @@ const STATUS_LOOKUP := {
 	"critical": preload("res://statuses/critical.tres"),
 	"despair": preload("res://statuses/despair.tres"),
 	"dexterity": preload("res://statuses/dexterity.tres"),
+	"dodge": preload("res://statuses/dodge.tres"),
 	"double": preload("res://statuses/double.tres"),
 	"enraged": preload("res://statuses/enraged.tres"),
 	"exposed": preload("res://statuses/exposed.tres"),

@@ -93,7 +93,7 @@ func get_owner_pokemon(uid: String) -> PokemonStats:
 
 func update_type_icon(damage_type: String) -> void:
 	var dam_type := damage_type.to_lower()
-	if not TYPE_ICON_INDEX.has(type):
+	if not TYPE_ICON_INDEX.has(dam_type):
 		$Type.visible = false
 		return
 

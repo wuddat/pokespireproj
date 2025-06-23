@@ -46,12 +46,12 @@ const ICON_START := Vector2(16, 16)
 const ICON_SPACING := Vector2(54, 54) 
 const ICONS_PER_ROW := 9
 
+var hover = "hover"
 
 
 func _ready() -> void:
 	if not is_node_ready():
 		await ready
-	var hover = "hover"
 	var hover_length = animation_player.get_animation(hover).length
 	var random_start = randf_range(0, hover_length)
 	
@@ -84,7 +84,10 @@ func update_intent(intent: Intent) -> void:
 		icon_2.texture = intent.icon
 		animation_player.play("fade_in")
 		await animation_player.animation_finished
+		var hover_length = animation_player.get_animation(hover).length
+		var random_start = randf_range(0, hover_length)
 		animation_player.play("hover")
+		animation_player.seek(random_start, true)
 	else:
 		icon_2.hide()
 	

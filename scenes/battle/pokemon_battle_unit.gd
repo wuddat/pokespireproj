@@ -84,7 +84,7 @@ func gain_block(block: int, _mod_type:Modifier.Type) -> void:
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0: return
-
+	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
 	
@@ -95,9 +95,7 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	
 	
 	if modified_damage > 0:
-		var dmg_text := COMBAT_TEXT.instantiate()
-		add_child(dmg_text)
-		dmg_text.show_text("%s" % modified_damage)
+		show_combat_text("%s" % modified_damage)
 	
 	tween.finished.connect(func():
 		sprite_2d.material = null
@@ -112,9 +110,7 @@ func heal(amount: int) -> void:
 		stats.heal(amount)
 		var actual_heal := stats.health - health_before
 		if actual_heal > 0:
-			var heal_text := COMBAT_TEXT.instantiate()
-			add_child(heal_text)
-			heal_text.show_text("+ %s HP" % amount, Color.GREEN)
+			show_combat_text("+ %s HP" % amount, Color.GREEN)
 	
 	
 
@@ -142,10 +138,7 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 	stats.current_exp += xp
 	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, xp])
 	
-
-	var text := COMBAT_TEXT.instantiate()
-	add_child(text)
-	text.show_text("EXP: %s" % xp)
+	show_combat_text("EXP: %s" % xp)
 
 	await get_tree().create_timer(0.4).timeout
 
@@ -161,9 +154,7 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		stats.max_health += stats.level
 		stats.health += stats.level
 
-		var level_text := COMBAT_TEXT.instantiate()
-		add_child(level_text)
-		level_text.show_text("LEVEL UP!")
+		show_combat_text("LEVEL UP!")
 
 		if stats.level >= stats.evolution_level:
 			#print("Evolution TRIGGERED")
@@ -175,3 +166,32 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		if enemy_handler.get_child_count() == 0:
 			await get_tree().process_frame
 			await get_tree().create_timer(0.2).timeout
+
+
+func dodge_check() -> bool:
+	if status_handler.has_status("dodge"):
+		var dodge_stacks = status_handler.get_status_stacks("dodge")
+		var dodge_chance = dodge_stacks * 0.1
+		var dodge_outcome = randf()
+
+		if dodge_outcome < dodge_chance:
+			Events.battle_text_requested.emit("%s was able to DODGE the attack!" % stats.species_id.capitalize())
+			_play_dodge_tween()
+			return true
+	return false
+
+
+func _play_dodge_tween() -> void:
+	var start_pos := global_position
+	var dodge_offset := Vector2.RIGHT * 24
+	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.1)
+	show_combat_text("DODGE!")
+	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.5)
+	tween.tween_property(self, "global_position", start_pos, 0.1)
+
+
+func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
+	var label := COMBAT_TEXT.instantiate()
+	add_child(label)
+	label.show_text(text, color)

@@ -92,7 +92,6 @@ func _on_party_shifted() -> void:
 		target = new_target
 		for action in get_children():
 			action.target = new_target
-			print_stack()
 			print("🎯 Updated action %s to new target: %s" % [action.name, new_target.stats.species_id])
 	else:
 		print("⚠️ _on_party_shifted: no target found for position %s" % current_target_pos)

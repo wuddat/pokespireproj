@@ -58,71 +58,99 @@ func animate_to_targets(
 	damage_type: String
 ) -> void:
 	if index >= targets_to_hit.size():
-		# Cleanup effects after final target
-		if self_damage > 0:
-			var recoil := DamageEffect.new()
-			recoil.amount = self_damage
-			recoil.execute([enemy])
-
-		if self_heal > 0:
-			var heal := HealEffect.new()
-			heal.amount = int(total_damage / 2)
-			heal.execute([enemy])
-
-		for self_effect in self_status:
-			if self_effect:
-				var status_instance := StatusEffect.new()
-				status_instance.status = self_effect.duplicate()
-				status_instance.execute([enemy])
-
+		_execute_self_effects(enemy, total_damage, self_damage, self_heal, self_status)
 		Events.enemy_action_completed.emit(enemy)
 		return
 
-	var target_node = targets_to_hit[index]
-	if not is_instance_valid(target_node):
+	var target = targets_to_hit[index]
+	if not is_instance_valid(target):
 		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
 		return
+
 	var start_pos
 	var end_pos
+
 	if total_damage <= 0:
 		start_pos = enemy.global_position
 		end_pos = enemy.global_position + Vector2.LEFT * 32
 	else:
 		start_pos = enemy.global_position
-		end_pos = target_node.global_position + Vector2.RIGHT * 32
+		end_pos = target.global_position + Vector2.RIGHT * 32
 
 	var tween = create_tween().set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(enemy, "global_position", end_pos, 0.3)
 
-	var dmg_effect := DamageEffect.new()
-	var target_types = target_node.stats.type
-	var mult = TypeChart.get_multiplier(damage_type, target_types)
-	dmg_effect.amount = round(total_damage * mult)
-	dmg_effect.sound = sound
+	if target.has_method("dodge_check") and target.dodge_check():
+		_handle_dodge(tween, enemy, start_pos, func():
+			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
+		)
+	else:
+		_handle_hit(tween, enemy, target, targets_to_hit, total_damage, splash_damage, status_effects, damage_type, start_pos, func():
+			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
+		)
+
+
+func _execute_self_effects(enemy: Node, total_damage: int, self_damage: int, self_heal: int, self_status: Array[Status]) -> void:
+	if self_damage > 0:
+		var recoil := DamageEffect.new()
+		recoil.amount = self_damage
+		recoil.execute([enemy])
+
+	if self_heal > 0:
+		var heal := HealEffect.new()
+		heal.amount = int(total_damage / 2)
+		heal.execute([enemy])
+
+	for effect in self_status:
+		if effect:
+			var status := StatusEffect.new()
+			status.status = effect.duplicate()
+			status.execute([enemy])
+
+
+func _handle_dodge(tween: Tween, enemy: Node, start_pos: Vector2, on_finish: Callable) -> void:
+	print("Attack was DODGED")
+	tween.tween_interval(0.2)
+	tween.tween_property(enemy, "global_position", start_pos, 0.3)
+	tween.finished.connect(on_finish)
+
+
+func _handle_hit(
+	tween: Tween,
+	enemy: Node,
+	target: Node,
+	all_targets: Array[Node],
+	total_damage: int,
+	splash_damage: int,
+	status_effects: Array[Status],
+	damage_type: String,
+	start_pos: Vector2,
+	on_finish: Callable
+) -> void:
+	var dmg := DamageEffect.new()
+	var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
+	dmg.amount = round(total_damage * mult)
+	dmg.sound = sound
 
 	tween.tween_callback(func():
-		dmg_effect.execute([target_node])
-		dmg_effect.sound = sound
+		dmg.execute([target])
+		dmg.sound = sound
 
-		# Apply splash damage to other targets
-		for splash_target in targets_to_hit:
-			if splash_target != target_node:
+		# Splash damage to others
+		for splash_target in all_targets:
+			if splash_target != target:
 				var splash := DamageEffect.new()
-				var splash_amt := splash_damage
-				splash.amount = splash_amt
+				splash.amount = splash_damage
 				splash.execute([splash_target])
 
-		# Apply statuses
-		for status_effect in status_effects:
-			if status_effect:
+		# Status effects
+		for status in status_effects:
+			if status:
 				var stat := StatusEffect.new()
-				stat.status = status_effect.duplicate()
-				stat.execute([target_node])
+				stat.status = status.duplicate()
+				stat.execute([target])
 	)
 
 	tween.tween_interval(0.2)
 	tween.tween_property(enemy, "global_position", start_pos, 0.3)
-
-	tween.finished.connect(func():
-		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
-	)
+	tween.finished.connect(on_finish)
