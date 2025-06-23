@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Paralyze" load_steps=3 format=3 uid="uid://bwxv50det2sku"]
+
+[ext_resource type="Texture2D" uid="uid://dal8rt7uusmor" path="res://art/status_effects/ParalysisIC_Masters.png" id="1_f0nfc"]
+[ext_resource type="Script" uid="uid://b12t25cjd76g1" path="res://statuses/paralyze.gd" id="2_f0nfc"]
+
+[resource]
+script = ExtResource("2_f0nfc")
+id = "paralyze"
+display_string = " was [color=goldenrod ]PARALYZED[/color]! Its attacks may fail!"
+type = 1
+chance = 1.0
+stack_type = 2
+can_expire = true
+duration = 1
+stacks = 0
+max_stacks = 999
+max_duration = 3
+icon = ExtResource("1_f0nfc")
+tooltip = "[color=goldenrod]PARALYZE[/color]:
+May prevent attacks from succeeding."
+metadata/_custom_type_script = "uid://breq3elxr1644"

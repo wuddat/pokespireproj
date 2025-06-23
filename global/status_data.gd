@@ -20,6 +20,7 @@ const STATUS_LOOKUP := {
 	"flinched": preload("res://statuses/flinched.tres"),
 	"froze": preload("res://statuses/froze.tres"),
 	"ohko": preload("res://statuses/ohko.tres"),
+	"paralyze": preload("res://statuses/paralyze.tres"),
 	"plated": preload("res://statuses/plated.tres"),
 	"poisoned": preload("res://statuses/poisoned.tres"),
 	"protected": preload("res://statuses/protected.tres"),

@@ -175,8 +175,10 @@ func play_card_with_delay(crd: Card) -> void:
 	crd.random_targets.clear()
 	#await get_tree().create_timer(play_card_delay).timeout
 	
-	#handle confusion if any:
-	if await _should_hit_self_due_to_confusion(crd):
+	#handle confusion/paralysis if any:
+	if await _paralysis_check(crd):
+		await get_tree().create_timer(0.2).timeout
+	elif await _confusion_check(crd):
 		_handle_confusion_self_hit(crd)
 		await get_tree().create_timer(0.2).timeout
 	
@@ -211,7 +213,7 @@ func play_card_with_delay(crd: Card) -> void:
 
 
 
-func _should_hit_self_due_to_confusion(crd: Card) -> bool:
+func _confusion_check(crd: Card) -> bool:
 	if not is_instance_valid(battle_unit_owner):
 		return false
 	if not battle_unit_owner.status_handler.has_status("confused"):
@@ -239,7 +241,27 @@ func _handle_confusion_self_hit(_card: Card) -> void:
 	effect.sound = preload("res://art/sounds/Tackle.wav")
 	effect.execute([battle_unit_owner])
 	print("damage effect executed on %s" % battle_unit_owner.stats.species_id)
-	
+
+
+func _paralysis_check(crd: Card) -> bool:
+	if not is_instance_valid(battle_unit_owner):
+		return false
+	if not battle_unit_owner.status_handler.has_status("paralyze"):
+		return false
+	await get_tree().create_timer(play_card_delay).timeout
+	var chance := 0.25
+	var roll := randf()
+	if roll < chance:
+		print("%s is fully paralyzed!" % battle_unit_owner.stats.species_id)
+		Events.battle_text_requested.emit("%s is PARALYZED!" % battle_unit_owner.stats.species_id.capitalize())
+		SFXPlayer.play(preload("res://art/sounds/sfx/stat_paralyze.mp3"))
+		var tween := create_tween()
+		tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 25, 0.15))
+		tween.tween_interval(0.17)
+		return true
+	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+	print("✅ %s resists paralysis and plays normally." % battle_unit_owner.stats.species_id)
+	return false
 
 
 func _set_disabled(value: bool) -> void:

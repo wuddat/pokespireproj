@@ -174,12 +174,16 @@ func do_turn() -> void:
 
 
 func status_effect_checks() -> void:
-	if status_handler.has_status("flinched") or status_handler.has_status("froze"):
+	if status_handler.get_child_count() == 0:
+		return
+		
+	if status_handler.has_status("flinched"):
 		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] flinched!" % stats.species_id.capitalize())
 		await get_tree().create_timer(enemy_text_delay).timeout
 		print("😬 Enemy flinched will skip turn.")
 		status_handler.remove_status("flinched")
 		skip_turn = true
+		
 	if status_handler.has_status("froze"):
 		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is FROZEN!" % stats.species_id.capitalize())
 		await get_tree().create_timer(enemy_text_delay).timeout
@@ -187,12 +191,30 @@ func status_effect_checks() -> void:
 		status_handler.remove_status("froze")
 		is_froze = false
 		skip_turn = true
+		
 	if status_handler.has_status("confused"):
 			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
 			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is CONFUSED!" % stats.species_id.capitalize())
 			await get_tree().create_timer(enemy_text_delay).timeout
 			enemy_action_picker.select_confused_target()
 			is_confused = true
+	
+	if status_handler.has_status("paralyze"):
+		await get_tree().create_timer(enemy_text_delay).timeout
+		var chance := 0.25
+		var roll := randf()
+		if roll < chance:
+			print("⚡ Enemy %s is fully paralyzed!" % stats.species_id.capitalize())
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is PARALYZED!" % stats.species_id.capitalize())
+			SFXPlayer.play(preload("res://art/sounds/sfx/stat_paralyze.mp3"))
+			var tween := create_tween()
+			tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
+			tween.tween_interval(0.17)
+			skip_turn = true
+			return
+		else:
+			print("✅ Enemy %s resists paralysis and acts normally." % stats.species_id.capitalize())
+
 	else:
 		is_confused = false
 	
