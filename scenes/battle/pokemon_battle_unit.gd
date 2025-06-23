@@ -33,11 +33,11 @@ func _ready() -> void:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
 	##status effect testing
-	#var status := preload("res://statuses/confused.tres")
+	var status := preload("res://statuses/confused.tres")
 	#var status1 := preload("res://statuses/attack_up.tres")
 	#var status2 := preload("res://statuses/attack_up.tres")
 	#var status3 := preload("res://statuses/burned.tres")
-	#status_handler.add_status(status)
+	status_handler.add_status(status)
 	#status_handler.add_status(status1)
 	#status_handler.add_status(status2)
 	#status_handler.add_status(status3)

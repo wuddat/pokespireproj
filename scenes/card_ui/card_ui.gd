@@ -176,7 +176,7 @@ func play_card_with_delay(crd: Card) -> void:
 	#await get_tree().create_timer(play_card_delay).timeout
 	
 	#handle confusion if any:
-	if _should_hit_self_due_to_confusion(crd):
+	if await _should_hit_self_due_to_confusion(crd):
 		_handle_confusion_self_hit(crd)
 		await get_tree().create_timer(0.2).timeout
 	
@@ -211,30 +211,34 @@ func play_card_with_delay(crd: Card) -> void:
 
 
 
-func _should_hit_self_due_to_confusion(_crd: Card) -> bool:
+func _should_hit_self_due_to_confusion(crd: Card) -> bool:
 	if not is_instance_valid(battle_unit_owner):
 		return false
 	if not battle_unit_owner.status_handler.has_status("confused"):
 		return false
 	Events.battle_text_requested.emit("%s is CONFUSED!" % battle_unit_owner.stats.species_id.capitalize())
+	await get_tree().create_timer(play_card_delay).timeout
 	var chance := 0.3
 	var roll := randf()
 	if roll < chance:
 		print("🤪 %s is confused and hits itself!" % battle_unit_owner.stats.species_id)
 		return true
-	
+	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 	print("✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
 	return false
 
 
 func _handle_confusion_self_hit(_card: Card) -> void:
-	var damage = round(battle_unit_owner.stats.max_health * 0.2)
+	var damage: int = round(battle_unit_owner.stats.max_health * 0.2)
+	print("pkmn to self hit is: %s" % battle_unit_owner.stats.species_id)
+	print("damage to take is %s" % damage)
 	Events.battle_text_requested.emit("Played %s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
-	await get_tree().create_timer(play_card_delay).timeout
 	var effect := DamageEffect.new()
 	effect.amount = damage
+	print("effect amount is: %s" % damage)
 	effect.sound = preload("res://art/sounds/Tackle.wav")
 	effect.execute([battle_unit_owner])
+	print("damage effect executed on %s" % battle_unit_owner.stats.species_id)
 	
 
 
