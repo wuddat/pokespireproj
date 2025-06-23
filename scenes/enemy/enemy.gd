@@ -254,6 +254,13 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
 	
 	if modified_damage > 0:
+		if status_handler.has_status("rage"):
+			var atkup = preload("res://statuses/attack_up.tres").duplicate()
+			atkup.stacks = 2
+			var rage_effect = StatusEffect.new()
+			rage_effect.source = self
+			rage_effect.status = atkup
+			rage_effect.execute([self])
 		var dmg_text := COMBAT_TEXT.instantiate()
 		add_child(dmg_text)
 		dmg_text.show_text("%s" % modified_damage)
@@ -357,3 +364,34 @@ func _on_area_exited(_area: Area2D) -> void:
 	pulse_material.shader = PULSE_SHADER
 	pulse_material.set_shader_parameter("width", 0)  # start with no highlight
 	sprite_2d.material = pulse_material
+
+
+func dodge_check() -> bool:
+	if status_handler.has_status("dodge"):
+		var dodge_stacks = status_handler.get_status_stacks("dodge")
+		var dodge_chance = dodge_stacks * 0.1
+		var dodge_outcome = randf()
+		var dodge = status_handler.get_status("dodge")
+		dodge.stacks -= 1
+
+		if dodge_outcome < dodge_chance:
+			Events.battle_text_requested.emit("%s was able to DODGE the attack!" % stats.species_id.capitalize())
+			_play_dodge_tween()
+			return true
+	return false
+
+
+func _play_dodge_tween() -> void:
+	var start_pos := global_position
+	var dodge_offset := Vector2.LEFT * 24
+	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.1)
+	show_combat_text("DODGE!")
+	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.5)
+	tween.tween_property(self, "global_position", start_pos, 0.1)
+
+
+func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
+	var label := COMBAT_TEXT.instantiate()
+	add_child(label)
+	label.show_text(text, color)

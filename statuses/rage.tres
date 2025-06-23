@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Rage" load_steps=3 format=3 uid="uid://deh4ipirrxcfc"]
+
+[ext_resource type="Texture2D" uid="uid://bn6pju4vfjxse" path="res://art/status_effects/rage.png" id="1_12p2h"]
+[ext_resource type="Script" uid="uid://cunlecnorhi4i" path="res://statuses/rage.gd" id="2_s3kt7"]
+
+[resource]
+script = ExtResource("2_s3kt7")
+id = "rage"
+display_string = " has flown into a [color=redorange]RAGE[/color]!"
+type = 2
+chance = 1.0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_12p2h")
+tooltip = "[color=redorange]RAGE:[/color]
+Gain [color=red] 2 ATKUP[/color] EACH time the unit takes damage."
+metadata/_custom_type_script = "uid://breq3elxr1644"

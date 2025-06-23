@@ -20,11 +20,15 @@ const STATUS_LOOKUP := {
 	"flinched": preload("res://statuses/flinched.tres"),
 	"froze": preload("res://statuses/froze.tres"),
 	"ohko": preload("res://statuses/ohko.tres"),
+	"plated": preload("res://statuses/plated.tres"),
 	"poisoned": preload("res://statuses/poisoned.tres"),
+	"protected": preload("res://statuses/protected.tres"),
 	"quiverdance": preload("res://statuses/quiverdance.tres"),
+	"rage": preload("res://statuses/rage.tres"),
 	"scaling": preload("res://statuses/scaling_per_turn.tres"),
 	"seeded": preload("res://statuses/seeded.tres"),
 	"sleep": preload("res://statuses/sleep.tres"),
+	"taunt": preload("res://statuses/taunt.tres"),
 }
 
 func get_status_effects_from_ids(ids: Array[String]) -> Array[Status]:

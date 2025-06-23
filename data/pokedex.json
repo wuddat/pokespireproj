@@ -1410,7 +1410,8 @@
 		"hyperbeam",
 		"accupressure",
 		"darkpulse",
-		"hypnosis"
+		"hypnosis",
+		"calmmind",
 	  ]
 	},
 	"machop": {
@@ -1588,7 +1589,8 @@
 		"defensecurl",
 		"rockthrow",
 		"rocktomb",
-		"growl"
+		"growl",
+		"protect",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "graveler"
@@ -1610,7 +1612,8 @@
 		"rocktomb",
 		"growl",
 		"earthquake",
-		"earthpower"
+		"earthpower",
+		"protect",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "golem"
@@ -1636,7 +1639,8 @@
 		"superpower",
 		"fissure",
 		"takedown",
-		"explosion"
+		"explosion",
+		"protect",
 	  ]
 	},
 	"ponyta": {
@@ -1694,7 +1698,8 @@
 	  "move_ids": [
 		"growl",
 		"confusion",
-		"watergun"
+		"watergun",
+		"calmmind",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "slowbro"
@@ -1772,7 +1777,8 @@
 		"furyswipes",
 		"peck",
 		"karatechop",
-		"aerialace"
+		"aerialace",
+		"parry",
 	  ]
 	},
 	"doduo": {
@@ -1905,6 +1911,7 @@
 		"withdraw",
 		"confuseray",
 		"iceshard",
+		"protect",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "cloyster"
@@ -1926,6 +1933,7 @@
 		"surf",
 		"iceshard",
 		"icebeam",
+		"protect",
 	  ]
 	},
 	"gastly": {
@@ -2445,7 +2453,11 @@
 		"confusion",
 		"psybeam",
 		"barrier",
-		"hypnosis"
+		"hypnosis",
+		"protect",
+		"confuseray",
+		"icepunch",
+		"haze",
 	  ]
 	},
 	"scyther": {

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PlatedStatus" load_steps=3 format=3 uid="uid://cpn3xa38eloru"]
+
+[ext_resource type="Script" uid="uid://cdn7rqkp0vwip" path="res://statuses/plated.gd" id="1_8txqv"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_p5j6s"]
+
+[resource]
+script = ExtResource("1_8txqv")
+id = "plated"
+display_string = " gained [color=blue]PLATED ARMOR[/color]!"
+type = 0
+chance = 1.0
+stack_type = 2
+can_expire = true
+duration = 1
+stacks = 0
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_p5j6s")
+tooltip = "[color=blue]PLATED ARMOR:[/color]
+Start of turn: Gain [color=blue]%s BLOCK[/color] per stack."
+metadata/_custom_type_script = "uid://breq3elxr1644"

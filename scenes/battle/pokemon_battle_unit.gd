@@ -33,11 +33,11 @@ func _ready() -> void:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
 	##status effect testing
-	#var status := preload("res://statuses/confused.tres")
+	var status := preload("res://statuses/rage.tres")
 	#var status1 := preload("res://statuses/attack_up.tres")
 	#var status2 := preload("res://statuses/attack_up.tres")
 	#var status3 := preload("res://statuses/burned.tres")
-	#status_handler.add_status(status)
+	status_handler.add_status(status)
 	#status_handler.add_status(status1)
 	#status_handler.add_status(status2)
 	#status_handler.add_status(status3)
@@ -87,6 +87,15 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
+	
+	if modified_damage > 0 and status_handler.has_status("rage"):
+		var atkup = preload("res://statuses/attack_up.tres").duplicate()
+		atkup.stacks = 2
+		var rage_effect = StatusEffect.new()
+		rage_effect.source = self
+		rage_effect.status = atkup
+		rage_effect.execute([self])
+		
 	
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
@@ -173,6 +182,8 @@ func dodge_check() -> bool:
 		var dodge_stacks = status_handler.get_status_stacks("dodge")
 		var dodge_chance = dodge_stacks * 0.1
 		var dodge_outcome = randf()
+		var dodge = status_handler.get_status("dodge")
+		dodge.stacks -= 1
 
 		if dodge_outcome < dodge_chance:
 			Events.battle_text_requested.emit("%s was able to DODGE the attack!" % stats.species_id.capitalize())

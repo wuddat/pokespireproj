@@ -20,6 +20,8 @@ enum StackType {NONE, INTENSITY, DURATION}
 @export var max_stacks: int = 999
 @export var max_duration: int = 999
 
+var status_source: Node = null
+
 @export_group("Status Visuals")
 @export var icon: Texture
 @export_multiline var tooltip: String

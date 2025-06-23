@@ -63,6 +63,7 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 		for status_effect in status_effects:
 			if status_effect:
 				var stat_effect := StatusEffect.new()
+				stat_effect.source = battle_unit_owner
 				var status_to_apply := status_effect.duplicate()
 				stat_effect.status = status_to_apply
 				stat_effect.execute(targets)
@@ -98,6 +99,7 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 		for self_stat in self_status:
 			if self_stat:
 				var self_effect := StatusEffect.new()
+				self_effect.source = battle_unit_owner
 				var status_to_apply := self_stat.duplicate()
 				self_effect.status = status_to_apply
 				self_effect.execute([battle_unit_owner])

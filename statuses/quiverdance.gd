@@ -15,11 +15,13 @@ func apply_status(target: Node) -> void:
 	Events.battle_text_requested.emit("%s is getting STRONGER!" % [target.stats.species_id.capitalize()])
 	
 	var status_effect := StatusEffect.new()
+	status_effect.source = target
 	var atkpwr := ATK_PWR.duplicate()
 	atkpwr.stacks = stacks_per_turn
 	status_effect.status = atkpwr
 	status_effect.execute([target])
 	var status_effect_2 := StatusEffect.new()
+	status_effect_2.source = target
 	var dex := DEX.duplicate()
 	dex.stacks = stacks_per_turn
 	status_effect_2.status = dex

@@ -1,4 +1,4 @@
-class_name Protected
+class_name Rage
 extends Status
 
 func get_tooltip() -> String:

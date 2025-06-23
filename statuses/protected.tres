@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="PoisonedStatus" load_steps=3 format=3 uid="uid://b3507d0tlawwr"]
+[gd_resource type="Resource" script_class="Protected" load_steps=3 format=3 uid="uid://b3507d0tlawwr"]
 
-[ext_resource type="Texture2D" uid="uid://bwp27owllm0bl" path="res://art/statuseffects/earth.png" id="1_tkp1y"]
-[ext_resource type="Script" uid="uid://yfavbjrgkk0x" path="res://statuses/poisoned.gd" id="2_8w6ds"]
+[ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_tkp1y"]
+[ext_resource type="Script" uid="uid://ce0xbswrk52wl" path="res://statuses/protected.gd" id="2_8w6ds"]
 
 [resource]
 script = ExtResource("2_8w6ds")
 id = "protected"
 display_string = " is being PROTECTED!"
-type = 1
+type = 0
 chance = 1.0
-stack_type = 1
+stack_type = 2
 can_expire = false
-duration = 0
-stacks = 1
+duration = 1
+stacks = 0
 max_stacks = 999
 max_duration = 999
 icon = ExtResource("1_tkp1y")

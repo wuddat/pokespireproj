@@ -37,6 +37,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	for status_effect in status_effects:
 		if status_effect:
 			var stat_effect := StatusEffect.new()
+			stat_effect.source = battle_unit_owner
 			var status_to_apply := status_effect.duplicate()
 			stat_effect.status = status_to_apply
 			stat_effect.execute(targets)

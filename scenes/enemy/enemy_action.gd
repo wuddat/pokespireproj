@@ -104,6 +104,7 @@ func _execute_self_effects(enemy: Node, total_damage: int, self_damage: int, sel
 	for effect in self_status:
 		if effect:
 			var status := StatusEffect.new()
+			status.source = enemy
 			status.status = effect.duplicate()
 			status.execute([enemy])
 
@@ -147,6 +148,7 @@ func _handle_hit(
 		for status in status_effects:
 			if status:
 				var stat := StatusEffect.new()
+				stat.source = enemy
 				stat.status = status.duplicate()
 				stat.execute([target])
 	)

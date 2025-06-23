@@ -154,6 +154,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			var applied = randf() <= effect_chance
 			if applied:
 				var stat_effect := StatusEffect.new()
+				stat_effect.source = battle_unit_owner
 				stat_effect.status = status_effect.duplicate()
 				stat_effect.execute(targets)
 			else:
@@ -195,6 +196,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	for self_stat in self_status:
 		if self_stat:
 			var self_effect := StatusEffect.new()
+			self_effect.source = battle_unit_owner
 			self_effect.status = self_stat.duplicate()
 			self_effect.execute([battle_unit_owner])
 	emit_dialogue(battle_text)

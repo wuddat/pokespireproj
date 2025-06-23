@@ -12,6 +12,7 @@ func apply_status(target: Node) -> void:
 	print("applied enraged and increased atk pwr ")
 	Events.battle_text_requested.emit("%s received [color=red]2 ATKPWR[/color]!" % [target.stats.species_id.capitalize()])
 	var status_effect := StatusEffect.new()
+	status_effect.source = target
 	var atkpwr := ATTACK_POWER_STATUS.duplicate()
 	atkpwr.stacks = stacks_per_turn
 	status_effect.status = atkpwr

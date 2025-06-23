@@ -65,7 +65,7 @@
 		"poisoned","poisoned","poisoned"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [b]POISON[/b].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common"
 	},
 	"accupressure": {
@@ -79,7 +79,7 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [b]POISON[/b].[/center]",
+	  "description": "[center]TODO - idfk bro - damage and something else maybe?.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common"
 	},
@@ -297,7 +297,7 @@
 		"poisoned"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]POISON[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common"
 	},
 	"bugbuzz": {
@@ -314,6 +314,23 @@
 		"despair"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and apply [color=dimgray]DESPAIR[/color].[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "uncommon"
+	},
+	"calmmind": {
+	  "name": "Calm Mind",
+	  "id": "calmmind",
+	  "category": "status",
+	  "subtype": "buff",
+	  "type": "psychic",
+	  "target": "self",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 3,
+	  "status_effects": [
+		"cleanse","dexterity","attack_up","attack_up","attack_up","protected",
+	  ],
+	  "description": "[center]CLEANSE self then apply [color=GREEN]2 DEXTERITY[/color], [color=red]3 ATKUP[/color], [color=blue]PROTECTED[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "uncommon"
 	},
@@ -397,7 +414,7 @@
 		"poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned","poisoned",
 	  ],
 	  "description": "[center]Apply 20 [color=purple]POISON[/color] to target.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare"
 	},
 	"crunch": {
@@ -897,7 +914,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to a RANDOM enemy.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
@@ -1457,6 +1474,21 @@
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "common"
 	},
+	"parry": {
+	  "name": "Parry",
+	  "id": "parry",
+	  "category": "status",
+	  "subtype": "buff",
+	  "type": "fighting",
+	  "target": "self",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["protected", "attack_up","attack_up",],
+	  "description": "[center]Apply [color=blue]PROTECTED[/color] and [color=red]2 ATKUP[/color]![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "common"
+	},
 	"peck": {
 	  "name": "Peck",
 	  "id": "peck",
@@ -1484,9 +1516,24 @@
 	  "cost": 0,
 	  "status_effects": ["poisoned"],
 	  "description": "[center]Deal [color=red]%s[/color] damage 5X RANDOMLY and [color=purple]POISON[/color]!.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "uncommon",
 	  "multiplay": 5
+	},
+	"protect": {
+	  "name": "Protect",
+	  "id": "protect",
+	  "category": "status",
+	  "subtype": "buff",
+	  "type": "normal",
+	  "target": "allies",
+	  "power": 2,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["protected"],
+	  "description": "[center]Apply [color=blue]PROTECTED[/color] to allies![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "rarity": "uncommon"
 	},
 	"poisongas": {
 	  "name": "Poison Gas",
@@ -1500,7 +1547,7 @@
 	  "cost": 0,
 	  "status_effects": ["poisoned","poisoned",],
 	  "description": "[center]Apply [color=purple]POISON[/color] to random allies/enemies [color=purple]3X[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common",
 	  "multiplay": 3,
 	},
@@ -1518,26 +1565,27 @@
 		"poisoned"
 	  ],
 	  "description": "[center]Deals [color=red]%s[/color] damage and applies [color=purple]POISON[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare"
 	},
 	"poisonpowder": {
 	  "name": "Poison Powder",
 	  "id": "poisonpowder",
 	  "category": "status",
-	  "subtype": "all_enemies",
+	  "subtype": "debuff",
 	  "type": "poison",
-	  "target": "all_enemies",
-	  "power": 5,
+	  "target": "random_enemy",
+	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
-		"poisoned","poisoned","poisoned","poisoned","poisoned",
+		"poisoned","poisoned",
 	  ],
-	  "description": "[center]Applies [color=purple]5 POISON[/color] to ALL enemies![/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "description": "[center]Apply [color=purple]2 POISON[/color] [color=red]4X[/color] randomly![/center]",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare",
-	  "sound_path": "res://art/sounds/move_sfx/poison_powder.mp3"
+	  "sound_path": "res://art/sounds/move_sfx/poison_powder.mp3",
+	  "multiplay": 4
 	},
 	"poisonsting": {
 	  "name": "Poison Sting",
@@ -1553,7 +1601,7 @@
 		"poisoned","poisoned","poisoned",
 	  ],
 	  "description": "[center]Sting your foe dealing [color=red]%s[/color] damage and apply [color=purple]2 POISON[/color].[/center]",
-	  "icon_path": "res://art/tile_0114.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare"
 	},
 	"pokeball": {
@@ -1665,6 +1713,43 @@
 	  "description": "[center]Gain Dexterity AND AtkPwr per turn[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "rarity": "rare"
+	},
+	"rage": {
+	  "name": "Rage",
+	  "id": "rage",
+	  "category": "status",
+	  "subtype": "buff",
+	  "type": "normal",
+	  "target": "self",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["plated","plated","plated","rage"],
+	  "description": "[center]Gain [color=blue]3 PLATED ARMOR[/color] and [color=redorange]RAGE[/color]![/center]",
+	  "icon_path": "res://art/status_effects/rage.png",
+	  "self_damage": 0,
+	  "self_status": [],
+	  "bonus_damage_if_target_has_status": "",
+	  "bonus_damage_multiplier": 1,
+	  "rarity": "common",
+	  "multiplay": 4,
+	},
+	"ragepowder": {
+	  "name": "Rage Powder",
+	  "id": "ragepowder",
+	  "category": "status",
+	  "subtype": "debuff",
+	  "type": "bug",
+	  "target": "all_enemies",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": ["taunt"],
+	  "description": "[center][color=red]TAUNT[/color] ALL enemies to target the user![/center]",
+	  "icon_path": "res://art/status_effects/rage.png",
+	  "self_damage": 0,
+	  "self_status": [],
+	  "rarity": "uncommon",
 	},
 	"rapidspin": {
 	  "name": "Rapid Spin",
@@ -1881,7 +1966,7 @@
 	  "cost": 2,
 	  "status_effects": ["poisoned","poisoned","poisoned","poisoned","poisoned","poisoned",],
 	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [color=purple]POISON[/color]![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "uncommon"
 	},
 	"solarbeam": {
@@ -1941,7 +2026,7 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": ["sleep"],
-	  "description": "[center]Attempt to put an enemy to SLEEP![/center]",
+	  "description": "[center]Apply ONE stack of SLEEP![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "uncommon"
 	},
@@ -1972,7 +2057,7 @@
 	  "cost": 1,
 	  "status_effects": ["poisoned","poisoned",],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple] 2 POISON[/color] to an enemy![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common"
 	},
 	"smog": {
@@ -1987,7 +2072,7 @@
 	  "cost": 2,
 	  "status_effects": ["poisoned","poisoned","poisoned",],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple] 3 POISON[/color] RANDOMLY![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "uncommon",
 	  "multiplay": 3,
 	},
@@ -2033,7 +2118,7 @@
 	  "cost": 1,
 	  "status_effects": ["sleep"],
 	  "description": "[center]ALL enemies with [color=purple]POISON[/color] gain [color=pink]1 SLEEP[/color]![/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common",
 	  "requires_status": "poisoned"
 	},
@@ -2146,7 +2231,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": [],
+	  "status_effects": ["taunt"],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,
@@ -2294,7 +2379,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[b]X2[/b] if [color=purple]POISONED[/color][/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "poisoned",

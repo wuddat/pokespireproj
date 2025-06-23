@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Taunt" load_steps=3 format=3 uid="uid://dd73rhg587qdk"]
+
+[ext_resource type="Texture2D" uid="uid://dh3t2q672ugjr" path="res://art/status_effects/taunt.png" id="1_p8lv2"]
+[ext_resource type="Script" uid="uid://c5rdr7xgwgaio" path="res://statuses/taunt.gd" id="2_p8lv2"]
+
+[resource]
+script = ExtResource("2_p8lv2")
+id = "taunt"
+display_string = " was [color=blue]TAUNTED![/color]!"
+type = 2
+chance = 1.0
+stack_type = 0
+can_expire = false
+duration = 2
+stacks = 0
+max_stacks = 999
+max_duration = 999
+icon = ExtResource("1_p8lv2")
+tooltip = "[color=red]TAUNTED: [/color]
+Must attack the taunt target!"
+metadata/_custom_type_script = "uid://breq3elxr1644"
