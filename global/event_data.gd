@@ -7,6 +7,11 @@ var events := {
 		"dynamic_choices": true,
 		"special_type": "move_tutor"
 	},
+	"hypno_trance": {
+	"description": "A wild Hypno appears! It seems to have your %s in a trance...",
+	"dynamic_choices": true,
+	"special_type": "hypno_trance"
+	},
 	"imbued_stone": {
 		"description": "You find a strange stone glowing faintly with the symbol for TYPE...",
 		"dynamic_choices": true,

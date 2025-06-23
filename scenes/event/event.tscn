@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://8fqjaf2yei3p"]
+[gd_scene load_steps=7 format=3 uid="uid://8fqjaf2yei3p"]
 
 [ext_resource type="Script" uid="uid://c2qp1c4ysp3dx" path="res://scenes/event/event.gd" id="1_lry0m"]
+[ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="2_uuxf3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cur4b"]
 
@@ -105,6 +106,9 @@ layout_mode = 2
 text = "Would you choose an option below?"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="CardPileView" parent="UILayer" instance=ExtResource("2_uuxf3")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

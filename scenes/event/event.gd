@@ -5,6 +5,7 @@ extends Control
 @export var run_stats: RunStats
 @onready var description_label := $UILayer/UI/Description
 @onready var choices_container := $UILayer/UI 
+@onready var card_pile_view: CardPileView = $UILayer/CardPileView
 
 const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 
@@ -31,6 +32,11 @@ func _ready():
 			var stone_type = _pick_random_type()
 			event_data["stone_type"] = stone_type
 			description_label.text = "You find a strange stone glowing faintly with the symbol for %s..." % stone_type.capitalize()
+		"hypno_trance":
+			var random_pkmn = char_stats.get_all_party_members()
+			random_pkmn.shuffle()
+			event_data["target_pokemon"] = random_pkmn[0]
+			description_label.text = "A wild Hypno appears! It seems to have your %s in a trance..." % random_pkmn[0].species_id.capitalize()
 		_:
 			description_label.text = event_data.get("description", "")
 		
@@ -62,6 +68,8 @@ func _generate_dynamic_choices() -> void:
 			_generate_move_tutor_choices()
 		"tm":
 			_generate_tm_choices()
+		"hypno_trance":
+			_generate_hypno_trance_choices()
 		_:
 			_generate_type_based_choices()
 
@@ -102,6 +110,70 @@ func _generate_tm_choices() -> void:
 		choices_container.add_child(btn)
 
 	generate_skip_button("Leave the TM")
+
+
+func _generate_hypno_trance_choices() -> void:
+	var pkmn = event_data["target_pokemon"]
+	var uid = pkmn.uid
+	var matching_cards = char_stats.get_party_pkmn_cards(uid)
+	
+	# Option 1: Forget
+	var btn1 := Button.new()
+	btn1.text = "FORGET a move.."
+	btn1.pressed.connect(func():
+		var pile := CardPile.new()
+		pile.cards = matching_cards.cards
+		var view = card_pile_view
+		view.card_pile = pile
+		view.char_stats = char_stats
+		view.show_current_view("Choose....")
+		view.card_detail_overlay.button.text = "Forget"
+		view.card_detail_overlay.button.visible = true
+		view.card_detail_overlay.button.pressed.connect(func():
+			var selected = view.card_detail_overlay.tooltip_card.get_child(0).card
+			char_stats.deck.remove_card(selected)
+			view.queue_free()
+			Events.event_room_exited.emit()
+			queue_free()
+		)
+		add_child(view)
+	)
+	choices_container.add_child(btn1)
+
+	# Option 2: Transform
+	var btn2 := Button.new()
+	btn2.text = "TRANSFORM a move.."
+	btn2.pressed.connect(func():
+		var pile := CardPile.new()
+		pile.cards = matching_cards.cards
+		var view := card_pile_view
+		view.card_pile = pile
+		view.char_stats = char_stats
+		view.show_current_view("Choose....")
+		view.card_detail_overlay.button.text = "Transform"
+		view.card_detail_overlay.button.visible = true
+		view.card_detail_overlay.button.pressed.connect(func():
+			var selected = view.card_detail_overlay.tooltip_card.get_child(0).card
+			char_stats.deck.remove_card(selected)
+			var all_ids = MoveData.moves.keys()
+			all_ids.shuffle()
+			var new_card = Utils.create_card(all_ids[0])
+			new_card.pkmn_owner_uid = pkmn.uid
+			new_card.pkmn_owner_name = pkmn.species_id
+			new_card.pkmn_icon = pkmn.icon
+			char_stats.deck.add_card(new_card)
+			view.queue_free()
+			Events.event_room_exited.emit()
+			queue_free()
+		)
+		add_child(view)
+	)
+	choices_container.add_child(btn2)
+
+	# Option 3: Flee
+	generate_skip_button("Flee from Hypno")
+
+
 
 
 func _generate_type_based_choices() -> void:

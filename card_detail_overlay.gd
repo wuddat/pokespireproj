@@ -14,6 +14,7 @@ const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 @onready var inflicts: RichTextLabel = %Inflicts
 @onready var status_box: VBoxContainer = %StatusBox
 @onready var pokemon_name: RichTextLabel = %Pokemon
+@onready var button: Button = %Button
 
 
 func _ready() -> void:
