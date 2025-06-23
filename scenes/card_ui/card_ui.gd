@@ -232,7 +232,7 @@ func _handle_confusion_self_hit(_card: Card) -> void:
 	var damage: int = round(battle_unit_owner.stats.max_health * 0.2)
 	print("pkmn to self hit is: %s" % battle_unit_owner.stats.species_id)
 	print("damage to take is %s" % damage)
-	Events.battle_text_requested.emit("Played %s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
+	Events.battle_text_requested.emit("%s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
 	var effect := DamageEffect.new()
 	effect.amount = damage
 	print("effect amount is: %s" % damage)
