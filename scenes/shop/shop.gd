@@ -13,6 +13,7 @@ const SHOP_PKMN = preload("res://scenes/shop/shop_pkmn.tscn")
 @onready var cards: HBoxContainer = %Cards
 @onready var card_detail_overlay: CardDetailOverlay = %CardDetailOverlay
 @onready var pokemon: HBoxContainer = %Pokemon
+@onready var pkmn_view: PkmnMoveView = %PkmnView
 
 func _ready() -> void:
 	for shop_card: ShopCard in cards.get_children():
@@ -74,6 +75,7 @@ func _generate_shop_pkmn() -> void:
 		pokemon.add_child(new_shop_pkmn)
 		new_shop_pkmn.pkmn = pkmn
 		new_shop_pkmn.update(run_stats)
+		new_shop_pkmn.pkmn_sprite_clicked.connect(_on_shop_pkmn_sprite_clicked)
 
 func _update_items() -> void:
 	for shop_card: ShopCard in cards.get_children():
@@ -96,3 +98,15 @@ func _on_shop_pkmn_bought(pkmn: PokemonStats, gold_cost: int) -> void:
 	print("added pkmn to party: ", pkmn.species_id)
 	Events.added_pkmn_to_party.emit(pkmn)
 	_update_items()
+
+func _on_shop_pkmn_sprite_clicked(pokemon: PokemonStats) -> void:
+	if not pkmn_view:
+		print("❌ No pkmn_view reference")
+		return
+	print("✅ Clicked on:", pokemon.species_id)
+	print("🐛 PkmnView visible before:", pkmn_view.visible)
+	pkmn_view.selected_pkmn = pokemon
+	pkmn_view.char_stats = char_stats
+	pkmn_view.show_current_view("%s Move List" % pokemon.species_id.capitalize())
+	pkmn_view.show()
+	print("🐛 PkmnView visible after:", pkmn_view.visible)

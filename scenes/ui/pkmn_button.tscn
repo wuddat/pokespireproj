@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="1_kbbcr"]
 [ext_resource type="Script" uid="uid://b7mq0y2jecbh0" path="res://scenes/ui/pkmn_button.gd" id="2_svwu3"]
 
-[node name="PokemonSprite" type="TextureButton"]
+[node name="Button" type="TextureButton"]
 offset_right = 37.0
 offset_bottom = 37.0
 texture_normal = ExtResource("1_kbbcr")

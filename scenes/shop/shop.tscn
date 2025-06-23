@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6nj6yoyul55h"]
+[gd_scene load_steps=7 format=3 uid="uid://c6nj6yoyul55h"]
 
 [ext_resource type="Script" uid="uid://d0h304pp8xh1m" path="res://scenes/shop/shop.gd" id="1_100s2"]
 [ext_resource type="AudioStream" uid="uid://cepml4sqwiirn" path="res://art/music/shop.mp3" id="2_jp048"]
 [ext_resource type="Texture2D" uid="uid://dt2fk18r22nhw" path="res://art/shop.png" id="2_qaxay"]
 [ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="4_jp048"]
+[ext_resource type="PackedScene" uid="uid://cj6pyex8cdo88" path="res://scenes/ui/pkmn_move_view.tscn" id="6_tp26b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7lxhl"]
 
@@ -95,6 +96,10 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 37
 alignment = 1
+
+[node name="PkmnView" parent="UILayer" instance=ExtResource("6_tp26b")]
+unique_name_in_owner = true
+visible = false
 
 [node name="CardDetailOverlay" parent="UILayer" instance=ExtResource("4_jp048")]
 unique_name_in_owner = true

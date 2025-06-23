@@ -17,6 +17,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="PokemonSprite" parent="PkmnContainer" instance=ExtResource("2_dhfsf")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Price" type="HBoxContainer" parent="."]

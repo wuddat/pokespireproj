@@ -15,8 +15,6 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var arrow: Sprite2D = %arrow
 @onready var particles: GPUParticles2D = %Particles
 @onready var swirl: TextureRect = %swirl
-
-
 @export var parent: Enemy
 
 @export var status_handler: StatusHandler

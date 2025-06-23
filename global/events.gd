@@ -56,6 +56,7 @@ signal map_exited(room: Room)
 signal shop_exited
 signal shop_card_bought(card: Card, gold_cost: int)
 signal shop_pkmn_bought(pkmn: PokemonStats, gold_cost: int)
+signal shop_pkmn_clicked(pkmn: PokemonStats)
 
 #Rest-related Events
 signal pokecenter_exited

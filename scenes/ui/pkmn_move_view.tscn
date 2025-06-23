@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj6pyex8cdo88"]
+
+[ext_resource type="Script" uid="uid://bo7osu3w7f030" path="res://scenes/ui/pkmn_move_view.gd" id="1_rh5x6"]
+[ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="2_5vkj4"]
+[ext_resource type="PackedScene" uid="uid://dvwwlm2ng1you" path="res://scenes/ui/pkmn_card_displayer.tscn" id="2_oq54m"]
+[ext_resource type="PackedScene" uid="uid://bmw6uc1p6fp8l" path="res://scenes/card_ui/card_ui.tscn" id="3_vtra6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bd0ix"]
+font_size = 24
+
+[node name="PkmnView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rh5x6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.854902)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Move Preview"
+label_settings = SubResource("LabelSettings_bd0ix")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PkmnCardDisplayer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_oq54m")]
+layout_mode = 2
+
+[node name="CardUI" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PkmnCardDisplayer" instance=ExtResource("3_vtra6")]
+layout_mode = 2
+
+[node name="CardUI2" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PkmnCardDisplayer" instance=ExtResource("3_vtra6")]
+layout_mode = 2
+
+[node name="CardUI3" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PkmnCardDisplayer" instance=ExtResource("3_vtra6")]
+layout_mode = 2
+
+[node name="CardUI4" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PkmnCardDisplayer" instance=ExtResource("3_vtra6")]
+layout_mode = 2
+
+[node name="CardUI5" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PkmnCardDisplayer" instance=ExtResource("3_vtra6")]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 93.0
+offset_right = 20.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
+[node name="CardDetailOverlay" parent="." instance=ExtResource("2_5vkj4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
