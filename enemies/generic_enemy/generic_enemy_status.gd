@@ -108,9 +108,7 @@ func update_intent_text() -> void:
 		return
 	
 	intent.target = target_pkmn.stats.icon
-	if intent.targets_all:
-		intent.aoe_icon.show()
-	
+
 	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
 	if modified_dmg > 0:
 		intent.current_text = intent.base_text % modified_dmg

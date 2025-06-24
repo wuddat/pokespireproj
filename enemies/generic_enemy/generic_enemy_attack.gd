@@ -140,8 +140,6 @@ func update_intent_text() -> void:
 		
 	intent.target = target_pkmn.stats.icon
 	intent.particles_on = status_effects.size() > 0
-	if intent.targets_all:
-		intent.aoe_icon.show()
 	
 	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
 	if modified_dmg > 0:
