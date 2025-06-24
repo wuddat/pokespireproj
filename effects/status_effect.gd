@@ -13,7 +13,6 @@ func execute(targets: Array[Node]) -> void:
 		if target is Enemy or target is Player or target is PokemonBattleUnit:
 			var unique_status = status.duplicate()
 			unique_status.status_source = source
-			print("%s applied by owner: %s" % [unique_status.id, unique_status.status_source.stats.species_id])
 			if not target.status_handler.has_status(status.id):
 				Events.battle_text_requested.emit("%s%s" % [target.stats.species_id.capitalize(),status.display_string])
 			else:

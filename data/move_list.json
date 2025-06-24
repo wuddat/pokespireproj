@@ -3,7 +3,7 @@
 	"shift": {
 	  "name": "shift",
 	  "id": "shift",
-	  "category": "shift",
+	  "category": "status",
 	  "subtype": "shift",
 	  "type": "normal",
 	  "target": "self",
@@ -2201,10 +2201,10 @@
 	"splash": {
 	  "name": "Splash",
 	  "id": "splash",
-	  "category": "shift",
-	  "subtype": "all_enemies",
+	  "category": "status",
+	  "subtype": "shift",
 	  "type": "water",
-	  "target": "all_enemies",
+	  "target": "self",
 	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 1,
