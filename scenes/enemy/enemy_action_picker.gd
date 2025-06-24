@@ -79,22 +79,25 @@ func _on_party_shifted() -> void:
 	for tar in target_pool:
 		print("target_pool: ", tar.stats.species_id)
 	var new_target: PokemonBattleUnit = null
-	print("current_target_pos is: ", current_target_pos)
+
+	print("%s current_target_pos is %s for %s: " % [enemy.stats.species_id.capitalize(), current_target_pos, target.stats.species_id])
 	
 	for target_candidate in target_pool:
 		if target_candidate.spawn_position == current_target_pos:
-			print("target candidate found its: ", target_candidate.stats.species_id)
 			new_target = target_candidate
 			break
+	if not new_target and not target_pool.is_empty():
+		new_target = target_pool.front()
+		current_target_pos = new_target.spawn_position
+		print("⚠️ Fallback! No one at desired spot. Defaulting to: ", new_target.stats.species_id)
 
 	if new_target:
-		print("🔄 _on_party_shifted: matched new target at position %s -> %s" % [current_target_pos, new_target.stats.species_id])
 		target = new_target
 		for action in get_children():
 			action.target = new_target
-			print("🎯 Updated action %s to new target: %s" % [action.name, new_target.stats.species_id])
+		print("🔄 _on_party_shifted: %s matched new target at position %s -> %s" % [enemy.stats.species_id.capitalize(),current_target_pos, new_target.stats.species_id])
 	else:
-		print("⚠️ _on_party_shifted: no target found for position %s" % current_target_pos)
+		print("❌ _on_party_shifted: no valid target found at all.")
 
 
 

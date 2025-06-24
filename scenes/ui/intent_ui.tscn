@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://djn4clek6m1mn"]
+[gd_scene load_steps=20 format=3 uid="uid://djn4clek6m1mn"]
 
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_mub4x"]
 [ext_resource type="Script" uid="uid://dp28gj3v4djpn" path="res://scenes/ui/intent_ui.gd" id="1_sg8ul"]
 [ext_resource type="Texture2D" uid="uid://bkc5qr388q57w" path="res://art/sprites/icons/25-cosplay.png" id="2_rdgft"]
+[ext_resource type="Texture2D" uid="uid://cilvwrhrf7ww6" path="res://art/intent/physical.png" id="3_v6c5w"]
 [ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_jvjc4"]
 [ext_resource type="Texture2D" uid="uid://ct5nygbymbebx" path="res://art/intent/status.png" id="4_m20oi"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="4_ove1y"]
@@ -64,7 +65,7 @@ region = Rect2(16, 16, 38, 38)
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -74,22 +75,29 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(256, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_rdgft"]
-resource_name = "hover"
-length = 1.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.43333),
-"transitions": PackedFloat32Array(0.594604, 1.68179, 0.615572),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer2/Panel:theme_override_styles/panel:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-60, -54), Vector2(-60, -59), Vector2(-60, -54)]
+"values": [Color(0.76662, 0.76662, 0.76662, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer2/Panel:theme_override_styles/panel:border_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.501524, 0.783101, 0.997451, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_m20oi"]
@@ -120,11 +128,58 @@ tracks/1/keys = {
 "values": [Vector2(2.53125, 2.4375), Vector2(1.1, 1.1)]
 }
 
+[sub_resource type="Animation" id="Animation_rdgft"]
+resource_name = "hover"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.43333),
+"transitions": PackedFloat32Array(0.594604, 1.68179, 0.615572),
+"update": 0,
+"values": [Vector2(-60, -54), Vector2(-60, -59), Vector2(-60, -54)]
+}
+
+[sub_resource type="Animation" id="Animation_v6c5w"]
+resource_name = "pulse"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer2/Panel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1009),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.76662, 0.76662, 0.76662, 1), Color(1, 0.7659, 0.727377, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer2/Panel:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1009),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.501524, 0.783101, 0.997451, 1), Color(1, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ove1y"]
 _data = {
 &"RESET": SubResource("Animation_jvjc4"),
 &"fade_in": SubResource("Animation_m20oi"),
-&"hover": SubResource("Animation_rdgft")
+&"hover": SubResource("Animation_rdgft"),
+&"pulse": SubResource("Animation_v6c5w")
 }
 
 [node name="IntentUI" type="Control"]
@@ -170,6 +225,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rdgft")
 layout_mode = 2
 theme_override_constants/separation = -3
 alignment = 1
+
+[node name="Icon3" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.65814, 0.0961577, 0.0961577, 1)
+position = Vector2(9.99999, 10)
+rotation = 0.327798
+scale = Vector2(0.559825, 0.626792)
+texture = ExtResource("3_v6c5w")
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer"]
 unique_name_in_owner = true
@@ -248,6 +311,12 @@ texture = ExtResource("4_ove1y")
 region_rect = Rect2(16, 16, 38, 38)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ove1y")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_ove1y")

@@ -25,6 +25,7 @@ var catch_animator: Node2D = null
 
 var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
+var spawn_coords: Vector2
 
 var is_catchable: bool = false
 var is_caught: bool = false
@@ -63,7 +64,7 @@ func _ready():
 	pulse_material.shader = PULSE_SHADER
 	pulse_material.set_shader_parameter("width", 0.0)  # start with no highlight
 	sprite_2d.material = pulse_material
-	
+	spawn_coords = global_position
 
 
 func set_current_action(value: EnemyAction) -> void:

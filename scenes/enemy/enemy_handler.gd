@@ -71,7 +71,44 @@ func start_turn() -> void:
 		acting_enemies.append(enemy)
 	
 	_start_next_enemy_turn()
+
+
+func shift_enemies() -> void:
+	var enemies: Array[Enemy] = []
+	var positions: Array[Vector2] = []
+	var target_positions: Array[String] = []
 	
+	for child in get_children():
+		if child is Enemy:
+			enemies.append(child)
+			positions.append(child.spawn_coords)
+			target_positions.append(child.enemy_action_picker.current_target_pos)
+
+	if enemies.size() < 2:
+		return
+
+	# Sort by spawn_coords.x for consistent left-to-right order
+	enemies.sort_custom(func(a, b): return a.spawn_coords.x < b.spawn_coords.x)
+	positions.sort_custom(func(a, b): return a.x < b.x)
+
+	# Rotate enemies AND target positions together
+	var new_order := enemies.duplicate()
+	var new_target_positions := target_positions.duplicate()
+	new_order.push_front(new_order.pop_back())
+	new_target_positions.push_front(new_target_positions.pop_back())
+
+	for i in range(new_order.size()):
+		var enemy: Enemy = new_order[i]
+		var new_position: Vector2 = positions[i]
+		var new_target_pos: String = new_target_positions[i]
+
+		enemy.spawn_coords = new_position
+		enemy.enemy_action_picker.current_target_pos = new_target_pos
+
+		print("%s reassigned to POS: %s" % [enemy.stats.species_id.capitalize(), new_target_pos])
+
+		var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(enemy, "global_position", new_position, 0.4)
 
 func _start_next_enemy_turn() -> void:
 	if acting_enemies.is_empty():

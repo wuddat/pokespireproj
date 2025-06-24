@@ -108,7 +108,8 @@
 		"flamecharge",
 		"focusenergy",
 		"growl",
-		"slash"
+		"slash",
+		"rage",
 	  ],
 	  "evolves_to": "charizard",
 	  "evolution_level": 6
@@ -137,6 +138,7 @@
 		"hurricane",
 		"swagger",
 		"smokescreen",
+		"rage",
 	  ]
 	},
 	"squirtle": {
@@ -241,7 +243,8 @@
 	  "max_health": 16,
 	  "move_ids": [
 		"tackle",
-		"harden"
+		"harden",
+		"slam"
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "butterfree"
@@ -306,7 +309,8 @@
 	  "max_health": 16,
 	  "move_ids": [
 		"harden",
-		"poisonsting"
+		"poisonsting",
+		"slam",
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "beedrill"
@@ -351,6 +355,7 @@
 		"quickattack",
 		"peck",
 		"aerialace",
+		"whirlwind",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "pidgeotto"
@@ -373,6 +378,7 @@
 		"aerialace",
 		"airslash",
 		"featherdance",
+		"whirlwind",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "pidgeot"
@@ -396,6 +402,8 @@
 		"aerialace",
 		"airslash",
 		"featherdance",
+		"whirlwind",
+		"hurricane"
 	  ]
 	},
 	"rattata": {
@@ -582,6 +590,7 @@
 		"defensecurl",
 		"furyswipes",
 		"growl",
+		"bulldoze",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "sandslash"
@@ -603,7 +612,7 @@
 		"earthquake",
 		"earthpower",
 		"fissure",
-		""
+		"bulldoze",
 	  ]
 	},
 	"nidoran\u2640": {
@@ -669,6 +678,7 @@
 		"fissure",
 		"slam",
 		"poisonjab",
+		"bulldoze",
 	  ]
 	},
 	"nidoran\u2642": {
@@ -811,6 +821,7 @@
 		"confusion",
 		"bite",
 		"doubleteam",
+		"roar",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "nintetails"
@@ -833,7 +844,8 @@
 		"firespin",
 		"flamecharge",
 		"quickattack",
-		"flamethrower"
+		"flamethrower",
+		"willowisp",
 	  ]
 	},
 	"jigglypuff": {
@@ -1215,6 +1227,8 @@
 		"tackle",
 		"focusenergy",
 		"slam",
+		"seismictoss",
+		"swagger"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "primeape"
@@ -1240,6 +1254,8 @@
 		"leer",
 		"accupressure",
 		"bulkup",
+		"seismictoss",
+		"swagger"
 	  ]
 	},
 	"growlithe": {
@@ -1258,7 +1274,8 @@
 		"flamethrower",
 		"bite",
 		"crunch",
-		"firefang"
+		"firefang",
+		"roar",
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "arcanine"
@@ -1283,7 +1300,9 @@
 		"extremespeed",
 		"flamethrower",
 		"firespin",
-		"flamecharge"
+		"flamecharge",
+		"roar",
+		"playrough",
 	  ]
 	},
 	"poliwag": {
@@ -1368,9 +1387,7 @@
 	  ],
 	  "max_health": 16,
 	  "move_ids": [
-		"growl",
-		"rest",
-		"doubleteam",
+		"teleport",
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "kadabra"
@@ -1412,6 +1429,7 @@
 		"darkpulse",
 		"hypnosis",
 		"calmmind",
+		"teleport",
 	  ]
 	},
 	"machop": {
@@ -1794,7 +1812,11 @@
 	  "move_ids": [
 		"peck",
 		"growl",
-		"furyswipes"
+		"furyswipes",
+		"rage",
+		"quickattack",
+		
+		
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "dodrio"
@@ -1812,7 +1834,10 @@
 	  "move_ids": [
 		"drillpeck",
 		"furyswipes",
-		"triattack"
+		"triattack",
+		"swordsdance",
+		"accupressure",
+		"hyperbeam",
 	  ]
 	},
 	"seel": {
@@ -1852,7 +1877,8 @@
 		"iceshard",
 		"haze",
 		"icebeam",
-		
+		"aquatail",
+		"safeguard"
 	  ]
 	},
 	"grimer": {
@@ -1872,7 +1898,8 @@
 		"smog",
 		"poisonjab",
 		"minimize",
-		"smokescreen"
+		"smokescreen",
+		"poisongas",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "muk"
@@ -1894,7 +1921,9 @@
 		"minimize",
 		"acidspray",
 		"smog",
-		"poisongas"
+		"poisongas",
+		"gunkshot",
+		"doubleteam",
 	  ]
 	},
 	"shellder": {
@@ -1949,7 +1978,10 @@
 	  "move_ids": [
 		"hypnosis",
 		"confuseray",
-		"dreameater"
+		"dreameater",
+		"nightshade",
+		"lick",
+		"willowisp"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "haunter"
@@ -1965,10 +1997,13 @@
 	  ],
 	  "max_health": 24,
 	  "move_ids": [
-		"lick",
-		"confuseray",
 		"hypnosis",
-		"dreameater"
+		"confuseray",
+		"dreameater",
+		"nightshade",
+		"lick",
+		"willowisp",
+		"darkpulse"
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "gengar"
@@ -1984,9 +2019,13 @@
 	  ],
 	  "max_health": 32,
 	  "move_ids": [
-		"confuseray",
 		"hypnosis",
-		"dreameater"
+		"confuseray",
+		"dreameater",
+		"nightshade",
+		"lick",
+		"willowisp",
+		"darkpulse"
 	  ]
 	},
 	"onix": {
@@ -2003,7 +2042,10 @@
 		"tackle",
 		"rocktomb",
 		"rockthrow",
-		"earthquake"
+		"earthquake",
+		"irontail",
+		"harden",
+		"bulldoze",
 	  ]
 	},
 	"drowzee": {
@@ -2052,7 +2094,9 @@
 	  "max_health": 14,
 	  "move_ids": [
 		"bubble",
-		"leer"
+		"leer",
+		"metalclaw",
+		"bubblebeam"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "kingler"
@@ -2068,7 +2112,12 @@
 	  "max_health": 32,
 	  "move_ids": [
 		"bubblebeam",
-		"bodyslam"
+		"bodyslam",
+		"swordsdance",
+		"surf",
+		"protect",
+		"slam",
+		"waterpulse"
 	  ]
 	},
 	"voltorb": {
@@ -2083,7 +2132,6 @@
 	  "move_ids": [
 		"tackle",
 		"screech",
-		"selfdestruct",
 		"thundershock"
 	  ],
 	  "evolution_level": 3,
@@ -2100,7 +2148,8 @@
 	  "max_health": 32,
 	  "move_ids": [
 		"screech",
-		"thunderbolt"
+		"thunderbolt",
+		"explosion",
 	  ]
 	},
 	"exeggcute": {
@@ -2151,7 +2200,9 @@
 		"growl",
 		"headbutt",
 		"leer",
-		"laserfocus"
+		"laserfocus",
+		"boneclub",
+		"rage",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "marowak"
@@ -2167,7 +2218,12 @@
 	  "max_health": 32,
 	  "move_ids": [
 		"headbutt",
-		"laserfocus"
+		"laserfocus",
+		"bonemerang",
+		"thrash",
+		"bonerush",
+		"focusenergy",
+		"slam",
 	  ]
 	},
 	"hitmonlee": {
@@ -2215,7 +2271,9 @@
 	  "move_ids": [
 		"lick",
 		"stomp",
-		"bodyslam"
+		"bodyslam",
+		"slam",
+		"bellydrum",
 	  ]
 	},
 	"koffing": {
@@ -2230,7 +2288,9 @@
 	  "move_ids": [
 		"tackle",
 		"smog",
-		"sludge"
+		"sludge",
+		"poisongas",
+		"smokescreen",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "weezing"
@@ -2247,7 +2307,11 @@
 	  "move_ids": [
 		"smog",
 		"sludge",
-		"explosion"
+		"explosion",
+		"sludgebomb",
+		"haze",
+		"poisongas",
+		"smog"
 	  ]
 	},
 	"rhyhorn": {
@@ -2263,7 +2327,11 @@
 	  "move_ids": [
 		"tailwhip",
 		"furyswipes",
-		"rockthrow"
+		"rockthrow",
+		"bulldoze",
+		"hornattack",
+		"takedown",
+		"megahorn"
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "rhydon"
@@ -2279,9 +2347,14 @@
 	  ],
 	  "max_health": 40,
 	  "move_ids": [
-		"bodyslam",
+		"tailwhip",
+		"furyswipes",
+		"rockthrow",
+		"bulldoze",
+		"hornattack",
+		"takedown",
+		"megahorn",
 		"earthquake",
-		"furyswipes"
 	  ]
 	},
 	"chansey": {
@@ -2401,7 +2474,8 @@
 		"confuseray",
 		"hornattack",
 		"surf",
-		"bubblebeam"
+		"bubblebeam",
+		"iceshard"
 	  ]
 	},
 	"staryu": {
@@ -2416,7 +2490,9 @@
 	  "move_ids": [
 		"tackle",
 		"watergun",
-		"harden"
+		"harden",
+		"waterpulse",
+		"calmmind",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "starmie"
@@ -2435,7 +2511,11 @@
 		"bodyslam",
 		"bubblebeam",
 		"psychic",
-		"confuseray"
+		"confuseray",
+		"icebeam",
+		"iceshard",
+		"surf",
+		"liquidation"
 	  ]
 	},
 	"mrmime": {
@@ -2494,7 +2574,9 @@
 		"lick",
 		"sing",
 		"dreameater",
-		"bodyslam"
+		"bodyslam",
+		"psychic",
+		"helpinghand",
 	  ]
 	},
 	"electabuzz": {
@@ -2510,7 +2592,10 @@
 		"cometpunch",
 		"leer",
 		"thunderbolt",
-		"barrier"
+		"barrier",
+		"zapcannon",
+		"thunder",
+		"thunderwave",
 	  ]
 	},
 	"magmar": {
@@ -2527,7 +2612,10 @@
 		"ember",
 		"confuseray",
 		"smog",
-		"firepunch"
+		"firepunch",
+		"poisongas",
+		"smokescreen",
+		"firespin",
 	  ]
 	},
 	"pinsir": {
@@ -2545,7 +2633,9 @@
 		"bugbite",
 		"leechlife",
 		"swordsdance",
-		"hijumpkick"
+		"hijumpkick",
+		"bugbuzz",
+		"megahorn"
 	  ]
 	},
 	"tauros": {
@@ -2559,10 +2649,13 @@
 	  "max_health": 24,
 	  "move_ids": [
 		"tackle",
-		"stomp",
+		"takedown",
 		"tailwhip",
 		"leer",
-		"bodyslam"
+		"bodyslam",
+		"slam",
+		"hornattack",
+		"playrough"
 	  ]
 	},
 	"magikarp": {
@@ -2595,7 +2688,16 @@
 		"hydropump",
 		"hyperbeam",
 		"surf",
-		"hurricane"
+		"hurricane",
+		"surf",
+		"aerialace",
+		"firefang",
+		"tailwhip",
+		"screech",
+		"laserfocus",
+		"swordsdance",
+		"superfang",
+		"hyperfang",
 	  ]
 	},
 	"lapras": {
@@ -2822,7 +2924,10 @@
 		"laserfocus",
 		"furyswipes",
 		"rockthrow",
-		"harden"
+		"harden",
+		"leechlife",
+		"rage",
+		"thrash"
 	  ]
 	},
 	"aerodactyl": {
@@ -2842,7 +2947,13 @@
 		"hyperbeam",
 		"gust",
 		"hurricane",
-		"extremespeed"
+		"extremespeed",
+		"whirlwind",
+		"crunch",
+		"screeech",
+		"leer",
+		"roar",
+		"furyswipes"
 	  ]
 	},
 	"snorlax": {
@@ -2860,6 +2971,7 @@
 		"bodyslam",
 		"hyperbeam",
 		"bellydrum",
+		"helpinghand"
 	  ]
 	},
 	"articuno": {
@@ -2882,7 +2994,10 @@
 		"iceshard",
 		"gust",
 		"whirlwind",
-		"aurorabeam"
+		"aurorabeam",
+		"hurricane",
+		"icebeam",
+		"wingattack"
 	  ]
 	},
 	"zapdos": {
@@ -2906,6 +3021,7 @@
 		"aerialace",
 		"extremespeed",
 		"laserfocus",
+		"wingattack"
 	  ]
 	},
 	"moltres": {
@@ -2927,7 +3043,9 @@
 		"drillpeck",
 		"aerialace",
 		"hurricane",
-		"explosion"
+		"explosion",
+		"whirlwind",
+		"wingattack",
 	  ]
 	},
 	"dratini": {
@@ -3032,6 +3150,7 @@
 		"psybeam",
 		"minimize",
 		"rest",
+		"metronome"
 	  ]
 	}
   }

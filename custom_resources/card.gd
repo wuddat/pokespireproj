@@ -58,7 +58,8 @@ var base_power: int
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
 @export var splash_damage: int = 0
-
+@export var shift_enabled: int = 0
+@export var self_shift: int = 0
 
 
 var random_targets = []
@@ -146,6 +147,8 @@ func setup_from_data(data: Dictionary) -> void:
 	requires_status = data.get("requires_status", "")
 	bonus_damage_if_target_has_status = data.get("bonus_damage_if_target_has_status", "")
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
+	shift_enabled = data.get("shift_enabled", 0)
+	self_shift = data.get("self_shift", 0)
 
 	
 

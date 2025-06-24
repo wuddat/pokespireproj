@@ -16,6 +16,7 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var particles: GPUParticles2D = %Particles
 @onready var swirl: TextureRect = %swirl
 @export var parent: Enemy
+@onready var aoe_icon: Sprite2D = %Icon3
 
 @export var status_handler: StatusHandler
 
@@ -57,6 +58,7 @@ func _ready() -> void:
 	
 	animation_player.play(hover)
 	animation_player.seek(random_start, true)
+	aoe_icon.hide()
 	
 	Utils.print_node(parent)
 
@@ -65,7 +67,7 @@ func update_intent(intent: Intent) -> void:
 	if not intent:
 		hide()
 		return
-	
+	aoe_icon.hide()
 	panel.visible = true
 	icon.texture = intent.icon
 	icon.visible = icon.texture != null
@@ -90,7 +92,8 @@ func update_intent(intent: Intent) -> void:
 		animation_player.seek(random_start, true)
 	else:
 		icon_2.hide()
-	
+	if intent.targets_all:
+		aoe_icon.show()
 	var type := intent.damage_type.to_lower()
 	if TYPE_ICON_INDEX.has(type):
 		var index = TYPE_ICON_INDEX[type]
@@ -126,10 +129,15 @@ func update_intent(intent: Intent) -> void:
 		arrow.visible = false
 		return
 		
-	if parent.is_confused:
+	elif parent.is_confused:
 		print("intentUI set to CONFUSED")
 		target.visible = true
 		target.scale = Vector2(0.6,0.6)
 		panel.visible = true
 		type_icon.visible = true
 		arrow.visible = true
+	
+	elif intent.targets_all:
+		aoe_icon.show()
+		aoe_icon.visible = true
+		

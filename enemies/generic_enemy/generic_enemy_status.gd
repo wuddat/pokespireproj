@@ -22,7 +22,7 @@ func setup_from_data(data: Dictionary) -> void:
 		status_effects.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["status_effects"])))
 	if data.has("self_status"):
 		self_status.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["self_status"])))
-		
+	intent.targets_all = data.get("target") == "all_enemies"
 	damage = 0
 	splash_damage = data.get("splash_damage", 0)
 	self_damage = data.get("self_damage", 0)
@@ -98,7 +98,6 @@ func update_intent_text() -> void:
 	if not is_instance_valid(target):
 		return
 		if intent.icon:
-			intent.icon_2 = intent.icon
 			intent.icon_2.hide()
 	intent.current_text = intent.base_text #default
 	intent.particles_on = status_effects.size() > 0
@@ -109,6 +108,8 @@ func update_intent_text() -> void:
 		return
 	
 	intent.target = target_pkmn.stats.icon
+	if intent.targets_all:
+		intent.aoe_icon.show()
 	
 	var modified_dmg: int = target_pkmn.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
 	if modified_dmg > 0:

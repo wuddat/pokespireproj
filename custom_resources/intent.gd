@@ -7,4 +7,5 @@ extends Resource
 @export var target: Texture
 @export var damage_type: String = "normal"
 @export var particles_on: bool = false
+@export var targets_all: bool = false
 var current_text: String

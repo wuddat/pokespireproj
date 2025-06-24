@@ -103,17 +103,12 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			damage_effect.sound = sound
 
 		damage_effect.execute([tar])
-		#if multiplay == 1:
-			#battle_text.insert(0,"%s dealt [color=red]%s[/color] damage to %s!"
-				#% [
-					#battle_unit_owner.stats.species_id.capitalize(),
-					#damage_effect.amount,
-					#tar.stats.species_id.capitalize()]
-				#)
-			#
-			#if effectiveness:
-				#battle_text.append(effective_text)
-			#total_damage_dealt += total
+		
+		if shift_enabled > 0 and targets.size() > 0:
+			var shift_effect := ShiftEffect.new()
+			shift_effect.tree = battle_unit_owner.get_tree()
+			shift_effect.amount = shift_enabled
+			shift_effect.execute([tar])
 
 	# 💦 Splash Damage (unaffected by effectiveness or statuses)
 	for splash_target in splash_targets:
@@ -199,4 +194,9 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			self_effect.source = battle_unit_owner
 			self_effect.status = self_stat.duplicate()
 			self_effect.execute([battle_unit_owner])
+	
+	if self_shift > 0:
+		var shift_effect := ShiftEffect.new()
+		shift_effect.tree = battle_unit_owner.get_tree()
+		shift_effect.execute([battle_unit_owner])
 	emit_dialogue(battle_text)
