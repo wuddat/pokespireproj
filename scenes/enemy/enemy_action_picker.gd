@@ -9,6 +9,8 @@ extends Node
 var target_pool: Array[PokemonBattleUnit] = []
 var confused_target_pool := []
 var current_target_pos: String
+var player_party_pool: Array[PokemonBattleUnit] = []
+var enemy_ally_pool: Array[Node] = []
 
 
 func _ready() -> void:
@@ -30,27 +32,25 @@ func refresh_target_pool() -> void:
 	
 	target_pool.clear()
 	confused_target_pool.clear()
+	player_party_pool.clear()
+	enemy_ally_pool.clear()
 	
 	if party_handler:
-		target_pool = party_handler.get_active_pokemon_nodes()
-		target_pool.sort_custom(func(a, b): return a.spawn_position < b.spawn_position)
-		target_pool = target_pool.filter(
+		player_party_pool = party_handler.get_active_pokemon_nodes()
+		player_party_pool.sort_custom(func(a, b): return a.spawn_position < b.spawn_position)
+		player_party_pool = player_party_pool.filter(
 			func(unit): return is_instance_valid(unit) and unit.stats and unit.stats.health > 0
 		)
-		confused_target_pool += target_pool.map(func(n): return n as Node)
+		target_pool = player_party_pool.duplicate()
+		confused_target_pool += player_party_pool
 		
 	if enemy_handler:
-		var enemies = enemy_handler.get_children().filter(
+		enemy_ally_pool = enemy_handler.get_children().filter(
 			func(n): return n is Enemy and n.stats and n.stats.health > 0
 		)
-		confused_target_pool += enemies.map(func(n): return n as Node)
-		
-	confused_target_pool = confused_target_pool.filter(
-		func(n): return is_instance_valid(n)
-	)
+		confused_target_pool += enemy_ally_pool
 	
-	#print("🤪 Refreshed confused_target_pool:", confused_target_pool.map(func(n): return n.name))
-	
+	confused_target_pool = confused_target_pool.filter(func(n): return is_instance_valid(n))
 
 
 
@@ -143,6 +143,7 @@ func get_chance_based_action() -> EnemyAction:
 
 
 func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void:
+	refresh_target_pool()
 	enemy = enemy_ref
 
 	if get_child_count() > 0:
@@ -174,11 +175,9 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 		add_child(action)
 		
 		action.enemy = enemy
+		
 		var target_type = move_data.get("target", "enemy")
-		if target_type == "all_enemies":
-			action.targets = target_pool.duplicate()
-		else:
-			action.target = target
+		resolve_action_targets(action, target_type)
 
 		if action.has_method("setup_from_data"):
 			action.setup_from_data(move_data)
@@ -186,6 +185,22 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 			push_warning("Action is missing setup_from_data")
 
 	setup_chances()
+
+
+func resolve_action_targets(action: EnemyAction, target_type: String) -> void:
+	match target_type:
+		"single_enemy", "enemy":
+			action.target = target
+		"all_enemies":
+			action.targets = player_party_pool.duplicate()
+		"all_allies":
+			action.targets = enemy_ally_pool.duplicate()
+		"all":
+			action.targets = player_party_pool.duplicate() + enemy_ally_pool.duplicate()
+		_:
+			action.target = target
+
+
 
 func setup_chances() -> void:
 	for child in get_children():

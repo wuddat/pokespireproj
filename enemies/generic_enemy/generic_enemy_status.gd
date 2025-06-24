@@ -22,7 +22,7 @@ func setup_from_data(data: Dictionary) -> void:
 		status_effects.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["status_effects"])))
 	if data.has("self_status"):
 		self_status.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["self_status"])))
-	intent.targets_all = data.get("target") == "all_enemies"
+	intent.targets_all = data.get("target") in ["all_enemies", "all"]
 	damage = 0
 	splash_damage = data.get("splash_damage", 0)
 	self_damage = data.get("self_damage", 0)

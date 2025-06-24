@@ -34,4 +34,6 @@ requires_status = ""
 bonus_damage_if_target_has_status = ""
 bonus_damage_multiplier = 1.0
 splash_damage = 0
+shift_enabled = 0
+self_shift = 0
 metadata/_custom_type_script = "uid://v0y8cuyxdriv"
