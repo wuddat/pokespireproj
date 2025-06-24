@@ -8,6 +8,8 @@ const pokecenterscene := preload("res://scenes/pokecenter/pokecenter.tscn")
 const shopscene := preload("res://scenes/shop/shop.tscn")
 const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 const eventscene := preload("res://scenes/event/event.tscn")
+const trainerscene := preload("res://scenes/animations/trainer_intro_scene.tscn")
+const wildscene := preload("res://scenes/animations/wild_intro.tscn")
 
 @export var run_startup: RunStartup
 
@@ -129,9 +131,7 @@ func fade_out(duration := 0.5) -> void:
 	fade_tween.tween_property(fade, "modulate:a", 1.0, duration)
 	await fade_tween.finished
 
-
-func _on_battle_room_entered(room: Room) -> void:
-	await fade_out()
+func _load_battle(room :Room) ->void:
 	caught_pokemon.clear() 
 	leveled_in_battle_pkmn.clear()
 	var battle_scene: Battle = _change_view(battlescene) as Battle
@@ -140,9 +140,25 @@ func _on_battle_room_entered(room: Room) -> void:
 	battle_scene.battle_stats = room.battle_stats
 	battle_scene.start_battle()
 	party_selector.in_battle = true
+
+func _on_battle_room_entered(room: Room) -> void:
+	var animation := wildscene.instantiate()
+	add_child(animation)
+	#animation.global_position = get_viewport().get_visible_rect().size / 2
+	await animation.play_intro()
+	_load_battle(room)
 	await fade_in()
 
-
+func _on_trainer_room_entered(room: Room) -> void:
+	var animation := trainerscene.instantiate()
+	add_child(animation)
+	#animation.global_position = get_viewport().get_visible_rect().size / 2
+	animation.sprite_2d.texture = room.battle_stats.trainer_sprite
+	animation.trainer_name.text = room.battle_stats.trainer_type
+	await animation.play_intro()
+	_load_battle(room)
+	await fade_in()
+	
 func _on_shop_entered() -> void:
 	await fade_out()
 	var shop  := _change_view(shopscene) as Shop
@@ -194,6 +210,8 @@ func _on_map_exited(room: Room) -> void:
 			_on_battle_room_entered(room)
 		Room.Type.EVENT:
 			_on_event_entered()
+		Room.Type.TRAINER:
+			_on_trainer_room_entered(room)
 
 
 func _on_pokemon_captured(stats: PokemonStats) -> void:

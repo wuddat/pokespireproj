@@ -2211,7 +2211,8 @@
 	  "status_effects": [],
 	  "description": "[center]This attack does nothing but flop around - may SHIFT.[/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	  "rarity": "common"
+	  "rarity": "common",
+	  "shift_enabled": 1
 	},
 	"spore": {
 	  "name": "Spore",

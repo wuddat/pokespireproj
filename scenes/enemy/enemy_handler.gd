@@ -8,6 +8,8 @@ extends Node2D
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var acting_enemies: Array[Enemy] = []
 var caught_pokemon: Array[PokemonStats] = []
+var bench_pokemon: Array[String] = []
+var battle_stats: BattleStats = null
 
 var enemy_text_delay: float = 0.4
 
@@ -19,39 +21,38 @@ func _ready() -> void:
 	Events.pokemon_captured.connect(_on_pokemon_captured)
 	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 
-func setup_enemies(battle_stats: BattleStats) -> void:
-	if not battle_stats:
+func setup_enemies(bat_stats: BattleStats) -> void:
+	if not bat_stats:
 		return
+	
+	battle_stats = bat_stats.duplicate()
 	
 	for enemy: Enemy in get_children():
 		enemy.queue_free()
 	
-	var all_new_enemies := battle_stats.enemies.instantiate()
-	var species_ids = Pokedex.get_species_for_tier(battle_stats.battle_tier)
+	var species_ids:Array[String] = []
+	if battle_stats.is_trainer_battle:
+		battle_stats.assign_enemy_pkmn_party()
+		species_ids = battle_stats.enemy_pkmn_party.duplicate()
+	else: 
+		species_ids = Pokedex.get_species_for_tier(battle_stats.battle_tier)
 	
-	for new_enemy: Node2D in all_new_enemies.get_children():
-		var new_enemy_child := new_enemy.duplicate() as Enemy
-		var random_species := species_ids.pick_random() as String
-		
-		var new_stats := preload("res://enemies/generic_enemy/generic_enemy.tres").duplicate()
-		new_stats.species_id = random_species
-		new_enemy_child.stats = new_stats
-		
-		add_child(new_enemy_child)
-		
-		var ui := stats_ui_scn.instantiate() as HealthBarUI
-
-		
-		right_panel.add_child(ui)
-		ui.icon.position = Vector2(60,7)
-		
-		ui.update_stats(new_enemy_child.stats)
-
-		if not new_enemy_child.stats.stats_changed.is_connected(ui.update_stats):
-			new_enemy_child.stats.stats_changed.connect(func(): ui.update_stats(new_enemy_child.stats))
-		
-		new_enemy_child.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(new_enemy_child))
-	all_new_enemies.queue_free()
+	var all_new_enemies := battle_stats.enemies.instantiate()
+	var max_spawn:= all_new_enemies.get_child_count()
+	var enemy_nodes := all_new_enemies.get_children()
+	
+	if battle_stats.is_trainer_battle:
+		var species_to_spawn := species_ids.slice(0, max_spawn)
+		bench_pokemon = species_ids.slice(max_spawn)
+	
+		for i in range(species_to_spawn.size()):
+			_spawn_enemy(species_to_spawn[i], enemy_nodes[i])
+			
+	else:
+		for new_enemy: Node2D in enemy_nodes:
+			var species_id = species_ids.pick_random()
+			_spawn_enemy(species_id, new_enemy)
+		all_new_enemies.queue_free()
 
 
 func reset_enemy_actions() -> void:
@@ -110,6 +111,29 @@ func shift_enemies() -> void:
 		var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(enemy, "global_position", new_position, 0.4)
 
+
+func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
+	var enemy: Enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
+	if enemy_node:
+		enemy.global_position = enemy_node.global_position
+	
+	var stats := preload("res://enemies/generic_enemy/generic_enemy.tres").duplicate()
+	stats.species_id = species_id
+	stats.load_from_pokedex(Pokedex.get_pokemon_data(species_id))
+	enemy.stats = stats
+	
+	add_child(enemy)
+
+	var ui := stats_ui_scn.instantiate() as HealthBarUI
+	right_panel.add_child(ui)
+	ui.icon.position = Vector2(60, 7)
+	ui.update_stats(stats)
+
+	if not enemy.stats.stats_changed.is_connected(ui.update_stats):
+		enemy.stats.stats_changed.connect(func(): ui.update_stats(enemy.stats))
+	enemy.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(enemy))
+
+
 func _start_next_enemy_turn() -> void:
 	if acting_enemies.is_empty():
 		Events.enemy_turn_ended.emit()
@@ -136,6 +160,12 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	if !enemy.is_caught:
 		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] FAINTED!" % enemy.stats.species_id.capitalize())
 	
+	if battle_stats.is_trainer_battle and bench_pokemon.size() > 0:
+		await get_tree().create_timer(0.5).timeout
+		var next_species = bench_pokemon.pop_front()
+		Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
+		_spawn_enemy(next_species, enemy)
+	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:
 		for battler in battling_pokemon:
@@ -144,7 +174,7 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)
-	
+	enemy.queue_free()
 	child_order_changed.emit()
 	
 	if is_enemy_turn:

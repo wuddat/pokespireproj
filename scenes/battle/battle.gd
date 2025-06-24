@@ -70,8 +70,8 @@ func start_battle() -> void:
 	
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
-
-	MusicPlayer.play(battle_music, true)
+	
+	#MusicPlayer.play(battle_music, true)
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()

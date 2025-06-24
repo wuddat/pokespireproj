@@ -9,7 +9,7 @@ extends Node
 var target_pool: Array[PokemonBattleUnit] = []
 var confused_target_pool := []
 var current_target_pos: String
-var player_party_pool: Array[PokemonBattleUnit] = []
+var player_party_pool: = []
 var enemy_ally_pool: Array[Node] = []
 
 
@@ -197,6 +197,8 @@ func resolve_action_targets(action: EnemyAction, target_type: String) -> void:
 			action.targets = enemy_ally_pool.duplicate()
 		"all":
 			action.targets = player_party_pool.duplicate() + enemy_ally_pool.duplicate()
+		"self":
+			action.targets = [enemy]
 		_:
 			action.target = target
 

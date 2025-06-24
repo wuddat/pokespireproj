@@ -14,7 +14,7 @@ enum Type {CONDITIONAL, CHANCE_BASED}
 
 var enemy: Enemy
 var target: Node2D
-var targets: Array[PokemonBattleUnit] = []
+var targets = []
 
 
 var confused_icon = preload("res://art/statuseffects/confused-effect.png")
@@ -55,7 +55,8 @@ func animate_to_targets(
 	self_heal: int,
 	self_status: Array[Status],
 	enemy: Node,
-	damage_type: String
+	damage_type: String,
+	shift_enabled: int
 ) -> void:
 	if index >= targets_to_hit.size():
 		_execute_self_effects(enemy, total_damage, self_damage, self_heal, self_status)
@@ -64,11 +65,17 @@ func animate_to_targets(
 
 	var target = targets_to_hit[index]
 	if not is_instance_valid(target):
-		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
+		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
 		return
 
 	var start_pos
 	var end_pos
+	
+	if shift_enabled > 0:
+		var shift_effect := ShiftEffect.new()
+		shift_effect.tree = enemy.get_tree()
+		shift_effect.amount = shift_enabled
+		await shift_effect.execute([target])
 
 	if total_damage <= 0:
 		start_pos = enemy.global_position
@@ -82,11 +89,11 @@ func animate_to_targets(
 
 	if target.has_method("dodge_check") and target.dodge_check():
 		_handle_dodge(tween, enemy, start_pos, func():
-			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
+			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
 		)
 	else:
 		_handle_hit(tween, enemy, target, targets_to_hit, total_damage, splash_damage, status_effects, damage_type, start_pos, func():
-			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type)
+			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled), shift_enabled
 		)
 
 
@@ -120,13 +127,14 @@ func _handle_hit(
 	tween: Tween,
 	enemy: Node,
 	target: Node,
-	all_targets: Array[Node],
+	targets_to_hit: Array[Node],
 	total_damage: int,
 	splash_damage: int,
 	status_effects: Array[Status],
 	damage_type: String,
 	start_pos: Vector2,
-	on_finish: Callable
+	on_finish: Callable,
+	shift_enabled: int,
 ) -> void:
 	var dmg := DamageEffect.new()
 	var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
@@ -134,11 +142,19 @@ func _handle_hit(
 	dmg.sound = sound
 
 	tween.tween_callback(func():
-		dmg.execute([target])
-		dmg.sound = sound
-
+		if dmg.amount > 0:
+			dmg.execute([target])
+			dmg.sound = sound
+		
+		if shift_enabled > 0 and targets_to_hit.size() > 0:
+			pass
+			#var shift_effect := ShiftEffect.new()
+			#shift_effect.tree = enemy.get_tree()
+			#shift_effect.amount = shift_enabled
+			#shift_effect.execute([target])
+		
 		# Splash damage to others
-		for splash_target in all_targets:
+		for splash_target in targets_to_hit:
 			if splash_target != target:
 				var splash := DamageEffect.new()
 				splash.amount = splash_damage

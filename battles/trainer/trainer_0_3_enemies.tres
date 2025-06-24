@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BattleStats" load_steps=3 format=3 uid="uid://q3e2ybvlyn3w"]
+
+[ext_resource type="PackedScene" uid="uid://tff5syx2geen" path="res://battles/tier_0_3_enemies.tscn" id="1_rdteb"]
+[ext_resource type="Script" uid="uid://e8dxadmnd240" path="res://custom_resources/battle_stats.gd" id="2_8eqo2"]
+
+[resource]
+script = ExtResource("2_8eqo2")
+encounter_type = "Trainer"
+trainer_type = "Youngster"
+battle_tier = 1
+weight = 3.0
+gold_reward_min = 138
+gold_reward_max = 168
+enemies = ExtResource("1_rdteb")
+pokemon_type = "Normal"
+enemy_pkmn_party = Array[String]([])
+metadata/_custom_type_script = "uid://e8dxadmnd240"

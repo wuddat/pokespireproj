@@ -11,6 +11,7 @@ extends EnemyAction
 @export var bonus_damage_multiplier: float = 1.0
 @export var damage_type: String
 @export var requires_status: String = ""
+@export var shift_enabled: int = 0
 
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
@@ -31,6 +32,7 @@ func setup_from_data(data: Dictionary) -> void:
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
+	shift_enabled = data.get("shift_enabled", 0)
 
 	var damage_display = "%s"
 
@@ -125,7 +127,8 @@ func perform_action() -> void:
 	self_heal,
 	self_status,
 	enemy,
-	damage_type
+	damage_type,
+	shift_enabled
 )
 
 func update_intent_text() -> void:

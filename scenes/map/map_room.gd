@@ -12,6 +12,8 @@ const ICONS:={
 	Room.Type.SHOP: [preload("res://art/shop.png"), Vector2(1.4, 1.4)],
 	Room.Type.BOSS: [preload("res://art/sprites/items/ball/master.png"), Vector2(1.25, 1.25)],
 	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
+	Room.Type.TRAINER: [preload("res://art/sprites/items/ball/premier.png"), Vector2.ONE],
+	Room.Type.LEGENDARY: [preload("res://art/sprites/items/ball/luxury.png"), Vector2.ONE],
 }
 
 @export var music = preload("res://art/sounds/sfx/ui_window_open.wav")

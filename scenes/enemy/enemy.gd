@@ -305,10 +305,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 				print("Emitting captured signal with:", self.stats)
 				mark_as_caught()
 				Events.enemy_fainted.emit(self)
-				queue_free()
 			elif stats.health <= 0:
 				Events.enemy_fainted.emit(self)
-				queue_free()
 	)
 
 

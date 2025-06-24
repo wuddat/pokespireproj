@@ -13,6 +13,7 @@ const STATUS_ICON := preload("res://art/status_effects/status_1.png")
 @export var bonus_damage_if_target_has_status: String = ""
 @export var bonus_damage_multiplier: float = 1.0
 @export var damage_type: String
+@export var shift_enabled: int = 0
 
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
@@ -33,6 +34,7 @@ func setup_from_data(data: Dictionary) -> void:
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
+	shift_enabled = data.get("shift_enabled", 0)
 	
 	var damage_display = "%s"
 
@@ -80,7 +82,6 @@ func perform_action() -> void:
 	if enemy and enemy.modifier_handler:
 		final_damage = 0
 	
-	
 	animate_to_targets(
 	targets_to_hit,
 	0,
@@ -91,7 +92,8 @@ func perform_action() -> void:
 	self_heal,
 	self_status,
 	enemy,
-	damage_type
+	damage_type,
+	shift_enabled
 )
 
 func update_intent_text() -> void:
