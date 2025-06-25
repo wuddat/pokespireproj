@@ -4,8 +4,10 @@ extends HBoxContainer
 @export var player: Player
 @export var char_stats: CharacterStats
 @export var party_handler: PartyHandler
-
+const CARD_SFX_1 = preload("res://art/sounds/sfx/card_sfx1.mp3")
 @onready var card_ui := preload("res://scenes/card_ui/card_ui.tscn")
+@onready var draw_pile_button: CardPileOpener = %DrawPileButton
+@onready var discard_pile_button: CardPileOpener = %DiscardPileButton
 
 
 func _ready():
@@ -13,11 +15,19 @@ func _ready():
 
 func add_card(card: Card) -> void:
 	var new_card_ui := card_ui.instantiate()
+	
 	add_child(new_card_ui)
+	await get_tree().process_frame
+	var spawn_position = new_card_ui.global_position
+	new_card_ui.global_position = draw_pile_button.global_position + Vector2(0, -50)
+	SFXPlayer.pitch_play(CARD_SFX_1)
+	new_card_ui.animate_to_position(spawn_position, .2)
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
 	new_card_ui.card = card
 	new_card_ui.parent = self
 	new_card_ui.char_stats = char_stats
+	
+	
 	
 	if card.pkmn_owner_uid == null:
 		return
@@ -29,6 +39,9 @@ func add_card(card: Card) -> void:
 
 
 func discard_card(card: CardUI) -> void:
+	SFXPlayer.pitch_play(CARD_SFX_1, 1.3, 1.35)
+	card.animate_to_position(discard_pile_button.global_position, .2)
+	await get_tree().create_timer(.3).timeout
 	card.queue_free()
 
 

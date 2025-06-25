@@ -152,6 +152,7 @@ grow_vertical = 2
 theme_override_constants/separation = -3
 
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
+unique_name_in_owner = true
 script = ExtResource("7_icoan")
 
 [node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player", "party_handler")]

@@ -2,7 +2,7 @@
 class_name PlayerHandler
 extends Node
 
-const HAND_DRAW_INTERVAL := 0.25
+const HAND_DRAW_INTERVAL := 0.3
 const HAND_DISCARD_INTERVAL := 0.2
 
 @export var hand: Hand
@@ -52,9 +52,7 @@ func start_turn() -> void:
 		# fallback, maybe just proceed
 		return
 	
-	#TODO debug for determining acting_party_pokemon
 	for pkmn in pkmn_with_turns:
-		#print("STARTING TURN FOR:", pkmn.stats.species_id, "| BLOCK:", pkmn.stats.block)
 		pkmn.start_of_turn()
 
 

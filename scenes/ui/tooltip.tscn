@@ -3,21 +3,7 @@
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_mtwet"]
 [ext_resource type="Texture2D" uid="uid://bi6pfjs32f820" path="res://art/tile_0101.png" id="2_b5j4s"]
 [ext_resource type="Script" uid="uid://cot5y2etanmqp" path="res://scenes/ui/tooltip.gd" id="2_kv0sd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv0sd"]
-bg_color = Color(0.921569, 0.921569, 0.921569, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.501524, 0.783101, 0.997451, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.290196)
-shadow_size = 5
-shadow_offset = Vector2(3, 6)
+[ext_resource type="StyleBox" uid="uid://1ny4guuky8rt" path="res://scenes/ui/tooltip.stylebox" id="2_o3msy"]
 
 [node name="Tooltip" type="PanelContainer"]
 anchors_preset = 5
@@ -31,7 +17,7 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_mtwet")
-theme_override_styles/panel = SubResource("StyleBoxFlat_kv0sd")
+theme_override_styles/panel = ExtResource("2_o3msy")
 script = ExtResource("2_kv0sd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -52,7 +38,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("2_b5j4s")
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="TooltipTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -61,8 +47,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/default_color = Color(0.212841, 0.439923, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 3
 bbcode_enabled = true
 text = "Fire Blast"
@@ -83,10 +68,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_mtwet")
-theme_override_colors/default_color = Color(0.212841, 0.439923, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.76662, 0.76662, 0.76662, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 3
 bbcode_enabled = true
 text = "This is where the ability text goes"
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1

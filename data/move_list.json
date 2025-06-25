@@ -1711,7 +1711,7 @@
 	  "name": "Pokeball",
 	  "id": "pokeball",
 	  "category": "status",
-	  "subtype": "single_target",
+	  "subtype": "item",
 	  "type": "grass",
 	  "target": "enemy",
 	  "power": 1,

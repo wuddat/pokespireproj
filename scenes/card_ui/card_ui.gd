@@ -6,6 +6,7 @@ signal reparent_requested(which_card_ui: CardUI)
 const BASE_CARDSTYLE := preload("res://scenes/card_ui/card_base_style.tres")
 const DRAG_CARDSTYLE := preload("res://scenes/card_ui/card_dragging_style.tres")
 const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
+#const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
@@ -107,7 +108,10 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func _on_mouse_entered() -> void:
+	#SFXPlayer.pitch_play(CARD_FLICK_1)
 	card_state_machine.on_mouse_entered()
+	
+	
 	
 
 

@@ -33,6 +33,7 @@ func pitch_play(audio: AudioStream, min_pitch := 0.95, max_pitch := 1.05, single
 			player.pitch_scale = randf_range(min_pitch, max_pitch)
 			player.play()
 			break
+		#print("we have audio playing!")
 
 
 func stop() -> void:

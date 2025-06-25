@@ -16,7 +16,6 @@ signal evolution_queue_completed
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var player: Player = $Player
 @onready var party_handler: PartyHandler = $PartyHandler
-#@onready var pokemon_battle_unit: Node2D = $PokemonBattleUnit
 @onready var left_panel: VBoxContainer = $StatUI/LeftPanel
 @onready var pkmn_fainted_ui: PkmnFaintedUI = $FaintUI/PkmnFainted
 
@@ -24,7 +23,6 @@ var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var stat_ui_by_uid: Dictionary = {}
 
 var evolution_in_progress := false
-
 var evolution_queue: Array[PokemonBattleUnit] = []
 var is_processing_evolution := false
 

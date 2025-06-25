@@ -5,6 +5,7 @@ extends Resource
 enum Type {ATTACK, SKILL, POWER, SHIFT, STATUS}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, SINGLE_ALLY, ALL_ENEMIES, ALL_ALLIES, ALL, RANDOM_ENEMY, SPLASH}
+enum PkmnType {NORMAL, GRASS, FIRE, WATER, FIGHTING, ELECTRIC, FLYING, BUG, POISON, ICE, ROCK, GROUND, STEEL, PSYCHIC, GHOST, DARK, FAIRY, DRAGON}
 
 const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
@@ -13,11 +14,32 @@ const RARITY_COLORS := {
 }
 
 const TYPE_COLORS := {
-	Card.Type.ATTACK: Color.RED,
+	Card.Type.ATTACK: Color.WHITE_SMOKE,
 	Card.Type.SKILL: Color.DARK_BLUE,
 	Card.Type.POWER: Color.PURPLE,
 	Card.Type.SHIFT: Color.GREEN,
 	Card.Type.STATUS: Color.WEB_PURPLE
+}
+
+const PKMN_COLORS := {
+	Card.PkmnType.NORMAL: Color(.659,.655,.478),
+	Card.PkmnType.GRASS: Color(.478,.78,.298),
+	Card.PkmnType.FIRE: Color(.933,.506,.188),
+	Card.PkmnType.WATER: Color(.388,.565,.941),
+	Card.PkmnType.FIGHTING: Color(.761,.18,.157),
+	Card.PkmnType.ELECTRIC: Color(.969,.816,.173),
+	Card.PkmnType.FLYING: Color(.663,.561,.953),
+	Card.PkmnType.BUG: Color(.651,.725,.102),
+	Card.PkmnType.POISON: Color(.639,.243,.631),
+	Card.PkmnType.ICE: Color(.588,.851,.839),
+	Card.PkmnType.ROCK: Color(.714,.631,.212),
+	Card.PkmnType.GROUND: Color(.886,.749,.396),
+	Card.PkmnType.STEEL: Color(.718,.718,.808),
+	Card.PkmnType.PSYCHIC: Color(.976,.333,.529),
+	Card.PkmnType.GHOST: Color(.451,.341,.592),
+	Card.PkmnType.DARK: Color(.439,.341,.275),
+	Card.PkmnType.FAIRY: Color(.839,.522,.678),
+	Card.PkmnType.DRAGON: Color(.435,.208,.988),
 }
 
 
@@ -216,3 +238,28 @@ func emit_dialogue(texts: Array[String]) -> void:
 	for text in texts:
 		Events.battle_text_requested.emit(text)
 		print(text)
+
+
+func get_pkmn_color() -> Color:
+	var type_str := damage_type.to_upper()
+	match type_str:
+		"NORMAL": return PKMN_COLORS[PkmnType.NORMAL]
+		"GRASS": return PKMN_COLORS[PkmnType.GRASS]
+		"FIRE": return PKMN_COLORS[PkmnType.FIRE]
+		"WATER": return PKMN_COLORS[PkmnType.WATER]
+		"FIGHTING": return PKMN_COLORS[PkmnType.FIGHTING]
+		"ELECTRIC": return PKMN_COLORS[PkmnType.ELECTRIC]
+		"FLYING": return PKMN_COLORS[PkmnType.FLYING]
+		"BUG": return PKMN_COLORS[PkmnType.BUG]
+		"POISON": return PKMN_COLORS[PkmnType.POISON]
+		"ICE": return PKMN_COLORS[PkmnType.ICE]
+		"ROCK": return PKMN_COLORS[PkmnType.ROCK]
+		"GROUND": return PKMN_COLORS[PkmnType.GROUND]
+		"STEEL": return PKMN_COLORS[PkmnType.STEEL]
+		"PSYCHIC": return PKMN_COLORS[PkmnType.PSYCHIC]
+		"GHOST": return PKMN_COLORS[PkmnType.GHOST]
+		"DARK": return PKMN_COLORS[PkmnType.DARK]
+		"FAIRY": return PKMN_COLORS[PkmnType.FAIRY]
+		"DRAGON": return PKMN_COLORS[PkmnType.DRAGON]
+		_:
+			return Color.WHITE

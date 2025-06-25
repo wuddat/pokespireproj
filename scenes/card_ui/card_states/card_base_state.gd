@@ -1,5 +1,5 @@
 extends CardState
-
+const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 func enter() -> void:
 	if not card_ui.is_node_ready():
@@ -26,8 +26,8 @@ func on_gui_input(event: InputEvent) -> void:
 func on_mouse_entered() -> void:
 	if not card_ui.playable or card_ui.disabled:
 		return
-
 	card_ui.card_visuals.panel.set("theme_override_styles/panel", card_ui.HOVER_CARDSTYLE)
+	SFXPlayer.pitch_play(CARD_FLICK_1)
 	card_ui.request_tooltip()
 	
 	

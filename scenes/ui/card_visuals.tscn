@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://spupfh640ekm"]
+[gd_scene load_steps=13 format=3 uid="uid://spupfh640ekm"]
 
 [ext_resource type="Shader" uid="uid://bvqp58acwws5i" path="res://scenes/ui/card_visuals.gdshader" id="1_njcf5"]
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_x0ouv"]
@@ -17,6 +17,14 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njcf5"]
+bg_color = Color(0.954, 0.917, 0.85, 0.375)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.837227, 0.844037, 0.244706, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m3e03"]
 font_size = 8
@@ -47,13 +55,28 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_jxbv6")
 
+[node name="pkmn_border" type="Panel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 14.0
+offset_right = -12.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_njcf5")
+
 [node name="Effect" type="Label" parent="."]
 process_mode = 3
 layout_mode = 0
 offset_left = 18.0
-offset_top = 35.0
+offset_top = 41.0
 offset_right = 34.0
-offset_bottom = 47.0
+offset_bottom = 53.0
 text = "99"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -67,9 +90,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -21.4999
-offset_top = 1.0
+offset_top = 7.0
 offset_right = -1.49995
-offset_bottom = 21.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -112,16 +135,16 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -22.4999
-offset_top = -3.0
+offset_top = 5.0
 offset_right = 12.5001
-offset_bottom = 32.0
+offset_bottom = 40.0
 grow_horizontal = 2
 texture = ExtResource("7_m3e03")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Type" type="Sprite2D" parent="."]
-position = Vector2(37, 23)
+position = Vector2(37, 19)
 scale = Vector2(0.421053, 0.421053)
 texture = ExtResource("8_bp74k")
 region_enabled = true

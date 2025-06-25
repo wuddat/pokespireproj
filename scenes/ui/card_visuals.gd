@@ -5,12 +5,14 @@ extends Control
 @export var char_stats: CharacterStats
 
 @onready var panel: Panel = $Panel
+@onready var pkmn_border: Panel = $pkmn_border
 @onready var cost: Label = $Cost
 @onready var icon: TextureRect = $Icon
 @onready var rarity: TextureRect = $Rarity
 @onready var effect: Label = $Effect
 @onready var owner_icon: TextureRect = $OwnerIcon
 @onready var type: Sprite2D = $Type
+
 
 var card_set := false
 var stats_set := false
@@ -43,6 +45,7 @@ const ICONS_PER_ROW := 9
 
 func _ready():
 	await get_tree().process_frame
+	await get_tree().process_frame
 	_update_visuals()
 
 
@@ -72,7 +75,8 @@ func _update_visuals() -> void:
 	effect.modulate = Card.TYPE_COLORS[card.type]
 	icon.texture = card.icon
 	rarity.modulate = Card.RARITY_COLORS[card.rarity]
-	panel.modulate = Card.RARITY_COLORS[card.rarity]
+	panel.modulate = card.get_pkmn_color()
+	#pkmn_border.modulate = card.get_pkmn_color()
 
 	if card.pkmn_icon:
 		owner_icon.texture = card.pkmn_icon

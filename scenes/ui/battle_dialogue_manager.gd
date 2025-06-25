@@ -23,6 +23,8 @@ func _ready():
 	modulate.a = 0
 	hide()
 	Events.battle_text_requested.connect(_enqueue_message)
+	Events.player_hand_discarded.connect(_clear_queue)
+	Events.enemy_turn_ended.connect(_clear_queue)
 	set_process_input(true)
 
 
@@ -125,3 +127,6 @@ func _on_evolution_completed() -> void:
 func _on_battle_won() -> void:
 	message_queue.clear()
 	_fade_out()
+
+func _clear_queue() -> void:
+	message_queue = []

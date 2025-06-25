@@ -10,7 +10,7 @@ extends CanvasLayer
 @onready var discard_pile_button: CardPileOpener = %DiscardPileButton
 @onready var draw_pile_view: CardPileView = %DrawPileView
 @onready var discard_pile_view: CardPileView = %DiscardPileView
-
+const END_TURN = preload("res://art/sounds/sfx/end_turn.mp3")
 
 func _ready() -> void:
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)

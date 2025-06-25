@@ -8,6 +8,7 @@ const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_style.tres")
 const HOVER_OFFSET := -10.0
 const HOVER_Z_INDEX := 100
 const BASE_Z_INDEX := 0
+const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = set_card
 @onready var visuals: CardVisuals = $Visuals
@@ -21,6 +22,7 @@ func _on_visuals_gui_input(event: InputEvent) -> void:
 
 
 func _on_visuals_mouse_entered() -> void:
+		SFXPlayer.pitch_play(CARD_FLICK_1)
 		visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 		set_z_index(HOVER_Z_INDEX)
 		
