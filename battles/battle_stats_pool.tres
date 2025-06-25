@@ -11,5 +11,5 @@
 
 [resource]
 script = ExtResource("2_42yw1")
-pool = Array[ExtResource("1_c4ej1")]([ExtResource("2_mktey"), ExtResource("3_lrvlq"), ExtResource("4_s5wuo"), ExtResource("2_lrvlq"), ExtResource("6_s5wuo"), ExtResource("7_7ckf5")])
+pool = Array[ExtResource("1_c4ej1")]([ExtResource("2_lrvlq"), ExtResource("2_mktey"), ExtResource("3_lrvlq"), ExtResource("4_s5wuo"), ExtResource("6_s5wuo"), ExtResource("7_7ckf5")])
 metadata/_custom_type_script = "uid://cjqkt8sb8j1s5"

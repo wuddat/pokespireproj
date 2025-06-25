@@ -35,6 +35,8 @@ func setup_from_data(data: Dictionary) -> void:
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
 	shift_enabled = data.get("shift_enabled", 0)
+	if data.has("sound_path"):
+		sound = load(data["sound_path"]) as AudioStream
 	
 	var damage_display = "%s"
 

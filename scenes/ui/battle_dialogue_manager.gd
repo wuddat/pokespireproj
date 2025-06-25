@@ -10,8 +10,8 @@ const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 var message_queue: Array[String] = []
 var is_displaying := false
 var is_typing := false
-var waiting_for_input := true
-var auto_advance := false
+var waiting_for_input := false
+var auto_advance := true
 var fade_duration := 0.2
 var advance_timer: SceneTreeTimer = null
 

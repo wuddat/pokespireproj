@@ -66,6 +66,13 @@ func _ready():
 	pulse_material.set_shader_parameter("width", 0.0)  # start with no highlight
 	sprite_2d.material = pulse_material
 	spawn_coords = global_position
+	
+	#TESTING add status effect here:
+	#var status := preload("res://statuses/dodge.tres")
+	#status_handler.add_status(status.duplicate())
+	#status_handler.add_status(status.duplicate())
+	#status_handler.add_status(status.duplicate())
+	#status_handler.add_status(status.duplicate())
 
 
 func set_current_action(value: EnemyAction) -> void:

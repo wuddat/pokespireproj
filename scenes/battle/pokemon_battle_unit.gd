@@ -13,11 +13,15 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
+
 var health_bar_ui: HealthBarUI
 var _queued_health_bar_ui: HealthBarUI = null
 
-var skip_turn = false
-var has_slept = false
+var skip_turn: bool = false
+var has_slept: bool = false
+var is_asleep: bool = false
+var is_confused: bool = false
+var is_froze: bool = false
 
 func _ready() -> void:
 	status_handler.status_owner = self
