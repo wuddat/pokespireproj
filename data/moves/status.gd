@@ -72,6 +72,12 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 		damage_effect.amount = 0
 		damage_effect.sound = sound
 		damage_effect.execute(targets)
+		
+		if shift_enabled > 0 and targets.size() > 0:
+			var shift_effect := ShiftEffect.new()
+			shift_effect.tree = battle_unit_owner.get_tree()
+			shift_effect.amount = shift_enabled
+			shift_effect.execute(targets)
 			
 		#user recoil damage if any
 		if self_damage > 0:
