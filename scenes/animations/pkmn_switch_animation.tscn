@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq2kay05ml62i"]
+
+[ext_resource type="Script" uid="uid://bkulqv7yh2x8g" path="res://scenes/animations/pkmn_switch_animation.gd" id="1_n37go"]
+[ext_resource type="PackedScene" uid="uid://ombtsrp0an1b" path="res://scenes/enemy/catch_animator.tscn" id="1_u5y7g"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="3_abtjj"]
+
+[sub_resource type="Animation" id="Animation_n37go"]
+resource_name = "toss"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CatchAnimator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(182, -90), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_abtjj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pkmn_sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_etpcx"]
+resource_name = "release"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pkmn_sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.200711, 0.3),
+"transitions": PackedFloat32Array(0.5, 2.07053, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etpcx"]
+_data = {
+&"RESET": SubResource("Animation_abtjj"),
+&"release": SubResource("Animation_etpcx"),
+&"toss": SubResource("Animation_n37go")
+}
+
+[node name="PkmnSwitchAnimation" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_n37go")
+
+[node name="CatchAnimator" parent="." instance=ExtResource("1_u5y7g")]
+position = Vector2(182, -90)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_etpcx")
+}
+
+[node name="pkmn_sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_abtjj")

@@ -2,6 +2,8 @@
 class_name EnemyHandler
 extends Node2D
 
+const PKMN_SWITCH_ANIMATION = preload("res://scenes/animations/pkmn_switch_animation.tscn")
+
 @onready var right_panel: VBoxContainer = $"../StatUI/RightPanel"
 @onready var party_handler: PartyHandler = $"../PartyHandler"
 
@@ -46,7 +48,8 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 		bench_pokemon = species_ids.slice(max_spawn)
 	
 		for i in range(species_to_spawn.size()):
-			_spawn_enemy(species_to_spawn[i], enemy_nodes[i])
+			await _spawn_enemy(species_to_spawn[i], enemy_nodes[i])
+			
 			
 	else:
 		for new_enemy: Node2D in enemy_nodes:
@@ -123,7 +126,11 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	enemy.stats = stats
 	
 	add_child(enemy)
-
+	
+	if battle_stats.is_trainer_battle:
+		enemy.hide()
+		await enemy.animation_handler.trainer_spawn_animation(enemy)
+		enemy.show()
 	var ui := stats_ui_scn.instantiate() as HealthBarUI
 	right_panel.add_child(ui)
 	ui.icon.position = Vector2(60, 7)

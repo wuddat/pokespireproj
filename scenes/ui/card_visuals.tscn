@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://spupfh640ekm"]
+[gd_scene load_steps=12 format=3 uid="uid://spupfh640ekm"]
 
+[ext_resource type="Shader" uid="uid://bvqp58acwws5i" path="res://scenes/ui/card_visuals.gdshader" id="1_njcf5"]
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_x0ouv"]
 [ext_resource type="Script" uid="uid://bu5qnb50thvsx" path="res://scenes/ui/card_visuals.gd" id="2_imfec"]
 [ext_resource type="StyleBox" uid="uid://cpv8itul2r88u" path="res://scenes/card_ui/card_base_style.tres" id="2_jxbv6"]
@@ -9,12 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="7_m3e03"]
 [ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="8_bp74k"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8ve4"]
+shader = ExtResource("1_njcf5")
+shader_parameter/fov = 99.54
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_m3e03"]
 font_size = 8
 font_color = Color(0.212841, 0.439923, 1, 1)
 
 [node name="CardVisuals" type="Control"]
 process_mode = 3
+material = SubResource("ShaderMaterial_b8ve4")
 custom_minimum_size = Vector2(45, 62)
 layout_mode = 3
 anchors_preset = 0

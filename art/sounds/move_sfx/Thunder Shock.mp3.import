@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1mva8iaj1lhe"
+path="res://.godot/imported/Thunder Shock.mp3-494c278608963fbd8f053f264e591ef3.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/move_sfx/Thunder Shock.mp3"
+dest_files=["res://.godot/imported/Thunder Shock.mp3-494c278608963fbd8f053f264e591ef3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

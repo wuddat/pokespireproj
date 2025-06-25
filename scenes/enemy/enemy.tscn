@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://b7kjap0xllfyb"]
+[gd_scene load_steps=137 format=3 uid="uid://b7kjap0xllfyb"]
 
 [ext_resource type="Texture2D" uid="uid://prme8llsdi5h" path="res://art/weedle_spritesheet.png" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://crgb1qoc5vdgn" path="res://scenes/enemy/enemy.gd" id="1_p200p"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://covk5qel4dban" path="res://scenes/status_handler/status_handler.tscn" id="7_nbhyu"]
 [ext_resource type="PackedScene" uid="uid://cinaas1i56ukh" path="res://scenes/modifier_handler/modifier_handler.tscn" id="8_4efjx"]
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="9_hvxgb"]
+[ext_resource type="Script" uid="uid://cqo7ngmlosw7g" path="res://scenes/enemy/enemy_animation_handler.gd" id="10_hvxgb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efjx"]
 
@@ -949,6 +950,9 @@ type = 4
 
 [node name="HealModifier" parent="ModifierHandler" instance=ExtResource("9_hvxgb")]
 type = 5
+
+[node name="AnimationHandler" type="Node2D" parent="."]
+script = ExtResource("10_hvxgb")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
