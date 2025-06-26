@@ -231,6 +231,7 @@ layout_mode = 2
 
 [node name="Icon3" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer"]
 unique_name_in_owner = true
+show_behind_parent = true
 position = Vector2(12, 11)
 scale = Vector2(0.15125, 0.15125)
 texture = ExtResource("3_v6c5w")

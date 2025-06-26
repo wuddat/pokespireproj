@@ -15,10 +15,10 @@ const RARITY_COLORS := {
 
 const TYPE_COLORS := {
 	Card.Type.ATTACK: Color.WHITE_SMOKE,
-	Card.Type.SKILL: Color.DARK_BLUE,
-	Card.Type.POWER: Color.PURPLE,
-	Card.Type.SHIFT: Color.GREEN,
-	Card.Type.STATUS: Color.WEB_PURPLE
+	Card.Type.SKILL: Color.WHITE_SMOKE,
+	Card.Type.POWER: Color.WHITE_SMOKE,
+	Card.Type.SHIFT: Color.WHITE_SMOKE,
+	Card.Type.STATUS: Color.WHITE_SMOKE
 }
 
 const PKMN_COLORS := {

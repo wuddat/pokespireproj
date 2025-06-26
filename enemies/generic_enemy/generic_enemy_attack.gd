@@ -53,7 +53,7 @@ func setup_from_data(data: Dictionary) -> void:
 		intent.icon = preload("res://art/tile_0118.png")
 	else:
 		intent.icon = preload("res://art/tile_0117.png")
-	sound = preload("res://art/sounds/VineWhip2.wav")
+	
 func perform_action() -> void:
 	
 	

@@ -166,6 +166,7 @@ func _handle_hit(
 				var stat := StatusEffect.new()
 				stat.source = enemy
 				stat.status = status.duplicate()
+				stat.sound = sound
 				stat.execute([target])
 	)
 
