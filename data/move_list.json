@@ -200,7 +200,7 @@
 	  "cost": 1,
 	  "status_effects": ["flinched"],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and possibly FLINCH.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/boneclub.mp3",
 	  "rarity": "common",
 	  "effect_chance": 0.25,
@@ -361,7 +361,7 @@
 		"despair"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and apply [color=dimgray]DESPAIR[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/calmmind.mp3",
 	  "rarity": "uncommon"
 	},
@@ -725,7 +725,7 @@
 	  "accuracy": 100,
 	  "cost": 3,
 	  "description": "[center]Deal [color=red]%s[/color] damage in a MASSIVE explosion![/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/explosion.mp3",
 	  "rarity": "rare",
 	},
@@ -741,7 +741,7 @@
 	  "cost": 2,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	  "rarity": "rare"
 	},
 	"featherdance": {
@@ -828,7 +828,7 @@
 	  "cost": 1,
 	  "status_effects": ["firespin"],
 	  "description": "[center]Apply [color=orange]4 BURN[/color] to ALL enemies each turn for 3 turns MAX.[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/ember.mp3",
 	  "rarity": "common"
 	},
@@ -864,7 +864,7 @@
 		"exposed"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and apply EXPOSED![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	  "rarity": "rare"
 	},
 	"flamecharge": {
@@ -903,7 +903,7 @@
 		"burned","burned","burned","burned","burned","burned","burned","burned",
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and apply [color=orange] 8 BURN[/color]![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/ember.mp3",
 	  "rarity": "uncommon"
 	},
@@ -1169,7 +1169,7 @@
 	  "cost": 2,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage then SHIFT enemies![/center]",
-	  "icon_path": "res://art/tile_0123.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	  "sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
 	  "rarity": "rare",
 	  "shift_enabled": 1,
@@ -1186,7 +1186,7 @@
 	  "cost": 3,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/surf.mp3",
 	  "rarity": "rare",
 	  "splash_damage": 10,
@@ -1555,7 +1555,7 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "description": "[center]Only the devil himself knows what will happen.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
 	  "rarity": "rare",
 	},
 	"minimize": {
@@ -1831,7 +1831,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/doubleslap.mp3",
 	  "rarity": "rare"
 	},
@@ -1900,7 +1900,7 @@
 	  "cost": 2,
 	  "status_effects": ["taunt"],
 	  "description": "[center][color=red]TAUNT[/color] ALL enemies to target the user![/center]",
-	  "icon_path": "res://art/status_effects/rage.png",
+	  "icon_path": "res://art/status_effects/taunt.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "rarity": "uncommon",
@@ -1937,7 +1937,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
 	  "rarity": "Uncommon"
 	},
@@ -2049,7 +2049,7 @@
 		"despair"
 	  ],
 	  "description": "[center]Apply [color=sage]DESPAIR[/color] to all enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/taunt.png",
 	  "rarity": "uncommon"
 	},
 	"scratch": {
@@ -2095,7 +2095,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	  "rarity": "common"
 	},
 	"seismictoss": {
@@ -2176,7 +2176,7 @@
 	  "cost": 3,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/bubble1aurora.mp3",
 	  "rarity": "rare"
 	},
@@ -2376,7 +2376,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/surf.mp3",
 	  "rarity": "common"
 	},
@@ -2425,7 +2425,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
 	  "rarity": "uncommon"
 	},

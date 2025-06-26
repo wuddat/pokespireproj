@@ -28,7 +28,6 @@ border_color = Color(0.837227, 0.844037, 0.244706, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m3e03"]
 font_size = 8
-font_color = Color(0.212841, 0.439923, 1, 1)
 
 [node name="CardVisuals" type="Control"]
 process_mode = 3

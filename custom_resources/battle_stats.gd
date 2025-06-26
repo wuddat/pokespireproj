@@ -39,7 +39,7 @@ func assign_enemy_pkmn_party() -> void:
 							0:
 								enemy_pkmn_party = ["rattata", "rattata", "pidgey", "raticate"]
 							1:
-								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto", "ghastly"]
+								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto", "haunter"]
 							2:
 								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto"]
 
