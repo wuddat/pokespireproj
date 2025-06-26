@@ -91,6 +91,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 
 			var damage_effect := DamageEffect.new()
 			damage_effect.amount = total
+			total_damage_dealt += total
 
 			# 🎵 Set sound based on effectiveness
 			var effective_text: String

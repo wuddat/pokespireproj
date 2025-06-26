@@ -2,7 +2,7 @@ class_name BattleStats
 extends Resource
 
 @export_enum("Wild", "Trainer", "Legendary", "Boss") var encounter_type := "Wild"
-@export_enum("Youngster", "Hiker", "Fisher",) var trainer_type:= "Youngster"
+@export_enum("Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",  ) var trainer_type:= "Youngster"
 
 @export_range(0,2) var battle_tier: int
 @export_range(0.0, 10.0) var weight: float
@@ -33,6 +33,78 @@ func assign_enemy_pkmn_party() -> void:
 
 			"Trainer":
 				match trainer_type:
+					"Aroma Lady":
+						trainer_sprite = preload("res://art/trainer/aromalady.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["oddish", "bellsprout", "tangela", "exeggcute"]
+							1:
+								enemy_pkmn_party = ["tangela", "gloom", "weepinbell", "exeggutor"]
+							2:
+								enemy_pkmn_party = ["tangela", "exeggutor", "victreebell", "vileplume"]
+					"Battle Girl":
+						trainer_sprite = preload("res://art/trainer/battlegirl.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["mankey", "machop", "poliwhirl", "hitmonchan"]
+							1:
+								enemy_pkmn_party = ["poliwhirl", "machoke", "primeape", "hitmonchan"]
+							2:
+								enemy_pkmn_party = ["hitmonchan", "primeape", "poliwrath", "machamp"]
+					"Biker":
+						trainer_sprite = preload("res://art/trainer/biker.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["grimer", "koffing", "ekans", "koffing"]
+							1:
+								enemy_pkmn_party = ["muk", "arbok", "jynx", "wheezing"]
+							2:
+								enemy_pkmn_party = ["muk", "muk", "muk", "muk"]
+					"Bird Keeper":
+						trainer_sprite = preload("res://art/trainer/birdkeeper.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["pidgey", "spearow", "pidgey", "doduo"]
+							1:
+								enemy_pkmn_party = ["pidgeotto", "pidgeotto", "fearow", "dodrio"]
+							2:
+								enemy_pkmn_party = ["dodrio", "fearow", "pidgeot", "pidgeot"]
+					"Black Belt":
+						trainer_sprite = preload("res://art/trainer/blackbelt.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["machop", "machoke", "machoke"]
+							1:
+								enemy_pkmn_party = ["machoke", "machoke", "machamp", "hitmonlee"]
+							2:
+								enemy_pkmn_party = ["hitmonlee", "hitmonchan", "machamp", "machamp"]
+					"Bug Catcher":
+						trainer_sprite = preload("res://art/trainer/bugcatcher.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["caterpie", "weedle", "metapod", "kakuna"]
+							1:
+								enemy_pkmn_party = ["kakuna", "metapod", "butterfree", "beedrill"]
+							2:
+								enemy_pkmn_party = ["butterfree", "beedrill", "beedrill", "pinsir"]
+					"Engineer":
+						trainer_sprite = preload("res://art/trainer/engineer.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["voltorb", "magnemite", "pikachu", "elektabuzz"]
+							1:
+								enemy_pkmn_party = ["elektabuzz", "magneton", "jolteon", "electrode"]
+							2:
+								enemy_pkmn_party = ["electrode", "electrode", "electrode", "electrode"]
+					"Psychic":
+						trainer_sprite = preload("res://art/trainer/psychic.png")
+						match battle_tier:
+							0:
+								enemy_pkmn_party = ["abra", "psyduck", "drowzee", "kadabra"]
+							1:
+								enemy_pkmn_party = ["kadabra", "hypno", "psyduck", "alakazam"]
+							2:
+								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto"]
 					"Youngster":
 						trainer_sprite = preload("res://art/trainer/youngster.png")
 						match battle_tier:
@@ -42,7 +114,6 @@ func assign_enemy_pkmn_party() -> void:
 								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto", "haunter"]
 							2:
 								enemy_pkmn_party = ["raticate", "raticate", "pidgeotto"]
-
 					"Hiker":
 						trainer_sprite = preload("res://art/trainer/hiker.png")
 						match battle_tier:
