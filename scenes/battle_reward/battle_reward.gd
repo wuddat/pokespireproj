@@ -82,42 +82,55 @@ func add_leveled_pkmn_rewards(pkmn_stats: Array[PokemonStats]) -> void:
 func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 	if not run_stats or not character_stats:
 		return
-		
+
 	SFXPlayer.play(PING_SOUND, true)
-	
+
 	var card_rewards := CARD_REWARDS.instantiate() as CardRewards
 	add_child(card_rewards)
 	card_rewards.card_reward_selected.connect(_on_card_reward_taken)
-	
 	var card_reward_array: Array[Card] = []
-	var available_cards: Array [Card] = character_stats.draftable_cards.cards.duplicate(true)
+	var available_cards: Array[Card] = character_stats.draftable_cards.cards.duplicate(true)
+
 	print("📛 Looking for cards owned by UID:", pkmn_uid)
 	for card in available_cards:
 		print("🔍 Card UID:", card.pkmn_owner_uid)
+
+	# Filter by Pokémon UID
 	available_cards = available_cards.filter(func(c): return c.pkmn_owner_uid == pkmn_uid)
 	print("✅ Filtered cards:", available_cards.size())
-	
-	for i in run_stats.card_rewards:
+
+	if available_cards.is_empty():
+		print("❌ No cards found for this Pokémon.")
+		return
+
+	# 👇 Clamp rewards to how many valid cards we have
+	var max_rewards = min(run_stats.card_rewards, available_cards.size())
+
+	for i in max_rewards:
 		_setup_card_chances()
 		var roll := randf_range(0.0, card_reward_total_weight)
-		
+
 		for rarity: Card.Rarity in card_rarity_weights:
 			if card_rarity_weights[rarity] > roll:
 				_modify_weights(rarity)
 				var picked_card := _get_random_available_card(available_cards, rarity)
-				
+
 				if picked_card != null:
-					print("picked Card" , picked_card, picked_card)
+					print("🎯 Picked Card:", picked_card)
 					card_reward_array.append(picked_card)
 					available_cards.erase(picked_card)
 				else:
-					print("picked Card" , picked_card, picked_card)
-					picked_card = available_cards.pick_random()
-					card_reward_array.append(picked_card)
+					print("⚠️ No card of rolled rarity, picking random fallback")
+					if not available_cards.is_empty():
+						picked_card = available_cards.pick_random()
+						card_reward_array.append(picked_card)
+						available_cards.erase(picked_card)
 				break
-	print("Cards in reward array are: ")
+
+	print("🎁 Final Card Reward Array:")
 	for card in card_reward_array:
 		Utils.print_resource(card)
+
 	card_rewards.rewards = card_reward_array
 	card_rewards.show()
 
