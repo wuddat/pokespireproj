@@ -19,7 +19,7 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var aoe_icon: Sprite2D = %Icon3
 
 @export var status_handler: StatusHandler
-
+var spin_tween: Tween
 
 const TYPE_ICON_INDEX := {
 	"normal": 0,
@@ -61,6 +61,7 @@ func _ready() -> void:
 	aoe_icon.hide()
 	
 	Utils.print_node(parent)
+	start_spinning()
 
 
 func update_intent(intent: Intent) -> void:
@@ -72,7 +73,7 @@ func update_intent(intent: Intent) -> void:
 	icon.texture = intent.icon
 	icon.visible = icon.texture != null
 	label.text = str(intent.current_text)
-	label.visible = intent.current_text.length() > 0
+	label.visible = intent.current_text != " "
 	target.texture = intent.target
 	target.visible = target.texture != null
 	target.scale = Vector2(1,1)
@@ -141,3 +142,12 @@ func update_intent(intent: Intent) -> void:
 		aoe_icon.show()
 		aoe_icon.visible = true
 		
+
+func start_spinning() -> void:
+	var size := swirl.size
+	swirl.pivot_offset = size / 2
+	if spin_tween:
+		spin_tween.kill()
+	spin_tween = create_tween()
+	spin_tween.set_loops()
+	spin_tween.tween_property(swirl, "rotation_degrees", 360, 2.0).as_relative()

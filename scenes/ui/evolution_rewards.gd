@@ -16,7 +16,6 @@ extends Control
 @export var forgettable_cards: Array[Card] : set = set_forgettable_cards
 @export var learnable_cards: Array[Card] : set = set_learnable_cards
 
-
 const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
 
 var pokemon: PokemonStats
@@ -28,6 +27,7 @@ var seen_ids := {}
 var forget_slot_selected := false
 var learn_slot_selected := false
 
+
 func _ready() -> void:
 	_clear_rewards()
 	seen_ids = {}
@@ -36,7 +36,6 @@ func _ready() -> void:
 	skip_button.pressed.connect(_on_skip)
 	
 	confirm_button.disabled = true
-	
 
 
 func set_forgettable_cards(new_cards: Array[Card]) -> void:
@@ -45,7 +44,9 @@ func set_forgettable_cards(new_cards: Array[Card]) -> void:
 	if not is_node_ready():
 		await ready
 		
-	
+	if new_cards.is_empty():
+		queue_free()
+		
 	for card: Card in forgettable_cards:
 		if seen_ids.has(card.id):
 			continue
@@ -55,11 +56,15 @@ func set_forgettable_cards(new_cards: Array[Card]) -> void:
 		new_card.card = card
 		new_card.tooltip_requested.connect(_on_forget_selected)
 
+
 func set_learnable_cards(new_cards: Array[Card]) -> void:
 	learnable_cards = new_cards
 	
 	if not is_node_ready():
 		await ready
+	
+	if new_cards.is_empty():
+		queue_free()
 		
 	for card: Card in learnable_cards:
 		if seen_ids.has(card.id):
@@ -126,11 +131,12 @@ func _on_confirm() -> void:
 		Utils.print_resource(new_card)
 		new_card.pkmn_owner_uid = pokemon.uid  # ✅ Make sure ownership is preserved
 		player_deck.cards.append(new_card)
-
 	queue_free()
+
 
 func _on_skip() -> void:
 	queue_free()
+
 
 func _update_confirm_button() -> void:
 	confirm_button.disabled = forget_slot_selected == false or learn_slot_selected == false

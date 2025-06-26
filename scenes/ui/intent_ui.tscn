@@ -106,7 +106,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HBoxContainer2/Panel/HBoxContainer/Icon2:modulate")
+tracks/0/path = NodePath("HBoxContainer2/Panel/HBoxContainer/CenterContainer/Icon2:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +118,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer2/Panel/HBoxContainer/Icon2:scale")
+tracks/1/path = NodePath("HBoxContainer2/Panel/HBoxContainer/CenterContainer/Icon2:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,58 +226,26 @@ layout_mode = 2
 theme_override_constants/separation = -3
 alignment = 1
 
-[node name="Icon3" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer2/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon3" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer"]
 unique_name_in_owner = true
-position = Vector2(9.99999, 11)
+position = Vector2(12, 11)
 scale = Vector2(0.15125, 0.15125)
 texture = ExtResource("3_v6c5w")
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = ExtResource("1_mub4x")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Icon2" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer"]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.839216)
-position = Vector2(10, 10)
-scale = Vector2(2.53125, 2.4375)
-texture = ExtResource("1_mub4x")
-
-[node name="Label" type="Label" parent="HBoxContainer2/Panel/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-size_flags_vertical = 1
-text = "88"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="swirl" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer/Label"]
+[node name="swirl" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 modulate = Color(0.627451, 0.505882, 1, 0.709804)
 show_behind_parent = true
 custom_minimum_size = Vector2(25, 20)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -10.0
-offset_right = 15.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture = ExtResource("4_m20oi")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Particles" type="GPUParticles2D" parent="HBoxContainer2/Panel/HBoxContainer/Label"]
+[node name="Particles" type="GPUParticles2D" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer/swirl"]
 unique_name_in_owner = true
 position = Vector2(12, 10)
 amount = 50
@@ -289,6 +257,30 @@ randomness = 1.0
 fixed_fps = 120
 trail_lifetime = 3.5
 process_material = SubResource("ParticleProcessMaterial_nw2sh")
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("1_mub4x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon2" type="Sprite2D" parent="HBoxContainer2/Panel/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.839216)
+position = Vector2(11, 10)
+scale = Vector2(2.53125, 2.4375)
+texture = ExtResource("1_mub4x")
+
+[node name="Label" type="Label" parent="HBoxContainer2/Panel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "88"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TypeIcon" type="TextureRect" parent="HBoxContainer2/Panel/HBoxContainer"]
 unique_name_in_owner = true
