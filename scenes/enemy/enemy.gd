@@ -28,6 +28,7 @@ var enemy_action_picker: EnemyActionPicker
 var current_action: EnemyAction : set = set_current_action
 var spawn_coords: Vector2
 
+#effect bools
 var is_catchable: bool = false
 var is_caught: bool = false
 var is_asleep: bool = false
@@ -36,10 +37,14 @@ var is_froze: bool = false
 var skip_turn: bool = false
 var has_slept: bool = false
 
+#catching
 var max_wobble = 3
 var current_wobble = 0
 
+#dialogue delay
 var enemy_text_delay: float = 0.4
+
+var last_damage_taken: int = 0
 
 func _ready():
 	await get_tree().process_frame
@@ -281,6 +286,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
 	
+	last_damage_taken = 0
+	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
 	
@@ -295,6 +302,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 		var dmg_text := COMBAT_TEXT.instantiate()
 		add_child(dmg_text)
 		dmg_text.show_text("%s" % modified_damage)
+		
+		last_damage_taken = modified_damage
 	
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))

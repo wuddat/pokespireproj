@@ -79,8 +79,9 @@ func _on_party_shifted() -> void:
 	for tar in target_pool:
 		print("target_pool: ", tar.stats.species_id)
 	var new_target: PokemonBattleUnit = null
-
-	print("%s current_target_pos is %s for %s: " % [enemy.stats.species_id.capitalize(), current_target_pos, target.stats.species_id])
+	if not is_instance_valid(target):
+		return
+	else: print("%s current_target_pos is %s for %s: " % [enemy.stats.species_id.capitalize(), current_target_pos, target.stats.species_id])
 	
 	for target_candidate in target_pool:
 		if target_candidate.spawn_position == current_target_pos:

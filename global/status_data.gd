@@ -3,6 +3,7 @@ extends Node
 const STATUS_LOOKUP := {
 	"attack_up": preload("res://statuses/attack_up.tres"),
 	"attack_down": preload("res://statuses/attack_down.tres"),
+	"body_blow": preload("res://statuses/body_blow.tres"),
 	"burned": preload("res://statuses/burned.tres"),
 	"catching": preload("res://statuses/catching.tres"),
 	"chill": preload("res://statuses/chill.tres"),
@@ -19,6 +20,7 @@ const STATUS_LOOKUP := {
 	"firespin": preload("res://statuses/firespin.tres"),
 	"flinched": preload("res://statuses/flinched.tres"),
 	"froze": preload("res://statuses/froze.tres"),
+	"headshot": preload("res://statuses/headshot.tres"),
 	"ohko": preload("res://statuses/ohko.tres"),
 	"paralyze": preload("res://statuses/paralyze.tres"),
 	"plated": preload("res://statuses/plated.tres"),

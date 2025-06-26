@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeadShot" load_steps=2 format=3 uid="uid://dg1ocywouj8m6"]
+
+[ext_resource type="Script" uid="uid://dgtgw8ndcfl13" path="res://statuses/headshot.gd" id="1_quuys"]
+
+[resource]
+script = ExtResource("1_quuys")
+id = "headshot"
+display_string = " took shots to the head!"
+type = 2
+chance = 1.0
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+max_stacks = 3
+max_duration = 999
+tooltip = "[color=red ]HEADSHOT:[/color]
+Causes [color=yellow ]PARALYZE[/color] at 3 stacks of BODY BLOW!"
+metadata/_custom_type_script = "uid://breq3elxr1644"

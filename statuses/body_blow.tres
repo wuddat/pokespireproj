@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BodyBlow" load_steps=3 format=3 uid="uid://ry0jna8kq36r"]
+
+[ext_resource type="Texture2D" uid="uid://bn6pju4vfjxse" path="res://art/status_effects/rage.png" id="1_48yrq"]
+[ext_resource type="Script" uid="uid://gat4eif3wlcp" path="res://statuses/body_blow.gd" id="2_jl4ma"]
+
+[resource]
+script = ExtResource("2_jl4ma")
+id = "body_blow"
+display_string = " took shots to the body!"
+type = 2
+chance = 1.0
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+max_stacks = 10
+max_duration = 999
+icon = ExtResource("1_48yrq")
+tooltip = "[color=red ]BODY BLOW:[/color]
+Causes [color=aqua ]HEADSHOT[/color] to do 3x damage at 10 stacks!"
+metadata/_custom_type_script = "uid://breq3elxr1644"

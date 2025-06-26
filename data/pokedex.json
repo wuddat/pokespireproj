@@ -1228,7 +1228,8 @@
 		"focusenergy",
 		"slam",
 		"seismictoss",
-		"swagger"
+		"swagger",
+		"lowkick"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "primeape"
@@ -1255,7 +1256,11 @@
 		"accupressure",
 		"bulkup",
 		"seismictoss",
-		"swagger"
+		"swagger",
+		"lowkick",
+		"crosschop",
+		"rage",
+		"finalgambit"
 	  ]
 	},
 	"growlithe": {
@@ -1345,7 +1350,8 @@
 		"pound",
 		"karatechop",
 		"icepunch",
-		"supersonic"
+		"supersonic",
+		"groundandpound",
 	  ],
 	  "evolution_level": 6,
 	  "evolves_to": "poliwrath"
@@ -1375,6 +1381,7 @@
 		"firepunch",
 		"dizzypunch",
 		"rest",
+		"bubblepunch",
 	  ]
 	},
 	"abra": {
@@ -1448,7 +1455,9 @@
 		"tackle",
 		"focusenergy",
 		"doublekick",
-		"cometpunch"
+		"cometpunch",
+		"lowsweep",
+		"lowkick",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "machoke"
@@ -2239,9 +2248,11 @@
 	  "max_health": 28,
 	  "move_ids": [
 		"doublekick",
-		"furyswipes",
 		"highkick",
-		"hijumpkick"
+		"hijumpkick",
+		"lowkick",
+		"lowsweep",
+		"closecombat"
 	  ]
 	},
 	"hitmonchan": {
@@ -2261,6 +2272,7 @@
 		"icepunch",
 		"bulletpunch",
 		"poisonjab",
+		"bubblepunch",
 	  ]
 	},
 	"lickitung": {

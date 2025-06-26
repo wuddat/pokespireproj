@@ -23,6 +23,8 @@ var is_asleep: bool = false
 var is_confused: bool = false
 var is_froze: bool = false
 
+var last_damage_taken: int = 0
+
 func _ready() -> void:
 	status_handler.status_owner = self
 	status_handler.statuses_applied.connect(_on_statuses_applied)
@@ -88,7 +90,7 @@ func gain_block(block: int, _mod_type:Modifier.Type) -> void:
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	if stats.health <= 0: return
-	
+	last_damage_taken = 0
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, mod_type)
 	
@@ -105,6 +107,8 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
 	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
+	
+	last_damage_taken = modified_damage
 	
 	
 	if modified_damage > 0:
