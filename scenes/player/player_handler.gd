@@ -41,6 +41,8 @@ func start_battle(char_stats: CharacterStats) -> void:
 
 func start_turn() -> void:
 	player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+	hand.cards_played_this_turn = 0
+	hand.lead_enabled = true
 	character.block = 0
 	character.reset_mana()
 	end_turn_button.show()
@@ -184,6 +186,8 @@ func _on_card_played(card: Card) -> void:
 		character.discard.add_card(card)
 		return
 	else:
+		hand.cards_played_this_turn += 1
+		hand.refresh_leads_to_base()
 		character.discard.add_card(card)
 
 

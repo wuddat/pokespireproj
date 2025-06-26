@@ -46,7 +46,7 @@ func take_damage(damage:int) -> void:
 
 
 func card_playable(card: Card) -> bool:
-	return mana >= card.cost
+	return mana >= card.current_cost
 
 
 func create_instance() -> Resource:

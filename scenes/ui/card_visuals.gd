@@ -45,7 +45,6 @@ const ICONS_PER_ROW := 9
 
 func _ready():
 	await get_tree().process_frame
-	await get_tree().process_frame
 	_update_visuals()
 
 
@@ -70,7 +69,7 @@ func _update_visuals() -> void:
 		return
 
 	update_type_icon(card.damage_type)
-	cost.text = str(card.cost)
+	cost.text = str(card.current_cost)
 	effect.text = str(card.power)
 	effect.modulate = Card.TYPE_COLORS[card.type]
 	icon.texture = card.icon

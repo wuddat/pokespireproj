@@ -1,23 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmw6uc1p6fp8l"]
+[gd_scene load_steps=15 format=3 uid="uid://bmw6uc1p6fp8l"]
 
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="1_gy3gl"]
 [ext_resource type="Script" uid="uid://cfaqtd3mxwwwr" path="res://scenes/card_ui/card_ui.gd" id="2_els2s"]
 [ext_resource type="PackedScene" uid="uid://spupfh640ekm" path="res://scenes/ui/card_visuals.tscn" id="3_ci03s"]
 [ext_resource type="Script" uid="uid://c1nmhhtu3qmim" path="res://scenes/card_ui/card_state_machine.gd" id="3_psaan"]
-[ext_resource type="Shader" uid="uid://bvqp58acwws5i" path="res://scenes/ui/card_visuals.gdshader" id="4_js3ux"]
 [ext_resource type="Script" uid="uid://cbxfliywdwlaj" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_orrkt"]
 [ext_resource type="Script" uid="uid://cqh2uvjwrdpd4" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_yxx8x"]
 [ext_resource type="Script" uid="uid://c2ddpgsuq0aye" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_ci03s"]
 [ext_resource type="Script" uid="uid://dqnmfxng8ugk0" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_js3ux"]
 [ext_resource type="Script" uid="uid://c2es1bme5jdvo" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_yxx8x"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeblu"]
-shader = ExtResource("4_js3ux")
-shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy3gl"]
 size = Vector2(37, 52)
@@ -91,9 +82,19 @@ theme = ExtResource("1_gy3gl")
 script = ExtResource("2_els2s")
 
 [node name="CardVisuals" parent="." instance=ExtResource("3_ci03s")]
-material = SubResource("ShaderMaterial_qeblu")
+material = null
 use_parent_material = true
 mouse_filter = 2
+
+[node name="LeadOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 10.0
+offset_right = 37.0
+offset_bottom = 62.0
+mouse_filter = 1
+color = Color(1, 0.85, 0.1, 0.25)
 
 [node name="DropPointDetector" type="Area2D" parent="."]
 collision_mask = 2

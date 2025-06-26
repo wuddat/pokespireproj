@@ -155,7 +155,7 @@ theme_override_constants/separation = -3
 unique_name_in_owner = true
 script = ExtResource("7_icoan")
 
-[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player", "party_handler")]
+[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player", "party_handler", "player_handler")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -171,6 +171,7 @@ alignment = 1
 script = ExtResource("2_xd4uy")
 player = NodePath("../../Player")
 party_handler = NodePath("../../PartyHandler")
+player_handler = NodePath("../../PlayerHandler")
 
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_fisqk")]
 offset_left = 2.0

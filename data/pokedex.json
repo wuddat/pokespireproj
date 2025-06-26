@@ -1676,7 +1676,8 @@
 		"growl",
 		"flamecharge",
 		"quickattack",
-		"bite"
+		"bite",
+		"stomp",
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "rapidash"
@@ -1701,6 +1702,7 @@
 		"takedown",
 		"leer",
 		"doubleteam",
+		"stomp",
 	  ]
 	},
 	"slowpoke": {
@@ -2256,7 +2258,9 @@
 		"agility",
 		"firepunch",
 		"quickguard",
-		"icepunch"
+		"icepunch",
+		"bulletpunch",
+		"poisonjab",
 	  ]
 	},
 	"lickitung": {
@@ -2331,7 +2335,8 @@
 		"bulldoze",
 		"hornattack",
 		"takedown",
-		"megahorn"
+		"megahorn",
+		"stomp"
 	  ],
 	  "evolution_level": 4,
 	  "evolves_to": "rhydon"
@@ -2355,6 +2360,7 @@
 		"takedown",
 		"megahorn",
 		"earthquake",
+		"stomp",
 	  ]
 	},
 	"chansey": {
@@ -2405,7 +2411,9 @@
 		"leer",
 		"bite",
 		"tailwhip",
-		"dizzypunch"
+		"dizzypunch",
+		"rage",
+		"workup"
 	  ]
 	},
 	"horsea": {
@@ -2493,6 +2501,8 @@
 		"harden",
 		"waterpulse",
 		"calmmind",
+		"lightscreen",
+		"swift"
 	  ],
 	  "evolution_level": 3,
 	  "evolves_to": "starmie"
@@ -2515,7 +2525,9 @@
 		"icebeam",
 		"iceshard",
 		"surf",
-		"liquidation"
+		"liquidation",
+		"lightscreen",
+		"swift"
 	  ]
 	},
 	"mrmime": {

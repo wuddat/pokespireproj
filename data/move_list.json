@@ -306,6 +306,29 @@
 	  "rarity": "uncommon",
 	  "shift_enabled": 1,
 	},
+	"bulletpunch": {
+	  "name": "Bullet Punch",
+	  "id": "bulletpunch",
+	  "category": "attack",
+	  "subtype": "lead",
+	  "type": "fighting",
+	  "target": "enemy",
+	  "power": 4,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage [color=dimgray][s]3X[/s][/color]![/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "self_damage": 0,
+	  "self_status": [],
+	  "bonus_damage_if_target_has_status": "",
+	  "bonus_damage_multiplier": 1,
+	  "rarity": "common",
+	 "lead_effects": {
+	  	"multiplay": 3,
+		"description": "[center]Deal [color=red]%s[/color] damage [color=red]3X[/color]![/center]"
+		}
+	},
 	"bugbite": {
 	  "name": "Bug Bite",
 	  "id": "bugbite",
@@ -859,8 +882,12 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange] 2 BURN[/color]![/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	"sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
-	  "rarity": "common"
+	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
+	  "rarity": "common",
+	  "lead_effects": {
+		  "status_effects": ["burned", "burned", "burned", "burned","burned",],
+		  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange]5[/color][color=goldenrod]+3 [/color][color=orange]BURN[/color]![/center]",
+		},
 	},
 	"flamethrower": {
 	  "name": "Flamethrower",
@@ -1250,19 +1277,21 @@
 	  "name": "Ice Shard",
 	  "id": "iceshard",
 	  "category": "attack",
-	  "subtype": "debuff",
+	  "subtype": "lead",
 	  "type": "ice",
 	  "target": "enemy",
 	  "power": 2,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": [
-		"chill"
-	  ],
-	  "description": "[center]Deal [color=red]%s[/color] damage  [color=red]2X[/color]and CHILL![/center]",
+	  "status_effects":[],
+	  "description": "[center]Deal [color=red]%s[/color] damage [color=red]2X[/color]![/center]",
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common",
-	  "multiplay": 2
+	  "multiplay": 2,
+	   "lead_effects": {
+	  	"status_effects": ["chill"],
+		"description": "[center]Deal [color=red]%s[/color] damage  [color=red]2X[/color]and [color=aqua]CHILL[/color]![/center]"
+		},
 	},
 	"irondefense": {
 	  "name": "Iron Defense",
@@ -1428,12 +1457,29 @@
 	  "power": 4,
 	  "accuracy": 100,
 	  "cost": 0,
-	  "status_effects": ["flinched"],
-	  "description": "[center]Deal [color=red]%s[/color] damage and possibly [color=yellow]PARALYZE[/color].[/center]",
-	  "icon_path": "res://art/tile_0107.png",
+	  "status_effects": ["paralyze"],
+	  "effect_chance": 0.25,
+	  "description": "[center]Deal [color=red]%s[/color] damage and possibly [color=yellow]PARALYZE[/color]![/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common",
 	  "effect_chance": 0.25,
+	},
+	"lightscreen": {
+	  "name": "Light Screen",
+	  "id": "lightscreen",
+	  "category": "attack",
+	  "subtype": "buff",
+	  "type": "water",
+	  "target": "allies",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": ["plated", "plated", "plated"],
+	  "description": "[center]Apply [color=blue]PLATED ARMOR[/color] to allies![/center]",
+	  "icon_path": "res://art/tile_0107.png",
+	  "sound_path": "res://art/block.ogg",
+	  "rarity": "common"
 	},
 	"liquidation": {
 	  "name": "Liquidation",
@@ -1553,10 +1599,10 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
-		"flinched"
+		"paralyze"
 	  ],
-	  "description": "[center]Deal [color=red]%s[/color] damage and FLINCH.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "description": "[center]Deal [color=red]%s[/color] damage and [color=yellow]PARALYZE[/color]![/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
 	  "rarity": "common"
 	},
 	"parry": {
@@ -2277,6 +2323,29 @@
 	  "rarity": "common",
 	  "requires_status": "poisoned"
 	},
+	"stomp": {
+	  "name": "Stomp",
+	  "id": "stomp",
+	  "category": "attack",
+	  "subtype": "single_target",
+	  "type": "normal",
+	  "target": "enemy",
+	  "power": 7,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
+	  "icon_path": "res://art/tile_0103.png",
+	  "self_damage": 0,
+	  "self_status": [],
+	  "bonus_damage_if_target_has_status": "",
+	  "bonus_damage_multiplier": 1,
+	  "rarity": "common",
+	 "lead_effects": {
+	  	"self_status": ["attack_up","attack_up","attack_up"],
+		"description": "[center]Deal [color=red]%s[/color] damage and gain [color=red]3 ATKPWR[/color].[/center]"
+		},
+  },
 	"stringshot": {
 	  "name": "String Shot",
 	  "id": "stringshot",
@@ -2342,6 +2411,22 @@
 	  "icon_path": "res://art/tile_0127.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "self_status": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
+	  "rarity": "uncommon"
+	},
+	"swift": {
+	  "name": "Swift",
+	  "id": "swift",
+	  "category": "attack",
+	  "subtype": "all_enemies",
+	  "type": "normal",
+	  "target": "all_enemies",
+	  "power": 7,
+	  "accuracy": 100,
+	  "cost": 1,
+	  "status_effects": [],
+	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
 	  "rarity": "uncommon"
 	},
 	"swordsdance": {
@@ -2424,12 +2509,13 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] damage to enemy and [color=red]3[/color] to the user.[/center]",
+	  "description": "[center]Deal [color=red]%s[/color] damage to enemy and [color=red]3[/color] to the user unless [color=goldenrod]%s[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "self_damage": 3,
 	  "self_status": [],
 	  "rarity": "common",
+	  "lead_effects": {"self_damage": 0},
 	},
 	"teleport": {
 	  "name": "Teleport",
@@ -2471,16 +2557,16 @@
 	  "category": "attack",
 	  "subtype": "single_target",
 	  "type": "electric",
-	  "target": "random_enemy",
-	  "power": 15,
+	  "target": "all_enemies",
+	  "power": 20,
 	  "accuracy": 100,
-	  "cost": 3,
+	  "cost": 2,
 	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] damage to a RANDOM enemy 2 to 5 times.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
+	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies with [color=yellow]PARALYZE[/color]![/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
+	  "sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
 	  "rarity": "rare",
-	  "randomplay": 5
+	  "requires_status": "paralyze"
 	},
 	"thunderbolt": {
 	  "name": "Thunder Bolt",
@@ -2492,9 +2578,10 @@
 	  "power": 20,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] damage to a RANDOM enemy.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "status_effects": ["paralyze"],
+	  "effect_chance": 0.25,
+	  "description": "[center]Deal [color=red]%s[/color] damage to a RANDOM enemy and possibly [color=yellow]PARALYZE[/color]![/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
 	  "rarity": "uncommon",
 	},
@@ -2508,11 +2595,12 @@
 	  "power": 3,
 	  "accuracy": 100,
 	  "cost": 0,
-	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "status_effects": ["paralyze"],
+	  "effect_chance": 0.25,
+	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and possibly [color=yellow]PARALYZE[/color].[/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"thunderwave": {
 	  "name": "Thunder Wave",
@@ -2524,10 +2612,10 @@
 	  "power": 0,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": ["flinched"],
-	  "description": "[center]Apply [color=red]FLINCH[/color] to ALL enemies.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
+	  "status_effects": ["paralyze"],
+	  "description": "[center]Apply [color=yellow]PARALYZE[/color] to ALL enemies.[/center]",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
+	  "sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
 	  "rarity": "uncommon"
 	},
 	"triattack": {
@@ -2684,6 +2772,23 @@
 	  "icon_path": "res://art/tile_0101.png",
 	  "rarity": "common"
 	},
+	"workup": {
+	  "name": "Work Up",
+	  "id": "workup",
+	  "category": "status",
+	  "subtype": "buff",
+	  "type": "normal",
+	  "target": "self",
+	  "power": 0,
+	  "accuracy": 100,
+	  "cost": 2,
+	  "status_effects": [
+		"dexterity", "attack_up", "attack_up"
+	  ],
+	  "description": "[center]Gain [color=sage]2 DEXTERITY[/color] and [color=red]2 ATKPWR[/color]![/center]",
+	  "icon_path": "res://art/tile_0101.png",
+	  "rarity": "common"
+	},
 	"zapcannon": {
 	  "name": "Zap Cannon",
 	  "id": "zapcannon",
@@ -2694,11 +2799,11 @@
 	  "power": 15,
 	  "accuracy": 100,
 	  "cost": 2,
-	  "status_effects": ["paralyzed"],
+	  "status_effects": ["paralyze"],
 	  "effect_chance": 0.25,
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL foes. [color=red]X2[/color] damage if [color=goldenrod]PARALYZED[/color][/center]",
-	  "icon_path": "res://art/tile_0103.png",
-	  "bonus_damage_if_target_has_status": "paralyzed",
+	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
+	  "bonus_damage_if_target_has_status": "paralyze",
 	  "bonus_damage_multiplier": 2,
 	  "rarity": "uncommon",
 	},

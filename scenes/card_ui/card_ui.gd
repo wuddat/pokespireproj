@@ -6,7 +6,6 @@ signal reparent_requested(which_card_ui: CardUI)
 const BASE_CARDSTYLE := preload("res://scenes/card_ui/card_base_style.tres")
 const DRAG_CARDSTYLE := preload("res://scenes/card_ui/card_dragging_style.tres")
 const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
-#const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
@@ -19,9 +18,11 @@ const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
 @onready var drop_point_detector: Area2D = $DropPointDetector
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var targets: Array[Node] = []
+@onready var lead_overlay: ColorRect = %LeadOverlay
 
 var play_card_delay: float = 0.4
-
+var lead_tween: Tween = null
+var pulse: Tween = null
 
 
 var original_index := 0
@@ -79,7 +80,7 @@ func play() -> void:
 	print("🎲 Metronome selected:", random_card.id)
 
 	discard.cards.erase(random_card)
-	random_card.cost = 0
+	random_card.current_cost = 0
 	hand.add_card(random_card)
 	discard.add_card(card)
 	#Events.card_play_completed.emit()
@@ -102,6 +103,36 @@ func request_tooltip() -> void:
 	var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers, targets)
 	Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon, card.name.capitalize())
 
+
+func show_lead_effect() -> void:
+	if not %LeadOverlay:
+		push_warning("LeadOverlay not found!")
+		return
+
+	%LeadOverlay.visible = true
+	%LeadOverlay.color.a = 0.2
+
+	# Stop previous tween if still running
+	if lead_tween and lead_tween.is_running():
+		lead_tween.kill()
+
+	# Create a new tween
+	lead_tween = create_tween().set_loops()  # infinite looping
+	lead_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	lead_tween.tween_property(%LeadOverlay, "modulate:a", 1, 0.6).from(0.2)
+	lead_tween.tween_property(%LeadOverlay, "modulate:a", 0.2, 0.6)
+	pulse = create_tween().set_loops()
+	pulse.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	pulse.tween_property(self, "scale", Vector2(1.03, 1.03), 0.25).from(Vector2(1.0, 1.0))
+	pulse.tween_property(self, "scale", Vector2(1.0, 1.0), 0.25)
+
+
+func stop_lead_effect() -> void:
+	if %LeadOverlay:
+		%LeadOverlay.visible = false
+	if lead_tween and lead_tween.is_running():
+		lead_tween.kill()
+		pulse.kill()
 
 func _on_gui_input(event: InputEvent) -> void:
 	card_state_machine.on_gui_input(event)
@@ -175,7 +206,7 @@ func play_card_with_delay(crd: Card) -> void:
 	hide()
 	Events.card_played.emit(crd)
 	#Events.battle_text_requested.emit("Played %s!" % card.name)
-	char_stats.mana -= crd.cost
+	char_stats.mana -= crd.current_cost
 	crd.random_targets.clear()
 	#await get_tree().create_timer(play_card_delay).timeout
 	

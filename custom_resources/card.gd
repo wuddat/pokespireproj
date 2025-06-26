@@ -56,7 +56,7 @@ const PKMN_COLORS := {
 @export var exhausts: bool = false
 @export var pkmn_owner_uid: String
 @export var pkmn_owner_name: String
-var base_power: int
+@export var base_power: int
 
 
 @export_group("Card Visuals")
@@ -68,11 +68,6 @@ var base_power: int
 @export_group("Card Effects")
 @export var status_effects: Array[Status]
 @export var effect_chance: float = 1
-@export var self_heal: int
-@export var self_damage: int = 0
-@export var self_damage_percent_hp: float = 0
-@export var self_status: Array[Status] = []
-@export var self_block: int = 0
 @export var dmg_block: int = 0
 @export var multiplay: int = 1
 @export var randomplay: int = 0
@@ -81,10 +76,20 @@ var base_power: int
 @export var bonus_damage_multiplier: float = 1.0
 @export var splash_damage: int = 0
 @export var shift_enabled: int = 0
+@export var lead_effects: Dictionary = {}
+
+@export_group("Self Effects")
+@export var self_heal: int
+@export var self_damage: int = 0
+@export var self_damage_percent_hp: float = 0
+@export var self_status: Array[Status] = []
+@export var self_block: int = 0
 @export var self_shift: int = 0
 
-
 var random_targets = []
+var current_cost: int
+var base_card: Card = null
+var lead_enabled: bool = false
 
 
 func is_single_targeted() -> bool:
@@ -154,6 +159,7 @@ func setup_from_data(data: Dictionary) -> void:
 	damage_type = data.get("type", "normal")
 	target_damage_percent_hp = data.get("target_damage_percent_hp", 0.0)
 	cost = data.get("cost", 88)
+	current_cost = cost
 	tooltip_text = data.get("description", "CardToolTipError")
 	var iconpath = data.get("icon_path", "res://art/arrow.png")
 	icon = load(iconpath)
@@ -233,6 +239,10 @@ func setup_from_data(data: Dictionary) -> void:
 		var typed_ids = Utils.to_typed_string_array(raw_ids)
 		self_status.clear()
 		self_status.append_array(StatusData.get_status_effects_from_ids(typed_ids))
+	
+	if data.has("lead_effects"):
+		lead_effects = data["lead_effects"]
+	
 
 func emit_dialogue(texts: Array[String]) -> void:
 	for text in texts:
@@ -263,3 +273,82 @@ func get_pkmn_color() -> Color:
 		"DRAGON": return PKMN_COLORS[PkmnType.DRAGON]
 		_:
 			return Color.WHITE
+
+func apply_lead_mods(card: Card) -> void:
+	lead_enabled = true
+	if card.lead_effects.has("power"):
+		card.power = card.lead_effects["power"]
+		card.base_power = card.power
+	
+	if card.lead_effects.has("self_damage"):
+		card.self_damage = card.lead_effects["self_damage"]
+		
+	if card.lead_effects.has("description"):
+		card.self_damage = card.lead_effects["description"]
+		
+	if card.lead_effects.has("multiplay"):
+		card.self_damage = card.lead_effects["multiplay"]
+		
+	if card.lead_effects.has("status_effects"):
+		var raw_ids = card.lead_effects["status_effects"]
+		var typed_ids = Utils.to_typed_string_array(raw_ids)
+		
+		status_effects.clear()
+		status_effects.append_array(StatusData.get_status_effects_from_ids(typed_ids))
+		
+	if card.lead_effects.has("self_status"):
+		var raw_ids = lead_effects["self_status"]
+		var typed_ids = Utils.to_typed_string_array(raw_ids)
+		self_status.clear()
+		self_status.append_array(StatusData.get_status_effects_from_ids(typed_ids))
+
+
+func reset_to_base_card() -> void:
+	if base_card == null:
+		push_warning("⚠️ Tried to reset card without a base_card.")
+		return
+		
+	lead_enabled = false
+	# --- Card Attributes ---
+	id = base_card.id
+	name = base_card.name
+	type = base_card.type
+	rarity = base_card.rarity
+	cost = base_card.cost
+	current_cost = base_card.current_cost
+	power = base_card.power
+	base_power = base_card.base_power
+	target_damage_percent_hp = base_card.target_damage_percent_hp
+	damage_type = base_card.damage_type
+	exhausts = base_card.exhausts
+	pkmn_owner_uid = base_card.pkmn_owner_uid
+	pkmn_owner_name = base_card.pkmn_owner_name
+
+	# --- Card Visuals ---
+	icon = base_card.icon
+	pkmn_icon = base_card.pkmn_icon
+	tooltip_text = base_card.tooltip_text
+	sound = base_card.sound
+
+	# --- Card Effects ---
+	status_effects = base_card.status_effects.duplicate()
+	effect_chance = base_card.effect_chance
+	dmg_block = base_card.dmg_block
+	multiplay = base_card.multiplay
+	randomplay = base_card.randomplay
+	requires_status = base_card.requires_status
+	bonus_damage_if_target_has_status = base_card.bonus_damage_if_target_has_status
+	bonus_damage_multiplier = base_card.bonus_damage_multiplier
+	splash_damage = base_card.splash_damage
+	shift_enabled = base_card.shift_enabled
+	lead_effects = base_card.lead_effects.duplicate()
+
+	# --- Self Effects ---
+	self_heal = base_card.self_heal
+	self_damage = base_card.self_damage
+	self_damage_percent_hp = base_card.self_damage_percent_hp
+	self_status = base_card.self_status.duplicate()
+	self_block = base_card.self_block
+	self_shift = base_card.self_shift
+
+ 

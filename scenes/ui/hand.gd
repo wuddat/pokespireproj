@@ -4,11 +4,16 @@ extends HBoxContainer
 @export var player: Player
 @export var char_stats: CharacterStats
 @export var party_handler: PartyHandler
+@export var player_handler: PlayerHandler
+
 const CARD_SFX_1 = preload("res://art/sounds/sfx/card_sfx1.mp3")
+
 @onready var card_ui := preload("res://scenes/card_ui/card_ui.tscn")
 @onready var draw_pile_button: CardPileOpener = %DrawPileButton
 @onready var discard_pile_button: CardPileOpener = %DiscardPileButton
 
+var cards_played_this_turn: int = 0
+var lead_enabled: bool = false
 
 func _ready():
 	_establish_connections()
@@ -24,8 +29,13 @@ func add_card(card: Card) -> void:
 	new_card_ui.animate_to_position(spawn_position, .2)
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
 	new_card_ui.card = card
+	new_card_ui.card.base_card = card.duplicate(true)
 	new_card_ui.parent = self
 	new_card_ui.char_stats = char_stats
+	
+	if lead_enabled and new_card_ui.card.lead_effects:
+		new_card_ui.card.apply_lead_mods(card)
+		new_card_ui.show_lead_effect()
 	
 	
 	
@@ -53,6 +63,26 @@ func disable_hand() -> void:
 func enable_hand() -> void:
 	for card in get_children():
 		card.disabled = false
+
+
+func refresh_leads_to_base() -> void:
+	print("Cards played this turn: ", cards_played_this_turn)
+	if cards_played_this_turn > 0:
+		lead_enabled = false
+		for child in get_children():
+			var crd: Card = child.card
+			if crd.base_card != null and crd.lead_effects:
+				print("============PRINTING CARD BEFORE: =======================")
+				Utils.print_resource(crd)
+				crd = crd.base_card.duplicate(true)
+				crd.base_card = crd
+				child.card = crd
+				child.stop_lead_effect()
+				child.card_visuals._update_visuals()
+				print("============PRINTING CARD AFTER: =======================")
+				Utils.print_resource(crd)
+				print("============PRINTING CARD BASE: =======================")
+				Utils.print_resource(crd.base_card)
 
 
 func _on_card_ui_reparent_requested(child: CardUI) -> void:

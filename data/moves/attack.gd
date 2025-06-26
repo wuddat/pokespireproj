@@ -29,8 +29,9 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		mod_dmg *= type_multiplier
 		mod_dmg = round(mod_dmg)
 
-		
-	return tooltip_text % mod_dmg
+	if lead_enabled:
+		return "[color=goldenrod]LEAD: [/color]" + tooltip_text % mod_dmg
+	else: return "[color=dimgray][s]LEAD:[/s][/color] " + tooltip_text % mod_dmg
 
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
