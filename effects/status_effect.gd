@@ -19,4 +19,6 @@ func execute(targets: Array[Node]) -> void:
 				Events.battle_text_requested.emit("")
 			target.status_handler.add_status(unique_status)
 			SFXPlayer.play(sound)
-			print("%s applied to %s" % [status.id, target.stats.species_id])
+			print("[STATUS_EFFECT]%s applied to %s" % [status.id, target.stats.species_id])
+			if "unit_status_indicator" in target:
+				target.unit_status_indicator.update_status_display(target)

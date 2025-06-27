@@ -24,8 +24,7 @@ func initialize_status(target: Node) -> void:
 	
 
 
-func _on_status_applied(status: Status) -> void:
-	if status.can_expire:
-		status.duration -= 1
-		print(status.id," effect applied and duration reduced by 1")
-		
+#func _on_status_applied(status: Status) -> void:
+	#if status.can_expire:
+		#status.duration -= 1
+		#print(status.id," effect applied and duration reduced by 1")

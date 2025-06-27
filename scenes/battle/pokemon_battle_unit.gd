@@ -13,6 +13,8 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 @onready var stats_ui: StatsUI = $StatsUI
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
+@onready var unit_status_indicator: UnitStatusIndicator = %UnitStatusIndicator
+
 
 
 var health_bar_ui: HealthBarUI
@@ -40,7 +42,7 @@ func _ready() -> void:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
 	##status effect testing
-	#var status := preload("res://statuses/paralyze.tres")
+	#var status := preload("res://statuses/confused.tres")
 	#var status1 := preload("res://statuses/attack_up.tres")
 	#var status2 := preload("res://statuses/attack_up.tres")
 	#var status3 := preload("res://statuses/burned.tres")
@@ -51,21 +53,21 @@ func _ready() -> void:
 
 
 func start_of_turn():
-	#print(">>> START OF TURN CALLED FOR:", stats.species_id, "| Current Block:", stats.block)
-	#print("status_handler valid? ", is_instance_valid(status_handler))
-
 	stats.block = 0
 	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
-	#print(">>> END OF TURN LOGIC FOR:", stats.species_id, "| Block After Reset:", stats.block)
+	
+
 
 func _on_evolution_completed() -> void:
 	Utils.print_resource(self.stats)
+
 
 func set_pokemon_stats(value: PokemonStats) -> void:
 	stats = value
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
 	update_pokemon()
+
 
 func update_pokemon() -> void:
 	if not stats is PokemonStats: return
@@ -142,11 +144,16 @@ func set_health_bar_ui(ui:HealthBarUI) -> void:
 	else:
 		_queued_health_bar_ui = ui  # Delay until ready
 
+func _update_unit_status_indicator() -> void:
+	unit_status_indicator.update_status_display(self)
+
 func _on_statuses_applied(type: Status.Type) -> void:
 	if type == Status.Type.START_OF_TURN:
 		Events.player_pokemon_start_status_applied.emit(self)
+		unit_status_indicator.update_status_display(self)
 	elif type == Status.Type.END_OF_TURN:
 		Events.player_pokemon_end_status_applied.emit(self)
+		unit_status_indicator.update_status_display(self)
 
 func _on_enemy_seeded_turn_start(seeded: Status) -> void:
 	heal(seeded.heal_strength)

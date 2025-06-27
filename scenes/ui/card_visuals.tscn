@@ -138,6 +138,7 @@ offset_top = 5.0
 offset_right = 12.5001
 offset_bottom = 40.0
 grow_horizontal = 2
+pivot_offset = Vector2(17, 22)
 texture = ExtResource("7_m3e03")
 expand_mode = 1
 stretch_mode = 5

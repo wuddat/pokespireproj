@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnnr7b1674s3f"]
+
+[ext_resource type="Script" uid="uid://8o04h4bgtsjt" path="res://scenes/ui/unit_status_indicator.gd" id="1_ehglf"]
+[ext_resource type="Texture2D" uid="uid://bnkw8kvauiocm" path="res://art/statuseffects/confused-effect.png" id="2_j05g4"]
+
+[node name="UnitStatusIndicator" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = -256.0
+grow_horizontal = 2
+script = ExtResource("1_ehglf")
+
+[node name="StatusIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("2_j05g4")
+expand_mode = 1
+stretch_mode = 5

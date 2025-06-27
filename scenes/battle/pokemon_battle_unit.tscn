@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj8k32krl0vwq"]
+[gd_scene load_steps=10 format=3 uid="uid://dj8k32krl0vwq"]
 
 [ext_resource type="Script" uid="uid://5121pgfrbdxd" path="res://scenes/battle/pokemon_battle_unit.gd" id="1_6808p"]
-[ext_resource type="Texture2D" uid="uid://dwr8fw4dyveyn" path="res://art/charmander_back.png" id="1_yo7j0"]
 [ext_resource type="PackedScene" uid="uid://b5xmc80xwdal6" path="res://scenes/ui/stats_ui.tscn" id="2_6808p"]
+[ext_resource type="Texture2D" uid="uid://rjfylssdvk1q" path="res://art/sprites/1.png" id="2_itayc"]
 [ext_resource type="PackedScene" uid="uid://covk5qel4dban" path="res://scenes/status_handler/status_handler.tscn" id="3_itayc"]
 [ext_resource type="PackedScene" uid="uid://cinaas1i56ukh" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_oml2l"]
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="6_dfvhe"]
 [ext_resource type="PackedScene" uid="uid://bcfgrnxf1tas7" path="res://scenes/ui/hoverable_tooltip.tscn" id="7_6808p"]
+[ext_resource type="PackedScene" uid="uid://bnnr7b1674s3f" path="res://scenes/ui/unit_status_indicator.tscn" id="8_itayc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo7j0"]
 size = Vector2(36, 35)
@@ -16,7 +17,7 @@ collision_layer = 4
 script = ExtResource("1_6808p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_yo7j0")
+texture = ExtResource("2_itayc")
 flip_h = true
 
 [node name="HoverableTooltip" parent="Sprite2D" instance=ExtResource("7_6808p")]
@@ -29,6 +30,13 @@ offset_right = -21.5
 offset_bottom = -21.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UnitStatusIndicator" parent="Sprite2D" instance=ExtResource("8_itayc")]
+unique_name_in_owner = true
+offset_left = -49.0
+offset_top = -48.0
+offset_right = -49.0
+offset_bottom = -48.0
 
 [node name="StatsUI" parent="." instance=ExtResource("2_6808p")]
 offset_top = 4.0

@@ -98,10 +98,14 @@ func get_active_enemy_modifiers() -> ModifierHandler:
 
 
 func request_tooltip() -> void:
+	
 	var enemy_modifiers := get_active_enemy_modifiers()
-	await get_tree().process_frame
-	var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers, targets)
-	Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon, card.name.capitalize())
+	if not is_instance_valid(player_pkmn_modifiers) or not is_instance_valid(enemy_modifiers) or not is_instance_valid(targets):
+		await is_instance_valid(player_pkmn_modifiers)
+		await is_instance_valid(enemy_modifiers)
+		await is_instance_valid(targets)
+		var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers, targets)
+		Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon, card.name.capitalize())
 
 
 func show_lead_effect() -> void:

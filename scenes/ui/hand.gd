@@ -37,6 +37,11 @@ func add_card(card: Card) -> void:
 		new_card_ui.card.apply_lead_mods(card)
 		new_card_ui.show_lead_effect()
 	
+	if card.pkmn_owner_uid == "":
+		card.pkmn_icon = card.icon
+		new_card_ui.card_visuals.owner_icon.scale = Vector2(.5,.5)
+		new_card_ui.card_visuals.icon.hide()
+		new_card_ui.card_visuals.effect.hide()
 	
 	
 	if card.pkmn_owner_uid == null:
