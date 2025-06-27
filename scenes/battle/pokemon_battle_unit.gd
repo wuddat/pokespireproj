@@ -8,6 +8,7 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 @export var stats: PokemonStats : set = set_pokemon_stats
 @export var spawn_position: String
 
+@onready var hoverable_tooltip: Control = $HoverableTooltip
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var stats_ui: StatsUI = $StatsUI
 @onready var status_handler: StatusHandler = $StatusHandler
@@ -214,3 +215,10 @@ func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
 	var label := COMBAT_TEXT.instantiate()
 	add_child(label)
 	label.show_text(text, color)
+
+
+func get_tooltip_data() -> Dictionary:
+	return {
+		"header": "[color=tan]%s[/color] Lvl %s" % [stats.species_id.capitalize(), stats.level],
+		"description": "Health: %s/%s\nExp: %s/%s" % [stats.health,stats.max_health,stats.current_exp,stats.get_xp_for_next_level(stats.level)]
+	}

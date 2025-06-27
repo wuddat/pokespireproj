@@ -1,6 +1,7 @@
 extends EnemyAction
 
 @export var block := 2
+@export var description: String
 
 func setup_from_data(data: Dictionary) -> void:
 	block = data.get("power", 1)
@@ -8,6 +9,7 @@ func setup_from_data(data: Dictionary) -> void:
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
+	description = data.get("description", "SOMETHING!")
 	intent = Intent.new()
 	intent.icon = preload("res://art/tile_0102.png")  # 🛡️ block icon
 	intent.particles_on = false

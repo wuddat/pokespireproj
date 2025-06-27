@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcfgrnxf1tas7"]
+
+[ext_resource type="Script" uid="uid://bn01kam5wwn8y" path="res://global/hoverable_tooltip.gd" id="1_xwgsq"]
+
+[node name="HoverableTooltip" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xwgsq")

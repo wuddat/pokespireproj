@@ -19,6 +19,8 @@ func _ready() -> void:
 	
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	draw_pile_button.pressed.connect(draw_pile_view.show_current_view.bind("Draw Pile", false, true))
+	draw_pile_button.container_name = "Draw Pile"
+	discard_pile_button.container_name = "Discard Pile"
 	discard_pile_button.pressed.connect(discard_pile_view.show_current_view.bind("Discard Pile"))
 
 

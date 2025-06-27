@@ -12,6 +12,7 @@ extends EnemyAction
 @export var damage_type: String
 @export var requires_status: String = ""
 @export var shift_enabled: int = 0
+@export var description: String =""
 
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
@@ -32,6 +33,7 @@ func setup_from_data(data: Dictionary) -> void:
 	type = EnemyAction.Type.CHANCE_BASED
 	chance_weight = 1.0
 	action_name = data.get("name", "SOMETHING!")
+	description = data.get("description", "hopefully something happens!")
 	shift_enabled = data.get("shift_enabled", 0)
 	if data.has("sound_path"):
 		sound = load(data["sound_path"]) as AudioStream

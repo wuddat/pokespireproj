@@ -3,6 +3,8 @@ extends TextureButton
 
 @export var counter: Label
 @export var card_pile: CardPile : set = set_card_pile
+@onready var hoverable_tooltip: Control = $HoverableTooltip
+var container_name: String = ""
 
 
 func set_card_pile(new_value: CardPile) -> void:
@@ -15,3 +17,10 @@ func set_card_pile(new_value: CardPile) -> void:
 
 func _on_card_pile_size_changed(cards_amount: int) -> void:
 	counter.text = str(cards_amount)
+
+
+func get_tooltip_data() -> Dictionary:
+	return {
+		"header": "[color=tan]%s[/color]:" % container_name,
+		"description": "Cards: %s" % card_pile.size()
+	}

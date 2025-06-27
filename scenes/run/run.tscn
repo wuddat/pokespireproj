@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bl8dkve10fma8"]
+[gd_scene load_steps=11 format=3 uid="uid://bl8dkve10fma8"]
 
 [ext_resource type="PackedScene" uid="uid://c32muahqn1k4q" path="res://scenes/map/map.tscn" id="1_8rlou"]
 [ext_resource type="Script" uid="uid://bm7k805xh1o2a" path="res://scenes/run/run.gd" id="1_l7o68"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://isan6btj7dwy" path="res://art/tile_0091.png" id="6_ux63y"]
 [ext_resource type="PackedScene" uid="uid://dg8q0cun8yy4s" path="res://scenes/ui/party_selector.tscn" id="6_yeia0"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="7_yeia0"]
+[ext_resource type="PackedScene" uid="uid://clj4o618fkspv" path="res://scenes/ui/universal_hover_tooltip.tscn" id="10_yeia0"]
 
 [node name="Run" type="Node"]
 process_mode = 3
@@ -131,3 +132,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="UniversalHoverTooltip" parent="SceneTransition" instance=ExtResource("10_yeia0")]
+visible = false

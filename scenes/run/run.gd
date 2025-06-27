@@ -10,7 +10,7 @@ const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 const eventscene := preload("res://scenes/event/event.tscn")
 const trainerscene := preload("res://scenes/animations/trainer_intro_scene.tscn")
 const wildscene := preload("res://scenes/animations/wild_intro.tscn")
-
+const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.tscn")
 @export var run_startup: RunStartup
 
 @onready var map: Map = $Map
@@ -77,6 +77,7 @@ func _show_map() -> void:
 		
 	map.show_map()
 	map.unlock_next_rooms()
+	
 
 
 func _setup_event_connections() -> void:
@@ -109,6 +110,7 @@ func 	_setup_top_bar():
 	health_ui.update_stats(character)
 	gold_ui.run_stats = stats
 	deck_button.card_pile = character.deck
+	deck_button.container_name = "Deck"
 	deck_view.card_pile = character.deck
 	deck_view.char_stats = character
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))

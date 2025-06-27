@@ -4,6 +4,7 @@ extends Control
 const SLEEP_ICON := preload("res://art/statuseffects/sleep.png")
 const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 
+@onready var hoverable_tooltip: Control = $HoverableTooltip
 @onready var icon_2: Sprite2D = %Icon2
 @onready var icon: TextureRect = %Icon
 @onready var label: Label = %Label
@@ -17,8 +18,8 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var swirl: TextureRect = %swirl
 @export var parent: Enemy
 @onready var aoe_icon: Sprite2D = %Icon3
-
 @export var status_handler: StatusHandler
+
 var spin_tween: Tween
 
 const TYPE_ICON_INDEX := {
@@ -141,7 +142,7 @@ func update_intent(intent: Intent) -> void:
 	elif intent.targets_all:
 		aoe_icon.show()
 		aoe_icon.visible = true
-		
+
 
 func start_spinning() -> void:
 	var size := swirl.size
@@ -151,3 +152,10 @@ func start_spinning() -> void:
 	spin_tween = create_tween()
 	spin_tween.set_loops()
 	spin_tween.tween_property(swirl, "rotation_degrees", 360, 2.0).as_relative()
+
+
+func get_tooltip_data() -> Dictionary:
+	return {
+		"header": "[color=tan]%s[/color]:" % parent.stats.species_id.capitalize(),
+		"description": "%s\n\n%s" % [parent.current_action.action_name, parent.current_action.description]
+	}
