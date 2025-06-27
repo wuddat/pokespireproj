@@ -16,14 +16,14 @@
 offsets = PackedFloat32Array(0, 0.218182, 0.50303, 0.80303, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.823, 1, 1, 1, 0.906, 1, 1, 1, 0.845, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7yo0l"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g42ja"]
 gradient = SubResource("Gradient_cnkn7")
 
 [sub_resource type="Curve" id="Curve_fo0ly"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.227528, 0.871003), 0.0, 0.0, 0, 0, Vector2(0.494382, 1), 0.0, 0.0, 0, 0, Vector2(0.803371, 0.871003), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="CurveTexture" id="CurveTexture_x53nd"]
+[sub_resource type="CurveTexture" id="CurveTexture_cnkn7"]
 curve = SubResource("Curve_fo0ly")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l6p45"]
@@ -40,8 +40,8 @@ angular_velocity_max = 197.36
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.6
-scale_curve = SubResource("CurveTexture_x53nd")
-color_ramp = SubResource("GradientTexture1D_7yo0l")
+scale_curve = SubResource("CurveTexture_cnkn7")
+color_ramp = SubResource("GradientTexture1D_g42ja")
 
 [node name="Run" type="Node"]
 process_mode = 3

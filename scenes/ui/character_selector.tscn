@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://eoubudhuhg53"]
+[gd_scene load_steps=120 format=3 uid="uid://eoubudhuhg53"]
 
 [ext_resource type="Script" uid="uid://du8dr06jscr0u" path="res://scenes/ui/character_selector.gd" id="1_to3sr"]
 [ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="2_to3sr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dflgoqc1mu7ql" path="res://art/bulbasaur_spritesheet.png" id="4_uy6wb"]
 [ext_resource type="Texture2D" uid="uid://c2xhttrclo1r7" path="res://art/tile_0116.png" id="5_uy6wb"]
 [ext_resource type="Texture2D" uid="uid://boklhiqs1414d" path="res://art/tile_0115.png" id="6_45qu8"]
+[ext_resource type="Texture2D" uid="uid://do0ydx76pjy6i" path="res://art/dottedline.png" id="9_45qu8"]
 
 [sub_resource type="Gradient" id="Gradient_wb0q5"]
 offsets = PackedFloat32Array(0, 0.99375)
@@ -736,6 +737,37 @@ animations = [{
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_2bl4m"]
 
+[sub_resource type="Gradient" id="Gradient_2bl4m"]
+offsets = PackedFloat32Array(0, 0.218182, 0.50303, 0.80303, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.355052, 0.137612, 0.015624, 0.823, 0.673006, 0.297928, 2.88785e-07, 0.906, 0.289085, 0.098464, 1.20327e-08, 0.845, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g42ja"]
+gradient = SubResource("Gradient_2bl4m")
+
+[sub_resource type="Curve" id="Curve_4u3lx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.227528, 0.871003), 0.0, 0.0, 0, 0, Vector2(0.494382, 1), 0.0, 0.0, 0, 0, Vector2(0.803371, 0.871003), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_cnkn7"]
+curve = SubResource("Curve_4u3lx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lqg73"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(256, 124, 1)
+direction = Vector3(1, 1, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 7.61
+initial_velocity_max = 38.07
+angular_velocity_min = 102.33
+angular_velocity_max = 197.36
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_cnkn7")
+color_ramp = SubResource("GradientTexture1D_g42ja")
+
 [node name="CharacterSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -747,6 +779,7 @@ script = ExtResource("1_to3sr")
 run_startup = ExtResource("2_uy6wb")
 
 [node name="Background" type="TextureRect" parent="."]
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -905,6 +938,15 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_45qu8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(260, 153)
+amount = 6
+texture = ExtResource("9_45qu8")
+lifetime = 2.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lqg73")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CharacterButtons/BulbasaurButton" to="." method="_on_bulbasaur_button_pressed"]
