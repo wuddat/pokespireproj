@@ -103,8 +103,8 @@ func perform_action() -> void:
 func update_intent_text() -> void:
 	if not is_instance_valid(target):
 		return
-		if intent.icon:
-			intent.icon_2.hide()
+	if intent.icon:
+		intent.icon_2.hide()
 	intent.current_text = intent.base_text #default
 	intent.particles_on = status_effects.size() > 0
 	

@@ -220,7 +220,8 @@ func setup_from_data(data: Dictionary) -> void:
 			rarity = Rarity.RARE
 	
 	if data.has("sound_path"):
-		sound = load(data["sound_path"]) as AudioStream
+		var soundpath = data["sound_path"]
+		sound = load(soundpath)
 	else:
 		var soundpath = "res://art/sounds/Tackle.wav"
 		sound = load(soundpath)

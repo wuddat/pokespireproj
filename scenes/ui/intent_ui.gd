@@ -145,8 +145,8 @@ func update_intent(intent: Intent) -> void:
 
 
 func start_spinning() -> void:
-	var size := swirl.size
-	swirl.pivot_offset = size / 2
+	var spin_size := swirl.size
+	swirl.pivot_offset = spin_size / 2
 	if spin_tween:
 		spin_tween.kill()
 	spin_tween = create_tween()

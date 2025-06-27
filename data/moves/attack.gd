@@ -94,16 +94,16 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			total_damage_dealt += total
 
 			# 🎵 Set sound based on effectiveness
-			var effective_text: String
-			var effectiveness: bool = false
+			var _effective_text: String
+			var _effectiveness: bool = false
 			if type_multiplier > 1:
 				damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
-				effective_text = "It's [color=goldenrod]SUPER EFFECTIVE[/color]!"
-				effectiveness = true
+				_effective_text = "It's [color=goldenrod]SUPER EFFECTIVE[/color]!"
+				_effectiveness = true
 			elif type_multiplier < 1:
 				damage_effect.sound = preload("res://art/sounds/not_effective.wav")
-				effectiveness = true
-				effective_text = "It's not very effective..!"
+				_effectiveness = true
+				_effective_text = "It's not very effective..!"
 			else:
 				damage_effect.sound = sound
 			damage_effect.execute([tar])
@@ -170,7 +170,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		
 		if self_damage_percent_hp > 0:
 			var self_dmg := DamageEffect.new()
-			self_dmg.amount = battle_unit_owner.stats.max_health * self_damage_percent_hp
+			self_dmg.amount = round(battle_unit_owner.stats.max_health * self_damage_percent_hp)
 			self_dmg.sound = null
 			self_dmg.execute([battle_unit_owner])
 			total_damage_dealt += self_dmg.amount

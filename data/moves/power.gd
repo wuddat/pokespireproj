@@ -90,7 +90,7 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 		
 		if self_heal > 0:
 			var self_heal_effect := HealEffect.new()
-			self_heal_effect.amount = total_damage_dealt/2
+			self_heal_effect.amount = round(total_damage_dealt/2)
 			#TODO add heal effect sfx
 			self_heal_effect.sound = null
 			self_heal_effect.execute([battle_unit_owner])

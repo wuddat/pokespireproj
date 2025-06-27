@@ -158,7 +158,7 @@ func _update_stat_ui(pkmn: PokemonStats) -> void:
 			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, stat_ui_by_uid[pkmn.uid]))
 		_update_pokemon_stats_ui(pkmn, ui)
 
-func _hide_switch_ui(switch_out_uid: String, switch_in_uid: String) -> void:
+func _hide_switch_ui(switch_out_uid: String, _switch_in_uid: String) -> void:
 	if stat_ui_by_uid.has(switch_out_uid):
 		var ui = stat_ui_by_uid[switch_out_uid]
 		ui.modulate = Color(1,1,1,.5)
@@ -236,7 +236,7 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	# 🎁 Inject EvolutionReward Screen
 	var evo_reward := preload("res://scenes/ui/evolution_rewards.tscn").instantiate()
 	$BattleOverLayer.add_child(evo_reward)
-	var evo_card_rewards: Array[Card] = []
+	var _evo_card_rewards: Array[Card] = []
 	var forgettable_cards: Array[Card] = char_stats.deck.cards.duplicate(true)
 	var learnable_cards: Array[Card] = char_stats.draftable_cards.cards.duplicate(true)
 	

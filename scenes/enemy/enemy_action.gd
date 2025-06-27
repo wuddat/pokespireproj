@@ -54,7 +54,7 @@ func animate_to_targets(
 	self_damage: int,
 	self_heal: int,
 	self_status: Array[Status],
-	enemy: Node,
+	enemy,
 	damage_type: String,
 	shift_enabled: int
 ) -> void:
@@ -63,7 +63,7 @@ func animate_to_targets(
 		Events.enemy_action_completed.emit(enemy)
 		return
 
-	var target = targets_to_hit[index]
+	target = targets_to_hit[index]
 	if not is_instance_valid(target):
 		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
 		return
@@ -97,7 +97,7 @@ func animate_to_targets(
 		)
 
 
-func _execute_self_effects(enemy: Node, total_damage: int, self_damage: int, self_heal: int, self_status: Array[Status]) -> void:
+func _execute_self_effects(enemy, total_damage: int, self_damage: int, self_heal: int, self_status: Array[Status]) -> void:
 	if self_damage > 0:
 		var recoil := DamageEffect.new()
 		recoil.amount = self_damage
@@ -105,7 +105,7 @@ func _execute_self_effects(enemy: Node, total_damage: int, self_damage: int, sel
 
 	if self_heal > 0:
 		var heal := HealEffect.new()
-		heal.amount = int(total_damage / 2)
+		heal.amount = round(total_damage / 2)
 		heal.execute([enemy])
 
 	for effect in self_status:
@@ -116,7 +116,7 @@ func _execute_self_effects(enemy: Node, total_damage: int, self_damage: int, sel
 			status.execute([enemy])
 
 
-func _handle_dodge(tween: Tween, enemy: Node, start_pos: Vector2, on_finish: Callable) -> void:
+func _handle_dodge(tween: Tween, enemy, start_pos: Vector2, on_finish: Callable) -> void:
 	print("Attack was DODGED")
 	tween.tween_interval(0.2)
 	tween.tween_property(enemy, "global_position", start_pos, 0.3)
@@ -125,8 +125,8 @@ func _handle_dodge(tween: Tween, enemy: Node, start_pos: Vector2, on_finish: Cal
 
 func _handle_hit(
 	tween: Tween,
-	enemy: Node,
-	target: Node,
+	enemy,
+	target,
 	targets_to_hit: Array[Node],
 	total_damage: int,
 	splash_damage: int,

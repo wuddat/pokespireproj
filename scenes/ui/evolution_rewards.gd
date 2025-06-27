@@ -106,7 +106,7 @@ func _on_learn_selected(card: Card) -> void:
 
 func _on_confirm() -> void:
 	var replacements: Array[Card] = []
-	var new_deck := CardPile.new()
+	
 	# Find all matching cards to remove
 	for card in player_deck.cards:
 		if card.id == forget_card.id and card.pkmn_owner_uid == pokemon.uid:

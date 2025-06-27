@@ -290,9 +290,9 @@ func _paralysis_check(crd: Card) -> bool:
 		print("%s is fully paralyzed!" % battle_unit_owner.stats.species_id)
 		Events.battle_text_requested.emit("%s is PARALYZED!" % battle_unit_owner.stats.species_id.capitalize())
 		SFXPlayer.play(preload("res://art/sounds/sfx/stat_paralyze.mp3"))
-		var tween := create_tween()
-		tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 25, 0.15))
-		tween.tween_interval(0.17)
+		var par_tween := create_tween()
+		par_tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 25, 0.15))
+		par_tween.tween_interval(0.17)
 		return true
 	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 	print("✅ %s resists paralysis and plays normally." % battle_unit_owner.stats.species_id)
