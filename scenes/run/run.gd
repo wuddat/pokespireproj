@@ -29,6 +29,7 @@ const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.
 @onready var party_selector: HBoxContainer = %PartySelector
 @onready var fade: ColorRect = %Fade
 @onready var fade_tween := create_tween()
+@onready var particles: CanvasLayer = %Particles
 
 
 var stats: RunStats
@@ -67,7 +68,7 @@ func _change_view(scene: PackedScene) -> Node:
 	var new_view := scene.instantiate()
 	currentview.add_child(new_view)
 	map.hide_map()
-	
+	particles.hide()
 	return new_view
 
 
@@ -77,6 +78,7 @@ func _show_map() -> void:
 		
 	map.show_map()
 	map.unlock_next_rooms()
+	particles.show()
 	
 
 
