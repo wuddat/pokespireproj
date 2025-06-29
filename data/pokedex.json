@@ -20,7 +20,7 @@
 		"razorleaf"
 	  ],
 	  "evolves_to": "ivysaur",
-	  "evolution_level": 3
+	  "evolution_level": 6
 	},
 	"ivysaur": {
 	  "name": "Ivysaur",
@@ -43,7 +43,7 @@
 		"sleeppowder",
 	  ],
 	  "evolves_to": "venusaur",
-	  "evolution_level": 6
+	  "evolution_level": 12
 	},
 	"venusaur": {
 	  "name": "Venusaur",
@@ -88,7 +88,7 @@
 		"flamethrower",
 	  ],
 	  "evolves_to": "charmeleon",
-	  "evolution_level": 3
+	  "evolution_level": 6
 	},
 	"charmeleon": {
 	  "name": "Charmeleon",
@@ -112,7 +112,7 @@
 		"rage",
 	  ],
 	  "evolves_to": "charizard",
-	  "evolution_level": 6
+	  "evolution_level": 12
 	},
 	"charizard": {
 	  "name": "Charizard",
