@@ -1,0 +1,183 @@
+[gd_scene load_steps=7 format=3 uid="uid://kfne03ql8pcq"]
+
+[ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="1_8j1b0"]
+[ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="2_fqg8x"]
+[ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="3_q6d5j"]
+[ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_s23g5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wshgr"]
+bg_color = Color(0.954, 0.917, 0.85, 0.375)
+
+[sub_resource type="LabelSettings" id="LabelSettings_koavt"]
+font_size = 24
+
+[node name="CardSuperDetail" type="Control"]
+layout_mode = 3
+anchor_right = 0.258
+anchor_bottom = 0.597
+offset_right = -0.0960083
+offset_bottom = 0.0639954
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 111.0
+offset_bottom = 172.0
+
+[node name="pkmn_border" type="Panel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.5
+offset_top = 31.0
+offset_right = -28.5
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wshgr")
+
+[node name="descr border" type="Panel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 119.0
+offset_right = -22.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wshgr")
+
+[node name="Description" type="RichTextLabel" parent="descr border"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Deal [color=red]10[/color] damage to all targets and inflict  [color=purple]2 POISON[/color]"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.9999
+offset_top = 33.0
+offset_right = -48.9999
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_8j1b0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rarity" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.9999
+offset_top = 40.0
+offset_right = -4.9999
+offset_bottom = 80.0
+grow_horizontal = 2
+rotation = 3.14159
+texture = ExtResource("2_fqg8x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cost" type="Label" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = -11.0
+offset_top = 5.0
+offset_right = 13.0
+offset_bottom = 32.0
+text = "9"
+label_settings = SubResource("LabelSettings_koavt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OwnerIcon" type="TextureRect" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.9999
+offset_top = 11.0
+offset_right = 43.0001
+offset_bottom = 116.0
+grow_horizontal = 2
+pivot_offset = Vector2(17, 22)
+texture = ExtResource("3_q6d5j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Type" type="Sprite2D" parent="."]
+position = Vector2(117, 55)
+scale = Vector2(0.842, 0.842)
+texture = ExtResource("4_s23g5")
+region_enabled = true
+region_rect = Rect2(70, 16, 38, 38)
+
+[node name="CardName" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 82.0
+offset_bottom = 31.0
+theme_override_font_sizes/normal_font_size = 8
+text = "ABSORB"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetType" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 108.0
+offset_right = 53.0
+offset_bottom = 117.0
+theme_override_font_sizes/normal_font_size = 8
+text = "Target:"
+fit_content = true
+autowrap_mode = 2
+vertical_alignment = 1
+
+[node name="Target" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = 52.0
+offset_top = 108.0
+offset_right = 108.0
+offset_bottom = 118.0
+text = "Self"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1

@@ -18,6 +18,8 @@ const PULSE_SHADER := preload("res://pulse.gdshader")
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = %IntentUI as IntentUI
 @onready var animation_handler: Node = $AnimationHandler
+@onready var name_container: PanelContainer = %NameContainer
+@onready var pkmn_name: RichTextLabel = %PkmnName
 
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
@@ -396,12 +398,15 @@ func _on_area_entered(_area: Area2D) -> void:
 	pulse_material.shader = PULSE_SHADER
 	pulse_material.set_shader_parameter("width", 1.5)  # start with no highlight
 	sprite_2d.material = pulse_material
+	pkmn_name.text = stats.species_id.capitalize()
+	name_container.show()
 
 func _on_area_exited(_area: Area2D) -> void:
 	var pulse_material := ShaderMaterial.new()
 	pulse_material.shader = PULSE_SHADER
 	pulse_material.set_shader_parameter("width", 0)  # start with no highlight
 	sprite_2d.material = pulse_material
+	name_container.hide()
 
 
 func dodge_check() -> bool:
@@ -433,3 +438,19 @@ func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
 	var label := COMBAT_TEXT.instantiate()
 	add_child(label)
 	label.show_text(text, color)
+
+
+func _on_mouse_entered() -> void:
+	var pulse_material := ShaderMaterial.new()
+	pulse_material.shader = PULSE_SHADER
+	pulse_material.set_shader_parameter("width", 1.5)  # start with no highlight
+	sprite_2d.material = pulse_material
+	pkmn_name.text = stats.species_id.capitalize()
+	name_container.show()
+
+func _on_mouse_exited() -> void:
+	var pulse_material := ShaderMaterial.new()
+	pulse_material.shader = PULSE_SHADER
+	pulse_material.set_shader_parameter("width", 0)  # start with no highlight
+	sprite_2d.material = pulse_material
+	name_container.hide()
