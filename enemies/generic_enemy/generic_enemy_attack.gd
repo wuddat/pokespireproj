@@ -14,8 +14,10 @@ extends EnemyAction
 @export var shift_enabled: int = 0
 @export var description: String =""
 
+
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
+	intent_type = "Attack"
 	
 	status_effects = []
 	if data.has("status_effects"):

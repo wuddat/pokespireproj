@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dj8k32krl0vwq"]
+[gd_scene load_steps=11 format=3 uid="uid://dj8k32krl0vwq"]
 
 [ext_resource type="Script" uid="uid://5121pgfrbdxd" path="res://scenes/battle/pokemon_battle_unit.gd" id="1_6808p"]
 [ext_resource type="PackedScene" uid="uid://b5xmc80xwdal6" path="res://scenes/ui/stats_ui.tscn" id="2_6808p"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="6_dfvhe"]
 [ext_resource type="PackedScene" uid="uid://bcfgrnxf1tas7" path="res://scenes/ui/hoverable_tooltip.tscn" id="7_6808p"]
 [ext_resource type="PackedScene" uid="uid://bnnr7b1674s3f" path="res://scenes/ui/unit_status_indicator.tscn" id="8_itayc"]
+[ext_resource type="PackedScene" uid="uid://dlmrrh6uk610u" path="res://scenes/ui/hover_name_container.tscn" id="9_gt2hd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo7j0"]
 size = Vector2(36, 35)
@@ -67,3 +68,10 @@ type = 4
 
 [node name="HealModifier" parent="ModifierHandler" instance=ExtResource("6_dfvhe")]
 type = 5
+
+[node name="NameContainer" parent="." instance=ExtResource("9_gt2hd")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

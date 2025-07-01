@@ -20,6 +20,8 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var aoe_icon: Sprite2D = %Icon3
 @export var status_handler: StatusHandler
 
+
+
 var spin_tween: Tween
 
 const TYPE_ICON_INDEX := {
@@ -131,15 +133,15 @@ func update_intent(intent: Intent) -> void:
 		arrow.visible = false
 		return
 		
-	elif parent.is_confused:
+	if parent.is_confused:
 		print("intentUI set to CONFUSED")
 		target.visible = true
-		target.scale = Vector2(0.6,0.6)
 		panel.visible = true
 		type_icon.visible = true
 		arrow.visible = true
+		return
 	
-	elif intent.targets_all:
+	if intent.targets_all:
 		aoe_icon.show()
 		aoe_icon.visible = true
 
@@ -155,7 +157,16 @@ func start_spinning() -> void:
 
 
 func get_tooltip_data() -> Dictionary:
+	var intent_description: String = ""
+	if parent.current_action.intent_type == "Attack":
+		intent_description = "Intends to [color=red]ATTACK[/color] for [color=red]%s[/color] damage" % parent.current_action.damage
+		if parent.current_action.status_effects and parent.current_action.status_effects.size() > 0:
+			intent_description = intent_description + " and [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
+	if parent.current_action.intent_type == "Block":
+		intent_description = "Intends to [color=blue]BLOCK[/color] for [color=blue]%s[/color]." % parent.current_action.block
+	if parent.current_action.intent_type == "Status":
+		intent_description = "Intends to [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]."
 	return {
 		"header": "[color=tan]%s[/color]:" % parent.stats.species_id.capitalize(),
-		"description": "%s\n\n%s" % [parent.current_action.action_name, parent.current_action.description]
+		"description": intent_description
 	}

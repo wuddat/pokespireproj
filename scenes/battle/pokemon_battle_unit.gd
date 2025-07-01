@@ -14,6 +14,7 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 @onready var unit_status_indicator: UnitStatusIndicator = %UnitStatusIndicator
+@onready var name_container: PanelContainer = %NameContainer
 
 
 
@@ -226,6 +227,14 @@ func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
 
 func get_tooltip_data() -> Dictionary:
 	return {
-		"header": "[color=tan]%s[/color] Lvl %s" % [stats.species_id.capitalize(), stats.level],
+		"header": "",
 		"description": "Health: %s/%s\nExp: %s/%s" % [stats.health,stats.max_health,stats.current_exp,stats.get_xp_for_next_level(stats.level)]
 	}
+
+
+func _on_mouse_entered() -> void:
+	name_container.pkmn_name.text = stats.species_id.capitalize()
+	name_container.show()
+
+func _on_mouse_exited() -> void:
+	name_container.hide()

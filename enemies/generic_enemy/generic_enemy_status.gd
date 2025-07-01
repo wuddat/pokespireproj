@@ -18,7 +18,7 @@ const STATUS_ICON := preload("res://art/status_effects/status_1.png")
 
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
-	
+	intent_type = "Status"
 	status_effects = []
 	if data.has("status_effects"):
 		status_effects.append_array(StatusData.get_status_effects_from_ids(Utils.to_typed_string_array(data["status_effects"])))

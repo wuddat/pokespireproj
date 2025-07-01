@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=3 uid="uid://b7kjap0xllfyb"]
+[gd_scene load_steps=138 format=3 uid="uid://b7kjap0xllfyb"]
 
 [ext_resource type="Texture2D" uid="uid://prme8llsdi5h" path="res://art/weedle_spritesheet.png" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://crgb1qoc5vdgn" path="res://scenes/enemy/enemy.gd" id="1_p200p"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cinaas1i56ukh" path="res://scenes/modifier_handler/modifier_handler.tscn" id="8_4efjx"]
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="9_hvxgb"]
 [ext_resource type="Script" uid="uid://cqo7ngmlosw7g" path="res://scenes/enemy/enemy_animation_handler.gd" id="10_hvxgb"]
-[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="11_peoo5"]
+[ext_resource type="PackedScene" uid="uid://dlmrrh6uk610u" path="res://scenes/ui/hover_name_container.tscn" id="11_peoo5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efjx"]
 
@@ -886,17 +886,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qk3tf"]
 size = Vector2(36.5, 39)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2f3il"]
-bg_color = Color(0, 0, 0, 0.708)
-border_color = Color(0.353, 0.344, 0.32, 0.602)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-shadow_color = Color(0, 0, 0, 0.290196)
-shadow_size = 3
-shadow_offset = Vector2(1, 1)
-
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_p200p")
@@ -966,48 +955,9 @@ type = 5
 [node name="AnimationHandler" type="Node2D" parent="."]
 script = ExtResource("10_hvxgb")
 
-[node name="NameContainer" type="PanelContainer" parent="."]
+[node name="NameContainer" parent="." instance=ExtResource("11_peoo5")]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 16.0
-offset_right = 28.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("11_peoo5")
-theme_override_styles/panel = SubResource("StyleBoxFlat_2f3il")
-
-[node name="MarginContainer" type="MarginContainer" parent="NameContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NameContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-alignment = 1
-
-[node name="PkmnName" type="RichTextLabel" parent="NameContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-bbcode_enabled = true
-text = "Staryu"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

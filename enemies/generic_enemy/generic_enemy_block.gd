@@ -13,6 +13,7 @@ func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
 	intent.icon = preload("res://art/tile_0102.png")  # 🛡️ block icon
 	intent.particles_on = false
+	intent_type = "Block"
 
 func perform_action() -> void:
 	if not enemy or not is_instance_valid(target):
@@ -34,6 +35,17 @@ func perform_action() -> void:
 	)
 
 func update_intent_text() -> void:
+	var target_pkmn := target
+	if not target_pkmn:
+		return
+	intent.target = target_pkmn.stats.icon
+	
+	if block > 0:
+		intent.current_text = intent.base_text % block
+	else: 
+		intent.current_text = intent.base_text % " "
+
 	if enemy and enemy.status_handler.has_status("confused"):
 		intent.target = preload("res://art/statuseffects/confused-effect.png")
-	intent.current_text = intent.base_text % block
+		return
+	
