@@ -72,6 +72,7 @@ type = 5
 [node name="NameContainer" parent="." instance=ExtResource("9_gt2hd")]
 unique_name_in_owner = true
 visible = false
+mouse_filter = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

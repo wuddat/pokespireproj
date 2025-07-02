@@ -21,6 +21,7 @@ const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.
 
 @onready var battlebutton: Button = %BattleButton
 @onready var pokecenterbtn: Button = %PokecenterButton
+@onready var add_item_button: Button = %AddItemButton
 @onready var mapbtn: Button = %MapButton
 @onready var rewardsbtn: Button = %RewardsButton
 @onready var shopbtn: Button = %ShopButton
@@ -30,6 +31,7 @@ const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.
 @onready var fade: ColorRect = %Fade
 @onready var fade_tween := create_tween()
 @onready var particles: CanvasLayer = %Particles
+@onready var item_inventory_ui: HBoxContainer = %ItemInventoryUI
 
 
 var stats: RunStats
@@ -101,6 +103,7 @@ func _setup_event_connections() -> void:
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
+	add_item_button.pressed.connect(_add_item_test)
 	mapbtn.pressed.connect(_show_map)
 	rewardsbtn.pressed.connect(_change_view.bind(rewardscene))
 	shopbtn.pressed.connect(_change_view.bind(shopscene))
@@ -117,7 +120,9 @@ func 	_setup_top_bar():
 	deck_view.char_stats = character
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))
 	party_selector.char_stats = character
+	item_inventory_ui.char_stats = character
 	party_selector.update_buttons()
+	item_inventory_ui.update_items()
 
 
 func fade_in(duration := 0.5) -> void:
@@ -243,3 +248,29 @@ func _on_leveled_pkmn_to_rewards(pkmn: PokemonStats) -> void:
 func _on_return_to_main_menu() -> void:
 	await get_tree().create_timer(0.1).timeout  # Let current frame/signal stack finish
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+
+func _add_item_test() -> void:
+	var itm_id := "pokeball"
+	var existing_item: Item = null
+
+	# Check if the item already exists in inventory
+	for item in character.item_inventory.items:
+		if item.id == itm_id:
+			existing_item = item
+			break
+
+	if existing_item:
+		existing_item.quantity += 1
+		print("INCREASED QUANTITY of item: %s (now %d)" % [existing_item.name, existing_item.quantity])
+	else:
+		var itm = ItemData.build_item(itm_id)
+		itm.quantity = 1  # initialize quantity if not already set in JSON
+		character.item_inventory.add_item(itm)
+		print("ADDED NEW ITEM: %s" % itm.name)
+		Utils.print_resource(itm)
+
+	print("Character Inventory:")
+	for i in character.item_inventory.items:
+		print("%s x%d" % [i.name, i.quantity])
+
+	item_inventory_ui.update_items()

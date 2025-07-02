@@ -1,0 +1,18 @@
+{
+  "items": {
+	"pokeball": {
+	  "name": "Pokeball",
+	  "id": "pokeball",
+	  "category": "target",
+	  "type": "normal",
+	  "target": "enemy",
+	  "status_effects": ["catching"],
+	  "description": "[center]Attempt to [color=gold]CATCH[/color] a pokemon![/center]",
+	  "icon_path": "res://art/sprites/items/ball/poke.png",
+	  "rarity": "common",
+	  "usable_in_battle": true,
+	  "consumable": true,
+	  "sound_path": "res://art/sounds/move_sfx/jump.wav"
+	},
+   }
+}

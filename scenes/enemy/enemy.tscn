@@ -958,6 +958,7 @@ script = ExtResource("10_hvxgb")
 [node name="NameContainer" parent="." instance=ExtResource("11_peoo5")]
 unique_name_in_owner = true
 visible = false
+mouse_filter = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6tvvkilj7pgd"]
+
+[ext_resource type="Script" uid="uid://buroj5v0qedcc" path="res://scenes/ui/item_inventory_ui.gd" id="1_co6a8"]
+[ext_resource type="Texture2D" uid="uid://d30341rsana41" path="res://art/sprites/items/medicine/rare-candy.png" id="2_nti3q"]
+[ext_resource type="Texture2D" uid="uid://cfrmxy6hvclpg" path="res://art/sprites/items/medicine/super-potion.png" id="3_vi0dr"]
+[ext_resource type="Texture2D" uid="uid://bh8hvvhvjd3tb" path="res://art/sprites/items/medicine/max-revive.png" id="4_i3sg3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2xh5j"]
+
+[node name="ItemInventoryUI" type="HBoxContainer"]
+offset_right = 92.0
+offset_bottom = 30.0
+theme_override_constants/separation = -14
+alignment = 1
+script = ExtResource("1_co6a8")
+
+[node name="Slot1" type="TextureButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_2xh5j")
+texture_normal = ExtResource("2_nti3q")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Slot1"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -12.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "99"
+
+[node name="Slot2" type="TextureButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_2xh5j")
+texture_normal = ExtResource("3_vi0dr")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="Slot2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -12.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "99"
+
+[node name="Slot3" type="TextureButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_2xh5j")
+texture_normal = ExtResource("4_i3sg3")
+stretch_mode = 3
+
+[node name="Label3" type="Label" parent="Slot3"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -12.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "99"

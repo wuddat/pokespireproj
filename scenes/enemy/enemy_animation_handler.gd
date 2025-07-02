@@ -4,6 +4,7 @@ const PKMN_SWITCH_ANIMATION = preload("res://scenes/animations/pkmn_switch_anima
 func _ready() -> void:
 	if not is_inside_tree():
 		await ready
+
 func trainer_spawn_animation(pkmn: Enemy) -> void:
 	var world_position = pkmn.global_position
 	var canvas_position = get_canvas_transform().affine_inverse() * world_position
@@ -12,3 +13,8 @@ func trainer_spawn_animation(pkmn: Enemy) -> void:
 	add_child(switch_animation)
 	switch_animation.pkmn_sprite.texture = pkmn.stats.art
 	await switch_animation.animation_player.animation_finished
+
+#TODO update this to allow used pokeballs to animate when thrown
+func pokeball_throw_animation(pkmn: Enemy) -> void:
+	var world_position = pkmn.global_position
+	var canvas_position = get_canvas_transform().affine_inverse() * world_position

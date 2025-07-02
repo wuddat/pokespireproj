@@ -10,6 +10,11 @@ signal card_played(card: Card)
 signal card_tooltip_requested(card: Card)
 signal tooltip_hide_requested()
 
+#Item-related Events
+signal item_aim_started(item: Item)
+signal item_aim_ended(item: Item)
+signal item_used(item: Item)
+
 #Player-related Events
 signal player_hand_drawn
 signal player_hand_discarded

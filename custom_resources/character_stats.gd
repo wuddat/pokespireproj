@@ -27,6 +27,8 @@ var draw_pile: CardPile
 var faint_pile: Dictionary = {} # uid (String) -> CardPile
 var battle_deck: CardPile
 var draftable_cards: CardPile
+var item_inventory: ItemInventory
+
 
 
 func set_mana (value: int) -> void:
@@ -72,6 +74,7 @@ func create_instance() -> Resource:
 		instance.deck.cards.append_array(pkmn_cards.cards)
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
+	instance.item_inventory = ItemInventory.new()
 	instance.draftable_cards = build_deck_from_pokemon(instance.current_party[0])
 	return instance
 
