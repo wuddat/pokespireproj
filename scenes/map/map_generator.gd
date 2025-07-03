@@ -158,10 +158,11 @@ func _setup_room_types() -> void:
 	#firstfloor is always battle
 	for room: Room in map_data[0]:
 		if room.next_rooms.size() > 0:
-			room.type = Room.Type.MONSTER
+			room.type = Room.Type.BOSS
 			room.tier = 0
 			room.battle_stats = battle_stats_pool.get_wild_battle_for_tier(0)
 			#room.battle_stats = battle_stats_pool.get_trainer_battle_for_tier(0)
+			#room.battle_stats = battle_stats_pool.get_boss_battle_for_tier(2)
 
 	
 	for floor_index in [2, 7]:  # 3rd and 8th floors (0-based index)

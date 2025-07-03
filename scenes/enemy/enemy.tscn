@@ -904,6 +904,7 @@ offset_top = -65.5
 offset_right = 33.5
 offset_bottom = -45.5
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false

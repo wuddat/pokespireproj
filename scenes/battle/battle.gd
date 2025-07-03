@@ -10,6 +10,8 @@ signal evolution_queue_completed
 @export var battle_music: AudioStream
 @export var party_selector: HBoxContainer
 @onready var status_view: StatusView = $StatusUI/StatusView
+@onready var background: Sprite2D = %Background
+@onready var background_2: Sprite2D = %Background2
 
 @onready var battle_ui: BattleUI = $BattleUI
 @onready var player_handler: PlayerHandler = $PlayerHandler
@@ -39,10 +41,13 @@ func _ready() -> void:
 	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
 	Events.evolution_triggered.connect(_on_evolution_triggered)
 	Events.evolution_completed.connect(_on_evolution_completed)
+	Events.mewtwo_phase_2_requested.connect(_on_mewtwo_phase_2_requested)
 
 
 func start_battle() -> void:
 	get_tree().paused = false
+	background.show()
+	background_2.hide()
 	status_view.visible = true
 	battle_ui.char_stats = char_stats
 	
@@ -66,6 +71,7 @@ func start_battle() -> void:
 	
 	initialize_stat_ui_for_party()
 	
+	enemy_handler.char_stats = char_stats
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
 	
@@ -268,3 +274,8 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	await evo_reward.tree_exited
 	
 	get_tree().paused = false
+
+
+func _on_mewtwo_phase_2_requested() -> void:
+	background.hide()
+	background_2.show()

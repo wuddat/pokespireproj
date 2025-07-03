@@ -1,8 +1,11 @@
 class_name BattleStats
 extends Resource
 
+
+
+
 @export_enum("Wild", "Trainer", "Legendary", "Boss") var encounter_type := "Wild"
-@export_enum("Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",  ) var trainer_type:= "Youngster"
+@export_enum("Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",  ) var trainer_type:= "None"
 
 @export_range(0,2) var battle_tier: int
 @export_range(0.0, 10.0) var weight: float
@@ -11,19 +14,22 @@ extends Resource
 @export var enemies: PackedScene #TODO this may need to be changed for enemy distribution
 
 @export_category("Enemy Types")
-@export_enum("Normal", "Water", "Rock", "Any") var pokemon_type:= "Normal"
+@export_enum("Normal", "Water", "Rock", "Any") var pokemon_type:= "Any"
 @export var enemy_pkmn_party: Array[String] = []
 
 var trainer_sprite: Texture
-
 var is_trainer_battle: bool:
 	get:
 		return encounter_type == "Trainer"
-
+var is_boss_battle: bool:
+	get:
+		return encounter_type == "Boss"
 var accumulated_weight: float = 0.0
+
 
 func roll_gold_reward() -> int:
 	return randi_range(gold_reward_min, gold_reward_max)
+
 
 func assign_enemy_pkmn_party() -> void:
 	if enemy_pkmn_party == []:
@@ -133,6 +139,9 @@ func assign_enemy_pkmn_party() -> void:
 								enemy_pkmn_party = ["magikarp", "magikarp", "seaking", "seadra", "dragonair", "gyarados"]
 							2:
 								enemy_pkmn_party = ["goldeen", "seaking", "gyarados"]
-
+								
 					_:
 						enemy_pkmn_party = ["zubat"]
+
+			"Boss":
+				pass

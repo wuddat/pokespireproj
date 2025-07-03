@@ -44,6 +44,9 @@ signal return_to_main_menu
 signal battle_text_requested(text: String)
 signal battle_text_completed()
 
+#Cutscene-related Events
+signal mewtwo_phase_2_requested
+
 #Pokemon-related Events
 signal party_pokemon_fainted(pokemon: PokemonBattleUnit)
 signal player_pokemon_start_status_applied(pokemon: PokemonBattleUnit)

@@ -4,6 +4,8 @@ extends Node2D
 
 const PKMN_SWITCH_ANIMATION = preload("res://scenes/animations/pkmn_switch_animation.tscn")
 
+@export var char_stats: CharacterStats : set = set_character
+
 @onready var right_panel: VBoxContainer = $"../StatUI/RightPanel"
 @onready var party_handler: PartyHandler = $"../PartyHandler"
 
@@ -11,6 +13,7 @@ var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var acting_enemies: Array[Enemy] = []
 var caught_pokemon: Array[PokemonStats] = []
 var bench_pokemon: Array[String] = []
+var bench_clones: Array[PokemonStats] = []
 var battle_stats: BattleStats = null
 
 var enemy_text_delay: float = 0.4
@@ -22,6 +25,11 @@ func _ready() -> void:
 	Events.player_hand_discarded.connect(_on_player_hand_drawn)
 	Events.pokemon_captured.connect(_on_pokemon_captured)
 	Events.party_pokemon_fainted.connect(_on_party_pokemon_fainted)
+
+
+func set_character(new_char_stats: CharacterStats) -> void:
+	char_stats = new_char_stats
+
 
 func setup_enemies(bat_stats: BattleStats) -> void:
 	if not bat_stats:
@@ -46,11 +54,16 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 	if battle_stats.is_trainer_battle:
 		var species_to_spawn := species_ids.slice(0, max_spawn)
 		bench_pokemon = species_ids.slice(max_spawn)
-	
+		
 		for i in range(species_to_spawn.size()):
 			await _spawn_enemy(species_to_spawn[i], enemy_nodes[i])
 			
-			
+	if battle_stats.is_boss_battle:
+		var enemy_clones = generate_phase_1_enemies(char_stats.current_party, char_stats.deck.cards)
+		var species_to_spawn := enemy_clones.slice(0, max_spawn)
+		bench_clones = enemy_clones.slice(max_spawn)
+		for i in range(min(enemy_clones.size(), enemy_nodes.size())):
+			await _spawn_enemy_from_stats(enemy_clones[i], enemy_nodes[i])
 	else:
 		for new_enemy: Node2D in enemy_nodes:
 			var species_id = species_ids.pick_random()
@@ -126,7 +139,7 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	enemy.stats = stats
 	
 	add_child(enemy)
-	
+	print("successfully spawned: ", enemy.stats.species_id)
 	if battle_stats.is_trainer_battle:
 		enemy.hide()
 		await enemy.animation_handler.trainer_spawn_animation(enemy)
@@ -139,6 +152,37 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	if not enemy.stats.stats_changed.is_connected(ui.update_stats):
 		enemy.stats.stats_changed.connect(func(): ui.update_stats(enemy.stats))
 	enemy.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(enemy))
+
+
+func _spawn_enemy_from_stats(clone_stats: Stats, enemy_node: Node2D) -> void:
+	var enemy: Enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
+	if enemy_node:
+		enemy.global_position = enemy_node.global_position
+	
+	var stats := preload("res://enemies/generic_enemy/generic_enemy.tres").duplicate()
+	stats.species_id = clone_stats.species_id
+	stats.load_from_pokedex(Pokedex.get_pokemon_data(clone_stats.species_id))
+	enemy.stats = stats
+	enemy.stats.move_ids = clone_stats.move_ids
+	for id in enemy.stats.move_ids:
+		print(id)
+	enemy.stats.max_health = clone_stats.max_health
+	add_child(enemy)
+
+	if battle_stats.is_trainer_battle or battle_stats.is_boss_battle:
+		enemy.hide()
+		await enemy.animation_handler.trainer_spawn_animation(enemy)
+		enemy.show()
+
+	var ui := stats_ui_scn.instantiate() as HealthBarUI
+	right_panel.add_child(ui)
+	ui.icon.position = Vector2(60, 7)
+	ui.update_stats(stats)
+
+	if not enemy.stats.stats_changed.is_connected(ui.update_stats):
+		enemy.stats.stats_changed.connect(func(): ui.update_stats(enemy.stats))
+	enemy.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(enemy))
+
 
 
 func _start_next_enemy_turn() -> void:
@@ -172,6 +216,24 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		var next_species = bench_pokemon.pop_front()
 		Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
 		_spawn_enemy(next_species, enemy)
+	print("ENEMY CLONE BENCH SIZE IS: ", bench_clones.size())
+	if battle_stats.is_boss_battle:
+		if bench_clones.size() > 0:
+			await get_tree().create_timer(0.5).timeout
+			var next_species = bench_clones.pop_front()
+			Events.battle_text_requested.emit("MewTwo summons [color=red]%s[/color]!" % next_species.species_id.capitalize())
+			_spawn_enemy_from_stats(next_species, enemy)
+		elif bench_clones.size() == 0:
+			print("attempting to spawn mewtwo:")
+			await get_tree().create_timer(0.5).timeout
+			Events.mewtwo_phase_2_requested.emit()
+			_spawn_enemy("mewtwo", enemy)
+			
+			
+			#var alive_enemies = get_children()
+			#if alive_enemies.size() == 0:
+			
+			
 	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:
@@ -203,3 +265,24 @@ func _on_player_hand_drawn() -> void:
 
 func _on_pokemon_captured(stats: PokemonStats) -> void:
 	caught_pokemon.append(stats.duplicate())
+
+
+func generate_phase_1_enemies(player_party: Array[PokemonStats], player_deck: Array[Card]) -> Array[PokemonStats]:
+	var clones: Array[PokemonStats] = []
+	
+	for pkmn in player_party:
+		var clone := pkmn.duplicate(true)
+		clone.health = clone.max_health
+		#clone.status_effects.clear()
+		#clone.is_enemy = true
+
+		# Extract move IDs from deck
+		var moves: Array[String] = []
+		for card in player_deck:
+			if card.pkmn_owner_uid == pkmn.uid and not moves.has(card.id):
+				moves.append(card.id)
+
+		clone.move_ids = moves
+		clones.append(clone)
+
+	return clones

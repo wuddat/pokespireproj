@@ -49,6 +49,10 @@ func get_legendary_battle_for_tier(tier: int) -> BattleStats:
 	return get_random_battle_for_tier_and_type(tier, "Legendary")
 
 
+func get_boss_battle_for_tier(tier: int) -> BattleStats:
+	return get_random_battle_for_tier_and_type(tier, "Boss")
+
+
 func _setup_weight_for_tier(tier: int) -> void:
 	var battles := _get_all_battles_for_tier(tier)
 	total_weights_by_tier[tier] = 0.0

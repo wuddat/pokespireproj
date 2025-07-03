@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bl8dkve10fma8"]
+[gd_scene load_steps=19 format=3 uid="uid://bl8dkve10fma8"]
 
 [ext_resource type="PackedScene" uid="uid://c32muahqn1k4q" path="res://scenes/map/map.tscn" id="1_8rlou"]
 [ext_resource type="Script" uid="uid://bm7k805xh1o2a" path="res://scenes/run/run.gd" id="1_l7o68"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b6tvvkilj7pgd" path="res://scenes/ui/item_inventory_ui.tscn" id="7_cnkn7"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="7_yeia0"]
 [ext_resource type="PackedScene" uid="uid://clj4o618fkspv" path="res://scenes/ui/universal_hover_tooltip.tscn" id="10_yeia0"]
+[ext_resource type="Script" uid="uid://1tb263xaqk62" path="res://scenes/run/cutscene_handler.gd" id="13_7yo0l"]
 
 [sub_resource type="Gradient" id="Gradient_cnkn7"]
 offsets = PackedFloat32Array(0, 0.218182, 0.50303, 0.80303, 1)
@@ -192,3 +193,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="UniversalHoverTooltip" parent="SceneTransition" instance=ExtResource("10_yeia0")]
 visible = false
+
+[node name="CutsceneHandler" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+layer = 25
+script = ExtResource("13_7yo0l")

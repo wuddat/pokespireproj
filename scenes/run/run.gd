@@ -8,9 +8,15 @@ const pokecenterscene := preload("res://scenes/pokecenter/pokecenter.tscn")
 const shopscene := preload("res://scenes/shop/shop.tscn")
 const treasurescene := preload("res://scenes/treasure/treasure.tscn")
 const eventscene := preload("res://scenes/event/event.tscn")
+const winscreenscene = preload("res://scenes/ui/win_screen.tscn")
+const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.tscn")
+
+
+#animations
 const trainerscene := preload("res://scenes/animations/trainer_intro_scene.tscn")
 const wildscene := preload("res://scenes/animations/wild_intro.tscn")
-const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.tscn")
+const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
+
 @export var run_startup: RunStartup
 
 @onready var map: Map = $Map
@@ -18,7 +24,7 @@ const universalhovertooltip := preload("res://scenes/ui/universal_hover_tooltip.
 @onready var gold_ui: GoldUI = %GoldUI
 @onready var deck_button: CardPileOpener = %DeckButton
 @onready var deck_view: CardPileView = %DeckView
-
+@onready var cutscene_handler: CanvasLayer = %CutsceneHandler
 @onready var battlebutton: Button = %BattleButton
 @onready var pokecenterbtn: Button = %PokecenterButton
 @onready var add_item_button: Button = %AddItemButton
@@ -125,6 +131,20 @@ func 	_setup_top_bar():
 	item_inventory_ui.update_items()
 
 
+func _show_regular_battle_rewards() -> void:
+	var reward_scene := _change_view(rewardscene) as BattleReward
+	reward_scene.run_stats = stats
+	reward_scene.character_stats = character
+	reward_scene.caught_pokemon = caught_pokemon
+	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
+	print("caught pokemon in _on_battle_won: ", caught_pokemon)
+	for pkmn in caught_pokemon:
+		print(pkmn.species_id)
+		
+	reward_scene.gold_reward = (map.last_room.battle_stats.roll_gold_reward())
+	reward_scene._play_reward_sequence()
+	party_selector.in_battle = false
+
 func fade_in(duration := 0.5) -> void:
 	fade.visible = true
 	fade_tween = create_tween()
@@ -192,18 +212,12 @@ func _on_event_entered() -> void:
 
 
 func _on_battle_won() -> void:
-	var reward_scene := _change_view(rewardscene) as BattleReward
-	reward_scene.run_stats = stats
-	reward_scene.character_stats = character
-	reward_scene.caught_pokemon = caught_pokemon
-	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
-	print("caught pokemon in _on_battle_won: ", caught_pokemon)
-	for pkmn in caught_pokemon:
-		print(pkmn.species_id)
-		
-	reward_scene.gold_reward = (map.last_room.battle_stats.roll_gold_reward())
-	reward_scene._play_reward_sequence()
-	party_selector.in_battle = false
+	if map.floors_climbed == MapGenerator.FLOORS:
+		var win_screen_scene := _change_view(winscreenscene) as WinScreen
+		win_screen_scene.char_stats = character
+	else:
+		_show_regular_battle_rewards()
+	
 
 func _on_map_exited(room: Room) -> void:
 	match room.type:

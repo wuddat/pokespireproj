@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://baulqd6xr7qvs"]
+
+[ext_resource type="Script" uid="uid://duu7i0y0ashfw" path="res://scenes/ui/win_screen.gd" id="1_rc6je"]
+[ext_resource type="AudioStream" uid="uid://d4fb3s0fs3iud" path="res://art/music/8bit_pkmn_theme_.ogg" id="2_viy0t"]
+[ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="3_mi4sw"]
+[ext_resource type="PackedScene" uid="uid://cpw38rx1au2ku" path="res://scenes/ui/pkmn_button.tscn" id="3_xl2x5"]
+[ext_resource type="Texture2D" uid="uid://do0ydx76pjy6i" path="res://art/dottedline.png" id="9_qiy78"]
+
+[sub_resource type="Gradient" id="Gradient_wb0q5"]
+offsets = PackedFloat32Array(0, 0.99375)
+colors = PackedColorArray(0.309065, 0.171555, 0, 1, 0.0383501, 0.0123539, 3.00817e-09, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q85j6"]
+gradient = SubResource("Gradient_wb0q5")
+width = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_8g5eo"]
+font = ExtResource("3_mi4sw")
+font_size = 24
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.772549)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_45qu8"]
+font = ExtResource("3_mi4sw")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.772549)
+
+[sub_resource type="Gradient" id="Gradient_2bl4m"]
+offsets = PackedFloat32Array(0, 0.218182, 0.50303, 0.80303, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.355052, 0.137612, 0.015624, 0.823, 0.673006, 0.297928, 2.88785e-07, 0.906, 0.289085, 0.098464, 1.20327e-08, 0.845, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g42ja"]
+gradient = SubResource("Gradient_2bl4m")
+
+[sub_resource type="Curve" id="Curve_4u3lx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.227528, 0.871003), 0.0, 0.0, 0, 0, Vector2(0.494382, 1), 0.0, 0.0, 0, 0, Vector2(0.803371, 0.871003), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_cnkn7"]
+curve = SubResource("Curve_4u3lx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lqg73"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(256, 124, 1)
+direction = Vector3(1, 1, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 7.61
+initial_velocity_max = 38.07
+angular_velocity_min = 102.33
+angular_velocity_max = 197.36
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_cnkn7")
+color_ramp = SubResource("GradientTexture1D_g42ja")
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rc6je")
+music = ExtResource("2_viy0t")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_q85j6")
+
+[node name="VboxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.5
+offset_top = -115.0
+offset_right = 157.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="VboxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Congratulations!"
+label_settings = SubResource("LabelSettings_8g5eo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="VboxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "You're  a  PoKeMon  Master!"
+label_settings = SubResource("LabelSettings_45qu8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="VboxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Again?"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(260, 153)
+amount = 6
+texture = ExtResource("9_qiy78")
+lifetime = 2.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lqg73")
+
+[node name="PkmnDisplay" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.0
+offset_top = 57.0
+offset_right = 226.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" parent="PkmnDisplay" instance=ExtResource("3_xl2x5")]
+layout_mode = 2
+
+[connection signal="pressed" from="VboxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

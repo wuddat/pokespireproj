@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=34 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b8uka45vccpd1" path="res://art/leaf2.png" id="5_8eh2s"]
 [ext_resource type="Resource" uid="uid://dw7iw834ey8jm" path="res://characters/bulbasaur/bulbasaur.tres" id="5_fisqk"]
 [ext_resource type="Resource" uid="uid://cht4tnwnmt5nj" path="res://enemies/rattata/rattata.tres" id="5_icoan"]
+[ext_resource type="Texture2D" uid="uid://de46jp3owuc02" path="res://art/bgs/crystal.png" id="5_ueicy"]
 [ext_resource type="Script" uid="uid://c2fu3iiht4n15" path="res://scenes/ui/battle_ui.gd" id="7_icoan"]
 [ext_resource type="Resource" uid="uid://bjnooo31mk6t3" path="res://enemies/mankey/mankey.tres" id="8_mvulk"]
 [ext_resource type="Script" uid="uid://sef1oxtgt26j" path="res://scenes/player/player_handler.gd" id="8_mxe8n"]
@@ -72,11 +73,20 @@ battle_music = ExtResource("3_pyfix")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.556953, 0.556953, 0.556953, 1)
 scale = Vector2(0.486984, 0.532598)
 texture = ExtResource("1_7gynk")
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="Background2" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.556953, 0.556953, 0.556953, 1)
+scale = Vector2(0.64125, 0.654545)
+texture = ExtResource("5_ueicy")
+centered = false
 
 [node name="CardDropArea" type="Area2D" parent="."]
 collision_layer = 2
