@@ -4,7 +4,8 @@ extends Node2D
 
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
-
+const LVL_UP = preload("res://art/sounds/sfx/lvl_up.wav")
+const DODGE = preload("res://art/sounds/sfx/dodge.wav")
 @export var stats: PokemonStats : set = set_pokemon_stats
 @export var spawn_position: String
 
@@ -164,7 +165,8 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 	stats.current_exp += xp
 	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, xp])
 	
-	show_combat_text("EXP: %s" % xp)
+	show_combat_text("EXP: %s" % xp, Color.WHITE, "quick_rise")
+	
 
 	await get_tree().create_timer(0.4).timeout
 
@@ -180,7 +182,8 @@ func on_enemy_defeated(enemy: Enemy) -> void:
 		stats.max_health += stats.level
 		stats.health += stats.level
 
-		show_combat_text("LEVEL UP!")
+		show_combat_text("LEVEL UP!", Color.WHITE, "quick_rise")
+		SFXPlayer.pitch_play(LVL_UP)
 
 		if stats.level >= stats.evolution_level:
 			#print("Evolution TRIGGERED")
@@ -214,15 +217,16 @@ func _play_dodge_tween() -> void:
 	var dodge_offset := Vector2.RIGHT * 24
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.1)
-	show_combat_text("DODGE!")
+	show_combat_text("DODGE!", Color.WHITE, "quick_rise")
+	SFXPlayer.play(DODGE)
 	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.5)
 	tween.tween_property(self, "global_position", start_pos, 0.1)
 
 
-func show_combat_text(text: String, color: Color = Color.WHITE) -> void:
+func show_combat_text(text: String, color: Color = Color.WHITE, animation: String = "rise_and_fade") -> void:
 	var label := COMBAT_TEXT.instantiate()
 	add_child(label)
-	label.show_text(text, color)
+	label.show_text(text, color, animation)
 
 
 func get_tooltip_data() -> Dictionary:

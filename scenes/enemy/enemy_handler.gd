@@ -58,7 +58,7 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 		for i in range(species_to_spawn.size()):
 			await _spawn_enemy(species_to_spawn[i], enemy_nodes[i])
 			
-	if battle_stats.is_boss_battle:
+	elif battle_stats.is_boss_battle:
 		var enemy_clones = generate_phase_1_enemies(char_stats.current_party, char_stats.deck.cards)
 		var species_to_spawn := enemy_clones.slice(0, max_spawn)
 		bench_clones = enemy_clones.slice(max_spawn)
@@ -139,7 +139,14 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	enemy.stats = stats
 	
 	add_child(enemy)
-	print("successfully spawned: ", enemy.stats.species_id)
+	
+	if enemy.stats.species_id == "mewtwo_mech":
+		enemy.sprite_2d.scale = Vector2(0.4,0.4)
+		var enemyintent = enemy.sprite_2d.get_child(0)
+		enemyintent.scale = Vector2(2.5,2.5)
+		enemyintent.pivot_offset = Vector2(55.0, 80.0)
+		print("successfully spawned: ", enemy.stats.species_id)
+	
 	if battle_stats.is_trainer_battle:
 		enemy.hide()
 		await enemy.animation_handler.trainer_spawn_animation(enemy)
@@ -216,7 +223,7 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		var next_species = bench_pokemon.pop_front()
 		Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
 		_spawn_enemy(next_species, enemy)
-	print("ENEMY CLONE BENCH SIZE IS: ", bench_clones.size())
+
 	if battle_stats.is_boss_battle:
 		if bench_clones.size() > 0:
 			await get_tree().create_timer(0.5).timeout
@@ -227,13 +234,7 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 			print("attempting to spawn mewtwo:")
 			await get_tree().create_timer(0.5).timeout
 			Events.mewtwo_phase_2_requested.emit()
-			_spawn_enemy("mewtwo", enemy)
-			
-			
-			#var alive_enemies = get_children()
-			#if alive_enemies.size() == 0:
-			
-			
+			_spawn_enemy("mewtwo_mech", enemy)
 	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:

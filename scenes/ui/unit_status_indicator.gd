@@ -39,18 +39,18 @@ func _ready() -> void:
 
 
 func update_status_display(pkmn: Node) -> void:
-	print("[UnitStatusIndicator] update status run")
+	#print("[UnitStatusIndicator] update status run")
 	if pkmn.status_handler.has_status("confused"):
-		print("[UnitStatusIndicator]confused detected showing effect")
+		#print("[UnitStatusIndicator]confused detected showing effect")
 		status_icon.texture = CONFUSED_EFFECT
 		show()
 		return
 	if pkmn.status_handler.has_status("sleep") or pkmn.skip_turn == true:
-		print("[UnitStatusIndicator] sleep detected showing effect")
+		#print("[UnitStatusIndicator] sleep detected showing effect")
 		status_icon.texture = SLEEP
 		show()
 		return
 	else:
 		hide()
-		print("[UnitStatusIndicator] EFFECT HIDDEN")
+		#print("[UnitStatusIndicator] EFFECT HIDDEN")
 	

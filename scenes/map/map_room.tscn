@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c21ndpvx44rjx"]
+[gd_scene load_steps=10 format=3 uid="uid://c21ndpvx44rjx"]
 
 [ext_resource type="Script" uid="uid://bk3y5ntws16lo" path="res://scenes/map/map_room.gd" id="1_gyfd6"]
 [ext_resource type="Texture2D" uid="uid://uu2myxkxc2s8" path="res://art/pokeball.png" id="1_hwhxx"]
@@ -43,6 +43,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.830335, 0.830335, 0.830335, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Visuals/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Visuals/Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_wln44"]
@@ -103,10 +127,58 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_gyfd6"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Visuals/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 2),
+"transitions": PackedFloat32Array(1.1487, 1.03526, 1.10957, 1.62451),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jaf1v"]
+resource_name = "boss_begin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Visuals/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(10, 10)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_map_room_selected"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jaf1v"]
 _data = {
 &"RESET": SubResource("Animation_w2n1o"),
+&"boss_begin": SubResource("Animation_jaf1v"),
 &"highlight": SubResource("Animation_wln44"),
+&"hover": SubResource("Animation_gyfd6"),
 &"select": SubResource("Animation_w2iac")
 }
 

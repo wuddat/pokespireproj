@@ -10,7 +10,7 @@ const ICONS:={
 	Room.Type.TREASURE: [preload("res://art/tile_0089.png"), Vector2(1.25, 1.25)],
 	Room.Type.POKECENTER:[preload("res://art/nurse.png"), Vector2(0.5, 0.5)],
 	Room.Type.SHOP: [preload("res://art/shop.png"), Vector2(1.4, 1.4)],
-	Room.Type.BOSS: [preload("res://art/sprites/items/ball/master.png"), Vector2(1.25, 1.25)],
+	Room.Type.BOSS: [preload("res://art/sprites/spritesheets/mewtwo_mech_sprite.png"), Vector2(0.6, 0.6)],
 	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
 	Room.Type.TRAINER: [preload("res://art/sprites/items/ball/premier.png"), Vector2.ONE],
 	Room.Type.LEGENDARY: [preload("res://art/sprites/items/ball/luxury.png"), Vector2.ONE],
@@ -37,11 +37,12 @@ func set_available(new_value: bool) -> void:
 	if available:
 		line_2d.visible = true
 		animation_player.play("highlight")
+		if room.type == Room.Type.BOSS:
+			animation_player.play("hover")
 	elif not room.selected:
 		animation_player.play("RESET")
 		line_2d.visible = false
 		sprite_2d.modulate = Color(1,1,1,0.7)
-		
 
 
 func set_room(new_data: Room) -> void:
@@ -53,6 +54,8 @@ func set_room(new_data: Room) -> void:
 		sprite_2d.texture = _get_monster_icon(room.tier)
 	else:
 		sprite_2d.texture = ICONS[room.type][0]
+	if room.type == Room.Type.BOSS:
+			animation_player.play("hover")
 	
 
 
@@ -66,6 +69,8 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	
 	room.selected = true
 	animation_player.play("select")
+	if room.type == Room.Type.BOSS:
+			animation_player.play("boss_begin")
 	MusicPlayer.play(music, true)
 
 

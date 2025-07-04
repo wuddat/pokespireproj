@@ -74,31 +74,37 @@ alignment = 1
 
 [node name="MapButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "map"
 
 [node name="BattleButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "battle"
 
 [node name="ShopButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "shop"
 
 [node name="TreasureButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "treasure"
 
 [node name="RewardsButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "rewards"
 
 [node name="PokecenterButton" type="Button" parent="DebugButtons"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "pokecenter"
 

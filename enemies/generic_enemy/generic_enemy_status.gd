@@ -43,7 +43,7 @@ func setup_from_data(data: Dictionary) -> void:
 	var damage_display = "%s"
 
 	intent.particles_on = status_effects.size() > 0
-	print("is intent on?: ", intent.particles_on)
+	#print("is intent on?: ", intent.particles_on)
 	intent.base_text = damage_display
 	intent.current_text = intent.base_text % damage
 	if damage <= 0:

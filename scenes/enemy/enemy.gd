@@ -51,8 +51,8 @@ func _ready():
 	await get_tree().process_frame
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
-	
-	if stats and stats.species_id != "" and stats.move_ids.size() <= 1:
+
+	if stats and stats.species_id != "" and stats.uid == "":
 		#print("READY: species_id = ", stats.species_id)
 		var poke_data = Pokedex.get_pokemon_data(stats.species_id)
 		#print("Pokedata: ", poke_data)
@@ -111,8 +111,8 @@ func setup_ai() -> void:
 	
 	if enemy_action_picker.has_method("setup_actions_from_moves"):
 		enemy_action_picker.setup_actions_from_moves(self, stats.move_ids)
-		for id in stats.move_ids:
-			print("this is in the action picker: ", id)
+		#for id in stats.move_ids:
+			#print("this is in the action picker: ", id)
 	else:
 			print("enemy_action_picker does NOT have setup_actions_from_moves")
 	await get_tree().process_frame

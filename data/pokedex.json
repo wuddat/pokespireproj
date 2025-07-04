@@ -3176,6 +3176,23 @@
 		"rest",
 		"metronome"
 	  ]
-	}
+	},
+	"mewtwo_mech": {
+	  "name": "Mewtwo",
+	  "species_id": "mewtwo_mech",
+	  "sprite_path": "res://art/sprites/150_1.png",
+	  "icon_path": "res://art/sprites/spritesheets/mewtwo_mech_sprite.png",
+	  "type": [
+		"psychic"
+	  ],
+	  "max_health": 50,
+	  "move_ids": [
+		"confusion",
+		"psychic",
+		"psybeam",
+		"hypnosis",
+		"barrier"
+	  ]
+	},
   }
 }

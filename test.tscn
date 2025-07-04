@@ -1,45 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf40ljrl6qjwu"]
+[gd_scene load_steps=8 format=3 uid="uid://cf40ljrl6qjwu"]
 
-[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="2_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://bppxxi36dobxg" path="res://art/sprites/9.png" id="2_6uqi0"]
+[ext_resource type="Script" uid="uid://81uh5y7xs58i" path="res://testing/test.gd" id="2_ppyta"]
+[ext_resource type="Shader" uid="uid://bue7704w1so3v" path="res://testing/testingShader.gdshader" id="3_ykrsh"]
 
-[sub_resource type="Shader" id="Shader_37kl0"]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppyta"]
+shader = ExtResource("3_ykrsh")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_rotation = 0.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_pivot = Vector2(0.5, 0.5)
+shader_parameter/mirror_horizontal = false
+shader_parameter/mirror_vertical = false
+shader_parameter/target_color = Color(0.517647, 0.937255, 0.772549, 1)
+shader_parameter/replacement_color = Color(0.261907, 0.588996, 1, 1)
+shader_parameter/tolerance = 0.4
+shader_parameter/blend_amount = 0.6
+shader_parameter/ignore_black = true
 
-uniform sampler2D flowMap; //Displacement map
-uniform float strength;    //Force of the effect
-uniform float speed;       //Speed of the effect
-uniform int frames : hint_range(1, 10); //Frames of the effect
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14j6"]
+shader = ExtResource("3_ykrsh")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_rotation = 0.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_pivot = Vector2(0.5, 0.5)
+shader_parameter/mirror_horizontal = false
+shader_parameter/mirror_vertical = false
+shader_parameter/target_color = Color(1, 0, 0, 1)
+shader_parameter/replacement_color = Color(0, 1, 0, 1)
+shader_parameter/tolerance = 0.2
+shader_parameter/blend_amount = 1.0
+shader_parameter/ignore_black = true
 
-//Returns a value between 0 and 1 depending of the frames -> exemple: frames = 4, frame 1 = 0.25
-float clock(float time){
-	float fframes = float(frames);
-	return floor(mod(time * speed, fframes)) / fframes;
-}
+[sub_resource type="Gradient" id="Gradient_vbegm"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 
-void fragment(){
-	float c = clock(TIME); //Get clock frame
-	vec4 offset = texture(flowMap, vec2(UV.x + c, UV.y + c)) * strength; //Get offset 
-	//COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + normal.xy); //Apply offset
-	COLOR = texture(TEXTURE, vec2(UV.x,UV.y) + offset.xy - vec2(0.5,0.5)*strength); //We need to remove the displacement 
-}
-
-
-// TEST CLOCK
-/*
-void fragment(){
-	float c = clock(TIME);
-	COLOR = vec4( c, c, c, 1);
-}
-*/"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
-shader = SubResource("Shader_37kl0")
-shader_parameter/strength = 0.1
-shader_parameter/speed = 30.0
-shader_parameter/frames = 10
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ehkex"]
+gradient = SubResource("Gradient_vbegm")
 
 [node name="Node2D" type="Sprite2D"]
-material = SubResource("ShaderMaterial_6uqi0")
+clip_children = 2
+material = SubResource("ShaderMaterial_ppyta")
 position = Vector2(236, 103)
 scale = Vector2(4.50676, 4.31757)
 texture = ExtResource("2_6uqi0")
+script = ExtResource("2_ppyta")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_g14j6")
+texture = SubResource("GradientTexture2D_ehkex")

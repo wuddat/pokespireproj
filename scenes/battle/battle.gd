@@ -74,13 +74,11 @@ func start_battle() -> void:
 	enemy_handler.char_stats = char_stats
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
-	
-	#MusicPlayer.play(battle_music, true)
 
 	player_handler.start_battle(char_stats)
 	battle_ui.initialize_card_pile_ui()
 
-#TODO clean up this function - literally a straight copy paste chatgpt because i was tired
+
 func initialize_stat_ui_for_party() -> void:
 	var active_pokemon := party_handler.get_active_pokemon()
 	var seen_uids: Array[String] = []
@@ -122,20 +120,15 @@ func initialize_stat_ui_for_party() -> void:
 			stat_ui_by_uid.erase(uid)
 
 
-
-
 func _update_pokemon_stats_ui(pkmn: PokemonStats, ui: HealthBarUI) -> void:
 	ui.update_stats(pkmn)
 
 
-
 func _on_enemies_child_order_changed() -> void:
-	#print("enemies_child_order_changed signal received")
 	if not is_instance_valid(get_tree()):
 		return
 	await get_tree().create_timer(1).timeout
-	print("evolution in progress is: ", evolution_in_progress)
-
+	
 	if enemy_handler.get_child_count() == 0:
 		if is_processing_evolution or evolution_queue.size() > 0:
 			print("🕐 Waiting for evolution queue to finish...")
@@ -149,8 +142,8 @@ func _on_enemies_child_order_changed() -> void:
 func _on_enemy_turn_ended() -> void:
 	await player_handler.start_turn()
 	enemy_handler.reset_enemy_actions()
-	
-	
+
+
 func _on_player_died() -> void:
 		Events.battle_over_screen_requested.emit("You Whited Out!", BattleOverPanel.Type.LOSE)
 
@@ -163,6 +156,7 @@ func _update_stat_ui(pkmn: PokemonStats) -> void:
 		if not pkmn.stats_changed.is_connected(_update_pokemon_stats_ui):
 			pkmn.stats_changed.connect(_update_pokemon_stats_ui.bind(pkmn, stat_ui_by_uid[pkmn.uid]))
 		_update_pokemon_stats_ui(pkmn, ui)
+
 
 func _hide_switch_ui(switch_out_uid: String, _switch_in_uid: String) -> void:
 	if stat_ui_by_uid.has(switch_out_uid):
@@ -188,14 +182,8 @@ func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
 
 func _on_evolution_triggered(pkmn: PokemonBattleUnit) -> void:
 	if not is_instance_valid(pkmn): return
-
-	#evolution_in_progress = true
-	#await _play_evolution_cutscene(pkmn)
-	#evolution_in_progress = false
-	#Events.evolution_completed.emit()
-	
 	evolution_queue.append(pkmn)
-
+	
 	if not is_processing_evolution:
 			_process_evolution_queue()
 
@@ -217,7 +205,7 @@ func _process_evolution_queue() -> void:
 func _on_evolution_completed():
 	evolution_in_progress = false
 	_on_enemies_child_order_changed()
-	
+
 
 func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	print("pausing tree....")
