@@ -263,7 +263,6 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	
 	get_tree().paused = false
 
-
 func _on_mewtwo_phase_2_requested() -> void:
 	background.hide()
 	background_2.show()
