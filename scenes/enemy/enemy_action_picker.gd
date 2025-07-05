@@ -194,7 +194,7 @@ func resolve_action_targets(action: EnemyAction, target_type: String) -> void:
 			action.target = target
 		"all_enemies":
 			action.targets = player_party_pool.duplicate()
-		"all_allies":
+		"all_allies", "allies":
 			action.targets = enemy_ally_pool.duplicate()
 		"all":
 			action.targets = player_party_pool.duplicate() + enemy_ally_pool.duplicate()
@@ -202,7 +202,7 @@ func resolve_action_targets(action: EnemyAction, target_type: String) -> void:
 			action.targets = [enemy]
 		_:
 			action.target = target
-
+			print("[ENEMYACTIONPICKER]: Resolve action target error: target_type string invalid")
 
 
 func setup_chances() -> void:

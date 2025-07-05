@@ -166,12 +166,13 @@ func _set_card(value: Card) -> void:
 
 func _set_playable(value:bool) -> void:
 	playable = value
+
 	if not playable:
-		card_visuals.cost.add_theme_color_override("font_color", Color.DARK_RED)
-		card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
+		card_visuals.cost.modulate = Color.DARK_RED
 	else:
-		card_visuals.cost.remove_theme_color_override("font_color")
-		card_visuals.icon.modulate = Color(1, 1, 1, 1)
+		if card.rarity == Card.Rarity.UNCOMMON:
+			card_visuals.cost.modulate = Color(1,1,1,1)
+		else: card_visuals.cost.modulate = Color(0.213,0.44,1,1)
 
 
 func _set_char_stats(value: CharacterStats) -> void:
@@ -209,10 +210,8 @@ func _on_char_stats_changed() -> void:
 func play_card_with_delay(crd: Card) -> void:
 	hide()
 	Events.card_played.emit(crd)
-	#Events.battle_text_requested.emit("Played %s!" % card.name)
 	char_stats.mana -= crd.current_cost
 	crd.random_targets.clear()
-	#await get_tree().create_timer(play_card_delay).timeout
 	
 	#handle confusion/paralysis if any:
 	if await _paralysis_check(crd):
@@ -231,7 +230,7 @@ func play_card_with_delay(crd: Card) -> void:
 			for i in range(crd.multiplay):
 				crd.random_targets.append(crd._get_targets([], battle_unit_owner))
 
-		print("🔁 Playing card %s %s times..." % [crd.name, crd.multiplay])
+		print("[CARD_UI] Playing card %s %s times..." % [crd.name, crd.multiplay])
 
 		# Play card with delays between
 		if crd.multiplay > 1:
@@ -262,10 +261,10 @@ func _confusion_check(crd: Card) -> bool:
 	var chance := 0.3
 	var roll := randf()
 	if roll < chance:
-		print("🤪 %s is confused and hits itself!" % battle_unit_owner.stats.species_id)
+		print("[CARD_UI] %s is confused and hits itself!" % battle_unit_owner.stats.species_id)
 		return true
 	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
-	print("✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
+	print("[CARD_UI]✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
 	return false
 
 

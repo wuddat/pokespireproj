@@ -22,6 +22,8 @@ func _ready() -> void:
 		await get_tree().process_frame
 	if not Events.item_used.is_connected(_on_item_used):
 		Events.item_used.connect(_on_item_used)
+	if not Events.item_added.is_connected(_on_item_added):
+		Events.item_added.connect(_on_item_added)
 	
 	btn_slots = [slot_1,slot_2,slot_3]
 	for slot in btn_slots:
@@ -52,7 +54,7 @@ func reset_item_use_state() -> void:
 
 
 func _on_item_used(current_item: Item) -> void:
-	print("used pokeball!")
+	print("used %s!" % current_item.name)
 	char_stats.item_inventory.use_item(current_item, current_item.targets)
 	update_items()
 
@@ -65,6 +67,9 @@ func _on_item_pressed(index: int) -> void:
 		pending_item = itm
 		Events.item_aim_started.emit(itm)
 
+
+func _on_item_added(_itm: Item) -> void:
+	update_items()
 
 func on_enemy_clicked(enemy: Node) -> void:
 	if current_state == State.SELECTING_TARGET and pending_item:

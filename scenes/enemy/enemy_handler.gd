@@ -149,6 +149,7 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	
 	if battle_stats.is_trainer_battle:
 		enemy.hide()
+		enemy.is_trainer_pkmn = true
 		await enemy.animation_handler.trainer_spawn_animation(enemy)
 		enemy.show()
 	var ui := stats_ui_scn.instantiate() as HealthBarUI

@@ -6,6 +6,7 @@ var items: Array[Item] = []
 
 func add_item(item: Item) -> void:
 	items.append(item)
+	Events.item_added.emit(item)
 
 func remove_item(item: Item) -> void:
 	items.erase(item)
@@ -13,13 +14,16 @@ func remove_item(item: Item) -> void:
 func use_item(item: Item, targets: Array[Node]) -> void:
 	for tar in targets:
 		if item.is_consumable:
-			print("item used on %s!" % tar.name)
-			if item.status_effects:
-				for status_effect in item.status_effects:
-					var stat_effect := StatusEffect.new()
-					stat_effect.source = null
-					stat_effect.status = status_effect.duplicate()
-					stat_effect.execute(targets)
+			if item.id == "pokeball" and tar.is_trainer_pkmn == true:
+				Events.battle_text_requested.emit("You can't catch trainer's pokemon!")
+			else:
+				print("item used on %s!" % tar.name)
+				if item.status_effects:
+					for status_effect in item.status_effects:
+						var stat_effect := StatusEffect.new()
+						stat_effect.source = null
+						stat_effect.status = status_effect.duplicate()
+						stat_effect.execute(targets)
 
 	if item.is_consumable:
 		item.quantity -= 1

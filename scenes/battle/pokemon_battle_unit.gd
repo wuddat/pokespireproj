@@ -27,7 +27,7 @@ var has_slept: bool = false
 var is_asleep: bool = false
 var is_confused: bool = false
 var is_froze: bool = false
-
+var is_trainer_pkmn: bool = true
 var last_damage_taken: int = 0
 
 func _ready() -> void:
@@ -218,7 +218,7 @@ func _play_dodge_tween() -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.1)
 	show_combat_text("DODGE!", Color.WHITE, "quick_rise")
-	SFXPlayer.play(DODGE)
+	SFXPlayer.pitch_play(DODGE)
 	tween.tween_property(self, "global_position", start_pos - dodge_offset, 0.5)
 	tween.tween_property(self, "global_position", start_pos, 0.1)
 

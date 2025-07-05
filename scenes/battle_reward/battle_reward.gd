@@ -1,8 +1,6 @@
 class_name BattleReward
 extends Control
 
-#enum Type {GOLD, NEW_CARD, RELIC}
-
 const CARD_REWARDS = preload("res://scenes/ui/card_rewards.tscn")
 const REWARD_BUTTON = preload("res://scenes/ui/reward_button.tscn")
 const GOLD_ICON := preload("res://art/gold.png")
@@ -25,9 +23,6 @@ const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 @onready var back_button: Button = $VBoxContainer/BackButton
 @onready var rewards: VBoxContainer = %Rewards
 var generated_rewards: Array[Control] = []
-
-
-
 
 var card_reward_total_weight := 0.0
 var card_rarity_weights := {
@@ -59,13 +54,21 @@ func add_card_reward() -> void:
 	card_reward.pressed.connect(_show_card_rewards)
 	rewards.add_child.call_deferred(card_reward)
 
+func add_item_reward() -> void:
+	var item_reward := REWARD_BUTTON.instantiate() as RewardButton
+	var random_item := ItemData.get_random_item()
+	item_reward.reward_icon = random_item.icon
+	item_reward.reward_text = "You found %s!" % random_item.name.capitalize()
+	item_reward.pressed.connect(_on_item_reward_taken.bind(random_item))
+	rewards.add_child.call_deferred(item_reward)
+
 
 func add_pkmn_reward() -> void:
 	print("Caught Pokémon array:", caught_pokemon)
 	print("Caught Pokémon count:", caught_pokemon.size())
 	for stats in caught_pokemon:
 		var pkmn_reward := REWARD_BUTTON.instantiate()
-		pkmn_reward.reward_icon = CAUGHT_ICON
+		pkmn_reward.reward_icon = stats.icon
 		pkmn_reward.reward_text = "Caught: %s " % stats.species_id.capitalize()
 		pkmn_reward.pressed.connect(_on_pokemon_reward_taken.bind(stats))
 		rewards.add_child.call_deferred(pkmn_reward)
@@ -207,6 +210,13 @@ func _on_card_reward_taken(card: Card) -> void:
 	character_stats.deck.add_card(card)
 	back_button.disabled = false
 
+func _on_item_reward_taken(item: Item) -> void:
+	if not character_stats or not item:
+		return
+	character_stats.item_inventory.add_item(item)
+	print("Added %s to player inventory" % item.name)
+	back_button.disabled = false
+
 
 func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	if not character_stats:
@@ -236,6 +246,9 @@ func _play_reward_sequence() -> void:
 		await _reward_delay()
 		
 	add_gold_reward(gold_reward)
+	await _reward_delay()
+	
+	add_item_reward()
 	await _reward_delay()
 
 

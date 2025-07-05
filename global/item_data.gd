@@ -48,8 +48,13 @@ func build_item(id: String) -> Item:
 		item.use_effect = load(effect_path)
 		
 	return item
-	
-	
-	
-	
-	
+
+
+func get_random_item() -> Item:
+	if items.is_empty():
+		push_error("No items loaded in ItemData!")
+		return null
+
+	var keys = items.keys()
+	var random_key = keys.pick_random()
+	return build_item(random_key)

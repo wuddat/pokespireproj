@@ -14,6 +14,7 @@ signal tooltip_hide_requested()
 signal item_aim_started(item: Item)
 signal item_aim_ended(item: Item)
 signal item_used(item: Item)
+signal item_added(item: Item)
 
 #Player-related Events
 signal player_hand_drawn

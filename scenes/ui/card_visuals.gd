@@ -12,6 +12,7 @@ extends Control
 @onready var effect: Label = $Effect
 @onready var owner_icon: TextureRect = $OwnerIcon
 @onready var type: Sprite2D = $Type
+var is_playable: bool
 
 
 var card_set := false
@@ -75,10 +76,9 @@ func _update_visuals() -> void:
 	icon.texture = card.icon
 	rarity.modulate = Card.RARITY_COLORS[card.rarity]
 	panel.modulate = card.get_pkmn_color()
-	if card.rarity == Card.Rarity.UNCOMMON:
-		cost.modulate = Color(1,1,1,1)
-	else: cost.modulate = Color(0.213,0.44,1,1)
-	#pkmn_border.modulate = card.get_pkmn_color()
+	#if card.rarity == Card.Rarity.UNCOMMON:
+		#cost.modulate = Color(1,1,1,1)
+	#else: cost.modulate = Color(0.213,0.44,1,1)
 
 	if card.pkmn_icon:
 		owner_icon.texture = card.pkmn_icon
