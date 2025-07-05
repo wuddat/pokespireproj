@@ -44,6 +44,7 @@ signal add_leveled_pkmn_to_rewards(pkmn_stats: PokemonStats)
 signal return_to_main_menu
 signal battle_text_requested(text: String)
 signal battle_text_completed()
+signal camera_shake_requested(damage: int)
 
 #Cutscene-related Events
 signal mewtwo_phase_2_requested

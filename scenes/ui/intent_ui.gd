@@ -159,11 +159,13 @@ func start_spinning() -> void:
 func get_tooltip_data() -> Dictionary:
 	var intent_description: String = ""
 	if parent.current_action.intent_type == "Attack":
-		intent_description = "Intends to [color=red]ATTACK[/color] for [color=red]%s[/color] damage" % parent.current_action.damage
+		intent_description = "Intends to [color=red]ATTACK[/color] for [color=red]%s[/color]" % label.text
 		if parent.current_action.status_effects and parent.current_action.status_effects.size() > 0:
 			intent_description = intent_description + " and [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
+		else:
+			intent_description = intent_description + "!"
 	if parent.current_action.intent_type == "Block":
-		intent_description = "Intends to [color=blue]BLOCK[/color] for [color=blue]%s[/color]." % parent.current_action.block
+		intent_description = "Intends to [color=royalblue]BLOCK[/color] for [color=royalblue]%s[/color]." % parent.current_action.block
 	if parent.current_action.intent_type == "Status":
 		intent_description = "Intends to [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]."
 	return {

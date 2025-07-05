@@ -286,6 +286,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage and gain equivalent [color=blue]BLOCK[/color]![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
+	  "sound_path": "res://art/sounds/move_sfx/bubble1.mp3",
 	  "rarity": "uncommon",
 	  "dmg_block": 4,
 	},
@@ -520,7 +521,7 @@
 	  ],
 	  "description": "[center]Apply 20 [color=purple]POISON[/color] to target.[/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	"sound_path": "res://art/sounds/move_sfx/bubble1.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/bubble1.mp3",
 	  "rarity": "rare"
 	},
 	"crunch": {
@@ -1026,7 +1027,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=green]HEAL[/color] HALF the amount.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/absorb.mp3",
+	"sound_path": "res://art/sounds/move_sfx/absorb1.mp3",
 	  "rarity": "uncommon",
 	  "self_heal": 1
 	},
@@ -1261,7 +1262,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage then SHIFT enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
-	  "sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
 	  "rarity": "rare",
 	  "shift_enabled": 1,
 	},
@@ -1516,7 +1517,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage then [color=green]HEAL[/color] for HALF the amount![/center]",
 	  "icon_path": "res://art/heart.png",
-	"sound_path": "res://art/sounds/move_sfx/absorb.mp3",
+	"sound_path": "res://art/sounds/move_sfx/absorb1.mp3",
 	  "rarity": "common",
 	  "self_heal": 1,
 	},
@@ -1640,7 +1641,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=green]HEAL[/color] HALF the amount.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/absorb.mp3",
+	"sound_path": "res://art/sounds/move_sfx/absorb1.mp3",
 	  "rarity": "uncommon",
 	  "self_heal": 1
 	},
@@ -2068,7 +2069,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
-	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
+	"sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
 	  "rarity": "Uncommon"
 	},
 	"rest": {
@@ -2276,7 +2277,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
+	"sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
 	  "rarity": "uncommon"
 	},
 	"sludgebomb": {
@@ -2556,7 +2557,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
-	"sound_path": "res://art/sounds/move_sfx/aerialace.mp3",
+	"sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
 	  "rarity": "uncommon"
 	},
 	"swordsdance": {

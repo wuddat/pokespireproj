@@ -59,9 +59,6 @@ func setup_from_data(data: Dictionary) -> void:
 		intent.icon = preload("res://art/tile_0117.png")
 	
 func perform_action() -> void:
-	
-	
-	
 	var targets_to_hit: Array[Node] = []
 
 	if targets.size() > 0:
@@ -107,7 +104,6 @@ func perform_action() -> void:
 		print("⚠️ No valid targets for generic_enemy_attack due to status requirements.")
 		Events.enemy_action_completed.emit(enemy)
 		return
-
 
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = damage

@@ -131,6 +131,20 @@ func get_status(id: String) -> Status:
 	return null
 
 
+func decrement_status(id: String) -> void:
+	var status: Status = get_status(id)
+	if status.stacks >= 1:
+		status.stacks -= 1
+	if status.duration >= 1 and status.can_expire == true:
+		status.duration -= 1
+
+func increment_status(id: String) -> void:
+	var status: Status = get_status(id)
+	if status.stacks >= 1:
+		status.stacks += 1
+	if status.duration >= 1 and status.can_expire == true:
+		status.duration += 1
+
 func _get_all_statuses() -> Array[Status]:
 	var statuses: Array[Status] = []
 	for status_ui: StatusUI in get_children():

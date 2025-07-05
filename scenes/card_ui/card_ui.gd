@@ -273,6 +273,7 @@ func _handle_confusion_self_hit(_card: Card) -> void:
 	print("pkmn to self hit is: %s" % battle_unit_owner.stats.species_id)
 	print("damage to take is %s" % damage)
 	Events.battle_text_requested.emit("%s hit itself in confusion for [color=red]%s[/color] damage!" % [battle_unit_owner.stats.species_id.capitalize(), damage])
+	battle_unit_owner.status_handler.decrement_status("confused")
 	var effect := DamageEffect.new()
 	effect.amount = damage
 	print("effect amount is: %s" % damage)
@@ -296,6 +297,7 @@ func _paralysis_check(crd: Card) -> bool:
 		var par_tween := create_tween()
 		par_tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 25, 0.15))
 		par_tween.tween_interval(0.17)
+		battle_unit_owner.status_handler.decrement_status("paralyze")
 		return true
 	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 	print("✅ %s resists paralysis and plays normally." % battle_unit_owner.stats.species_id)

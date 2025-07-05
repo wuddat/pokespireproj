@@ -5,8 +5,21 @@ extends Resource
 var items: Array[Item] = []
 
 func add_item(item: Item) -> void:
-	items.append(item)
-	Events.item_added.emit(item)
+	var existing_item: Item = null
+	for itm in items:
+		if itm.id == item.id:
+			existing_item = itm
+			break
+	if existing_item:
+		existing_item.quantity += 1
+		print("INCREASED QUANTITY of item: %s (now %d)" % [existing_item.name, existing_item.quantity])
+		Events.item_added.emit(existing_item)
+	else:
+		items.append(item)
+		print("ADDED NEW ITEM: %s" % item.name)
+		Events.item_added.emit(item)
+	for i in items:
+		print("%s x%d" % [i.name, i.quantity])
 
 func remove_item(item: Item) -> void:
 	items.erase(item)

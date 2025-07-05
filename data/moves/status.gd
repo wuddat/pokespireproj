@@ -66,12 +66,13 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 					stat_effect.source = battle_unit_owner
 					var status_to_apply := status_effect.duplicate()
 					stat_effect.status = status_to_apply
+					stat_effect.sound = sound
 					stat_effect.execute(targets)
-			
-			var damage_effect := DamageEffect.new()
-			damage_effect.amount = 0
-			damage_effect.sound = sound
-			damage_effect.execute(targets)
+			#This was deactivated to prevent 1 damage from occuring due to minimums set in damage_effect
+			#var damage_effect := DamageEffect.new()
+			#damage_effect.amount = 0
+			#damage_effect.sound = sound
+			#damage_effect.execute(targets)
 			
 			if shift_enabled > 0 and targets.size() > 0:
 				var shift_effect := ShiftEffect.new()

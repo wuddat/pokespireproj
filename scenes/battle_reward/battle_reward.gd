@@ -250,6 +250,12 @@ func _play_reward_sequence() -> void:
 	
 	add_item_reward()
 	await _reward_delay()
+	
+	add_item_reward()
+	await _reward_delay()
+	
+	add_item_reward()
+	await _reward_delay()
 
 
 func _reward_delay(duration := 0.6) -> void:
