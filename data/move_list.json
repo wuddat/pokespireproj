@@ -128,7 +128,7 @@
 	  "cost": 1,
 	  "status_effects": ["chill"],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=aquamarine]1 CHILL[/color][/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/FrozenIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/aurora.mp3",
 	  "rarity": "common"
 	},
@@ -395,7 +395,7 @@
 		"cleanse","dexterity","attack_up","attack_up","attack_up","protected",
 	  ],
 	  "description": "[center]CLEANSE self then apply [color=GREEN]2 DEXTERITY[/color], [color=red]3 ATKUP[/color], [color=blue]PROTECTED[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	"sound_path": "res://art/sounds/move_sfx/calmmind.mp3",
 	  "rarity": "uncommon"
 	},
@@ -432,7 +432,7 @@
 		"attack_up","attack_up","attack_up","attack_up","attack_up",
 	  ],
 	  "description": "[center]Gain [color=blue]%s[/color] BLOCK and [color=red]5 ATKUP[/color].[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	"sound_path": "res://art/sounds/move_sfx/bind.mp3",
 	  "rarity": "common"
 	},
@@ -466,7 +466,7 @@
 	  "status_effects": ["confused"],
 	  "effect_chance": 0.25,
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly CONFUSE.[/center]",
-	  "icon_path": "res://art/tile_0107.png",
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
 	  "sound_path": "res://art/sounds/move_sfx/confusion.mp3",
 	  "rarity": "common"
 	},
@@ -482,7 +482,7 @@
 	  "cost": 2,
 	  "status_effects": ["double", "confused"],
 	  "description": "[center]CONFUSE an enemy and DOUBLE all DEBUFFS on them.[/center]",
-	  "icon_path": "res://art/tile_0107.png",
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
 	  "sound_path": "res://art/sounds/move_sfx/confusion.mp3",
 	  "rarity": "uncommon"
 	},
@@ -586,7 +586,7 @@
 	  "cost": 1,
 	  "status_effects": ["confused"],
 	  "description": "[center]Deal [color=red]%s[/color] damage. Leaves the user and enemy CONFUSED[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
 	"sound_path": "res://art/sounds/move_sfx/cometpunch.mp3",
 	  "self_status": ["confused"],
 	  "rarity": "common",
@@ -678,7 +678,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to a target with SLEEP[/center].",
 	  "icon_path": "res://art/tile_0102.png",
-	  "sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
+	  "sound_path": "res://art/status_effects/dreameater.png",
 	  "rarity": "uncommon",
 	  "requires_status": "sleep"
 	},
@@ -763,7 +763,7 @@
 		"burned","burned","burned",
 	  ],
 	  "description": "[center]Burn for [color=red]%s[/color] damage and apply [color=orange]3 BURN[/color].[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/ember.mp3",
 	  "rarity": "common"
 	},
@@ -812,7 +812,7 @@
 		"attack_down","attack_down","attack_down","attack_down","attack_down",
 	  ],
 	  "description": "[center]Inflict [color=red]ATKDWN 5[/color] on an enemy.[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/atkdwn.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "rarity": "common"
 	},
@@ -867,7 +867,7 @@
 		"burned","burned","burned",
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange] 3 BURN[/color].[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/bite.mp3",
 	  "rarity": "common"
 	},
@@ -885,7 +885,7 @@
 		"burned","burned","burned",
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange] 3 BURN[/color].[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "rarity": "common"
 	},
@@ -917,7 +917,7 @@
 	  "cost": 3,
 	  "status_effects": ["burned", "burned"],
 	  "description": "[center]Deal [color=red]%s[/color] damage to an enemy. Damages the user slightly and [color=redorange]BURNS[/color] both.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "self_damage": 10,
 	  "self_status": ["burned","burned"],
@@ -954,7 +954,7 @@
 		"burned","burned",
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange] 2 BURN[/color]![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "rarity": "common",
 	  "lead_effects": {
@@ -994,7 +994,7 @@
 		"critical"
 	  ],
 	  "description": "[center]Next attack deals [color=goldenrod]X2[/color] damage.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/critical.png",
 	  "rarity": "common"
 	},
 	"furyswipes": {
@@ -1060,7 +1060,7 @@
 	  "cost": 1,
 	  "status_effects": ["attack_down","attack_down"],
 	  "description": "[center]Inflict [color=red]2 ATKDWN[/color] on an enemy![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/atkdwn.png",
 	  "rarity": "common"
 	},
 	"growth": {
@@ -1192,7 +1192,7 @@
 	  "cost": 1,
 	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
 	  "description": "[center]Apply 7 ATKPWR to the target foe or ally.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	  "rarity": "common"
 	},
 	"highkick": {
@@ -1324,7 +1324,7 @@
 	  "cost": 1,
 	  "status_effects": ["sleep"],
 	  "description": "[center]Attempt to SLEEP a target![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	"sound_path": "res://art/sounds/move_sfx/calmmind.mp3",
 	  "rarity": "uncommon"
 	},
@@ -1342,7 +1342,7 @@
 		"chill"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=aquamarine]1 CHILL[/color]. [color=red]SHATTER[/color] on [color=aqua]FROZE[/color] for [color=red]3X[/color] damage![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/FrozenIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
 	  "rarity": "rare",
 	},
@@ -1360,7 +1360,7 @@
 		"chill"
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=aquamarine]1 CHILL[/color]. [color=red]SHATTER[/color] on [color=aqua]FROZE[/color] for [color=red]3X[/color] damage![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/FrozenIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/cometpunch.mp3",
 	  "rarity": "uncommon",
 	},
@@ -1376,7 +1376,7 @@
 	  "cost": 1,
 	  "status_effects":[],
 	  "description": "[center]Deal [color=red]%s[/color] damage [color=red]2X[/color]![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/FrozenIC_Masters.png",
 	  "rarity": "common",
 	  "multiplay": 2,
 	   "lead_effects": {
@@ -1466,7 +1466,7 @@
 		"critical"
 	  ],
 	  "description": "[center]Next attack deals [color=goldenrod]X2[/color] damage.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/critical.png",
 	  "rarity": "uncommon"
 	},
 	"leaftornado": {
@@ -1499,7 +1499,7 @@
 	  "cost": 0,
 	  "status_effects": ["seeded"],
 	  "description": "[center]SEED enemies causing them to [color=green]HEAL[/color] your team 3 each turn![/center]",
-	  "icon_path": "res://art/heart.png",
+	  "icon_path": "res://art/status_effects/seeded.png",
 	  "rarity": "common",
 	  "multiplay": 1,
 	},
@@ -1747,7 +1747,7 @@
 	  "cost": 2,
 	  "status_effects": ["protected", "attack_up","attack_up",],
 	  "description": "[center]Apply [color=blue]PROTECTED[/color] and [color=red]2 ATKUP[/color]![/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	  "rarity": "common"
 	},
 	"peck": {
@@ -2084,7 +2084,7 @@
 	  "status_effects": [],
 	  "self_status": ["sleep", "sleep"],
 	  "description": "[center]The user falls ASLEEP![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	  "rarity": "common"
 	},
 	"roar": {
@@ -2354,7 +2354,7 @@
 	  "cost": 1,
 	  "status_effects": ["sleep"],
 	  "description": "[center]Apply ONE stack of SLEEP![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	  "rarity": "uncommon"
 	},
 	"sing": {
@@ -2369,7 +2369,7 @@
 	  "cost": 1,
 	  "status_effects": ["sleep"],
 	  "description": "[center]Apply SLEEP to ALL![/center]",
-	  "icon_path": "res://art/statuseffects/sleep.png",
+	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	"sound_path": "res://art/sounds/move_sfx/sing.mp3",
 	  "rarity": "common"
 	},
@@ -2449,7 +2449,7 @@
 	  "cost": 1,
 	  "status_effects": ["sleep"],
 	  "description": "[center]ALL enemies with [color=purple]POISON[/color] gain [color=pink]1 SLEEP[/color]![/center]",
-	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
+	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	  "rarity": "common",
 	  "requires_status": "poisoned"
 	},
@@ -2488,7 +2488,7 @@
 	  "cost": 1,
 	  "status_effects": ["attack_down"],
 	  "description": "[center]A pathetic move that MAY weaken enemies![/center]",
-	  "icon_path": "res://art/tile_0101.png",
+	  "icon_path": "res://art/status_effects/atkdwn.png",
 	"sound_path": "res://art/sounds/move_sfx/sandattack.mp3",
 	  "effect_chance": 0.4,
 	  "rarity": "common",
@@ -2538,7 +2538,7 @@
 	  "cost": 1,
 	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","confuse"],
 	  "description": "[center]Apply [color=red]10 ATKUP[/color] to the user AND an enemy. The enemy is also CONFUSED[/center]",
-	  "icon_path": "res://art/tile_0127.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
 	  "self_status": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
 	  "rarity": "uncommon"
@@ -2573,7 +2573,7 @@
 		"attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",
 	  ],
 	  "description": "[center]Gain [color=red]10 ATKUP[/color].[/center]",
-	  "icon_path": "res://art/tile_0118.png",
+	  "icon_path": "res://art/status_effects/atkup.png",
 	  "sound_path": "res://art/enemy_attack.ogg",
 	  "rarity": "rare"
 	},
@@ -2811,7 +2811,7 @@
 	  "splash_damage": 2,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["confused"],
+	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to target and [color=red]2[/color] to adjacent.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	},
@@ -2827,7 +2827,7 @@
 	  "cost": 1,
 	  "status_effects": ["confused"],
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly CONFUSE.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/statuseffects/confused-effect.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	},
@@ -2855,12 +2855,12 @@
 	  "subtype": "single_target",
 	  "type": "ghost",
 	  "target": "enemy",
-	  "power": 0,
+	  "power": 3,
 	  "accuracy": 100,
 	  "cost": 0,
 	  "status_effects": ["burned","burned","burned"],
 	  "description": "[center]Apply[color=redorange]3 BURN[/color] to a foe.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "shift_enabled": 1,
