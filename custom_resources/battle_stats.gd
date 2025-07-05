@@ -97,9 +97,9 @@ func assign_enemy_pkmn_party() -> void:
 						trainer_sprite = preload("res://art/trainer/engineer.png")
 						match battle_tier:
 							0:
-								enemy_pkmn_party = ["voltorb", "magnemite", "pikachu", "elektabuzz"]
+								enemy_pkmn_party = ["voltorb", "magnemite", "pikachu", "electabuzz"]
 							1:
-								enemy_pkmn_party = ["elektabuzz", "magneton", "jolteon", "electrode"]
+								enemy_pkmn_party = ["electabuzz", "magneton", "jolteon", "electrode"]
 							2:
 								enemy_pkmn_party = ["electrode", "electrode", "electrode", "electrode"]
 					"Psychic":
