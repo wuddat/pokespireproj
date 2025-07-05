@@ -285,10 +285,10 @@ func apply_lead_mods(card: Card) -> void:
 		card.self_damage = card.lead_effects["self_damage"]
 		
 	if card.lead_effects.has("description"):
-		card.self_damage = card.lead_effects["description"]
+		card.tooltip_text = card.lead_effects["description"]
 		
 	if card.lead_effects.has("multiplay"):
-		card.self_damage = card.lead_effects["multiplay"]
+		card.multiplay = card.lead_effects["multiplay"]
 		
 	if card.lead_effects.has("status_effects"):
 		var raw_ids = card.lead_effects["status_effects"]
