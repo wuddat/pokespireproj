@@ -6,7 +6,7 @@ func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-	
+
 	var mod_dmg := player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
 	if enemy_modifiers:
@@ -24,6 +24,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 						mod_dmg *= bonus_damage_multiplier
 						break
 	if targets:
+		if not is_instance_valid(targets[0]):
+			return " "
 		var target_types = targets[0].stats.type
 		var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
 		mod_dmg *= type_multiplier
@@ -100,6 +102,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 				damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
 				_effective_text = "It's [color=goldenrod]SUPER EFFECTIVE[/color]!"
 				_effectiveness = true
+				damage_effect.super_effective = true
 			elif type_multiplier < 1:
 				damage_effect.sound = preload("res://art/sounds/not_effective.wav")
 				_effectiveness = true

@@ -3,7 +3,7 @@ extends PanelContainer
 
 @onready var label: RichTextLabel = %BattleText
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var tween: Tween
+var tween: Tween
 
 const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 

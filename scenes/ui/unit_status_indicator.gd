@@ -37,7 +37,6 @@ func _ready() -> void:
 	drift_tween.parallel().tween_property(status_icon, "rotation_degrees", 0.0, 0.4)
 	drift_tween.parallel().tween_property(status_icon, "scale", scale_normal, 0.4)
 
-
 func update_status_display(pkmn: Node) -> void:
 	#print("[UnitStatusIndicator] update status run")
 	if pkmn.status_handler.has_status("confused"):
@@ -45,7 +44,7 @@ func update_status_display(pkmn: Node) -> void:
 		status_icon.texture = CONFUSED_EFFECT
 		show()
 		return
-	if pkmn.status_handler.has_status("sleep") or pkmn.skip_turn == true:
+	if pkmn.is_asleep == true or pkmn.skip_turn == true:
 		#print("[UnitStatusIndicator] sleep detected showing effect")
 		status_icon.texture = SLEEP
 		show()

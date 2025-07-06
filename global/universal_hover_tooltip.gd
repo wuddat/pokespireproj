@@ -18,10 +18,6 @@ func _process(_delta):
 		# Flip horizontally if overflowing right
 		if new_pos.x + tooltip_size.x + MARGIN > viewport_size.x:
 			new_pos.x = mouse_pos.x - tooltip_size.x - abs(offset.x)
-		
-		## Flip vertically if overflowing bottom
-		#if new_pos.y + tooltip_size.y + MARGIN > viewport_size.y:
-			#new_pos.y = mouse_pos.y - tooltip_size.y - abs(offset.y)
 
 		# Clamp to edges with margin
 		new_pos.x = clamp(new_pos.x, MARGIN, viewport_size.x - tooltip_size.x - MARGIN)
@@ -39,7 +35,7 @@ func show_tooltip(header_text: String, description_text: String):
 	fade_in()
 
 func hide_tooltip():
-	fade_out()
+	hide()
 
 
 func fade_in(duration := 0.1) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://b7kjap0xllfyb"]
+[gd_scene load_steps=139 format=3 uid="uid://b7kjap0xllfyb"]
 
 [ext_resource type="Texture2D" uid="uid://prme8llsdi5h" path="res://art/weedle_spritesheet.png" id="1_ofsxj"]
 [ext_resource type="Script" uid="uid://crgb1qoc5vdgn" path="res://scenes/enemy/enemy.gd" id="1_p200p"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://btwh8nsmqma2k" path="res://scenes/modifier_handler/modifier.tscn" id="9_hvxgb"]
 [ext_resource type="Script" uid="uid://cqo7ngmlosw7g" path="res://scenes/enemy/enemy_animation_handler.gd" id="10_hvxgb"]
 [ext_resource type="PackedScene" uid="uid://dlmrrh6uk610u" path="res://scenes/ui/hover_name_container.tscn" id="11_peoo5"]
+[ext_resource type="PackedScene" uid="uid://bnnr7b1674s3f" path="res://scenes/ui/unit_status_indicator.tscn" id="12_2f3il"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efjx"]
 
@@ -960,6 +961,13 @@ script = ExtResource("10_hvxgb")
 unique_name_in_owner = true
 visible = false
 mouse_filter = 1
+
+[node name="UnitStatusIndicator" parent="." instance=ExtResource("12_2f3il")]
+unique_name_in_owner = true
+offset_left = -32.0
+offset_top = -58.0
+offset_right = -32.0
+offset_bottom = -58.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

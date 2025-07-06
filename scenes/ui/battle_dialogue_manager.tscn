@@ -16,6 +16,7 @@ offset_top = 3.0
 offset_right = 110.0
 offset_bottom = 53.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="BattleDialogueManager" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -71,8 +72,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 0.0
-offset_top = 0.0
+offset_top = -6.0
 offset_right = 12.0
-offset_bottom = 12.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2

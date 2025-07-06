@@ -72,6 +72,7 @@ func end_turn() -> void:
 
 	for pkmn in pkmn_status_execution:
 		pkmn.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
+		pkmn.status_handler.remove_status("flinched")
 
 
 func draw_card() -> void:
@@ -150,9 +151,12 @@ func exhaust_cards_on_faint(uid: String) -> void:
 	)
 	
 	for card_ui in hand.get_children():
-		if card_ui.card.pkmn_owner_uid == uid:
-			cards_to_exhaust.add_card(card_ui.card)
-			hand.discard_card(card_ui)
+		if card_ui == null:
+			return
+		else:
+			if card_ui.card.pkmn_owner_uid == uid:
+				cards_to_exhaust.add_card(card_ui.card)
+				hand.discard_card(card_ui)
 
 	for card in cards_to_exhaust.cards:
 		character.faint_pile[uid].add_card(card)

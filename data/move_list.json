@@ -555,7 +555,7 @@
 	  "status_effects": ["flinched"],
 	  "description": "[center]Deal [color=red]%s[/color] damage to up to 4 RANDOM enemies and FLINCH![/center]",
 	  "icon_path": "res://art/tile_0101.png",
-	"sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
 	  "rarity": "uncommon",
 	  "randomplay": 4
 	},
@@ -678,8 +678,8 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to a target with SLEEP[/center].",
-	  "icon_path": "res://art/tile_0102.png",
-	  "sound_path": "res://art/status_effects/dreameater.png",
+	  "icon_path": "res://art/status_effects/dreameater.png",
+	  "sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
 	  "rarity": "uncommon",
 	  "requires_status": "sleep"
 	},
@@ -1716,7 +1716,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage and add a copy to your DISCARD.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	"sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
 	  "rarity": "common"
 	},
 	"nuzzle": {
@@ -1915,6 +1915,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
 	  "icon_path": "res://art/tile_0103.png",
+	  "sound_path": "res://art/sounds/Tackle.wav",
 	  "rarity": "common"
 	},
 	"psybeam": {
@@ -2604,7 +2605,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": [],
+	  "status_effects": ["sleep"],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,
@@ -2862,6 +2863,7 @@
 	  "status_effects": ["burned","burned","burned"],
 	  "description": "[center]Apply[color=redorange]3 BURN[/color] to a foe.[/center]",
 	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
+	  "sound_path": "res://art/sounds/move_sfx/boneclub.mp3",
 	  "self_damage": 0,
 	  "self_status": [],
 	  "shift_enabled": 1,

@@ -32,6 +32,7 @@ func add_card(card: Card) -> void:
 	new_card_ui.card.base_card = card.duplicate(true)
 	new_card_ui.parent = self
 	new_card_ui.char_stats = char_stats
+	new_card_ui.party_handler = party_handler
 	new_card_ui.playable = true
 	
 	if lead_enabled and new_card_ui.card.lead_effects:

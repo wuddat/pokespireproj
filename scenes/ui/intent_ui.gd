@@ -5,8 +5,9 @@ const SLEEP_ICON := preload("res://art/statuseffects/sleep.png")
 const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 
 @onready var hoverable_tooltip: Control = $HoverableTooltip
-@onready var icon_2: Sprite2D = %Icon2
 @onready var icon: TextureRect = %Icon
+@onready var icon_2: Sprite2D = %Icon2
+@onready var aoe_icon: Sprite2D = %Icon3
 @onready var label: Label = %Label
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var type_icon: TextureRect = %TypeIcon
@@ -16,9 +17,11 @@ const CONFUSED_ICON := preload("res://art/statuseffects/confused-effect.png")
 @onready var arrow: Sprite2D = %arrow
 @onready var particles: GPUParticles2D = %Particles
 @onready var swirl: TextureRect = %swirl
+@onready var unit_status_indicator: UnitStatusIndicator = %UnitStatusIndicator
 @export var parent: Enemy
-@onready var aoe_icon: Sprite2D = %Icon3
+
 @export var status_handler: StatusHandler
+
 
 
 
@@ -119,31 +122,16 @@ func update_intent(intent: Intent) -> void:
 			type_icon.visible = false
 	else:
 		type_icon.visible = false
-	show()
-	
-	await get_tree().create_timer(.1).timeout
+		
 	if parent.is_asleep:
-		icon.texture = SLEEP_ICON
-		target.texture = SLEEP_ICON
-		print("intentUI set to SLEEP")
-		label.text = ""
-		target.visible = false
-		panel.visible = false
-		type_icon.visible = false
-		arrow.visible = false
+		hide()
 		return
 		
 	if parent.is_confused:
-		print("intentUI set to CONFUSED")
-		target.visible = true
-		panel.visible = true
-		type_icon.visible = true
-		arrow.visible = true
+		hide()
 		return
-	
-	if intent.targets_all:
-		aoe_icon.show()
-		aoe_icon.visible = true
+	else:
+		show()
 
 
 func start_spinning() -> void:
@@ -165,9 +153,13 @@ func get_tooltip_data() -> Dictionary:
 		else:
 			intent_description = intent_description + "!"
 	if parent.current_action.intent_type == "Block":
-		intent_description = "Intends to [color=royalblue]BLOCK[/color] for [color=royalblue]%s[/color]." % parent.current_action.block
+		intent_description = "Intends to [color=royalblue]BLOCK[/color] for [color=royalblue]%s[/color]" % parent.current_action.block
+		if parent.current_action.status_effects and parent.current_action.status_effects.size() > 0:
+			intent_description = intent_description + " and [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
+		else:
+			intent_description = intent_description + "!"
 	if parent.current_action.intent_type == "Status":
-		intent_description = "Intends to [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]."
+		intent_description = "Intends to [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
 	return {
 		"header": "[color=tan]%s[/color]:" % parent.stats.species_id.capitalize(),
 		"description": intent_description

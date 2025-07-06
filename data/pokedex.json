@@ -3185,7 +3185,7 @@
 	  "type": [
 		"psychic"
 	  ],
-	  "max_health": 50,
+	  "max_health": 150,
 	  "move_ids": [
 		"confusion",
 		"psychic",

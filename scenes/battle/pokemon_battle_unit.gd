@@ -43,20 +43,25 @@ func _ready() -> void:
 	if _queued_health_bar_ui != null:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
-	##status effect testing
-	#var status := preload("res://statuses/confused.tres")
-	#var status1 := preload("res://statuses/attack_up.tres")
-	#var status2 := preload("res://statuses/attack_up.tres")
-	#var status3 := preload("res://statuses/burned.tres")
+	#status effect testing
+	#var status := preload("res://statuses/sleep.tres")
 	#status_handler.add_status(status)
+	#var status1 := preload("res://statuses/attack_up.tres")
 	#status_handler.add_status(status1)
+	#var status2 := preload("res://statuses/attack_up.tres")
 	#status_handler.add_status(status2)
+	#var status3 := preload("res://statuses/burned.tres")
 	#status_handler.add_status(status3)
 
 
 func start_of_turn():
 	stats.block = 0
 	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
+	if status_handler.has_status("sleep"):
+		is_asleep = true
+	else:
+		is_asleep = false
+	unit_status_indicator.update_status_display(self)
 	
 
 

@@ -6,12 +6,13 @@ signal reparent_requested(which_card_ui: CardUI)
 const BASE_CARDSTYLE := preload("res://scenes/card_ui/card_base_style.tres")
 const DRAG_CARDSTYLE := preload("res://scenes/card_ui/card_dragging_style.tres")
 const HOVER_CARDSTYLE := preload("res://scenes/card_ui/card_hover_style.tres")
+const SNORE := preload("res://art/sounds/sfx/snore.mp3")
 
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
 @export var player_pkmn_modifiers: ModifierHandler
-
 @export var battle_unit_owner: PokemonBattleUnit
+@export var party_handler: PartyHandler
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_visuals: CardVisuals = $CardVisuals
@@ -145,9 +146,6 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_entered() -> void:
 	#SFXPlayer.pitch_play(CARD_FLICK_1)
 	card_state_machine.on_mouse_entered()
-	
-	
-	
 
 
 func _on_mouse_exited() -> void:
@@ -164,15 +162,24 @@ func _set_card(value: Card) -> void:
 	card_visuals.card = card
 
 
-func _set_playable(value:bool) -> void:
+func _set_playable(value: bool) -> void:
 	playable = value
 
+	if card.pkmn_owner_uid != "" and is_instance_valid(party_handler):
+		var unit := party_handler.get_pkmn_by_uid(card.pkmn_owner_uid)
+		if unit and unit.status_handler.has_status("flinched"):
+			playable = false
+			disabled = true
+			card_visuals.cost.modulate = Color.DARK_RED
+			card_visuals.modulate.a = 0.5
+			return
+
+	disabled = false
 	if not playable:
 		card_visuals.cost.modulate = Color.DARK_RED
 	else:
-		if card.rarity == Card.Rarity.UNCOMMON:
-			card_visuals.cost.modulate = Color(1,1,1,1)
-		else: card_visuals.cost.modulate = Color(0.213,0.44,1,1)
+		card_visuals.cost.modulate = Color(1,1,1,1) if card.rarity == Card.Rarity.UNCOMMON else Color(0.213, 0.44, 1, 1)
+
 
 
 func _set_char_stats(value: CharacterStats) -> void:
@@ -214,7 +221,9 @@ func play_card_with_delay(crd: Card) -> void:
 	crd.random_targets.clear()
 	
 	#handle confusion/paralysis if any:
-	if await _paralysis_check(crd):
+	if await _sleep_check(crd):
+		await get_tree().create_timer(0.2).timeout
+	elif await _paralysis_check(crd):
 		await get_tree().create_timer(0.2).timeout
 	elif await _confusion_check(crd):
 		_handle_confusion_self_hit(crd)
@@ -250,7 +259,6 @@ func play_card_with_delay(crd: Card) -> void:
 			await get_tree().create_timer(0.2).timeout
 
 
-
 func _confusion_check(crd: Card) -> bool:
 	if not is_instance_valid(battle_unit_owner):
 		return false
@@ -263,9 +271,18 @@ func _confusion_check(crd: Card) -> bool:
 	if roll < chance:
 		print("[CARD_UI] %s is confused and hits itself!" % battle_unit_owner.stats.species_id)
 		return true
-	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
-	print("[CARD_UI]✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
-	return false
+	var roll2 := randf()
+	if roll2 > chance:
+		Events.battle_text_requested.emit("%s snapped out of confusion!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+		await get_tree().create_timer(.6).timeout
+		battle_unit_owner.status_handler.remove_status("confused")
+		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+		print("[CARD_UI] %s snaps out of confusion." % battle_unit_owner.stats.species_id)
+		return false
+	else:
+		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+		print("[CARD_UI]✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
+		return false
 
 
 func _handle_confusion_self_hit(_card: Card) -> void:
@@ -302,6 +319,39 @@ func _paralysis_check(crd: Card) -> bool:
 	Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 	print("✅ %s resists paralysis and plays normally." % battle_unit_owner.stats.species_id)
 	return false
+
+
+func _sleep_check(crd: Card) -> bool:
+	if not is_instance_valid(battle_unit_owner):
+		return false
+	if not battle_unit_owner.is_asleep:
+		return false
+
+	Events.battle_text_requested.emit("%s is sleeping..." % battle_unit_owner.stats.species_id.capitalize())
+	var slp_tween := create_tween()
+	slp_tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 15, 0.25))
+	slp_tween.tween_interval(0.6)
+	slp_tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 15, 0.25))
+	SFXPlayer.play(SNORE)
+	await get_tree().create_timer(1).timeout
+
+	var stuck_asleep := 0.4  # or whatever value feels right
+	var roll := randf()
+	if roll < stuck_asleep:
+		slp_tween = create_tween()
+		slp_tween.tween_callback(Shaker.shake.bind(battle_unit_owner, 25, 0.15))
+		slp_tween.tween_interval(0.17)
+		Events.battle_text_requested.emit("%s is fast asleep..!" % battle_unit_owner.stats.species_id.capitalize())
+		return true
+	else:
+		Events.battle_text_requested.emit("%s woke up!" % battle_unit_owner.stats.species_id.capitalize())
+		await get_tree().create_timer(play_card_delay).timeout
+		battle_unit_owner.is_asleep = false
+		battle_unit_owner.unit_status_indicator.update_status_display(battle_unit_owner)
+		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+		print("✅ %s woke up and plays normally." % battle_unit_owner.stats.species_id)
+		return false
+
 
 
 func _set_disabled(value: bool) -> void:

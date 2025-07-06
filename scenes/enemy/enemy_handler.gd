@@ -199,7 +199,7 @@ func _start_next_enemy_turn() -> void:
 		return
 	
 	Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
-	#await get_tree().create_timer(.5).timeout
+	await get_tree().process_frame
 	await acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 

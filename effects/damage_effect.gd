@@ -4,6 +4,7 @@ extends Effect
 
 var amount := 0
 var receiver_mod_type := Modifier.Type.DMG_TAKEN
+var super_effective: bool = false
 const SHATTER = preload("res://art/sounds/move_sfx/iceball.mp3")
 const BLOCK = preload("res://art/block.ogg")
 
@@ -27,8 +28,12 @@ func execute(targets: Array[Node]) -> void:
 				if amount <= 0:
 					amount = 1
 				target.take_damage(amount, receiver_mod_type)
-				Events.camera_shake_requested.emit(amount)
-				SFXPlayer.play(sound)
+				SFXPlayer.pitch_play(sound)
 				print("dealt %s damage to %s." % [amount,target.stats.species_id])
+				if super_effective:
+					Events.camera_shake_requested.emit(amount, 0.5)
+				else:
+					Events.camera_shake_requested.emit(amount)
+				
 		
 			

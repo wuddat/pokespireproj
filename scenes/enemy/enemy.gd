@@ -8,6 +8,7 @@ const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 const WOBBLE: AudioStream = preload("res://art/sounds/sfx/wobble.wav")
 const BREAKOUT = preload("res://art/sounds/sfx/pokeball_release.wav")
 const CAUGHT = preload("res://art/sounds/sfx/caught.wav")
+const SNORE := preload("res://art/sounds/sfx/snore.mp3")
 
 const PULSE_SHADER := preload("res://pulse.gdshader")
 
@@ -19,7 +20,7 @@ const PULSE_SHADER := preload("res://pulse.gdshader")
 @onready var intent_ui: IntentUI = %IntentUI as IntentUI
 @onready var animation_handler: Node = $AnimationHandler
 @onready var name_container: PanelContainer = %NameContainer
-
+@onready var unit_status_indicator: UnitStatusIndicator = %UnitStatusIndicator
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 @onready var catch_animator_tscn = preload("res://scenes/enemy/catch_animator.tscn")
@@ -167,7 +168,7 @@ func do_turn() -> void:
 
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
-	status_effect_checks()
+	await status_effect_checks()
 	await catch_check()
 
 	if skip_turn:
@@ -194,7 +195,8 @@ func do_turn() -> void:
 
 
 func status_effect_checks() -> void:
-	if status_handler.get_child_count() == 0:
+	if status_handler.get_child_count() == 0 and !is_asleep and !is_confused:
+		print("[ENEMY] no status effects detected on %s - turn executing normally" % stats.species_id.capitalize())
 		return
 		
 	if status_handler.has_status("flinched"):
@@ -211,14 +213,36 @@ func status_effect_checks() -> void:
 		status_handler.remove_status("froze")
 		is_froze = false
 		skip_turn = true
-		
-	if status_handler.has_status("confused"):
-			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
-			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is CONFUSED!" % stats.species_id.capitalize())
-			await get_tree().create_timer(enemy_text_delay).timeout
-			enemy_action_picker.select_confused_target()
-			is_confused = true
 	
+	if is_asleep:
+		var slp_tween := create_tween()
+		slp_tween.tween_callback(Shaker.shake.bind(self, 15, 0.25))
+		slp_tween.tween_interval(0.6)
+		slp_tween.tween_callback(Shaker.shake.bind(self, 15, 0.25))
+		SFXPlayer.play(SNORE)
+		await get_tree().create_timer(1).timeout
+
+		var stuck_asleep := 0.4
+		var roll := randf()
+		if roll < stuck_asleep:
+			slp_tween = create_tween()
+			slp_tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
+			slp_tween.tween_interval(0.17)
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is fast asleep..!" % stats.species_id.capitalize())
+			await get_tree().create_timer(1).timeout
+			is_asleep = true
+			has_slept = true
+			skip_turn = true
+			return
+		else:
+			print("✅ Enemy %s wakes up and acts normally." % stats.species_id.capitalize())
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] WOKE UP!" % stats.species_id.capitalize())
+			skip_turn = false
+			has_slept = true
+			is_asleep = false
+			unit_status_indicator.update_status_display(self)
+			await get_tree().create_timer(2).timeout
+
 	if status_handler.has_status("paralyze"):
 		await get_tree().create_timer(enemy_text_delay).timeout
 		var chance := 0.25
@@ -234,16 +258,15 @@ func status_effect_checks() -> void:
 			return
 		else:
 			print("✅ Enemy %s resists paralysis and acts normally." % stats.species_id.capitalize())
-
+		
+	if status_handler.has_status("confused"):
+			print("⚠️ %s is CONFUSED — selecting from confused_target_pool" % stats.species_id)
+			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is CONFUSED!" % stats.species_id.capitalize())
+			await get_tree().create_timer(enemy_text_delay).timeout
+			enemy_action_picker.select_confused_target()
+			is_confused = true
 	else:
 		is_confused = false
-	
-	if is_asleep and not status_handler.has_status("sleep"):
-		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] WOKE UP!" % stats.species_id.capitalize())
-		await get_tree().create_timer(enemy_text_delay).timeout
-		is_asleep = false
-		has_slept = true
-		print("🌅 Enemy %s woke up." % stats.species_id.capitalize())
 
 
 func catch_check() -> void:

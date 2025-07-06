@@ -43,5 +43,5 @@ func screen_shake(intensity: int, time: float):
 	shake_time = 0.0
 
 
-func _on_shake_requested(damage: int) -> void:
-	screen_shake(damage, 0.2)
+func _on_shake_requested(damage: int, intensity: float = 0.2) -> void:
+	screen_shake(damage, intensity)
