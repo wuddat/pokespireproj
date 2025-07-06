@@ -139,14 +139,16 @@ func _handle_hit(
 	shift_enabled: int,
 ) -> void:
 	var dmg := DamageEffect.new()
-	var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
-	dmg.amount = round(total_damage * mult)
-	dmg.sound = sound
+	if intent_type != "status":
+		var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
+		dmg.amount = round(total_damage * mult)
+		dmg.sound = sound
 
 	tween.tween_callback(func():
-		if dmg.amount > 0:
-			dmg.execute([target])
-			dmg.sound = sound
+		if intent_type != "status":
+			if dmg.amount > 0:
+				dmg.execute([target])
+				dmg.sound = sound
 		
 		if shift_enabled > 0 and targets_to_hit.size() > 0:
 			pass

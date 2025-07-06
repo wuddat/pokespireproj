@@ -20,7 +20,7 @@ func _ready() -> void:
 	var rotate_amount := 5.0  # degrees of rotation
 	var scale_min := Vector2(0.6, 0.6)
 	var scale_max := Vector2(0.8, 0.8)
-	var scale_normal := Vector2(0.6, 0.6)  # or whatever your default is
+	var scale_normal := Vector2(0.6, 0.6)  # default
 
 	# Drift left
 	drift_tween.tween_property(status_icon, "position", start_pos + Vector2(-drift_amount, 0), 0.4)

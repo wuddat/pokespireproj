@@ -6,7 +6,9 @@ func get_default_tooltip() -> String:
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler, _targets) -> String:
 	var mod_block := player_modifiers.get_modified_value(base_power, Modifier.Type.BLOCK_GAINED)
-
+	if mod_block <= 0:
+		mod_block = 0
+		
 	return tooltip_text % mod_block
 
 
@@ -22,7 +24,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		
 	var block_effect := BlockEffect.new()
 	block_effect.amount = modifiers.get_modified_value(base_block, Modifier.Type.BLOCK_GAINED)
-	print("block effect amount is: ", block_effect.amount)
+	block_effect.base_block = base_block
 	block_effect.sound = sound
 	print("block targets are: ", [targets])
 	block_effect.execute(targets)

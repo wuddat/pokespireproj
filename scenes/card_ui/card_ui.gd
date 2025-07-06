@@ -273,7 +273,7 @@ func _confusion_check(crd: Card) -> bool:
 		return true
 	var roll2 := randf()
 	if roll2 > chance:
-		Events.battle_text_requested.emit("%s snapped out of confusion!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
+		Events.battle_text_requested.emit("%s snapped out of confusion!" % battle_unit_owner.stats.species_id.capitalize())
 		await get_tree().create_timer(.6).timeout
 		battle_unit_owner.status_handler.remove_status("confused")
 		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])

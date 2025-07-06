@@ -2605,7 +2605,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["sleep"],
+	  "status_effects": ["feeble", "feeble","feeble", "feeble","feeble", "feeble","feeble", "feeble",],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,

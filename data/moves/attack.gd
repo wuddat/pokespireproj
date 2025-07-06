@@ -156,13 +156,10 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		if self_block > 0:
 			var block = BlockEffect.new()
 			block.amount = self_block
+			block.amount = modifiers.get_modified_value(self_block, Modifier.Type.BLOCK_GAINED)
+			block.base_block = self_block
 			block.execute([battle_unit_owner])
 			
-		if dmg_block > 0:
-			var block = BlockEffect.new()
-			block.amount = total_damage_dealt
-			block.execute([battle_unit_owner])
-		
 		# 🩸 Self damage
 		if self_damage > 0:
 			var self_dmg := DamageEffect.new()
@@ -170,14 +167,20 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 			self_dmg.sound = null
 			self_dmg.execute([battle_unit_owner])
 			total_damage_dealt += self_dmg.amount
-		
+			
 		if self_damage_percent_hp > 0:
 			var self_dmg := DamageEffect.new()
 			self_dmg.amount = round(battle_unit_owner.stats.max_health * self_damage_percent_hp)
 			self_dmg.sound = null
 			self_dmg.execute([battle_unit_owner])
 			total_damage_dealt += self_dmg.amount
-
+			
+		if dmg_block > 0:
+			var block = BlockEffect.new()
+			block.amount = modifiers.get_modified_value(total_damage_dealt, Modifier.Type.BLOCK_GAINED)
+			block.base_block = total_damage_dealt
+			block.execute([battle_unit_owner])
+			
 		# 💚 Self heal (half total damage dealt)
 		if self_heal > 0:
 			var self_heal_effect := HealEffect.new()

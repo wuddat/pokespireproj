@@ -57,10 +57,6 @@ func _ready() -> void:
 func start_of_turn():
 	stats.block = 0
 	status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
-	if status_handler.has_status("sleep"):
-		is_asleep = true
-	else:
-		is_asleep = false
 	unit_status_indicator.update_status_display(self)
 	
 
