@@ -11,18 +11,20 @@ const BASE_Z_INDEX := 0
 const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = set_card
-@onready var visuals: CardVisuals = $Visuals
 @onready var tween := create_tween()
 @onready var card_super_detail: CardSuperDetail = $CardSuperDetail
 
 var is_floatable: bool = false
+var is_hoverable: bool = true
 
 func _on_visuals_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_mouse"):
-		tooltip_requested.emit(card)
+	if is_hoverable:
+		if event.is_action_pressed("left_mouse"):
+			tooltip_requested.emit(card)
 
 
 func _on_visuals_mouse_entered() -> void:
+	if is_hoverable:
 		SFXPlayer.pitch_play(CARD_FLICK_1)
 		card_super_detail.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 		set_z_index(HOVER_Z_INDEX)
@@ -33,6 +35,7 @@ func _on_visuals_mouse_entered() -> void:
 			tween.tween_property(self, "position:y", HOVER_OFFSET, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_visuals_mouse_exited() -> void:
+	if is_hoverable:
 		card_super_detail.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
 		set_z_index(BASE_Z_INDEX)
 		

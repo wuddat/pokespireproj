@@ -159,6 +159,7 @@ pivot_offset = Vector2(18, 31)
 
 [node name="ForgetCardSuper" parent="." instance=ExtResource("3_2wue3")]
 unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -163.0
 offset_top = -38.0
@@ -199,6 +200,7 @@ pivot_offset = Vector2(18, 31)
 
 [node name="LearnCardSuper" parent="." instance=ExtResource("3_2wue3")]
 unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 53.0
 offset_top = -38.0
