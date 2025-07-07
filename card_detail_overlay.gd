@@ -2,6 +2,7 @@ class_name CardDetailOverlay
 extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
+const CARD_SUPER_DETAIL_UI := preload("res://scenes/ui/card_super_detail_ui.tscn")
 const STATUS_TOOLTIP_SCENE := preload("res://scenes/ui/status_tooltip.tscn")
 const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 
@@ -15,10 +16,11 @@ const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 @onready var status_box: VBoxContainer = %StatusBox
 @onready var pokemon_name: RichTextLabel = %Pokemon
 @onready var button: Button = %Button
+@onready var v_box_container: VBoxContainer = %VBoxContainer
 
 
 func _ready() -> void:
-	for card: CardMenuUI in tooltip_card.get_children():
+	for card: CardSuperDetailUI in tooltip_card.get_children():
 		card.queue_free()
 	
 	background.color = background_color
@@ -34,7 +36,7 @@ func show_tooltip(card: Card) -> void:
 		child.queue_free()
 
 	# Create and show the card visual
-	var new_card := CARD_MENU_UI_SCENE.instantiate() as CardMenuUI
+	var new_card := CARD_SUPER_DETAIL_UI.instantiate() as CardSuperDetailUI
 	tooltip_card.add_child(new_card)
 	new_card.card = card
 	new_card.tooltip_requested.connect(hide_tooltip.unbind(1))
@@ -62,7 +64,7 @@ func hide_tooltip() -> void:
 	if not visible:
 		return
 	#SFXPlayer.play(OPEN_SOUND, true)
-	for card: CardMenuUI in tooltip_card.get_children():
+	for card: CardSuperDetailUI in tooltip_card.get_children():
 		card.queue_free()
 	hide()
 

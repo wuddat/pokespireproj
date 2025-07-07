@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://sfvur5wu524h"]
 
 [ext_resource type="Script" uid="uid://biuwlf3gncn8r" path="res://scenes/ui/card_rewards.gd" id="1_chmpv"]
-[ext_resource type="PackedScene" uid="uid://bq8ebkvp2okor" path="res://scenes/ui/card_menu_ui.tscn" id="1_mywnl"]
+[ext_resource type="PackedScene" uid="uid://dbrkhr76xq5ki" path="res://scenes/ui/card_super_detail_ui.tscn" id="2_cak6g"]
 [ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="2_chmpv"]
 
 [node name="CardRewards" type="ColorRect"]
@@ -33,13 +33,13 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="CardMenuUI" parent="VBoxContainer/Cards" instance=ExtResource("1_mywnl")]
+[node name="CardSuperDetailUI" parent="VBoxContainer/Cards" instance=ExtResource("2_cak6g")]
 layout_mode = 2
 
-[node name="CardMenuUI2" parent="VBoxContainer/Cards" instance=ExtResource("1_mywnl")]
+[node name="CardSuperDetailUI2" parent="VBoxContainer/Cards" instance=ExtResource("2_cak6g")]
 layout_mode = 2
 
-[node name="CardMenuUI3" parent="VBoxContainer/Cards" instance=ExtResource("1_mywnl")]
+[node name="CardSuperDetailUI3" parent="VBoxContainer/Cards" instance=ExtResource("2_cak6g")]
 layout_mode = 2
 
 [node name="SkipButton" type="Button" parent="."]

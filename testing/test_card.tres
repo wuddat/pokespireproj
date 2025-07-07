@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cbasdh0yeoa5r"]
+
+[ext_resource type="Script" uid="uid://v0y8cuyxdriv" path="res://custom_resources/card.gd" id="1_3y1vu"]
+[ext_resource type="Texture2D" uid="uid://d0edy7thj8ce6" path="res://art/heart.png" id="1_uyob1"]
+[ext_resource type="Texture2D" uid="uid://bkc5qr388q57w" path="res://art/sprites/icons/25-cosplay.png" id="2_c2e1t"]
+[ext_resource type="Script" uid="uid://breq3elxr1644" path="res://custom_resources/status.gd" id="2_lmh1m"]
+
+[resource]
+script = ExtResource("1_3y1vu")
+id = "test_card"
+name = "Test Card"
+type = 0
+rarity = 1
+target = 0
+cost = 3
+power = 8
+target_damage_percent_hp = 0.5
+damage_type = "Poison"
+exhausts = false
+pkmn_owner_uid = "123456"
+pkmn_owner_name = "pikachu"
+base_power = 8
+icon = ExtResource("1_uyob1")
+pkmn_icon = ExtResource("2_c2e1t")
+tooltip_text = "Deal [color=red]8[/color] damage and [color=purple]2 POISON[/color]!"
+status_effects = Array[ExtResource("2_lmh1m")]([])
+effect_chance = 1.0
+dmg_block = 0
+multiplay = 1
+randomplay = 0
+requires_status = ""
+bonus_damage_if_target_has_status = ""
+bonus_damage_multiplier = 1.0
+splash_damage = 0
+shift_enabled = 0
+lead_effects = {}
+self_heal = 0
+self_damage = 0
+self_damage_percent_hp = 0.0
+self_status = Array[ExtResource("2_lmh1m")]([])
+self_block = 0
+self_shift = 0
+metadata/_custom_type_script = "uid://v0y8cuyxdriv"

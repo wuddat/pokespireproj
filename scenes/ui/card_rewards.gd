@@ -4,6 +4,7 @@ extends ColorRect
 signal card_reward_selected(card: Card)
 
 const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
+const CARD_SUPER_DETAIL = preload("res://scenes/ui/card_super_detail_ui.tscn")
 const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 
@@ -14,11 +15,15 @@ const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 @onready var card_detail_overlay: CardDetailOverlay = $CardDetailOverlay
 @onready var take_button: Button = %TakeButton
 
+
 var selected_card: Card
 
 
 func _ready()-> void:
 	_clear_rewards()
+	
+	take_button.reparent(card_detail_overlay.v_box_container)
+	take_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	
 	take_button.pressed.connect(
 		func():
@@ -64,7 +69,7 @@ func set_rewards(new_cards: Array[Card]) -> void:
 		
 	_clear_rewards()
 	for card: Card in rewards:
-		var new_card := CARD_MENU_UI.instantiate() as CardMenuUI
+		var new_card := CARD_SUPER_DETAIL.instantiate()
 		cards.add_child(new_card)
 		new_card.card = card
 		new_card.tooltip_requested.connect(_show_tooltip)

@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://kfne03ql8pcq"]
 
 [ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="1_8j1b0"]
+[ext_resource type="Script" uid="uid://utn37ymxvcc2" path="res://scenes/ui/card_super_detail.gd" id="1_s23g5"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="2_fqg8x"]
+[ext_resource type="Resource" uid="uid://cbasdh0yeoa5r" path="res://testing/test_card.tres" id="2_koavt"]
+[ext_resource type="Resource" uid="uid://dw7iw834ey8jm" path="res://characters/bulbasaur/bulbasaur.tres" id="3_4ux4t"]
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="3_q6d5j"]
+[ext_resource type="Texture2D" uid="uid://bux11a8ux54cv" path="res://art/status_effects/PoisonedIC_Masters.png" id="3_wshgr"]
 [ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_s23g5"]
-[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="5_wshgr"]
-[ext_resource type="Script" uid="uid://dm5ivhiykxb27" path="res://scenes/ui/status_view.gd" id="6_koavt"]
-[ext_resource type="StyleBox" uid="uid://1ny4guuky8rt" path="res://scenes/ui/tooltip.stylebox" id="7_4ux4t"]
-[ext_resource type="PackedScene" uid="uid://cjt3didegw4ym" path="res://scenes/ui/status_tooltip.tscn" id="8_hwp1n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wshgr"]
 bg_color = Color(0.954, 0.917, 0.85, 0.375)
@@ -21,97 +21,180 @@ anchor_right = 0.258
 anchor_bottom = 0.597
 offset_right = -0.0960083
 offset_bottom = 0.0639954
-grow_horizontal = 2
-grow_vertical = 2
+pivot_offset = Vector2(66, 86)
+script = ExtResource("1_s23g5")
+card = ExtResource("2_koavt")
+char_stats = ExtResource("3_4ux4t")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(111, 153)
 layout_mode = 0
 offset_top = 19.0
 offset_right = 111.0
 offset_bottom = 172.0
+mouse_filter = 1
 
 [node name="pkmn_border" type="Panel" parent="."]
+unique_name_in_owner = true
 process_mode = 3
+custom_minimum_size = Vector2(96, 75)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 7.5
+offset_left = 7.0
 offset_top = 31.0
-offset_right = -28.5
-offset_bottom = -66.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 103.0
+offset_bottom = 106.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wshgr")
 
-[node name="descr border" type="Panel" parent="."]
+[node name="descr_border" type="PanelContainer" parent="."]
+unique_name_in_owner = true
 process_mode = 3
+custom_minimum_size = Vector2(110, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 119.0
-offset_right = -22.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+offset_top = 121.0
+offset_right = 110.0
+offset_bottom = 169.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_wshgr")
 
-[node name="Description" type="RichTextLabel" parent="descr border"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="descr_border"]
+custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
+
+[node name="CardEffects" type="HBoxContainer" parent="descr_border/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Damage" type="HBoxContainer" parent="descr_border/VBoxContainer/CardEffects"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="DmgIcon" type="TextureRect" parent="descr_border/VBoxContainer/CardEffects/Damage"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("1_8j1b0")
+stretch_mode = 5
+
+[node name="DmgDescription" type="RichTextLabel" parent="descr_border/VBoxContainer/CardEffects/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
 bbcode_enabled = true
-text = "Deal [color=red]10[/color] damage to all targets and inflict  [color=purple]2 POISON[/color]"
+text = "[color=red]10[/color]"
 fit_content = true
-autowrap_mode = 2
+autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Status" type="HBoxContainer" parent="descr_border/VBoxContainer/CardEffects"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="StatusIcon" type="TextureRect" parent="descr_border/VBoxContainer/CardEffects/Status"]
+unique_name_in_owner = true
 process_mode = 3
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.9999
-offset_top = 33.0
-offset_right = -48.9999
-offset_bottom = 53.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_8j1b0")
+texture = ExtResource("3_wshgr")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Rarity" type="TextureRect" parent="."]
+[node name="StatusDescription" type="RichTextLabel" parent="descr_border/VBoxContainer/CardEffects/Status"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=purple]2[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardEffects2" type="HBoxContainer" parent="descr_border/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Description2" type="HBoxContainer" parent="descr_border/VBoxContainer/CardEffects2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="Text2" type="RichTextLabel" parent="descr_border/VBoxContainer/CardEffects2/Description2"]
+layout_mode = 2
+bbcode_enabled = true
+text = "X2"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description3" type="HBoxContainer" parent="descr_border/VBoxContainer/CardEffects2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icon3" type="TextureRect" parent="descr_border/VBoxContainer/CardEffects2/Description3"]
 process_mode = 3
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_wshgr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text3" type="RichTextLabel" parent="descr_border/VBoxContainer/CardEffects2/Description3"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=purple]2[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardDescription" type="RichTextLabel" parent="descr_border/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+bbcode_enabled = true
+text = "[color=red]10[/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rarity" type="TextureRect" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -44.9999
-offset_top = 40.0
-offset_right = -4.9999
-offset_bottom = 80.0
-grow_horizontal = 2
+offset_left = 20.0
+offset_top = 39.0
+offset_right = 60.0
+offset_bottom = 79.0
 rotation = 3.14159
 texture = ExtResource("2_fqg8x")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Cost" type="Label" parent="."]
+unique_name_in_owner = true
 process_mode = 3
+custom_minimum_size = Vector2(24, 27)
 layout_mode = 0
 offset_left = -11.0
 offset_top = 5.0
@@ -123,22 +206,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OwnerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
 process_mode = 3
+custom_minimum_size = Vector2(105, 105)
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -61.9999
-offset_top = 11.0
-offset_right = 43.0001
-offset_bottom = 116.0
-grow_horizontal = 2
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 111.0
 pivot_offset = Vector2(17, 22)
 texture = ExtResource("3_q6d5j")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Type" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(117, 55)
 scale = Vector2(0.842, 0.842)
 texture = ExtResource("4_s23g5")
@@ -146,17 +227,19 @@ region_enabled = true
 region_rect = Rect2(70, 16, 38, 38)
 
 [node name="CardName" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 0
-offset_left = 32.0
-offset_top = 22.0
-offset_right = 82.0
-offset_bottom = 31.0
+offset_left = 12.0
+offset_top = 21.0
+offset_right = 110.0
+offset_bottom = 30.0
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 8
 text = "ABSORB"
 fit_content = true
-autowrap_mode = 2
+autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -168,6 +251,7 @@ offset_left = 3.0
 offset_top = 108.0
 offset_right = 53.0
 offset_bottom = 117.0
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 8
 text = "Target:"
 fit_content = true
@@ -175,77 +259,15 @@ autowrap_mode = 2
 vertical_alignment = 1
 
 [node name="Target" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 0
 offset_left = 52.0
 offset_top = 108.0
 offset_right = 108.0
 offset_bottom = 118.0
+mouse_filter = 1
 text = "Self"
 fit_content = true
 autowrap_mode = 2
 horizontal_alignment = 1
-
-[node name="StatusView" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 223.0
-offset_top = 97.0
-offset_right = 91.0
-offset_bottom = -75.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("5_wshgr")
-script = ExtResource("6_koavt")
-
-[node name="Background" type="PanelContainer" parent="StatusView"]
-custom_minimum_size = Vector2(100, 26)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -105.0
-offset_top = -1.0
-offset_right = 97.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("5_wshgr")
-theme_override_styles/panel = ExtResource("7_4ux4t")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="StatusView/Background"]
-layout_mode = 2
-mouse_filter = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 0
-
-[node name="CenterContainer" type="CenterContainer" parent="StatusView/Background/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="StatusTooltips" type="VBoxContainer" parent="StatusView/Background/ScrollContainer/CenterContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-alignment = 2
-
-[node name="StatusTooltip2" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
-layout_mode = 2
-
-[node name="StatusTooltip3" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
-layout_mode = 2
-
-[node name="StatusTooltip4" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
-layout_mode = 2
-
-[node name="StatusTooltip5" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
-layout_mode = 2

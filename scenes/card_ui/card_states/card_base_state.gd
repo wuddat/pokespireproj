@@ -28,7 +28,10 @@ func on_mouse_entered() -> void:
 		return
 	card_ui.card_visuals.panel.set("theme_override_styles/panel", card_ui.HOVER_CARDSTYLE)
 	SFXPlayer.pitch_play(CARD_FLICK_1)
-	card_ui.request_tooltip()
+	if not is_instance_valid(card_ui.card):
+		return
+	else:
+		card_ui.request_tooltip()
 	
 	
 func on_mouse_exited() -> void:

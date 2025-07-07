@@ -2,8 +2,11 @@
 class_name CardSuperDetail
 extends Control
 
+signal tooltip_requested(card: Card)
+
 @export var card: Card: set = set_card
 @export var char_stats: CharacterStats
+@onready var tween := create_tween()
 
 @onready var panel: PanelContainer = %Panel
 @onready var pkmn_border: Panel = %pkmn_border
@@ -15,13 +18,13 @@ extends Control
 @onready var type: Sprite2D = %Type
 @onready var card_name: RichTextLabel = %CardName
 @onready var target: RichTextLabel = %Target
-@onready var hoverable_tooltip: Control = %HoverableTooltip
 @onready var dmg_icon: TextureRect = %DmgIcon
 @onready var dmg_description: RichTextLabel = %DmgDescription
 @onready var status_icon: TextureRect = %StatusIcon
 @onready var status_description: RichTextLabel = %StatusDescription
 @onready var damage: HBoxContainer = %Damage
 @onready var status: HBoxContainer = %Status
+@onready var card_description: RichTextLabel = %CardDescription
 
 var is_playable: bool
 
@@ -83,8 +86,13 @@ func _update_visuals() -> void:
 	status.hide()
 	update_type_icon(card.damage_type)
 	cost.text = str(card.current_cost)
+	card_name.text = card.name
+	card_description.text = card.tooltip_text % card.base_power
 	if card.type == Card.Type.ATTACK:
 		damage.show()
+	if card.target_damage_percent_hp:
+		dmg_description.text = "[color=red]" + str(int(card.target_damage_percent_hp * 100)) + "%[/color]"
+	else:
 		dmg_description.text = "[color=red]" + str(card.power) + "[/color]"
 	if card.type == Card.Type.STATUS:
 		damage.hide()
@@ -100,6 +108,21 @@ func _update_visuals() -> void:
 			else:
 				continue
 		status_description.text = str(i)
+	match card.target:
+		card.Target.SELF:
+			target.text = "Self"
+		card.Target.SINGLE_ENEMY:
+			target.text ="Enemy"
+		card.Target.SINGLE_ALLY:
+			target.text ="Ally"
+		card.Target.ALL_ALLIES:
+			target.text ="Allies"
+		card.Target.ALL:
+			target.text ="ALL"
+		card.Target.SPLASH:
+			target.text ="Splash"
+		card.Target.RANDOM_ENEMY:
+			target.text ="Random"
 
 	if card.pkmn_icon:
 		owner_icon.texture = card.pkmn_icon
@@ -133,3 +156,8 @@ func update_type_icon(damage_type: String) -> void:
 	
 	$Type.visible = true
 	$Type.region_rect = Rect2(region_x, region_y, ICON_SIZE.x, ICON_SIZE.y)
+
+
+func _on_visuals_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_mouse"):
+		tooltip_requested.emit(card)

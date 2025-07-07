@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbrkhr76xq5ki"]
+
+[ext_resource type="Script" uid="uid://dpwfeg413die3" path="res://scenes/ui/card_super_detail_ui.gd" id="1_3vgec"]
+[ext_resource type="PackedScene" uid="uid://kfne03ql8pcq" path="res://scenes/ui/card_super_detail.tscn" id="1_owpxh"]
+
+[node name="CardSuperDetailUI" type="CenterContainer"]
+custom_minimum_size = Vector2(132, 172)
+offset_right = 132.0
+offset_bottom = 188.0
+size_flags_horizontal = 3
+mouse_filter = 0
+use_top_left = true
+script = ExtResource("1_3vgec")
+
+[node name="CardSuperDetail" parent="." instance=ExtResource("1_owpxh")]
+layout_mode = 2
+
+[connection signal="gui_input" from="CardSuperDetail" to="." method="_on_visuals_gui_input"]
+[connection signal="mouse_entered" from="CardSuperDetail" to="." method="_on_visuals_mouse_entered"]
+[connection signal="mouse_exited" from="CardSuperDetail" to="." method="_on_visuals_mouse_exited"]
