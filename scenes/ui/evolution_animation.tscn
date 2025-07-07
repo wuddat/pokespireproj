@@ -12,13 +12,14 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.603922, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_s8615"]
 gradient = SubResource("Gradient_h03dp")
 
-[node name="EvolutionAnimation" type="Node2D"]
+[node name="EvolutionAnimation" type="CanvasLayer"]
 process_mode = 3
+layer = 50
 script = ExtResource("1_s1p8l")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-layer = 0
+layer = 49
 
 [node name="Background" type="TextureRect" parent="BGLayer"]
 unique_name_in_owner = true
@@ -36,6 +37,7 @@ expand_mode = 1
 
 [node name="SpritesLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+layer = 50
 
 [node name="sprite_current" type="Sprite2D" parent="SpritesLayer"]
 unique_name_in_owner = true

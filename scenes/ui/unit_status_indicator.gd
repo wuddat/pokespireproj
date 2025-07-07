@@ -44,7 +44,7 @@ func update_status_display(pkmn: Node) -> void:
 		status_icon.texture = CONFUSED_EFFECT
 		show()
 		return
-	if pkmn.is_asleep == true or pkmn.skip_turn == true:
+	if pkmn.is_asleep == true:
 		#print("[UnitStatusIndicator] sleep detected showing effect")
 		status_icon.texture = SLEEP
 		show()

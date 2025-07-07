@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 signal animation_completed
 @onready var sprite_current: Sprite2D = %sprite_current
