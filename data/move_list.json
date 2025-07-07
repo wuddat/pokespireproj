@@ -1561,7 +1561,7 @@
 	"lightscreen": {
 	  "name": "Light Screen",
 	  "id": "lightscreen",
-	  "category": "attack",
+	  "category": "status",
 	  "subtype": "buff",
 	  "type": "water",
 	  "target": "allies",
@@ -2605,7 +2605,7 @@
 	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["feeble", "feeble","feeble", "feeble","feeble", "feeble","feeble", "feeble",],
+	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "self_damage": 0,

@@ -14,8 +14,8 @@ enum Type {CONDITIONAL, CHANCE_BASED}
 
 @onready var accumulated_weight := 0.0
 
-var enemy: Enemy
-var target: Node2D
+var enemy
+var target: Node
 var targets = []
 
 

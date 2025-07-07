@@ -74,11 +74,11 @@ func spawn_active_pokemon():
 		add_child(unit)
 
 
-func get_active_pokemon_nodes() -> Array[PokemonBattleUnit]:
-	var typed_array: Array[PokemonBattleUnit] = []
+func get_active_pokemon_nodes() -> Array[Node]:
+	var typed_array: Array[Node] = []
 	for node in get_children():
-		if node is PokemonBattleUnit:
-			typed_array.append(node as PokemonBattleUnit)
+		if node is Node:
+			typed_array.append(node as Node)
 	#print("ACTIVE BATTLE UNITS:")
 	#for unit in typed_array:
 		#print("- %s | UID: %s | BLOCK: %d" % [unit.stats.species_id, unit.stats.uid, unit.stats.block])

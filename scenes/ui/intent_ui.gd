@@ -65,8 +65,6 @@ func _ready() -> void:
 	animation_player.play(hover)
 	animation_player.seek(random_start, true)
 	aoe_icon.hide()
-	
-	Utils.print_node(parent)
 	start_spinning()
 
 

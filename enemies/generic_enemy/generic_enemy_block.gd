@@ -26,9 +26,11 @@ func perform_action() -> void:
 			return
 
 	var block_effect := BlockEffect.new()
-	block_effect.amount = block
+	block_effect.amount = enemy.modifier_handler.get_modified_value(block, Modifier.Type.BLOCK_GAINED)
+	block_effect.base_block = block
 	block_effect.sound = sound
-	block_effect.execute([enemy])
+	print("block targets are: ", [targets])
+	block_effect.execute(targets)
 
 	get_tree().create_timer(0.6, false).timeout.connect(
 		func(): Events.enemy_action_completed.emit(enemy)

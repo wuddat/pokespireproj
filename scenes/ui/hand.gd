@@ -1,5 +1,5 @@
 class_name Hand
-extends HBoxContainer
+extends Control
 
 @export var player: Player
 @export var char_stats: CharacterStats

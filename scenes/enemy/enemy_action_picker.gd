@@ -6,7 +6,7 @@ extends Node
 @export var target: Node2D: set = _set_target
 
 @onready var total_weight := 0.0
-var target_pool: Array[PokemonBattleUnit] = []
+var target_pool = []
 var confused_target_pool := []
 var current_target_pos: String
 var player_party_pool: = []
@@ -72,7 +72,7 @@ func select_valid_target() -> void:
 	for action in get_children():
 		action.target = target
 		#print("ENEMY_ACTION_PICKER.GD Applied new target to action: %s" % action)
-#
+
 
 func _on_party_shifted() -> void:
 	refresh_target_pool()

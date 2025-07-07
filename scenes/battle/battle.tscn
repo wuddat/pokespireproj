@@ -1,8 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=32 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
-[ext_resource type="PackedScene" uid="uid://b7kjap0xllfyb" path="res://scenes/enemy/enemy.tscn" id="2_oiw7q"]
 [ext_resource type="Script" uid="uid://7r3b56mpfc5e" path="res://scenes/ui/hand.gd" id="2_xd4uy"]
 [ext_resource type="AudioStream" uid="uid://c41t7pan2dphc" path="res://art/music/19 Victory (VS Wild Pokemon).mp3" id="3_fe4ja"]
 [ext_resource type="AudioStream" uid="uid://bcqjsytvyxds5" path="res://art/music/18 Battle (VS Wild Pokemon).mp3" id="3_pyfix"]
@@ -12,10 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://ih1u373ufo54" path="res://scenes/card_target_selector/card_target_selector.tscn" id="4_py4tk"]
 [ext_resource type="Texture2D" uid="uid://b8uka45vccpd1" path="res://art/leaf2.png" id="5_8eh2s"]
 [ext_resource type="Resource" uid="uid://dw7iw834ey8jm" path="res://characters/bulbasaur/bulbasaur.tres" id="5_fisqk"]
-[ext_resource type="Resource" uid="uid://cht4tnwnmt5nj" path="res://enemies/rattata/rattata.tres" id="5_icoan"]
 [ext_resource type="Texture2D" uid="uid://de46jp3owuc02" path="res://art/bgs/crystal.png" id="5_ueicy"]
 [ext_resource type="Script" uid="uid://c2fu3iiht4n15" path="res://scenes/ui/battle_ui.gd" id="7_icoan"]
-[ext_resource type="Resource" uid="uid://bjnooo31mk6t3" path="res://enemies/mankey/mankey.tres" id="8_mvulk"]
 [ext_resource type="Script" uid="uid://sef1oxtgt26j" path="res://scenes/player/player_handler.gd" id="8_mxe8n"]
 [ext_resource type="PackedScene" uid="uid://b1j2o4bdr8i4q" path="res://scenes/ui/mana_ui.tscn" id="11_fisqk"]
 [ext_resource type="PackedScene" uid="uid://b4ceusfsgxuxg" path="res://scenes/party_handler/party_handler.tscn" id="12_156m4"]
@@ -102,18 +99,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.0666667)
 
 [node name="EnemyHandler" type="Node2D" parent="." groups=["enemy_handler"]]
 script = ExtResource("4_kd6yx")
-
-[node name="Rattata" parent="EnemyHandler" instance=ExtResource("2_oiw7q")]
-position = Vector2(284, 124)
-stats = ExtResource("5_icoan")
-
-[node name="Mankey" parent="EnemyHandler" instance=ExtResource("2_oiw7q")]
-position = Vector2(343, 134)
-stats = ExtResource("8_mvulk")
-
-[node name="Rattata2" parent="EnemyHandler" instance=ExtResource("2_oiw7q")]
-position = Vector2(399, 145)
-stats = ExtResource("5_icoan")
 
 [node name="Player" parent="." instance=ExtResource("4_oiw7q")]
 visible = false

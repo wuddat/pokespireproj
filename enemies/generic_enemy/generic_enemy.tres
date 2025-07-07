@@ -7,8 +7,16 @@
 [resource]
 script = ExtResource("3_fndka")
 ai = ExtResource("1_xbwui")
-species_id = "mankey"
+species_id = ""
 move_ids = Array[String]([])
+type = Array[String]([])
+draft_pool = Array[String]([])
+is_battling = false
+leveled_up_in_battle = false
+evolves_to = ""
+evolution_level = 101
+current_exp = 0
+level = 1
 max_health = 12
 art = ExtResource("2_xbwui")
 metadata/_custom_type_script = "uid://b5scvdy2uuhx3"

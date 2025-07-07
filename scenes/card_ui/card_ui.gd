@@ -102,9 +102,9 @@ func request_tooltip() -> void:
 	
 	var enemy_modifiers := get_active_enemy_modifiers()
 	if not is_instance_valid(player_pkmn_modifiers) or not is_instance_valid(enemy_modifiers) or not is_instance_valid(targets):
-		await is_instance_valid(player_pkmn_modifiers)
-		await is_instance_valid(enemy_modifiers)
-		await is_instance_valid(targets)
+		is_instance_valid(player_pkmn_modifiers)
+		is_instance_valid(enemy_modifiers)
+		is_instance_valid(targets)
 		var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers, targets)
 		Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon, card.name.capitalize())
 
@@ -276,12 +276,14 @@ func _confusion_check(crd: Card) -> bool:
 		Events.battle_text_requested.emit("%s snapped out of confusion!" % battle_unit_owner.stats.species_id.capitalize())
 		await get_tree().create_timer(.6).timeout
 		battle_unit_owner.status_handler.remove_status("confused")
+		battle_unit_owner.unit_status_indicator.update_status_display(battle_unit_owner)
 		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 		print("[CARD_UI] %s snaps out of confusion." % battle_unit_owner.stats.species_id)
 		return false
 	else:
 		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 		print("[CARD_UI]✅ %s resists confusion and plays normally." % battle_unit_owner.stats.species_id)
+		battle_unit_owner.unit_status_indicator.update_status_display(battle_unit_owner)
 		return false
 
 

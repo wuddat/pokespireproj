@@ -1,32 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://belkobawax8yt"]
+[gd_scene load_steps=6 format=3 uid="uid://belkobawax8yt"]
 
 [ext_resource type="Script" uid="uid://dav7bv4qmjqve" path="res://scenes/enemy/enemy_action_picker.gd" id="1_71mro"]
 [ext_resource type="Script" uid="uid://ceharas6l511j" path="res://enemies/generic_enemy/generic_enemy_attack.gd" id="2_kai5s"]
 [ext_resource type="Script" uid="uid://mopmtkqxtoli" path="res://custom_resources/intent.gd" id="4_igsv5"]
-[ext_resource type="Script" uid="uid://ca841lgh3w3fo" path="res://enemies/rattata/rattata_block_action.gd" id="6_ywdiq"]
-[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="7_10078"]
-[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="8_qevli"]
-[ext_resource type="Script" uid="uid://b55366ji66wbb" path="res://enemies/rattata/rattata_mega_block_action.gd" id="9_5llm0"]
-[ext_resource type="Texture2D" uid="uid://c4e7ovx16yfl1" path="res://art/tile_0113.png" id="10_3odth"]
+[ext_resource type="Script" uid="uid://ccgisenxluofx" path="res://enemies/generic_enemy/generic_enemy_block.gd" id="4_n2syt"]
 
 [sub_resource type="Resource" id="Resource_kai5s"]
 script = ExtResource("4_igsv5")
 base_text = ""
 target_id = ""
-metadata/_custom_type_script = "uid://mopmtkqxtoli"
-
-[sub_resource type="Resource" id="Resource_kms8m"]
-script = ExtResource("4_igsv5")
-base_text = ""
-icon = ExtResource("7_10078")
-target_id = ""
-metadata/_custom_type_script = "uid://mopmtkqxtoli"
-
-[sub_resource type="Resource" id="Resource_36tai"]
-script = ExtResource("4_igsv5")
-base_text = ""
-icon = ExtResource("10_3odth")
-target_id = ""
+damage_type = "normal"
+particles_on = false
+targets_all = false
 metadata/_custom_type_script = "uid://mopmtkqxtoli"
 
 [node name="GenericAI" type="Node"]
@@ -47,13 +32,4 @@ chance_weight = 1.0
 metadata/_custom_type_script = "uid://seonw4l00poc"
 
 [node name="BlockAction" type="Node" parent="."]
-script = ExtResource("6_ywdiq")
-intent = SubResource("Resource_kms8m")
-sound = ExtResource("8_qevli")
-type = 1
-chance_weight = 1.0
-
-[node name="TriggerAction" type="Node" parent="."]
-script = ExtResource("9_5llm0")
-intent = SubResource("Resource_36tai")
-sound = ExtResource("8_qevli")
+script = ExtResource("4_n2syt")
