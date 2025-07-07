@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://diaylkglmhm4n"]
+[gd_scene load_steps=8 format=3 uid="uid://diaylkglmhm4n"]
 
 [ext_resource type="Script" uid="uid://dha2lktffgkxl" path="res://scenes/ui/evolution_rewards.gd" id="1_h527p"]
 [ext_resource type="PackedScene" uid="uid://bq8ebkvp2okor" path="res://scenes/ui/card_menu_ui.tscn" id="2_h527p"]
+[ext_resource type="PackedScene" uid="uid://dbrkhr76xq5ki" path="res://scenes/ui/card_super_detail_ui.tscn" id="3_2wue3"]
 [ext_resource type="PackedScene" uid="uid://cmndbgancqt71" path="res://scenes/ui/card_detail_overlay.tscn" id="3_cowsq"]
 [ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="4_h527p"]
 
@@ -47,9 +48,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -106.5
-offset_top = -98.0
+offset_top = -103.0
 offset_right = 106.5
-offset_bottom = -86.0
+offset_bottom = -91.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(105, 6)
@@ -66,9 +67,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -122.0
-offset_top = -79.0
+offset_top = -84.0
 offset_right = 122.0
-offset_bottom = -70.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(106, 6)
@@ -84,10 +85,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -163.5
-offset_top = -35.5
-offset_right = -66.5
-offset_bottom = -17.5
+offset_left = -147.0
+offset_top = -52.0
+offset_right = -50.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "FORGET"
@@ -101,10 +102,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 93.0
-offset_top = -35.5
-offset_right = 174.0
-offset_bottom = -17.5
+offset_left = 75.0
+offset_top = -52.0
+offset_right = 156.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "LEARN"
@@ -118,9 +119,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -235.0
+offset_left = -245.0
 offset_top = -89.0
-offset_right = -198.0
+offset_right = -208.0
 offset_bottom = 111.0
 grow_vertical = 2
 pivot_offset = Vector2(18, 100)
@@ -135,9 +136,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 197.5
+offset_left = 214.0
 offset_top = -89.0
-offset_right = 234.5
+offset_right = 251.0
 offset_bottom = 111.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -146,6 +147,7 @@ theme_override_constants/separation = 0
 
 [node name="ForgetCard" parent="." instance=ExtResource("2_h527p")]
 unique_name_in_owner = true
+visible = false
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 offset_left = -140.0
@@ -155,8 +157,17 @@ offset_bottom = 60.0
 scale = Vector2(1.2, 1.2)
 pivot_offset = Vector2(18, 31)
 
+[node name="ForgetCardSuper" parent="." instance=ExtResource("3_2wue3")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -163.0
+offset_top = -38.0
+offset_right = -31.0
+offset_bottom = 150.0
+
 [node name="ForgetCardName" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -176,6 +187,7 @@ vertical_alignment = 1
 
 [node name="LearnCard" parent="." instance=ExtResource("2_h527p")]
 unique_name_in_owner = true
+visible = false
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 offset_left = 116.0
@@ -185,8 +197,17 @@ offset_bottom = 60.0
 scale = Vector2(1.2, 1.2)
 pivot_offset = Vector2(18, 31)
 
+[node name="LearnCardSuper" parent="." instance=ExtResource("3_2wue3")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 53.0
+offset_top = -38.0
+offset_right = 185.0
+offset_bottom = 150.0
+
 [node name="LearnCardName" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = 8

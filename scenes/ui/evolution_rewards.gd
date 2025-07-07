@@ -4,6 +4,8 @@ extends Control
 @onready var cards_to_forget: VBoxContainer = %CardsToForget
 @onready var cards_to_learn: VBoxContainer = %CardsToLearn
 @onready var forget_slot: CardMenuUI = %ForgetCard
+@onready var forget_card_super: CardSuperDetailUI = %ForgetCardSuper
+@onready var learn_card_super: CardSuperDetailUI = %LearnCardSuper
 @onready var learn_slot: CardMenuUI = %LearnCard
 @onready var confirm_button: Button = %ConfirmButton
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -17,6 +19,7 @@ extends Control
 @export var learnable_cards: Array[Card] : set = set_learnable_cards
 
 const CARD_MENU_UI = preload("res://scenes/ui/card_menu_ui.tscn")
+const CARD_MENU_SUPER_UI = preload("res://scenes/ui/card_super_detail_ui.tscn")
 
 var pokemon: PokemonStats
 var player_deck = CardPile
@@ -80,12 +83,17 @@ func _on_forget_selected(card: Card) -> void:
 	forget_card = card
 	
 	forget_slot.card = card
+	forget_card_super.card = card
 	forget_slot.set_card(card)
+	forget_card_super.set_card(card)
 	await forget_slot.set_char_stats(char_stats)
+	await forget_card_super.set_char_stats(char_stats)
 	forget_card_name.text = card.name
 	forget_slot.visuals._update_visuals()
+	forget_card_super.card_super_detail._update_visuals()
 	Utils.print_resource(forget_slot.card)
 	forget_slot.modulate = Color(1,1,1,1)
+	forget_card_super.modulate = Color(1,1,1,1)
 	forget_slot_selected = true
 	_update_confirm_button()
 
@@ -94,12 +102,17 @@ func _on_learn_selected(card: Card) -> void:
 	learn_card = card
 	
 	learn_slot.card = card
+	learn_card_super.card = card
 	learn_slot.set_card(card)
+	learn_card_super.set_card(card)
 	await learn_slot.set_char_stats(char_stats)
+	await learn_card_super.set_char_stats(char_stats)
 	learn_card_name.text = card.name
 	learn_slot.visuals._update_visuals()
+	learn_card_super.card_super_detail._update_visuals()
 	Utils.print_resource(learn_slot.card)
 	learn_slot.modulate = Color(1,1,1,1)
+	learn_card_super.modulate = Color(1,1,1,1)
 	learn_slot_selected = true
 	_update_confirm_button()
 
