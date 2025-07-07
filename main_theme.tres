@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c3anpexwnb0eu"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c3anpexwnb0eu"]
 
 [ext_resource type="StyleBox" uid="uid://y2b64u7hvwiv" path="res://scenes/card_ui/card_hover_style.tres" id="1_0omi4"]
 [ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="1_470mv"]
 [ext_resource type="StyleBox" uid="uid://cpv8itul2r88u" path="res://scenes/card_ui/card_base_style.tres" id="1_a2l2q"]
+[ext_resource type="StyleBox" uid="uid://1ny4guuky8rt" path="res://scenes/ui/tooltip.stylebox" id="3_58jnp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58jnp"]
 bg_color = Color(0.512399, 0.426499, 0.264206, 0.666667)
@@ -36,7 +37,7 @@ Button/styles/focus = SubResource("StyleBoxEmpty_466ly")
 Button/styles/hover = ExtResource("1_0omi4")
 Button/styles/normal = ExtResource("1_a2l2q")
 Button/styles/pressed = SubResource("StyleBoxFlat_52mx2")
-Panel/styles/panel = ExtResource("1_a2l2q")
+Panel/styles/panel = ExtResource("3_58jnp")
 PanelContainer/styles/panel = ExtResource("1_a2l2q")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_0omi4")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_466ly")

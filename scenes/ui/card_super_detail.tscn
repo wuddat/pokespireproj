@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://kfne03ql8pcq"]
+[gd_scene load_steps=11 format=3 uid="uid://kfne03ql8pcq"]
 
 [ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="1_8j1b0"]
 [ext_resource type="Texture2D" uid="uid://uddpi0vfxtsl" path="res://art/rarity.png" id="2_fqg8x"]
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="3_q6d5j"]
 [ext_resource type="Texture2D" uid="uid://8hitk03a8wtk" path="res://art/sprites/spritesheets/types.png" id="4_s23g5"]
+[ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="5_wshgr"]
+[ext_resource type="Script" uid="uid://dm5ivhiykxb27" path="res://scenes/ui/status_view.gd" id="6_koavt"]
+[ext_resource type="StyleBox" uid="uid://1ny4guuky8rt" path="res://scenes/ui/tooltip.stylebox" id="7_4ux4t"]
+[ext_resource type="PackedScene" uid="uid://cjt3didegw4ym" path="res://scenes/ui/status_tooltip.tscn" id="8_hwp1n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wshgr"]
 bg_color = Color(0.954, 0.917, 0.85, 0.375)
@@ -181,3 +185,67 @@ text = "Self"
 fit_content = true
 autowrap_mode = 2
 horizontal_alignment = 1
+
+[node name="StatusView" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 223.0
+offset_top = 97.0
+offset_right = 91.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("5_wshgr")
+script = ExtResource("6_koavt")
+
+[node name="Background" type="PanelContainer" parent="StatusView"]
+custom_minimum_size = Vector2(100, 26)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -1.0
+offset_right = 97.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("5_wshgr")
+theme_override_styles/panel = ExtResource("7_4ux4t")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StatusView/Background"]
+layout_mode = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="StatusView/Background/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="StatusTooltips" type="VBoxContainer" parent="StatusView/Background/ScrollContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+alignment = 2
+
+[node name="StatusTooltip2" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
+layout_mode = 2
+
+[node name="StatusTooltip3" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
+layout_mode = 2
+
+[node name="StatusTooltip4" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
+layout_mode = 2
+
+[node name="StatusTooltip5" parent="StatusView/Background/ScrollContainer/CenterContainer/StatusTooltips" instance=ExtResource("8_hwp1n")]
+layout_mode = 2

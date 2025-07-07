@@ -222,8 +222,11 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	if battle_stats.is_trainer_battle and bench_pokemon.size() > 0:
 		await get_tree().create_timer(0.5).timeout
 		var next_species = bench_pokemon.pop_front()
-		Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
-		_spawn_enemy(next_species, enemy)
+		if next_species == null:
+			return
+		else:
+			Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
+			_spawn_enemy(next_species, enemy)
 
 	if battle_stats.is_boss_battle:
 		if bench_clones.size() > 0:
