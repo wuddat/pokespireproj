@@ -4,13 +4,13 @@
 [ext_resource type="Resource" uid="uid://cbasdh0yeoa5r" path="res://testing/test_card.tres" id="2_codgc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_codgc"]
-size = Vector2(131, 187)
+size = Vector2(131, 171)
 
 [node name="CardFanner" type="CenterContainer"]
 process_mode = 3
-custom_minimum_size = Vector2(132, 188)
+custom_minimum_size = Vector2(132, 172)
 offset_right = 132.0
-offset_bottom = 188.0
+offset_bottom = 172.0
 size_flags_horizontal = 4
 use_top_left = true
 script = ExtResource("1_codgc")
@@ -21,5 +21,5 @@ matches = 6
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(65.5, 94.5)
+position = Vector2(65.5, 86.5)
 shape = SubResource("RectangleShape2D_codgc")

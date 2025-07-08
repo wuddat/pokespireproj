@@ -14,6 +14,7 @@ const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 
 func _ready() -> void:
 	clear_cards()
+	
 
 func update_visuals() -> void:
 	pkmn_texture.texture = pkmn.art

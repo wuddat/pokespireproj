@@ -75,16 +75,6 @@ func perform_action() -> void:
 
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = 0
-	if bonus_damage_if_target_has_status != "":
-		var handler = targets_to_hit[0].get_node_or_null("StatusHandler")
-		if handler:
-			for status in handler.get_statuses():
-				if status.id == bonus_damage_if_target_has_status:
-					final_damage *= 0
-					break
-
-	if enemy and enemy.modifier_handler:
-		final_damage = 0
 	
 	animate_to_targets(
 	targets_to_hit,

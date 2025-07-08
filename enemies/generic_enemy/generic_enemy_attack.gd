@@ -39,6 +39,8 @@ func setup_from_data(data: Dictionary) -> void:
 	shift_enabled = data.get("shift_enabled", 0)
 	if data.has("sound_path"):
 		sound = load(data["sound_path"]) as AudioStream
+	else:
+		sound = load("res://art/axe.ogg")
 
 	var damage_display = "%s"
 

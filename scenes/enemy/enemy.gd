@@ -165,7 +165,6 @@ func update_intent() -> void:
 
 
 func do_turn() -> void:
-
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
 	await status_effect_checks()
@@ -312,8 +311,8 @@ func catch_check() -> void:
 	
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
-	if stats.health <= 0:
-		return
+	#if stats.health <= 0:
+		#return
 	
 	last_damage_taken = 0
 	

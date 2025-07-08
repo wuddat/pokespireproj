@@ -173,6 +173,7 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 				continue
 
 		var action = action_scene.new()
+		action.script_type = category
 		add_child(action)
 		
 		action.enemy = enemy

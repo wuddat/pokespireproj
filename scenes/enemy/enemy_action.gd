@@ -10,6 +10,7 @@ enum Type {CONDITIONAL, CHANCE_BASED}
 @export_range(0.0, 10.0) var chance_weight := 0.0
 @export var action_name: String
 @export var intent_type: String
+@export var script_type: String
 
 
 @onready var accumulated_weight := 0.0
@@ -139,13 +140,13 @@ func _handle_hit(
 	shift_enabled: int,
 ) -> void:
 	var dmg := DamageEffect.new()
-	if intent_type != "status":
+	if script_type != "status":
 		var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
 		dmg.amount = round(total_damage * mult)
 		dmg.sound = sound
 
 	tween.tween_callback(func():
-		if intent_type != "status":
+		if script_type != "status":
 			if dmg.amount > 0:
 				dmg.execute([target])
 				dmg.sound = sound
@@ -158,11 +159,12 @@ func _handle_hit(
 			#shift_effect.execute([target])
 		
 		# Splash damage to others
-		for splash_target in targets_to_hit:
-			if splash_target != target:
-				var splash := DamageEffect.new()
-				splash.amount = splash_damage
-				splash.execute([splash_target])
+		if splash_damage > 0:
+			for splash_target in targets_to_hit:
+				if splash_target != target:
+					var splash := DamageEffect.new()
+					splash.amount = splash_damage
+					splash.execute([splash_target])
 
 		# Status effects
 		for status in status_effects:
