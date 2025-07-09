@@ -24,6 +24,7 @@ func _ready() -> void:
 		card.queue_free()
 	
 	card_detail_overlay.hide_tooltip()
+	canvas_layer.hide()
 
 
 
@@ -40,6 +41,7 @@ func show_current_view(new_title: String, deck_view: bool = false, randomized: b
 	SFXPlayer.play(OPEN_SOUND)
 	if deck_view:
 		scroll_container.show()
+		canvas_layer.hide()
 		for pokemon: Node in scroll_container.get_children():
 			pokemon.queue_free()
 		for  pkmn in char_stats.current_party:
@@ -62,6 +64,7 @@ func show_current_view(new_title: String, deck_view: bool = false, randomized: b
 		cards.hide()
 	if deck_view == false:
 		cards.show()
+		canvas_layer.show()
 		scroll_container.hide()
 		
 		
@@ -88,8 +91,11 @@ func _update_view(randomized: bool) -> void:
 		new_card.card = card
 		new_card.set_char_stats(char_stats)
 	show()
+	canvas_layer.show()
 
 
 func _on_back_pressed() -> void:
 	SFXPlayer.play(OPEN_SOUND, true)
+	for card: Node in cards.get_children():
+		card.queue_free()
 	hide()

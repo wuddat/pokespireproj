@@ -42,12 +42,16 @@ func _on_area_mouse_entered() -> void:
 	# Toggle visibility via alpha
 	card_menu_ui.modulate.a = 0.0
 	card_super_detail_ui.modulate.a = 1.0
+	await get_tree().process_frame
+	card_super_detail_ui.show()
 
 
 func _on_area_mouse_exited() -> void:
 	print("mouse exited")
 	card_menu_ui.modulate.a = 1.0
 	card_super_detail_ui.modulate.a = 0.0
+	await get_tree().process_frame
+	card_super_detail_ui.hide()
 
 
 func set_card(value: Card) -> void:
