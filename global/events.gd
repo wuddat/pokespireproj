@@ -48,6 +48,8 @@ signal camera_shake_requested(damage: int, intensity: float)
 
 #Cutscene-related Events
 signal mewtwo_phase_2_requested
+signal pokemon_reward_requested(pkmn: PokemonStats)
+signal pokemon_reward_completed
 
 #Pokemon-related Events
 signal party_pokemon_fainted(pokemon: PokemonBattleUnit)

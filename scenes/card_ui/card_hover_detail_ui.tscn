@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn846kmx2ihs7"]
+
+[ext_resource type="Script" uid="uid://clruk7qdqer7i" path="res://scenes/card_ui/card_hover_detail_ui.gd" id="1_y3iqy"]
+[ext_resource type="PackedScene" uid="uid://bq8ebkvp2okor" path="res://scenes/ui/card_menu_ui.tscn" id="1_ys5rs"]
+[ext_resource type="Resource" uid="uid://cbasdh0yeoa5r" path="res://testing/test_card.tres" id="2_bcugt"]
+[ext_resource type="PackedScene" uid="uid://dbrkhr76xq5ki" path="res://scenes/ui/card_super_detail_ui.tscn" id="4_j6raw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx1ta"]
+size = Vector2(37, 51)
+
+[node name="CardHoverDetailUI" type="CenterContainer"]
+offset_right = 45.0
+offset_bottom = 62.0
+size_flags_horizontal = 3
+script = ExtResource("1_y3iqy")
+
+[node name="CardMenuUI" parent="." instance=ExtResource("1_ys5rs")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+card = ExtResource("2_bcugt")
+
+[node name="SuperDetailContainer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 51
+
+[node name="CardSuperDetailUI" parent="SuperDetailContainer" instance=ExtResource("4_j6raw")]
+unique_name_in_owner = true
+z_index = 10
+offset_bottom = 172.0
+pivot_offset = Vector2(66, 86)
+mouse_filter = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(19, 36)
+shape = SubResource("RectangleShape2D_vx1ta")

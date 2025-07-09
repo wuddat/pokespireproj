@@ -291,3 +291,6 @@ func generate_phase_1_enemies(player_party: Array[PokemonStats], player_deck: Ar
 		clones.append(clone)
 
 	return clones
+
+func get_enemies() -> Array[Node]:
+	return get_children()

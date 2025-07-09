@@ -6,8 +6,9 @@ func get_default_tooltip() -> String:
 	return tooltip_text % base_power
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-
-	var mod_dmg := player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
+	var mod_dmg = base_power
+	if player_modifiers:
+		mod_dmg = player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
 	if enemy_modifiers:
 		mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
@@ -33,7 +34,11 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 
 	if lead_enabled:
 		return "[color=goldenrod]LEAD: [/color]" + tooltip_text % mod_dmg
-	else: return tooltip_text % mod_dmg
+	else:
+		if mod_dmg:
+			return tooltip_text % mod_dmg
+		else:
+			return tooltip_text
 #	return "[color=dimgray][s]LEAD:[/s][/color] " + tooltip_text % mod_dmg
 
 

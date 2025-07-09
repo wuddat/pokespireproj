@@ -17,6 +17,21 @@ func play(audio: AudioStream, single := false) -> void:
 			player.play()
 			break
 
+func play_from_time(audio: AudioStream, from_time := 0.0, single := false) -> void:
+	if not audio:
+		return
+	
+	if single:
+		stop()
+	
+	for player in get_children():
+		player = player as AudioStreamPlayer
+		
+		if not player.playing:
+			player.stream = audio
+			player.pitch_scale = 1.0  # Reset pitch to default
+			player.play(from_time)
+			break
 
 func pitch_play(audio: AudioStream, min_pitch := 0.95, max_pitch := 1.05, single := false) -> void:
 	if not audio:

@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0in5o1p3w83a"]
+
+[ext_resource type="Script" uid="uid://8mhp63t1byvo" path="res://scenes/animations/pokemon_reward_animation.gd" id="1_71nu1"]
+[ext_resource type="PackedScene" uid="uid://ombtsrp0an1b" path="res://scenes/enemy/catch_animator.tscn" id="2_0mhjp"]
+[ext_resource type="Resource" uid="uid://bv1navywawt1p" path="res://testing/test_pkmn_stats.tres" id="2_uxs6v"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="4_uxs6v"]
+[ext_resource type="Resource" uid="uid://dw7iw834ey8jm" path="res://characters/bulbasaur/bulbasaur.tres" id="5_uq2xs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uxs6v"]
+
+[node name="PokemonRewardAnimation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_71nu1")
+caught_pkmn = ExtResource("2_uxs6v")
+char_stats = ExtResource("5_uq2xs")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="CatchAnimator" parent="." instance=ExtResource("2_0mhjp")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="pkmn" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(245, 152)
+texture = ExtResource("4_uxs6v")
+
+[node name="color_overlay" type="ColorRect" parent="pkmn"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -18.5
+offset_right = -18.5
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 42.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "You caught Bulbasaur!"
+label_settings = SubResource("LabelSettings_uxs6v")
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = -104.0
+offset_right = 224.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4

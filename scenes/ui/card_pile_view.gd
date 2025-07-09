@@ -2,6 +2,7 @@ class_name CardPileView
 extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
+const CARD_HOVER_DETAIL_UI = preload("res://scenes/card_ui/card_hover_detail_ui.tscn")
 const PKMN_CARD_DISPLAYER := preload("res://scenes/ui/pkmn_card_displayer.tscn")
 const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 
@@ -13,6 +14,7 @@ const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 @onready var card_detail_overlay: CardDetailOverlay = %CardDetailOverlay
 @onready var backbtn: Button = %BackButton
 @onready var scroll_container: VBoxContainer = %VBoxContainer
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 
 func _ready() -> void:
@@ -81,15 +83,12 @@ func _update_view(randomized: bool) -> void:
 		all_cards.shuffle()
 	
 	for card: Card in all_cards:
-		var new_card := CARD_MENU_UI_SCENE.instantiate() as CardMenuUI
+		var new_card := CARD_HOVER_DETAIL_UI.instantiate() as CardHoverDetailUI
 		cards.add_child(new_card)
 		new_card.card = card
-		new_card.tooltip_requested.connect(card_detail_overlay.show_tooltip)
-		
 		new_card.set_char_stats(char_stats)
-
-		
 	show()
+
 
 func _on_back_pressed() -> void:
 	SFXPlayer.play(OPEN_SOUND, true)

@@ -224,6 +224,8 @@ func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	var new_pokemon_stats := PokemonStats.from_enemy_stats(stats)
 	var pkmn_to_add = Pokedex.create_pokemon_instance(new_pokemon_stats.species_id)
 	Events.added_pkmn_to_party.emit(pkmn_to_add)
+	await get_tree().process_frame
+	Events.pokemon_reward_requested.emit(pkmn_to_add)
 	back_button.disabled = false
 
 

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PokemonStats" load_steps=4 format=3 uid="uid://bv1navywawt1p"]
+
+[ext_resource type="Script" uid="uid://c850f60iwin7v" path="res://custom_resources/pokemon_stats.gd" id="1_gduer"]
+[ext_resource type="Texture2D" uid="uid://kwttb76rg8ig" path="res://art/sprites/7.png" id="1_r7daw"]
+[ext_resource type="Texture2D" uid="uid://b5jsjryv6bf1k" path="res://art/sprites/icons/7.png" id="2_72r40"]
+
+[resource]
+script = ExtResource("1_gduer")
+species_id = "squirtle"
+move_ids = Array[String](["watergun", "watergun", "watergun", "tackle", "tackle", "defensecurl"])
+type = Array[String](["water"])
+draft_pool = Array[String]([])
+is_battling = false
+leveled_up_in_battle = false
+evolves_to = "warturtle"
+evolution_level = 8
+current_exp = 0
+level = 1
+max_health = 25
+art = ExtResource("1_r7daw")
+icon = ExtResource("2_72r40")
+metadata/_custom_type_script = "uid://c850f60iwin7v"

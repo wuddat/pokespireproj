@@ -113,6 +113,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "add item"
 
+[node name="KillEnemiesButton" type="Button" parent="DebugButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "kill all"
+
 [node name="TopBar" type="CanvasLayer" parent="."]
 layer = 3
 
@@ -203,5 +208,5 @@ visible = false
 [node name="CutsceneHandler" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
-layer = 25
+layer = 50
 script = ExtResource("13_7yo0l")

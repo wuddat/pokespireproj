@@ -28,6 +28,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var battlebutton: Button = %BattleButton
 @onready var pokecenterbtn: Button = %PokecenterButton
 @onready var add_item_button: Button = %AddItemButton
+@onready var kill_enemies_button: Button = %KillEnemiesButton
 @onready var mapbtn: Button = %MapButton
 @onready var rewardsbtn: Button = %RewardsButton
 @onready var shopbtn: Button = %ShopButton
@@ -114,6 +115,7 @@ func _setup_event_connections() -> void:
 	rewardsbtn.pressed.connect(_change_view.bind(rewardscene))
 	shopbtn.pressed.connect(_change_view.bind(shopscene))
 	treasurebtn.pressed.connect(_change_view.bind(treasurescene))
+	kill_enemies_button.pressed.connect(_on_kill_enemies)
 
 
 func 	_setup_top_bar():
@@ -129,6 +131,7 @@ func 	_setup_top_bar():
 	item_inventory_ui.char_stats = character
 	party_selector.update_buttons()
 	item_inventory_ui.update_items()
+	cutscene_handler.char_stats = character
 
 
 func _show_regular_battle_rewards() -> void:
@@ -288,3 +291,12 @@ func _add_item_test() -> void:
 		print("%s x%d" % [i.name, i.quantity])
 
 	item_inventory_ui.update_items()
+
+func _on_kill_enemies() -> void:
+	var battle = currentview.get_child(0)
+	for enemy in battle.enemy_handler.get_enemies():
+		print("EnemyNode: ", enemy)
+		var stats = enemy.stats
+		var dmg := DamageEffect.new()
+		dmg.amount = stats.max_health
+		dmg.execute([enemy])

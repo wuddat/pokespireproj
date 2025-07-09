@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_5fd14")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -84,3 +85,6 @@ text = "Back"
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 11
