@@ -10,7 +10,7 @@ const PULSE_SHADER := preload("res://pulse.gdshader")
 @onready var card_grid_container: GridContainer = %CardGridContainer
 @onready var back_button: Button = %BackButton
 @onready var pokemon_container: PokemonContainer = %PokemonContainer
-
+@onready var deck_view: CardPileView = %DeckView
 @export var char_stats: CharacterStats
 
 func _ready() -> void:
@@ -36,9 +36,14 @@ func _populate_pkmn_cards(pkmn_uid: String) -> void:
 			new_card_amt.card_amt = 1
 			new_card_amt.set_char_stats(char_stats)
 			card_amt_map[card.id] = new_card_amt
+	var column_min_amt = card_grid_container.get_children().size()
+	if column_min_amt <= 4:
+		card_grid_container.columns = column_min_amt
 
 
 func show_party_view(pkmn_uid: String) -> void:
+	if deck_view.visible:
+		deck_view._on_back_pressed()
 	_populate_pkmn_cards(pkmn_uid)
 	SFXPlayer.play(OPEN_SOUND, true)
 	show()

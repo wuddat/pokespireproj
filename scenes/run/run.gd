@@ -127,6 +127,7 @@ func 	_setup_top_bar():
 	deck_button.container_name = "Deck"
 	deck_view.card_pile = character.deck
 	deck_view.char_stats = character
+	deck_view.party_view = party_view
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))
 	party_view.char_stats = character
 	party_selector.char_stats = character
@@ -173,8 +174,10 @@ func _load_battle(room :Room) ->void:
 	battle_scene.char_stats = character
 	battle_scene.party_selector = party_selector
 	battle_scene.battle_stats = room.battle_stats
+	battle_scene.party_view = party_view
 	battle_scene.start_battle()
 	party_selector.in_battle = true
+
 
 func _on_battle_room_entered(room: Room) -> void:
 	var animation := wildscene.instantiate()

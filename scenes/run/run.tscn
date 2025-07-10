@@ -127,7 +127,7 @@ custom_minimum_size = Vector2(0, 36)
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
-color = Color(0, 0, 0, 0.501961)
+color = Color(0, 0, 0, 0.635294)
 
 [node name="BarItems" type="HBoxContainer" parent="TopBar"]
 custom_minimum_size = Vector2(0, 36)
@@ -182,19 +182,21 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PartyView" parent="TopBar" instance=ExtResource("12_fo0ly")]
+unique_name_in_owner = true
+visible = false
+offset_top = 36.0
+
 [node name="DeckView" parent="TopBar" instance=ExtResource("7_yeia0")]
 unique_name_in_owner = true
 visible = false
 offset_top = 36.0
 
-[node name="PartyView" parent="TopBar" instance=ExtResource("12_fo0ly")]
-unique_name_in_owner = true
-
 [node name="EvolutionRewardsUI" type="CanvasLayer" parent="."]
 layer = 5
 
 [node name="SceneTransition" type="CanvasLayer" parent="."]
-layer = 6
+layer = 12
 
 [node name="Fade" type="ColorRect" parent="SceneTransition"]
 unique_name_in_owner = true

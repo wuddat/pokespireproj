@@ -8,6 +8,7 @@ const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")
 
 @export var card_pile: CardPile
 @export var char_stats: CharacterStats
+@export var party_view: PartyView
 
 @onready var title: Label = %Title
 @onready var cards: GridContainer = %Cards
@@ -39,6 +40,9 @@ func _input(event: InputEvent) -> void:
 
 func show_current_view(new_title: String, deck_view: bool = false, randomized: bool = false) -> void:
 	SFXPlayer.play(OPEN_SOUND)
+	if party_view:
+		if party_view.visible == true:
+			party_view._on_back_pressed()
 	if deck_view:
 		scroll_container.show()
 		canvas_layer.hide()

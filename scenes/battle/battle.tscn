@@ -281,10 +281,12 @@ layer = 4
 [node name="DrawPileView" parent="CardPileViews" instance=ExtResource("20_fe4ja")]
 unique_name_in_owner = true
 visible = false
+offset_top = 36.0
 
 [node name="DiscardPileView" parent="CardPileViews" instance=ExtResource("20_fe4ja")]
 unique_name_in_owner = true
 visible = false
+offset_top = 36.0
 
 [node name="StatusUI" type="CanvasLayer" parent="."]
 layer = 4

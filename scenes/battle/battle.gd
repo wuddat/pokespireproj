@@ -9,6 +9,7 @@ signal evolution_queue_completed
 @export var music: AudioStream
 @export var battle_music: AudioStream
 @export var party_selector: HBoxContainer
+@export var party_view: PartyView
 @onready var status_view: StatusView = $StatusUI/StatusView
 @onready var background: Sprite2D = %Background
 @onready var background_2: Sprite2D = %Background2
@@ -20,6 +21,7 @@ signal evolution_queue_completed
 @onready var party_handler: PartyHandler = $PartyHandler
 @onready var left_panel: VBoxContainer = $StatUI/LeftPanel
 @onready var pkmn_fainted_ui: PkmnFaintedUI = $FaintUI/PkmnFainted
+
 
 var stats_ui_scn := preload("res://scenes/ui/health_bar_ui.tscn")
 var stat_ui_by_uid: Dictionary = {}
@@ -50,6 +52,7 @@ func start_battle() -> void:
 	background_2.hide()
 	status_view.visible = true
 	battle_ui.char_stats = char_stats
+	battle_ui.party_view = party_view
 	
 	player.stats = char_stats
 	

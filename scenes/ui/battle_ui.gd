@@ -2,6 +2,7 @@ class_name BattleUI
 extends CanvasLayer
 
 @export var char_stats: CharacterStats : set = _set_char_stats
+@export var party_view: PartyView
 
 @onready var hand: Hand = $Hand as Hand
 @onready var mana_ui: ManaUI = $ManaUI as ManaUI
@@ -22,6 +23,8 @@ func _ready() -> void:
 	draw_pile_button.container_name = "Draw Pile"
 	discard_pile_button.container_name = "Discard Pile"
 	discard_pile_button.pressed.connect(discard_pile_view.show_current_view.bind("Discard Pile"))
+	draw_pile_view.party_view = party_view
+	discard_pile_view.party_view = party_view
 
 
 func initialize_card_pile_ui() -> void:
