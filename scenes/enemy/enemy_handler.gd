@@ -225,8 +225,9 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		if next_species == null:
 			return
 		else:
-			Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
-			_spawn_enemy(next_species, enemy)
+			if enemy:
+				Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
+				_spawn_enemy(next_species, enemy)
 
 	if battle_stats.is_boss_battle:
 		if bench_clones.size() > 0:
@@ -244,7 +245,8 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	if battling_pokemon:
 		for battler in battling_pokemon:
 			if battler.has_method("on_enemy_defeated"):
-				battler.on_enemy_defeated(enemy)
+				if enemy:
+					battler.on_enemy_defeated(enemy)
 	
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)

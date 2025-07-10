@@ -22,18 +22,24 @@ card = ExtResource("2_bcugt")
 
 [node name="SuperDetailContainer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-layer = 51
+layer = 12
 
 [node name="CardSuperDetailUI" parent="SuperDetailContainer" instance=ExtResource("4_j6raw")]
 unique_name_in_owner = true
-z_index = 10
+visible = false
+z_index = 12
 offset_bottom = 172.0
 pivot_offset = Vector2(66, 86)
-mouse_filter = 2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Area2D" type="Area2D" parent="Control"]
 unique_name_in_owner = true
+position = Vector2(-22, -31)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Area2D"]
 position = Vector2(19, 36)
 shape = SubResource("RectangleShape2D_vx1ta")
+
+[connection signal="gui_input" from="SuperDetailContainer/CardSuperDetailUI" to="." method="_on_card_super_detail_ui_gui_input"]

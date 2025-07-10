@@ -39,6 +39,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var fade_tween := create_tween()
 @onready var particles: CanvasLayer = %Particles
 @onready var item_inventory_ui: HBoxContainer = %ItemInventoryUI
+@onready var party_view: PartyView = %PartyView
 
 
 var stats: RunStats
@@ -127,7 +128,9 @@ func 	_setup_top_bar():
 	deck_view.card_pile = character.deck
 	deck_view.char_stats = character
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))
+	party_view.char_stats = character
 	party_selector.char_stats = character
+	party_selector.party_viewer = party_view
 	item_inventory_ui.char_stats = character
 	party_selector.update_buttons()
 	item_inventory_ui.update_items()

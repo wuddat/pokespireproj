@@ -2,13 +2,13 @@
 class_name CardHoverDetailUI
 extends CenterContainer
 
+signal tooltip_requested(card: Card)
+
 @export var card : Card : set = set_card
 @onready var card_menu_ui: CardMenuUI = %CardMenuUI
 @onready var card_super_detail_ui: CardSuperDetailUI = %CardSuperDetailUI
 @onready var area_2d: Area2D = %Area2D
 @onready var super_detail_container: CanvasLayer = %SuperDetailContainer
-
-
 
 func _ready():
 	area_2d.mouse_entered.connect(_on_area_mouse_entered)
@@ -69,3 +69,8 @@ func set_char_stats(value: CharacterStats) -> void:
 		card_menu_ui.visuals.char_stats = value
 	if card_super_detail_ui.card_super_detail:
 		card_super_detail_ui.card_super_detail.char_stats = value
+
+func _on_card_super_detail_ui_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_mouse"):
+		tooltip_requested.emit(card)
+		card_super_detail_ui.modulate = Color (1,1,1,0)

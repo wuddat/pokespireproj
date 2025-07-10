@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl8dkve10fma8"]
+[gd_scene load_steps=20 format=3 uid="uid://bl8dkve10fma8"]
 
 [ext_resource type="PackedScene" uid="uid://c32muahqn1k4q" path="res://scenes/map/map.tscn" id="1_8rlou"]
 [ext_resource type="Script" uid="uid://bm7k805xh1o2a" path="res://scenes/run/run.gd" id="1_l7o68"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b6tvvkilj7pgd" path="res://scenes/ui/item_inventory_ui.tscn" id="7_cnkn7"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="7_yeia0"]
 [ext_resource type="PackedScene" uid="uid://clj4o618fkspv" path="res://scenes/ui/universal_hover_tooltip.tscn" id="10_yeia0"]
+[ext_resource type="PackedScene" uid="uid://bqmb5hl4t7an7" path="res://scenes/ui/party_view.tscn" id="12_fo0ly"]
 [ext_resource type="Script" uid="uid://1tb263xaqk62" path="res://scenes/run/cutscene_handler.gd" id="13_7yo0l"]
 
 [sub_resource type="Gradient" id="Gradient_cnkn7"]
@@ -119,7 +120,7 @@ layout_mode = 2
 text = "kill all"
 
 [node name="TopBar" type="CanvasLayer" parent="."]
-layer = 3
+layer = 10
 
 [node name="Background" type="ColorRect" parent="TopBar"]
 custom_minimum_size = Vector2(0, 36)
@@ -184,6 +185,10 @@ vertical_alignment = 1
 [node name="DeckView" parent="TopBar" instance=ExtResource("7_yeia0")]
 unique_name_in_owner = true
 visible = false
+offset_top = 36.0
+
+[node name="PartyView" parent="TopBar" instance=ExtResource("12_fo0ly")]
+unique_name_in_owner = true
 
 [node name="EvolutionRewardsUI" type="CanvasLayer" parent="."]
 layer = 5
@@ -208,5 +213,5 @@ visible = false
 [node name="CutsceneHandler" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
-layer = 50
+layer = 11
 script = ExtResource("13_7yo0l")

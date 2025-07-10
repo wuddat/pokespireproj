@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://br5d3fpwymqac"]
+
+[ext_resource type="Script" uid="uid://cc47v4u16btt0" path="res://scenes/ui/pokemon_container.gd" id="1_blmvo"]
+[ext_resource type="PackedScene" uid="uid://cpw38rx1au2ku" path="res://scenes/ui/pkmn_button.tscn" id="1_hih3e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blmvo"]
+content_margin_top = 5.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.353, 0.344, 0.32, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqbqt"]
+bg_color = Color(0.255659, 0.255659, 0.255659, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.353, 0.344, 0.32, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4b5c"]
+bg_color = Color(0.870268, 0.0566761, 0.0327728, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.353, 0.344, 0.32, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81gfs"]
+bg_color = Color(0.212841, 0.439923, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.353, 0.344, 0.32, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="PokemonContainer" type="HBoxContainer"]
+script = ExtResource("1_blmvo")
+
+[node name="PkmnWindow" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_blmvo")
+
+[node name="Button" parent="PkmnWindow" instance=ExtResource("1_hih3e")]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Level" type="Label" parent="PkmnWindow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "lvl 4"
+horizontal_alignment = 1
+
+[node name="StatBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="HPContainer" type="VBoxContainer" parent="StatBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HPLabel" type="Label" parent="StatBox/HPContainer"]
+layout_mode = 2
+text = "   Health:"
+
+[node name="HPBar" type="PanelContainer" parent="StatBox/HPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 15)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_qqbqt")
+
+[node name="CurrentHP" type="PanelContainer" parent="StatBox/HPContainer/HPBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 15)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4b5c")
+
+[node name="HPText" type="Label" parent="StatBox/HPContainer/HPBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "25/25"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XPContainer" type="VBoxContainer" parent="StatBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="XPLabel" type="Label" parent="StatBox/XPContainer"]
+layout_mode = 2
+text = "   Exp:"
+
+[node name="XPBar" type="PanelContainer" parent="StatBox/XPContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 15)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_qqbqt")
+
+[node name="CurrentXP" type="PanelContainer" parent="StatBox/XPContainer/XPBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 15)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_81gfs")
+
+[node name="XPText" type="Label" parent="StatBox/XPContainer/XPBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "25/25"
+horizontal_alignment = 1
+vertical_alignment = 1

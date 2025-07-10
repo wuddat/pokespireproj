@@ -208,5 +208,11 @@ func get_party_pkmn_cards(pkmn_uid: String) -> CardPile:
 		if card.pkmn_owner_uid == pkmn_uid:
 			card_pile.add_card(card)
 	return card_pile
-			
-			
+
+
+func get_individual_pkmn(pkmn_uid: String) -> PokemonStats:
+	for p in current_party:
+		if p.uid == pkmn_uid:
+			return p
+	print("No pokemon in party w UID: ", pkmn_uid)
+	return

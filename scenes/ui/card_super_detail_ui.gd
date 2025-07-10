@@ -29,7 +29,7 @@ func _on_visuals_mouse_entered() -> void:
 		card_super_detail.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 		set_z_index(HOVER_Z_INDEX)
 		
-		if is_floatable:
+		if is_floatable and tween.is_running():
 			tween.kill()  # stop any current tween
 			tween = create_tween()
 			tween.tween_property(self, "position:y", HOVER_OFFSET, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -39,7 +39,7 @@ func _on_visuals_mouse_exited() -> void:
 		card_super_detail.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
 		set_z_index(BASE_Z_INDEX)
 		
-		if is_floatable:
+		if is_floatable and tween.is_running():
 			tween.kill()
 			tween = create_tween()
 			tween.tween_property(self, "position:y", 0, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

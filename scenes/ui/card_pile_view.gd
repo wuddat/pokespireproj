@@ -90,6 +90,7 @@ func _update_view(randomized: bool) -> void:
 		cards.add_child(new_card)
 		new_card.card = card
 		new_card.set_char_stats(char_stats)
+		new_card.tooltip_requested.connect(card_detail_overlay.show_tooltip)
 	show()
 	canvas_layer.show()
 

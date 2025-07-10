@@ -2,6 +2,7 @@ class_name PartySelector
 extends Control
 
 var char_stats: CharacterStats
+var party_viewer: PartyView
 
 
 @onready var party_buttons: HBoxContainer = $"."
@@ -119,6 +120,10 @@ func _on_slot_pressed(index: int) -> void:
 				selected_switch_out_uid = uid
 				print("Entering switch mode for UID: %s" % uid)
 	else:
+		if party_viewer.visible:
+			party_viewer.hide()
+		else:
+			party_viewer.show_party_view(uid)
 		if uid in highlighted_in_bar_pkmn:
 			if highlighted_in_bar_pkmn.size() > 1:
 				highlighted_in_bar_pkmn.erase(uid)

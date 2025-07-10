@@ -2538,11 +2538,11 @@
 	  "power": 10,
 	  "accuracy": 100,
 	  "cost": 1,
-	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","confuse"],
+	  "status_effects": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","confused"],
 	  "description": "[center]Apply [color=red]10 ATKUP[/color] to the user AND an enemy. The enemy is also CONFUSED[/center]",
 	  "icon_path": "res://art/status_effects/atkup.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "self_status": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up",],
+	  "self_status": ["attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up","attack_up", "confused"],
 	  "rarity": "uncommon"
 	},
 	"swift": {
