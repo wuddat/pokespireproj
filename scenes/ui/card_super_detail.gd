@@ -6,7 +6,7 @@ signal tooltip_requested(card: Card)
 
 @export var card: Card: set = set_card
 @export var char_stats: CharacterStats
-@onready var tween := create_tween()
+#@onready var tween : Tween
 
 @onready var panel: PanelContainer = %Panel
 @onready var pkmn_border: Panel = %pkmn_border
@@ -87,7 +87,10 @@ func _update_visuals() -> void:
 	update_type_icon(card.damage_type)
 	cost.text = str(card.current_cost)
 	card_name.text = card.name
-	card_description.text = card.tooltip_text % card.base_power
+	if card.tooltip_text.find("%") != -1:
+		card_description.text = card.tooltip_text % card.base_power
+	else:
+		card_description.text = card.tooltip_text
 	if card.type == Card.Type.ATTACK:
 		damage.show()
 	if card.target_damage_percent_hp:

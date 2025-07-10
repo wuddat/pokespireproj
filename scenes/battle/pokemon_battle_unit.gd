@@ -9,7 +9,6 @@ const DODGE = preload("res://art/sounds/sfx/dodge.wav")
 @export var stats: PokemonStats : set = set_pokemon_stats
 @export var spawn_position: String
 
-@onready var hoverable_tooltip: Control = $HoverableTooltip
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var stats_ui: StatsUI = $StatsUI
 @onready var status_handler: StatusHandler = $StatusHandler
@@ -162,7 +161,9 @@ func _on_enemy_seeded_turn_start(seeded: Status) -> void:
 	heal(seeded.heal_strength)
 
 func on_enemy_defeated(enemy: Enemy) -> void:
-	var xp := enemy.stats.max_health * 2
+	if stats.health <= 0:
+		return
+	var xp := enemy.stats.max_health
 	stats.current_exp += xp
 	print("💥 Enemy defeated: %s | Gained EXP: %s" % [enemy.stats.species_id, xp])
 	

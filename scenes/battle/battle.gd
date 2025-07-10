@@ -143,7 +143,8 @@ func _on_enemies_child_order_changed() -> void:
 
 
 func _on_enemy_turn_ended() -> void:
-	await player_handler.start_turn()
+	player_handler.start_turn()
+	#removed await - return if crash
 	enemy_handler.reset_enemy_actions()
 
 

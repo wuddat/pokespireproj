@@ -2,7 +2,6 @@ class_name BattleDialogueManager
 extends PanelContainer
 
 @onready var label: RichTextLabel = %BattleText
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 var tween: Tween
 
 const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")

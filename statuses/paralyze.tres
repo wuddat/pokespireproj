@@ -17,5 +17,5 @@ max_stacks = 999
 max_duration = 3
 icon = ExtResource("1_f0nfc")
 tooltip = "[color=goldenrod]PARALYZE[/color]:
-May prevent attacks from succeeding."
+May prevent attacks from succeeding for %s turns."
 metadata/_custom_type_script = "uid://breq3elxr1644"

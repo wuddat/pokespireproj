@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=41 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -20,9 +20,12 @@
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="13_icoan"]
 [ext_resource type="Script" uid="uid://d2wwbjths5rhf" path="res://scenes/ui/red_flash.gd" id="15_t1kk3"]
 [ext_resource type="PackedScene" uid="uid://ofgutpuj26p0" path="res://scenes/ui/battle_over_panel.tscn" id="17_6ofp8"]
+[ext_resource type="StyleBox" uid="uid://y2b64u7hvwiv" path="res://scenes/card_ui/card_hover_style.tres" id="17_n5ix6"]
 [ext_resource type="PackedScene" uid="uid://d0sv3khv88a0s" path="res://scenes/ui/card_pile_opener.tscn" id="17_w40i5"]
 [ext_resource type="PackedScene" uid="uid://6mq48o6e08j5" path="res://scenes/ui/status_view.tscn" id="18_sgdsx"]
+[ext_resource type="StyleBox" uid="uid://cpv8itul2r88u" path="res://scenes/card_ui/card_base_style.tres" id="18_tnndc"]
 [ext_resource type="PackedScene" uid="uid://domqaoyk0ywyl" path="res://scenes/ui/battle_dialogue_manager.tscn" id="19_e48mi"]
+[ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="19_k6ux7"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="20_fe4ja"]
 [ext_resource type="PackedScene" uid="uid://cfip7c5hyvwvo" path="res://scenes/ui/pkmn_fainted_ui.tscn" id="23_156m4"]
 
@@ -63,6 +66,43 @@ scale_min = 0.3
 scale_max = 0.7
 scale_curve = SubResource("CurveTexture_e48mi")
 color_ramp = SubResource("GradientTexture1D_ueicy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58jnp"]
+bg_color = Color(0.512399, 0.426499, 0.264206, 0.666667)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.837227, 0.844037, 0.244706, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_466ly"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52mx2"]
+bg_color = Color(0.761133, 0.656606, 0.459396, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.837227, 0.844037, 0.244706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0omi4"]
+bg_color = Color(0.32536, 0.234123, 0.160835, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_466ly"]
+bg_color = Color(0, 0.717647, 0.101961, 1)
+
+[sub_resource type="Theme" id="Theme_1oulw"]
+default_font = ExtResource("19_k6ux7")
+default_font_size = 8
+Button/styles/disabled = SubResource("StyleBoxFlat_58jnp")
+Button/styles/focus = SubResource("StyleBoxEmpty_466ly")
+Button/styles/hover = ExtResource("17_n5ix6")
+Button/styles/normal = ExtResource("18_tnndc")
+Button/styles/pressed = SubResource("StyleBoxFlat_52mx2")
+Panel/styles/panel = ExtResource("18_tnndc")
+PanelContainer/styles/panel = ExtResource("18_tnndc")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_0omi4")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_466ly")
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_kd6yx")
@@ -177,6 +217,7 @@ offset_left = 2.0
 offset_top = -68.0
 offset_right = 32.0
 offset_bottom = -38.0
+theme = SubResource("Theme_1oulw")
 char_stats = ExtResource("5_fisqk")
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_mxe8n")]

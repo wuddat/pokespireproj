@@ -36,7 +36,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var health_ui: HealthUI = %HealthUI
 @onready var party_selector: HBoxContainer = %PartySelector
 @onready var fade: ColorRect = %Fade
-@onready var fade_tween := create_tween()
+@onready var fade_tween: Tween
 @onready var particles: CanvasLayer = %Particles
 @onready var item_inventory_ui: HBoxContainer = %ItemInventoryUI
 @onready var party_view: PartyView = %PartyView
@@ -246,8 +246,8 @@ func _on_map_exited(room: Room) -> void:
 			_on_trainer_room_entered(room)
 
 
-func _on_pokemon_captured(stats: PokemonStats) -> void:
-	caught_pokemon.append(stats.duplicate())
+func _on_pokemon_captured(captured_stats: PokemonStats) -> void:
+	caught_pokemon.append(captured_stats.duplicate())
 	print("caught pokemon in run: ", caught_pokemon)
 
 
@@ -302,7 +302,7 @@ func _on_kill_enemies() -> void:
 	var battle = currentview.get_child(0)
 	for enemy in battle.enemy_handler.get_enemies():
 		print("EnemyNode: ", enemy)
-		var stats = enemy.stats
+		var enemy_stats = enemy.stats
 		var dmg := DamageEffect.new()
-		dmg.amount = stats.max_health
+		dmg.amount = enemy_stats.max_health
 		dmg.execute([enemy])

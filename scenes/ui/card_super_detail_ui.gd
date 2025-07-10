@@ -11,7 +11,7 @@ const BASE_Z_INDEX := 0
 const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = set_card
-@onready var tween := create_tween()
+@onready var tween : Tween
 @onready var card_super_detail: CardSuperDetail = $CardSuperDetail
 
 var is_floatable: bool = false

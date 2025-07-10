@@ -31,7 +31,7 @@ func _input(event: InputEvent) -> void:
 			hide()
 
 
-func show_current_view(new_title: String, randomized: bool = false) -> void:
+func show_current_view(new_title: String, _randomized: bool = false) -> void:
 	print("📜 Showing view for:", selected_pkmn.species_id)
 	SFXPlayer.play(OPEN_SOUND)
 	for pokemon: Node in scroll_container.get_children():

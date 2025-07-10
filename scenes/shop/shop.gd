@@ -81,8 +81,8 @@ func _update_items() -> void:
 	for shop_card: ShopCard in cards.get_children():
 		shop_card.update(run_stats)
 	
-	for shop_pkmn: ShopPkmn in pokemon.get_children():
-		shop_pkmn.update(run_stats)
+	for shoppkmn: ShopPkmn in pokemon.get_children():
+		shoppkmn.update(run_stats)
 
 func _on_back_button_pressed() -> void:
 	Events.shop_exited.emit()
@@ -99,14 +99,14 @@ func _on_shop_pkmn_bought(pkmn: PokemonStats, gold_cost: int) -> void:
 	Events.added_pkmn_to_party.emit(pkmn)
 	_update_items()
 
-func _on_shop_pkmn_sprite_clicked(pokemon: PokemonStats) -> void:
+func _on_shop_pkmn_sprite_clicked(clicked_pkmn: PokemonStats) -> void:
 	if not pkmn_view:
 		print("❌ No pkmn_view reference")
 		return
-	print("✅ Clicked on:", pokemon.species_id)
+	print("✅ Clicked on:", clicked_pkmn.species_id)
 	print("🐛 PkmnView visible before:", pkmn_view.visible)
-	pkmn_view.selected_pkmn = pokemon
+	pkmn_view.selected_pkmn = clicked_pkmn
 	pkmn_view.char_stats = char_stats
-	pkmn_view.show_current_view("%s Move List" % pokemon.species_id.capitalize())
+	pkmn_view.show_current_view("%s Move List" % clicked_pkmn.species_id.capitalize())
 	pkmn_view.show()
 	print("🐛 PkmnView visible after:", pkmn_view.visible)

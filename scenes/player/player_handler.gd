@@ -151,7 +151,7 @@ func exhaust_cards_on_faint(uid: String) -> void:
 	)
 	
 	for card_ui in hand.get_children():
-		if card_ui == null:
+		if card_ui == null or card_ui.card == null:
 			return
 		else:
 			if card_ui.card.pkmn_owner_uid == uid:

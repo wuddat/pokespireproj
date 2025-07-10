@@ -37,7 +37,8 @@ func update_items() -> void:
 		for i in range(char_stats.item_inventory.size()):
 			if is_instance_valid(char_stats.item_inventory.items[i]):
 				btn_slots[i].texture_normal = char_stats.item_inventory.items[i].icon
-				btn_slots[i].pressed.connect(_on_item_pressed.bind(i))
+				if not btn_slots[i].pressed.is_connected(_on_item_pressed):
+					btn_slots[i].pressed.connect(_on_item_pressed.bind(i))
 				btn_slots[i].get_child(0).text = str(char_stats.item_inventory.items[i].quantity)
 				if char_stats.item_inventory.items[i].quantity <=1:
 					btn_slots[i].get_child(0).hide()

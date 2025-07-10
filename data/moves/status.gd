@@ -31,7 +31,10 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		mod_dmg = round(mod_dmg)
 
 	mod_dmg = 0
-	return tooltip_text % str(mod_dmg)
+	if tooltip_text.find("%") != -1:
+		return tooltip_text % str(mod_dmg)
+	else:
+		return tooltip_text
 
 
 func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:

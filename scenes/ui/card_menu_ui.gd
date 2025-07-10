@@ -12,7 +12,7 @@ const CARD_FLICK_1 = preload("res://art/sounds/sfx/card_flick1.mp3")
 
 @export var card: Card : set = set_card
 @onready var visuals: CardVisuals = $Visuals
-@onready var tween := create_tween()
+@onready var tween : Tween
 
 var is_floatable: bool = false
 
@@ -27,7 +27,9 @@ func _on_visuals_mouse_entered() -> void:
 		set_z_index(HOVER_Z_INDEX)
 		
 		if is_floatable:
-			tween.kill()  # stop any current tween
+			if tween:
+				if tween.is_running():
+					tween.kill()  # stop any current tween
 			tween = create_tween()
 			tween.tween_property(self, "position:y", HOVER_OFFSET, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
@@ -36,7 +38,9 @@ func _on_visuals_mouse_exited() -> void:
 		set_z_index(BASE_Z_INDEX)
 		
 		if is_floatable:
-			tween.kill()
+			if tween:
+				if tween.is_running():
+					tween.kill()  # stop any current tween
 			tween = create_tween()
 			tween.tween_property(self, "position:y", 0, 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 

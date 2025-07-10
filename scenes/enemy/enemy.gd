@@ -51,8 +51,8 @@ var last_damage_taken: int = 0
 
 func _ready():
 	await get_tree().process_frame
-	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
-	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	#connect("mouse_entered", Callable(self, "_on_mouse_entered"))
+	#connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 	if stats and stats.species_id != "" and stats.uid == "":
 		#print("READY: species_id = ", stats.species_id)
