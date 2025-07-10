@@ -25,7 +25,7 @@ const VICTORY = preload("res://art/music/19 Victory (VS Wild Pokemon).mp3")
 @export var cards: Array[Card]
 @export var char_stats: CharacterStats
 
-
+var animation_speed: float = .2
 var pokeball: AnimatedSprite2D
 var final_tween: Tween
 
@@ -92,10 +92,11 @@ func bounce_sprite_to_center(sprite: Node2D) -> void:
 	tween.tween_property(label, "modulate", Color.WHITE, .2)
 	tween.parallel().tween_property(label, "visible_ratio", 1, .5)
 	await tween.tween_interval(2)
+	
 	#offset pkmn on screen
 	tween.tween_callback(MusicPlayer.play_from_time.bind(VICTORY, 2, true)) 
-	tween.tween_property(label, "modulate", Color(1,1,1,0), .2)
-	tween.tween_property(pkmn, "global_position", Vector2(viewport_size.x/7, viewport_size.y/2), 1)
+	tween.tween_property(label, "modulate", Color(1,1,1,0), animation_speed)
+	tween.tween_property(pkmn, "global_position", Vector2(viewport_size.x/7, viewport_size.y/2), animation_speed)
 	await tween.finished
 	pkmn.flip_h = true
 	
@@ -116,19 +117,19 @@ func bounce_sprite_to_center(sprite: Node2D) -> void:
 		new_card.modulate = Color(1,1,1,0)
 		var card_tween := create_tween()
 		SFXPlayer.pitch_play(CARD_FLICK)
-		card_tween.tween_property(new_card,"scale", Vector2(1,1), .2)
-		card_tween.parallel().tween_property(new_card, "global_position", Vector2(viewport_size.x - (viewport_size.x/3),(viewport_size.y/2) - 100), .2)
-		card_tween.parallel().tween_property(new_card, "modulate", Color(1,1,1,1), .2)
+		card_tween.tween_property(new_card,"scale", Vector2(1,1), animation_speed)
+		card_tween.parallel().tween_property(new_card, "global_position", Vector2(viewport_size.x - (viewport_size.x/3),(viewport_size.y/2) - 100), animation_speed)
+		card_tween.parallel().tween_property(new_card, "modulate", Color(1,1,1,1), animation_speed)
 		await card_tween.tween_interval(.1)
 		await card_tween.finished
 		#await _wait_for_input()
 		card_tween = create_tween()
 		SFXPlayer.pitch_play(CARD_FLICK)
-		card_tween.tween_property(new_card, "scale", Vector2(0,0), .2)
-		card_tween.parallel().tween_property(new_card,"modulate", Color(1,1,1,0), .2)
-		card_tween.parallel().tween_property(new_card,"global_position", Vector2(mini_card.global_position.x, mini_card.global_position.y), .2)
-		card_tween.parallel().tween_property(mini_card,"modulate", Color(1,1,1,1), .2)
-		card_tween.parallel().tween_interval(.2)
+		card_tween.tween_property(new_card, "scale", Vector2(0,0), animation_speed)
+		card_tween.parallel().tween_property(new_card,"modulate", Color(1,1,1,0), animation_speed)
+		card_tween.parallel().tween_property(new_card,"global_position", Vector2(mini_card.global_position.x, mini_card.global_position.y), animation_speed)
+		card_tween.parallel().tween_property(mini_card,"modulate", Color(1,1,1,1), animation_speed)
+		card_tween.parallel().tween_interval(animation_speed)
 		await card_tween.finished
 		new_card.queue_free()
 	await _wait_for_input()
@@ -173,3 +174,7 @@ func _wait_for_input() -> void:
 		await get_tree().process_frame
 		if Input.is_action_just_pressed("left_mouse"):
 			break
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("left_mouse"):
+		animation_speed = .05
