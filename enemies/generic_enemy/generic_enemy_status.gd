@@ -76,7 +76,7 @@ func perform_action() -> void:
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = 0
 	
-	animate_to_targets(
+	await animate_to_targets(
 	targets_to_hit,
 	0,
 	final_damage,

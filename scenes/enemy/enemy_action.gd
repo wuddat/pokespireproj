@@ -70,34 +70,28 @@ func animate_to_targets(
 	if not is_instance_valid(target):
 		animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
 		return
+	if target.stats.health > 0:
+		var start_pos
+		var end_pos
 
-	var start_pos
-	var end_pos
-	
-	if shift_enabled > 0:
-		var shift_effect := ShiftEffect.new()
-		shift_effect.tree = enemy.get_tree()
-		shift_effect.amount = shift_enabled
-		await shift_effect.execute([target])
+		if total_damage <= 0:
+			start_pos = enemy.global_position
+			end_pos = enemy.global_position + Vector2.LEFT * 32
+		else:
+			start_pos = enemy.global_position
+			end_pos = target.global_position + Vector2.RIGHT * 32
 
-	if total_damage <= 0:
-		start_pos = enemy.global_position
-		end_pos = enemy.global_position + Vector2.LEFT * 32
-	else:
-		start_pos = enemy.global_position
-		end_pos = target.global_position + Vector2.RIGHT * 32
+		var tween = create_tween().set_trans(Tween.TRANS_QUINT)
+		tween.tween_property(enemy, "global_position", end_pos, 0.3)
 
-	var tween = create_tween().set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(enemy, "global_position", end_pos, 0.3)
-
-	if target.has_method("dodge_check") and target.dodge_check():
-		_handle_dodge(tween, enemy, start_pos, func():
-			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
-		)
-	else:
-		_handle_hit(tween, enemy, target, targets_to_hit, total_damage, splash_damage, status_effects, damage_type, start_pos, func():
-			animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled), shift_enabled
-		)
+		if target.has_method("dodge_check") and target.dodge_check():
+			_handle_dodge(tween, enemy, start_pos, func():
+				animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled)
+			)
+		else:
+			_handle_hit(tween, enemy, target, targets_to_hit, total_damage, splash_damage, status_effects, damage_type, start_pos, func():
+				animate_to_targets(targets_to_hit, index + 1, total_damage, splash_damage, status_effects, self_damage, self_heal, self_status, enemy, damage_type, shift_enabled), shift_enabled
+			)
 
 
 func _execute_self_effects(enemy, total_damage: int, self_damage: int, self_heal: int, self_status: Array[Status]) -> void:
@@ -139,42 +133,43 @@ func _handle_hit(
 	on_finish: Callable,
 	shift_enabled: int,
 ) -> void:
-	var dmg := DamageEffect.new()
-	if script_type != "status":
-		var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
-		dmg.amount = round(total_damage * mult)
-		dmg.sound = sound
-
-	tween.tween_callback(func():
+	if target.stats.health > 0:
+		var dmg := DamageEffect.new()
 		if script_type != "status":
-			if dmg.amount > 0:
-				dmg.execute([target])
-				dmg.sound = sound
-		
-		if shift_enabled > 0 and targets_to_hit.size() > 0:
-			pass
-			#var shift_effect := ShiftEffect.new()
-			#shift_effect.tree = enemy.get_tree()
-			#shift_effect.amount = shift_enabled
-			#shift_effect.execute([target])
-		
-		# Splash damage to others
-		if splash_damage > 0:
-			for splash_target in targets_to_hit:
-				if splash_target != target:
-					var splash := DamageEffect.new()
-					splash.amount = splash_damage
-					splash.execute([splash_target])
+			var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
+			dmg.amount = round(total_damage * mult)
+			dmg.sound = sound
 
-		# Status effects
-		for status in status_effects:
-			if status:
-				var stat := StatusEffect.new()
-				stat.source = enemy
-				stat.status = status.duplicate()
-				stat.sound = sound
-				stat.execute([target])
-	)
+		tween.tween_callback(func():
+			if script_type != "status":
+				if dmg.amount > 0:
+					var mult := TypeChart.get_multiplier(damage_type, target.stats.type)
+					dmg.sound = sound
+					dmg.execute([target])
+					
+
+			if shift_enabled > 0:
+				var handler = enemy.get_tree().get_first_node_in_group("enemy_handler")
+				if handler:
+					handler.call_deferred("shift_enemies")
+			
+			# Splash damage to others
+			if splash_damage > 0:
+				for splash_target in targets_to_hit:
+					if splash_target != target:
+						var splash := DamageEffect.new()
+						splash.amount = splash_damage
+						splash.execute([splash_target])
+
+			# Status effects
+			for status in status_effects:
+				if status:
+					var stat := StatusEffect.new()
+					stat.source = enemy
+					stat.status = status.duplicate()
+					stat.sound = sound
+					stat.execute([target])
+		)
 
 	tween.tween_interval(0.2)
 	tween.tween_property(enemy, "global_position", start_pos, 0.3)

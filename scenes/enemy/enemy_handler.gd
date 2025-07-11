@@ -91,6 +91,7 @@ func start_turn() -> void:
 
 
 func shift_enemies() -> void:
+	await get_tree().create_timer(.1).timeout
 	var enemies: Array[Enemy] = []
 	var positions: Array[Vector2] = []
 	var target_positions: Array[String] = []
@@ -101,7 +102,7 @@ func shift_enemies() -> void:
 			positions.append(child.spawn_coords)
 			target_positions.append(child.enemy_action_picker.current_target_pos)
 
-	if enemies.size() < 2:
+	if positions.size() < 2:
 		return
 
 	# Sort by spawn_coords.x for consistent left-to-right order
@@ -115,10 +116,12 @@ func shift_enemies() -> void:
 	new_target_positions.push_front(new_target_positions.pop_back())
 
 	for i in range(new_order.size()):
+		new_order[i].spawn_coords = positions[i]
+		new_order[i].enemy_action_picker.current_target_pos = new_target_positions[i]
 		var enemy: Enemy = new_order[i]
 		var new_position: Vector2 = positions[i]
 		var new_target_pos: String = new_target_positions[i]
-
+		print("[ENEMYHANDLER] Before shift, position: ", enemy.global_position, " | spawn_coords: ", enemy.spawn_coords)
 		enemy.spawn_coords = new_position
 		enemy.enemy_action_picker.current_target_pos = new_target_pos
 
@@ -126,6 +129,7 @@ func shift_enemies() -> void:
 
 		var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tween.tween_property(enemy, "global_position", new_position, 0.4)
+		print("[ENEMYHANDLER] AFTER shift, position: ", enemy.global_position, " | spawn_coords: ", enemy.spawn_coords)
 
 
 func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:

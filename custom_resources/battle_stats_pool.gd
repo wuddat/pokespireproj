@@ -30,7 +30,8 @@ func get_random_battle_for_tier_and_type(tier: int, type: String) -> BattleStats
 
 	if selected_battle.encounter_type == "Trainer":
 		# Randomly assign a trainer type
-		var trainer_types := ["Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",]
+		#var trainer_types := ["Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",]
+		var trainer_types := ["Fisher"]
 		selected_battle.trainer_type = trainer_types.pick_random()
 		selected_battle.assign_enemy_pkmn_party()
 

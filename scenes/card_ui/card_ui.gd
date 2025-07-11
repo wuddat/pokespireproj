@@ -276,7 +276,7 @@ func _confusion_check(crd: Card) -> bool:
 		Events.battle_text_requested.emit("%s snapped out of confusion!" % battle_unit_owner.stats.species_id.capitalize())
 		await get_tree().create_timer(.6).timeout
 		battle_unit_owner.status_handler.remove_status("confused")
-		battle_unit_owner.unit_status_indicator.update_status_display(battle_unit_owner)
+		battle_unit_owner.unit_status_indicator.hide()
 		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 		print("[CARD_UI] %s snaps out of confusion." % battle_unit_owner.stats.species_id)
 		return false
@@ -349,7 +349,7 @@ func _sleep_check(crd: Card) -> bool:
 		Events.battle_text_requested.emit("%s woke up!" % battle_unit_owner.stats.species_id.capitalize())
 		await get_tree().create_timer(play_card_delay).timeout
 		battle_unit_owner.is_asleep = false
-		battle_unit_owner.unit_status_indicator.update_status_display(battle_unit_owner)
+		battle_unit_owner.unit_status_indicator.hide()
 		Events.battle_text_requested.emit("%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), crd.name])
 		print("✅ %s woke up and plays normally." % battle_unit_owner.stats.species_id)
 		return false
