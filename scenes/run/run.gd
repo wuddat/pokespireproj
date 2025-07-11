@@ -251,7 +251,7 @@ func _on_pokemon_captured(captured_stats: PokemonStats) -> void:
 	print("caught pokemon in run: ", caught_pokemon)
 
 
-func _update_party_buttons() -> void:
+func _update_party_buttons(_pkmn: PokemonBattleUnit) -> void:
 	party_selector.char_stats = character
 	party_selector.update_buttons()
 	

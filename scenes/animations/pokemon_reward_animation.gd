@@ -32,7 +32,6 @@ var final_tween: Tween
 
 func _ready() -> void:
 	pokeball = catch_animator.animated_sprite_2d as AnimatedSprite2D
-	final_tween = create_tween()
 	bounce_sprite_to_center(catch_animator)
 	pkmn.hide()
 
