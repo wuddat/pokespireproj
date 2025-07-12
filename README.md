@@ -1,7 +1,3 @@
-Absolutely! Here's a polished `README.md` tailored for your Pokémon x Slay the Spire game based on everything you've built so far:
-
----
-
 # PokéSpire
 
 **A Pokémon deckbuilding roguelike in the spirit of Slay the Spire — built with Godot 4.4**
