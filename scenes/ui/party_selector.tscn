@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg8q0cun8yy4s"]
+[gd_scene load_steps=7 format=3 uid="uid://dg8q0cun8yy4s"]
 
 [ext_resource type="Script" uid="uid://bbpq8rjo5tcwj" path="res://scenes/ui/party_selector.gd" id="1_2xh5j"]
 [ext_resource type="Texture2D" uid="uid://uu2myxkxc2s8" path="res://art/pokeball.png" id="2_2xh5j"]
 [ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="2_o7g3j"]
 [ext_resource type="Texture2D" uid="uid://cigv8n76dchkl" path="res://art/sprites/icons/5.png" id="3_111go"]
+[ext_resource type="PackedScene" uid="uid://bcfgrnxf1tas7" path="res://scenes/ui/hoverable_tooltip.tscn" id="5_111go"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_2xh5j"]
 
@@ -23,6 +24,15 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_2xh5j")
 texture_normal = ExtResource("2_o7g3j")
 stretch_mode = 3
+
+[node name="HoverableTooltip" parent="Slot1" instance=ExtResource("5_111go")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="Slot2" type="TextureButton" parent="."]
 unique_name_in_owner = true

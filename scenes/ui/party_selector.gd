@@ -12,6 +12,7 @@ var party_viewer: PartyView
 @onready var slot_4: TextureButton = %Slot4
 @onready var slot_5: TextureButton = %Slot5
 @onready var slot_6: TextureButton = %Slot6
+@onready var hoverable_tooltip: Control = $Slot1/HoverableTooltip
 
 var currently_battling_pokemon: Array[PokemonStats] = []
 var highlighted_in_bar_pkmn: Array[String] = []
@@ -197,3 +198,11 @@ func _on_party_pokemon_fainted(unit: PokemonBattleUnit):
 	if currently_battling_pokemon.any(func(p): return p.uid == uid):
 		currently_battling_pokemon = currently_battling_pokemon.filter(func(p): return p.uid != uid)
 	update_buttons()
+
+
+func get_tooltip_data() -> Dictionary:
+	var party_description: String = ""
+	return {
+		"header": "[color=tan]Party[/color]:",
+		"description": "Select  a  Pkmn  to  learn\nmore  about it!"
+	}

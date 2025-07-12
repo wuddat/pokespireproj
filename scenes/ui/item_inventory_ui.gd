@@ -85,3 +85,11 @@ func get_item_origin_position() -> Vector2:
 		return Vector2.ZERO
 	var button := btn_slots[slot_index]
 	return button.get_global_position() + button.size / 2.0
+
+
+func get_tooltip_data() -> Dictionary:
+	var intent_description: String = ""
+	return {
+		"header": "[color=tan]Items[/color]:",
+		"description": "When  you  find  some\nyou  can  use  them  to\ndo stuff!"
+	}

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3kq1lyhjn7ng"]
+[gd_scene load_steps=6 format=3 uid="uid://c3kq1lyhjn7ng"]
 
 [ext_resource type="Script" uid="uid://c6gb05hp2h7co" path="res://scenes/ui/gold_ui.gd" id="1_h4fjr"]
 [ext_resource type="Texture2D" uid="uid://d056agsiro50a" path="res://art/gold.png" id="1_xf85s"]
 [ext_resource type="Shader" uid="uid://c1bi6ad0o05rv" path="res://scenes/ui/highlight.gdshader" id="3_4oho1"]
+[ext_resource type="PackedScene" uid="uid://bcfgrnxf1tas7" path="res://scenes/ui/hoverable_tooltip.tscn" id="4_5u54n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5u54n"]
 shader = ExtResource("3_4oho1")
@@ -41,6 +42,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HoverableTooltip" parent="Icon" instance=ExtResource("4_5u54n")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.8, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
