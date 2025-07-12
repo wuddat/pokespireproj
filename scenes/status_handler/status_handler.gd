@@ -56,6 +56,11 @@ func add_status(status: Status) -> void:
 
 		#  LOGIC: Add to StatusHandler scene tree for status logic to work
 		add_child(new_status_ui)
+		new_status_ui.status_icon.scale = Vector2(10,10)
+		new_status_ui.modulate.a = 0.0
+		var tween: Tween = create_tween()
+		tween.tween_property(new_status_ui.status_icon, "scale", Vector2.ONE, 0.3).set_ease(Tween.EASE_IN_OUT )
+		tween.parallel().tween_property(new_status_ui, "modulate", Color(1, 1, 1, 1), 0.2)
 
 		#  VISUALS: Also add a copy to the HealthBarUI (optional)
 		if health_ui_status_container:

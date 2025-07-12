@@ -66,7 +66,7 @@
 	  "status_effects": [
 		"poisoned","poisoned","poisoned"
 	  ],
-	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [b]POISON[/b].[/center]",
+	  "description": "[center]Deal [color=red]%s[/color] and [color=purple]3 POISON[/color] to ALL enemie![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common"
 	},
@@ -184,7 +184,7 @@
 		"exposed"
 	  ],
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
-	  "icon_path": "res://art/tile_0107.png",
+	  "icon_path": "res://art/tile_0103.png",
 	  "sound_path": "res://art/sounds/move_sfx/beatup.mp3",
 	  "rarity": "rare"
 	},
@@ -1145,7 +1145,7 @@
 	  "cost": 1,
 	  "status_effects": [],
 	  "description": "[center][b]BLOCK[/b] for [color=blue]%s[/color] damage.[/center]",
-	  "icon_path": "res://art/tile_0103.png",
+	  "icon_path": "res://art/tile_0102.png",
 	  "rarity": "common"
 	},
 	"haze": {
@@ -1253,7 +1253,7 @@
 	  "name": "Hurricane",
 	  "id": "hurricane",
 	  "category": "attack",
-	  "subtype": "all_enemies",
+	  "subtype": "shift",
 	  "type": "flying",
 	  "target": "all_enemies",
 	  "power": 13,
@@ -1826,7 +1826,7 @@
 	  "accuracy": 100,
 	  "cost": 0,
 	  "status_effects": ["poisoned","poisoned",],
-	  "description": "[center]Apply [color=purple]POISON[/color] to random allies/enemies [color=purple]3X[/color].[/center]",
+	  "description": "[center]Apply [color=purple]POISON[/color] to random allies/enemies [color=red]3X[/color].[/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "common",
 	  "multiplay": 3,
@@ -1842,9 +1842,9 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
-		"poisoned"
+		"poisoned","poisoned"
 	  ],
-	  "description": "[center]Deals [color=red]%s[/color] damage and applies [color=purple]POISON[/color].[/center]",
+	  "description": "[center]Deals [color=red]%s[/color] damage and applies [color=purple]2 POISON[/color]![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare"
 	},
@@ -2292,7 +2292,7 @@
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": ["poisoned","poisoned","poisoned","poisoned","poisoned","poisoned",],
-	  "description": "[center]Deal [color=red]%s[/color] to ALL enemies and [color=purple]POISON[/color]![/center]",
+	  "description": "[center]Deal [color=red]%s[/color] and [color=purple]6 POISON[/color] to ALL enemies ![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "uncommon"
 	},
@@ -2401,7 +2401,7 @@
 	  "accuracy": 100,
 	  "cost": 2,
 	  "status_effects": ["poisoned","poisoned","poisoned",],
-	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple] 3 POISON[/color] RANDOMLY![/center]",
+	  "description": "[center]Deal [color=purple] 3 POISON[/color] RANDOMLY![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "uncommon",
 	  "multiplay": 3,

@@ -39,5 +39,5 @@ func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, battle_un
 		for child in enemy_handler.get_children():
 			await child.update_action()
 			child.current_action.update_intent_text()
-			await child.intent_ui.update_intent(child.current_action.intent)
+			await child.intent_ui.update_intent(child.current_action)
 			print("SHIFT.GD enemy attack target is: %s " % child.current_action.target.stats.species_id)

@@ -14,11 +14,16 @@ const CARD_SFX_1 = preload("res://art/sounds/sfx/card_sfx1.mp3")
 
 var cards_played_this_turn: int = 0
 var lead_enabled: bool = false
+var hand_max: int = 5
 
 func _ready():
 	_establish_connections()
 
 func add_card(card: Card) -> void:
+	var total_hand: int = get_child_count()
+	print("hand size is: ",total_hand)
+	if total_hand >= hand_max:
+		return
 	var new_card_ui := card_ui.instantiate()
 	
 	add_child(new_card_ui)
@@ -44,7 +49,6 @@ func add_card(card: Card) -> void:
 		new_card_ui.card_visuals.owner_icon.scale = Vector2(.5,.5)
 		new_card_ui.card_visuals.icon.hide()
 		new_card_ui.card_visuals.effect.hide()
-	
 	
 	if card.pkmn_owner_uid == null:
 		return

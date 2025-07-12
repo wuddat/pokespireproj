@@ -14,6 +14,7 @@
 size = Vector2(36, 35)
 
 [node name="PokemonBattleUnit" type="Area2D" groups=["active_pokemon"]]
+process_mode = 3
 collision_layer = 4
 script = ExtResource("1_6808p")
 

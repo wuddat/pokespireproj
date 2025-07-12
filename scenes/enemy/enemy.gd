@@ -87,7 +87,7 @@ func _ready():
 
 func set_current_action(value: EnemyAction) -> void:
 	current_action = value
-	update_intent()
+	update_intent(current_action)
 
 
 
@@ -138,7 +138,7 @@ func update_action() -> void:
 	if new_conditional_action and current_action != new_conditional_action:
 		current_action = new_conditional_action
 	
-	update_intent()
+	update_intent(current_action)
 
 
 func update_enemy() -> void:
@@ -153,7 +153,7 @@ func update_enemy() -> void:
 	update_stats()
 
 
-func update_intent() -> void:
+func update_intent(action: EnemyAction) -> void:
 	await get_tree().process_frame
 	if not current_action:
 		#print("ENEMY.GD update_intent: No current_action for enemy %s" % self.name)
@@ -161,7 +161,7 @@ func update_intent() -> void:
 	#print("ENEMY.GD target BEFORE intent update: %s" % current_action.target.stats.species_id)
 	current_action.update_intent_text()
 	#print("ENEMY.GD target AFTER intent update: %s" % current_action.target.stats.species_id)
-	intent_ui.update_intent(current_action.intent)
+	intent_ui.update_intent(current_action)
 
 
 func do_turn() -> void:
@@ -180,7 +180,7 @@ func do_turn() -> void:
 		return
 	
 	current_action.update_intent_text()
-	intent_ui.update_intent(current_action.intent)
+	intent_ui.update_intent(current_action)
 	Events.battle_text_requested.emit("Enemy [color=red]%s[/color] used %s!" % [stats.species_id.capitalize(), current_action.action_name])
 	await get_tree().create_timer(enemy_text_delay).timeout
 	current_action.perform_action()
@@ -337,7 +337,7 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	tween.tween_callback(Shaker.shake.bind(self, 25, 0.15))
 	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
-	update_intent()
+	update_intent(current_action)
 	tween.finished.connect(
 		func():
 			sprite_2d.material = null

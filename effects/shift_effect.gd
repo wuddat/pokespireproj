@@ -27,7 +27,7 @@ func execute(targets: Array[Node]) -> void:
 				if child.current_action:
 					child.current_action.update_intent_text()
 				if child.intent_ui:
-					await child.intent_ui.update_intent(child.current_action.intent)
+					await child.intent_ui.update_intent(child.current_action)
 					
 	elif targets[0] is Enemy:
 		print("target is ENEMY")
@@ -41,7 +41,7 @@ func execute(targets: Array[Node]) -> void:
 				if child.current_action:
 					child.current_action.update_intent_text()
 				if child.intent_ui:
-					await child.intent_ui.update_intent(child.current_action.intent)
+					await child.intent_ui.update_intent(child.current_action)
 		
 	else:
 		print("❌ SHIFT EFFECT FAILED — target was neither PKMN nor Enemy")

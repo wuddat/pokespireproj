@@ -10,6 +10,7 @@ font_size = 8
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 5.0
 mouse_filter = 2
 script = ExtResource("1_r24ij")
 
@@ -17,6 +18,7 @@ script = ExtResource("1_r24ij")
 layout_mode = 0
 offset_right = 10.0
 offset_bottom = 10.0
+pivot_offset = Vector2(5, 5)
 mouse_filter = 2
 texture = ExtResource("1_7scyp")
 expand_mode = 1

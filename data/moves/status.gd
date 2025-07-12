@@ -1,6 +1,7 @@
 #status.gd
 extends Card
 
+var action_delay = 0.2 #delay between actions
 
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
@@ -66,6 +67,7 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 	if is_instance_valid(primary_target):
 		if primary_target.has_method("dodge_check") and !primary_target.dodge_check():
 			for status_effect in status_effects:
+				await battle_unit_owner.get_tree().create_timer(action_delay).timeout
 				if status_effect:
 					var stat_effect := StatusEffect.new()
 					stat_effect.source = battle_unit_owner

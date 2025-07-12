@@ -68,27 +68,27 @@ func _ready() -> void:
 	start_spinning()
 
 
-func update_intent(intent: Intent) -> void:
-	if not intent:
+func update_intent(action: EnemyAction) -> void:
+	if not action.intent:
 		hide()
 		return
 	aoe_icon.hide()
 	panel.visible = true
-	icon.texture = intent.icon
+	icon.texture = action.intent.icon
 	icon.visible = icon.texture != null
-	label.text = str(intent.current_text)
-	label.visible = intent.current_text != " "
-	target.texture = intent.target
+	label.text = str(action.intent.current_text)
+	label.visible = action.intent.current_text != " "
+	target.texture = action.intent.target
 	target.visible = target.texture != null
 	target.scale = Vector2(1,1)
-	particles.emitting = intent.particles_on
+	particles.emitting = action.intent.particles_on
 	#particles.process_material.color = Color(1,1,1,1) #TODO can change particle color maybe by type?
 	if particles.emitting:
 		swirl.visible = true
 	else:
 		swirl.visible = false
-	if intent.icon:
-		icon_2.texture = intent.icon
+	if action.intent.icon:
+		icon_2.texture = action.intent.icon
 		animation_player.play("fade_in")
 		await animation_player.animation_finished
 		var hover_length = animation_player.get_animation(hover).length
@@ -97,9 +97,9 @@ func update_intent(intent: Intent) -> void:
 		animation_player.seek(random_start, true)
 	else:
 		icon_2.hide()
-	if intent.targets_all:
+	if action.intent.targets_all:
 		aoe_icon.show()
-	var type := intent.damage_type.to_lower()
+	var type := action.intent.damage_type.to_lower()
 	if TYPE_ICON_INDEX.has(type):
 		var index = TYPE_ICON_INDEX[type]
 		var col = index % ICONS_PER_ROW
@@ -144,20 +144,23 @@ func start_spinning() -> void:
 
 func get_tooltip_data() -> Dictionary:
 	var intent_description: String = ""
+	if aoe_icon.visible:
+			intent_description = "Targets [color=red]ALL[/color] to"
+	else: intent_description = "Intends to"
 	if parent.current_action.intent_type == "Attack":
-		intent_description = "Intends to [color=red]ATTACK[/color] for [color=red]%s[/color]" % label.text
+		intent_description = intent_description + " [color=red]ATTACK[/color] for [color=red]%s[/color]" % label.text
 		if parent.current_action.status_effects and parent.current_action.status_effects.size() > 0:
 			intent_description = intent_description + " and [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
 		else:
 			intent_description = intent_description + "!"
 	if parent.current_action.intent_type == "Block":
-		intent_description = "Intends to [color=royalblue]BLOCK[/color] for [color=royalblue]%s[/color]" % parent.current_action.block
+		intent_description = intent_description + " [color=royalblue]BLOCK[/color] for [color=royalblue]%s[/color]" % parent.current_action.block
 		if parent.current_action.status_effects and parent.current_action.status_effects.size() > 0:
 			intent_description = intent_description + " and [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
 		else:
 			intent_description = intent_description + "!"
 	if parent.current_action.intent_type == "Status":
-		intent_description = "Intends to [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
+		intent_description = intent_description + " [color=palegreen]INFLICT[/color] a [color=palegreen]STATUS[/color]!"
 	return {
 		"header": "[color=tan]%s[/color]:" % parent.stats.species_id.capitalize(),
 		"description": intent_description

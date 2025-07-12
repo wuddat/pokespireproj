@@ -1,15 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://8fqjaf2yei3p"]
+[gd_scene load_steps=24 format=3 uid="uid://8fqjaf2yei3p"]
 
 [ext_resource type="Script" uid="uid://c2qp1c4ysp3dx" path="res://scenes/event/event.gd" id="1_lry0m"]
-[ext_resource type="Shader" uid="uid://dyt2cnqb6dtfm" path="res://use_for_test.gdshader" id="2_lry0m"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="2_uuxf3"]
 [ext_resource type="Texture2D" uid="uid://djlofet58gay3" path="res://testing/hypno_spritesheet.png" id="3_djiyq"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux51x"]
-shader = ExtResource("2_lry0m")
-shader_parameter/pixel_sc = 512.0
-shader_parameter/bender = 1.0
-shader_parameter/alpha_mod = 0.125
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8flnu"]
 atlas = ExtResource("3_djiyq")
@@ -201,12 +194,12 @@ color = Color(0, 0, 0, 1)
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="Hypno" type="AnimatedSprite2D" parent="UILayer"]
-material = SubResource("ShaderMaterial_ux51x")
+modulate = Color(1, 1, 1, 0.116)
 position = Vector2(257, 143.921)
 scale = Vector2(1.02397, 0.935155)
 sprite_frames = SubResource("SpriteFrames_jaws1")
 autoplay = "default"
-frame_progress = 0.799843
+frame_progress = 0.673667
 
 [node name="UI" type="VBoxContainer" parent="UILayer"]
 anchors_preset = 8

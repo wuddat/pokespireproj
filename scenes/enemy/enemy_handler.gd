@@ -153,6 +153,7 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	
 	if battle_stats.is_trainer_battle:
 		enemy.hide()
+		await get_tree().create_timer(.1).timeout
 		enemy.is_trainer_pkmn = true
 		await enemy.animation_handler.trainer_spawn_animation(enemy)
 		enemy.show()
@@ -202,7 +203,7 @@ func _start_next_enemy_turn() -> void:
 		Events.enemy_turn_ended.emit()
 		return
 	
-	Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
+	#Events.battle_text_requested.emit("Enemy Turn: [color=red]%s[/color]" % acting_enemies[0].stats.species_id.capitalize())
 	await get_tree().process_frame
 	acting_enemies[0].status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 	#removed await - readd if crash
@@ -273,7 +274,7 @@ func _on_party_pokemon_fainted(pkmn: PokemonBattleUnit):
 
 func _on_player_hand_drawn() -> void:
 	for enemy: Enemy in get_children():
-		enemy.update_intent()
+		enemy.update_intent(enemy.current_action)
 
 func _on_pokemon_captured(stats: PokemonStats) -> void:
 	caught_pokemon.append(stats.duplicate())

@@ -15,6 +15,7 @@ const STATUS_ICON := preload("res://art/status_effects/status_1.png")
 @export var damage_type: String
 @export var shift_enabled: int = 0
 @export var description: String = ""
+@export var requires_status: String
 
 func setup_from_data(data: Dictionary) -> void:
 	intent = Intent.new()
@@ -37,6 +38,7 @@ func setup_from_data(data: Dictionary) -> void:
 	action_name = data.get("name", "SOMETHING!")
 	description = data.get("description", "hopefully something happens!")
 	shift_enabled = data.get("shift_enabled", 0)
+	requires_status = data.get("requires_status", "")
 	if data.has("sound_path"):
 		sound = load(data["sound_path"]) as AudioStream
 	

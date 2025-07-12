@@ -6,6 +6,7 @@ extends CanvasLayer
 
 @onready var hand: Hand = $Hand as Hand
 @onready var mana_ui: ManaUI = $ManaUI as ManaUI
+@onready var oom_panel: PanelContainer = %OOMPanel
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var draw_pile_button: CardPileOpener = %DrawPileButton
 @onready var discard_pile_button: CardPileOpener = %DiscardPileButton
@@ -49,6 +50,7 @@ func _on_player_hand_drawn() -> void:
 
 func _on_end_turn_button_pressed() -> void:
 	end_turn_button.disabled = true
+	oom_panel.hide_oom()
 	Events.player_turn_ended.emit()
 
 func _on_battle_text_requested(_string: String) -> void:

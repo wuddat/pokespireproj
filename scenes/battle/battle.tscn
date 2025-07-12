@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dnr46qv68apmu"]
+[gd_scene load_steps=43 format=3 uid="uid://dnr46qv68apmu"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_7gynk"]
 [ext_resource type="Script" uid="uid://dh6i1y7tjrv0v" path="res://scenes/battle/battle.gd" id="1_kd6yx"]
@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://dr2wwcitt72yh" path="res://scenes/ui/tooltip.tscn" id="12_mxe8n"]
 [ext_resource type="Theme" uid="uid://c3anpexwnb0eu" path="res://main_theme.tres" id="13_icoan"]
 [ext_resource type="Script" uid="uid://d2wwbjths5rhf" path="res://scenes/ui/red_flash.gd" id="15_t1kk3"]
+[ext_resource type="StyleBox" uid="uid://1ny4guuky8rt" path="res://scenes/ui/tooltip.stylebox" id="16_tnndc"]
 [ext_resource type="PackedScene" uid="uid://ofgutpuj26p0" path="res://scenes/ui/battle_over_panel.tscn" id="17_6ofp8"]
+[ext_resource type="Script" uid="uid://bxtbai8y3flmv" path="res://scenes/battle/oom_panel.gd" id="17_k6ux7"]
 [ext_resource type="StyleBox" uid="uid://y2b64u7hvwiv" path="res://scenes/card_ui/card_hover_style.tres" id="17_n5ix6"]
 [ext_resource type="PackedScene" uid="uid://d0sv3khv88a0s" path="res://scenes/ui/card_pile_opener.tscn" id="17_w40i5"]
 [ext_resource type="PackedScene" uid="uid://6mq48o6e08j5" path="res://scenes/ui/status_view.tscn" id="18_sgdsx"]
@@ -212,11 +214,34 @@ player = NodePath("../../Player")
 party_handler = NodePath("../../PartyHandler")
 player_handler = NodePath("../../PlayerHandler")
 
+[node name="OOMPanel" type="PanelContainer" parent="BattleUI"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(205, 48)
+offset_left = 154.0
+offset_top = 236.0
+offset_right = 359.0
+offset_bottom = 284.0
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("16_tnndc")
+script = ExtResource("17_k6ux7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BattleUI/OOMPanel"]
+layout_mode = 2
+bbcode_enabled = true
+text = "No  Playable Cards!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_fisqk")]
-offset_left = 2.0
-offset_top = -68.0
-offset_right = 32.0
-offset_bottom = -38.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_top = -43.0
+offset_right = -109.0
+offset_bottom = -13.0
+grow_horizontal = 2
 theme = SubResource("Theme_1oulw")
 char_stats = ExtResource("5_fisqk")
 
@@ -230,17 +255,18 @@ offset_bottom = 92.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI"]
 unique_name_in_owner = true
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -145.0
-offset_top = -34.0
-offset_right = -45.0
-offset_bottom = -4.0
-grow_horizontal = 0
+offset_left = 112.0
+offset_top = -43.0
+offset_right = 212.0
+offset_bottom = -13.0
+grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(50, 15)
 theme = ExtResource("13_icoan")
 text = "End Turn"
 

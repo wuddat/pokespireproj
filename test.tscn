@@ -130,4 +130,4 @@ material = SubResource("ShaderMaterial_ppyta")
 position = Vector2(8.5, -8.5)
 scale = Vector2(1.03414, 0.944444)
 sprite_frames = SubResource("SpriteFrames_ykrsh")
-frame_progress = 0.279041
+frame_progress = 0.514451

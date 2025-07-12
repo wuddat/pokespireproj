@@ -13,6 +13,7 @@ extends EnemyAction
 @export var requires_status: String = ""
 @export var shift_enabled: int = 0
 @export var description: String =""
+@export var target_damage_percent_hp: int
 
 
 func setup_from_data(data: Dictionary) -> void:
@@ -37,6 +38,9 @@ func setup_from_data(data: Dictionary) -> void:
 	action_name = data.get("name", "SOMETHING!")
 	description = data.get("description", "hopefully something happens!")
 	shift_enabled = data.get("shift_enabled", 0)
+	requires_status = data.get("requires_status", "")
+	target_damage_percent_hp = data.get("target_damage_percent_hp", 0.0)
+	
 	if data.has("sound_path"):
 		sound = load(data["sound_path"]) as AudioStream
 	else:
@@ -44,8 +48,8 @@ func setup_from_data(data: Dictionary) -> void:
 
 	var damage_display = "%s"
 
-
-	intent.particles_on = true
+	if status_effects.size() > 0:
+		intent.particles_on = true
 	intent.base_text = damage_display
 	intent.current_text = str(damage)
 	if damage <= 0:
@@ -106,6 +110,9 @@ func perform_action() -> void:
 		print("⚠️ No valid targets for generic_enemy_attack due to status requirements.")
 		Events.enemy_action_completed.emit(enemy)
 		return
+	
+	if target_damage_percent_hp > 0:
+				damage = round(targets_to_hit[0].stats.health * target_damage_percent_hp)
 
 	# Animate to targets and let that handle the full effect chain
 	var final_damage = damage
