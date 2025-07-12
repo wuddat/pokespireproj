@@ -1,4 +1,5 @@
 # event_effect_resolver.gd
+#this is a global autoload singleton
 extends Node
 
 func apply(effects: Dictionary, char_stats: CharacterStats, run_stats: RunStats) -> void:
@@ -12,8 +13,6 @@ func apply(effects: Dictionary, char_stats: CharacterStats, run_stats: RunStats)
 				_gain_gold(effects[effect], run_stats)
 			"lose_hp":
 				_lose_hp(effects[effect], char_stats)
-			"gain_random_move_card":
-				_gain_random_move_card(char_stats)
 			"gain_random_card_of_type":
 				_gain_random_card_of_type(effects[effect], char_stats)
 			"gain_random_card_of_type_for_pokemon":
@@ -46,14 +45,6 @@ func _gain_gold(amount: int, run_stats: RunStats) -> void:
 func _lose_hp(amount: int, char_stats: CharacterStats) -> void:
 	char_stats.current_hp = max(char_stats.current_hp - amount, 0)
 	char_stats.stats_changed.emit()
-
-
-func _gain_random_move_card(char_stats: CharacterStats) -> void:
-	var possible_cards: CardPile= char_stats.get_all_move_cards()
-	if possible_cards.is_empty():
-		return
-	possible_cards.shuffle()
-	char_stats.deck.add_card(possible_cards.cards[0])
 
 
 func _gain_random_card_of_type(type: String, char_stats: CharacterStats) -> void:
@@ -173,3 +164,89 @@ func _teach_tm(data: Dictionary, char_stats: CharacterStats) -> void:
 	card.pkmn_owner_name = target.species_id
 	card.pkmn_icon = target.icon
 	char_stats.deck.add_card(card)
+
+
+func _handle_card_gain(effect: String, data: Variant, char_stats: CharacterStats) -> void:
+	var card: Card = null
+	
+	match effect:
+		"gain_card":
+			card = Utils.create_card(data)
+
+		"gain_random_card_of_type", "gain_random_card_of_type_for_pokemon", "gain_rare_card_of_type_for_pokemon":
+			var type = data.get("type", "")
+			if not MoveData.type_to_moves.has(type):
+				push_warning("Unknown type in event: %s" % type)
+				return
+
+			var move_ids = MoveData.type_to_moves[type]
+
+			if effect == "gain_rare_card_of_type_for_pokemon":
+				move_ids = move_ids.filter(func(m): 
+					return MoveData.moves.get(m, {}).get("rarity", "") in ["rare", "uncommon"]
+				)
+				if move_ids.is_empty():
+					return
+
+			move_ids.shuffle()
+			card = Utils.create_card(move_ids[0])
+
+		"teach_tm":
+			card = Utils.create_card(data.get("move_id", ""))
+
+	if not card:
+		return
+
+	# Assign Pokémon if necessary
+	if effect in ["gain_random_card_of_type_for_pokemon", "gain_rare_card_of_type_for_pokemon", "teach_tm"]:
+		var uid = data.get("uid", "")
+		var pkmn = char_stats.current_party.filter(func(p): return p.uid == uid)
+		if pkmn.is_empty():
+			push_warning("No Pokémon found for UID %s" % uid)
+			return
+		var target = pkmn[0]
+		card.pkmn_owner_uid = target.uid
+		card.pkmn_owner_name = target.species_id
+		card.pkmn_icon = target.icon
+
+	char_stats.deck.add_card(card)
+	print("✅ Added card: %s" % card.name)
+
+
+func create_event_card(effects: Dictionary, char_stats: CharacterStats) -> Card:
+	var card: Card = null
+
+	for effect in effects:
+		match effect:
+			"gain_card":
+				card = Utils.create_card(effects[effect])
+			"gain_random_card_of_type":
+				var type = effects[effect]
+				if not MoveData.type_to_moves.has(type):
+					return null
+				card = Utils.create_card(MoveData.type_to_moves[type].pick_random())
+			"gain_random_card_of_type_for_pokemon", "gain_rare_card_of_type_for_pokemon", "teach_tm", "imbued_stone":
+				var type = effects[effect].get("type", "")
+				var move_id = effects[effect].get("move_id", "")
+				var uid = effects[effect].get("uid", "")
+				
+				if effect == "teach_tm":
+					card = Utils.create_card(move_id)
+				else:
+					if not MoveData.type_to_moves.has(type):
+						return null
+					var candidates = MoveData.type_to_moves[type]
+					if effect == "gain_rare_card_of_type_for_pokemon":
+						candidates = candidates.filter(func(m): return MoveData.moves.get(m, {}).get("rarity", "") in ["rare", "uncommon"])
+						if candidates.is_empty():
+							return null
+					card = Utils.create_card(candidates.pick_random())
+				
+				var pkmn = char_stats.current_party.filter(func(p): return p.uid == uid)
+				if not pkmn.is_empty():
+					var target = pkmn[0]
+					card.pkmn_owner_uid = target.uid
+					card.pkmn_owner_name = target.species_id
+					card.pkmn_icon = target.icon
+
+	return card

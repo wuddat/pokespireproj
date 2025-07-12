@@ -1,52 +1,133 @@
-[gd_scene load_steps=8 format=3 uid="uid://cf40ljrl6qjwu"]
+[gd_scene load_steps=20 format=3 uid="uid://cf40ljrl6qjwu"]
 
-[ext_resource type="Texture2D" uid="uid://bppxxi36dobxg" path="res://art/sprites/9.png" id="2_6uqi0"]
-[ext_resource type="Script" uid="uid://81uh5y7xs58i" path="res://testing/test.gd" id="2_ppyta"]
-[ext_resource type="Shader" uid="uid://bue7704w1so3v" path="res://testing/testingShader.gdshader" id="3_ykrsh"]
+[ext_resource type="Shader" uid="uid://dyt2cnqb6dtfm" path="res://use_for_test.gdshader" id="1_8uh7m"]
+[ext_resource type="Texture2D" uid="uid://djlofet58gay3" path="res://testing/hypno_spritesheet.png" id="2_6uqi0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ppyta"]
-shader = ExtResource("3_ykrsh")
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_rotation = 0.0
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_pivot = Vector2(0.5, 0.5)
-shader_parameter/mirror_horizontal = false
-shader_parameter/mirror_vertical = false
-shader_parameter/target_color = Color(0.517647, 0.937255, 0.772549, 1)
-shader_parameter/replacement_color = Color(0.261907, 0.588996, 1, 1)
-shader_parameter/tolerance = 0.4
-shader_parameter/blend_amount = 0.6
-shader_parameter/ignore_black = true
+shader = ExtResource("1_8uh7m")
+shader_parameter/pixel_sc = 512.0
+shader_parameter/bender = 1.0
+shader_parameter/alpha_mod = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14j6"]
-shader = ExtResource("3_ykrsh")
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_rotation = 0.0
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_pivot = Vector2(0.5, 0.5)
-shader_parameter/mirror_horizontal = false
-shader_parameter/mirror_vertical = false
-shader_parameter/target_color = Color(1, 0, 0, 1)
-shader_parameter/replacement_color = Color(0, 1, 0, 1)
-shader_parameter/tolerance = 0.2
-shader_parameter/blend_amount = 1.0
-shader_parameter/ignore_black = true
+[sub_resource type="AtlasTexture" id="AtlasTexture_8flnu"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(0, 0, 498, 306)
 
-[sub_resource type="Gradient" id="Gradient_vbegm"]
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa3if"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(498, 0, 498, 306)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ehkex"]
-gradient = SubResource("Gradient_vbegm")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kjsw"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(996, 0, 498, 306)
 
-[node name="Node2D" type="Sprite2D"]
-clip_children = 2
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr0o5"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1494, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oy23"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1992, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2r8q"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(0, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtneb"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(498, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou86n"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(996, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs164"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1494, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qbxu"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1992, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xprap"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(0, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x53aw"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(498, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcog"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(996, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3th3"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1494, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncyxi"]
+atlas = ExtResource("2_6uqi0")
+region = Rect2(1992, 612, 498, 306)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykrsh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8flnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa3if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kjsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr0o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oy23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2r8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtneb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou86n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs164")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qbxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xprap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x53aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htcog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3th3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncyxi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(249, 152)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ppyta")
-position = Vector2(236, 103)
-scale = Vector2(4.50676, 4.31757)
-texture = ExtResource("2_6uqi0")
-script = ExtResource("2_ppyta")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_g14j6")
-texture = SubResource("GradientTexture2D_ehkex")
+position = Vector2(8.5, -8.5)
+scale = Vector2(1.03414, 0.944444)
+sprite_frames = SubResource("SpriteFrames_ykrsh")
+frame_progress = 0.279041

@@ -25,5 +25,4 @@ bbcode_enabled = true
 text = "At end of turn, takes [color=red]%s[/color] damage."
 fit_content = true
 scroll_active = false
-autowrap_mode = 2
 vertical_alignment = 1

@@ -1,7 +1,6 @@
 class_name CardDetailOverlay
 extends Control
 
-const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 const CARD_SUPER_DETAIL_UI := preload("res://scenes/ui/card_super_detail_ui.tscn")
 const STATUS_TOOLTIP_SCENE := preload("res://scenes/ui/status_tooltip.tscn")
 const OPEN_SOUND := preload("res://art/sounds/sfx/menu_open.wav")

@@ -25,6 +25,7 @@ func _ready()-> void:
 	take_button.reparent(card_detail_overlay.v_box_container)
 	take_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	
+	
 	take_button.pressed.connect(
 		func():
 			card_reward_selected.emit(selected_card)

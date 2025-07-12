@@ -1,7 +1,128 @@
-[gd_scene load_steps=7 format=3 uid="uid://8fqjaf2yei3p"]
+[gd_scene load_steps=26 format=3 uid="uid://8fqjaf2yei3p"]
 
 [ext_resource type="Script" uid="uid://c2qp1c4ysp3dx" path="res://scenes/event/event.gd" id="1_lry0m"]
+[ext_resource type="Shader" uid="uid://dyt2cnqb6dtfm" path="res://use_for_test.gdshader" id="2_lry0m"]
 [ext_resource type="PackedScene" uid="uid://gfvm2mvp7prq" path="res://scenes/ui/card_pile_view.tscn" id="2_uuxf3"]
+[ext_resource type="Texture2D" uid="uid://djlofet58gay3" path="res://testing/hypno_spritesheet.png" id="3_djiyq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux51x"]
+shader = ExtResource("2_lry0m")
+shader_parameter/pixel_sc = 512.0
+shader_parameter/bender = 1.0
+shader_parameter/alpha_mod = 0.125
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8flnu"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(0, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa3if"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(498, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kjsw"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(996, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr0o5"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1494, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oy23"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1992, 0, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2r8q"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(0, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtneb"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(498, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou86n"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(996, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs164"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1494, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qbxu"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1992, 306, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xprap"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(0, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x53aw"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(498, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcog"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(996, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3th3"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1494, 612, 498, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncyxi"]
+atlas = ExtResource("3_djiyq")
+region = Rect2(1992, 612, 498, 306)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jaws1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8flnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa3if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kjsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr0o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oy23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2r8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtneb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou86n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs164")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qbxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xprap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x53aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htcog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3th3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncyxi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cur4b"]
 
@@ -78,6 +199,14 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Hypno" type="AnimatedSprite2D" parent="UILayer"]
+material = SubResource("ShaderMaterial_ux51x")
+position = Vector2(257, 143.921)
+scale = Vector2(1.02397, 0.935155)
+sprite_frames = SubResource("SpriteFrames_jaws1")
+autoplay = "default"
+frame_progress = 0.799843
 
 [node name="UI" type="VBoxContainer" parent="UILayer"]
 anchors_preset = 8

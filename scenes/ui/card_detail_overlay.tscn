@@ -67,7 +67,7 @@ theme_override_constants/separation = 150
 alignment = 2
 
 [node name="Owner" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
 [node name="Placeholder2" type="Control" parent="VBoxContainer/CenterContainer/HBoxContainer/Owner"]
@@ -94,7 +94,7 @@ horizontal_alignment = 2
 
 [node name="StatusBox" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
 [node name="Placeholder2" type="Control" parent="VBoxContainer/CenterContainer/HBoxContainer/StatusBox"]

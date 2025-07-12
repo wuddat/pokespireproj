@@ -1,3 +1,5 @@
+#event.gd
+#this exists as a scene root node script
 class_name EventScene
 extends Control
 
@@ -6,6 +8,8 @@ extends Control
 @onready var description_label := $UILayer/UI/Description
 @onready var choices_container := $UILayer/UI 
 @onready var card_pile_view: CardPileView = $UILayer/CardPileView
+@onready var ui_layer: CanvasLayer = $UILayer
+@onready var hypno: AnimatedSprite2D = $UILayer/Hypno
 
 const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 
@@ -14,7 +18,7 @@ var event_data := {}  # Loaded from JSON or hardcoded dictionary
 func _ready():
 	# Load a random event
 	await get_tree().create_timer(0.1).timeout  
-	
+	hypno.hide()
 	var random_event_id = EventData.get_random_event_id()
 	event_data = EventData.get_event(random_event_id)
 	var special_type = event_data.get("special_type", "")
@@ -37,6 +41,7 @@ func _ready():
 			random_pkmn.shuffle()
 			event_data["target_pokemon"] = random_pkmn[0]
 			description_label.text = "A wild Hypno appears! It seems to have your %s in a trance..." % random_pkmn[0].species_id.capitalize()
+			hypno.show()
 		_:
 			description_label.text = event_data.get("description", "")
 		
@@ -48,10 +53,14 @@ func _ready():
 	
 
 func _on_choice_selected(effects: Dictionary) -> void:
-	EventEffectResolver.apply(effects, char_stats, run_stats)
-	SFXPlayer.play(PC_MENU_SELECT)
-	Events.event_room_exited.emit()
-	queue_free()
+	if effects.has("gain_card") or effects.has("gain_random_card_of_type") or effects.has("gain_random_card_of_type_for_pokemon") or effects.has("gain_rare_card_of_type_for_pokemon") or effects.has("teach_tm") or effects.has("imbued_stone"):
+		_show_event_card_reward(effects)
+		print("SHOWING REWARDS SCREEN")
+	else:
+		EventEffectResolver.apply(effects, char_stats, run_stats)
+		SFXPlayer.play(PC_MENU_SELECT)
+		Events.event_room_exited.emit()
+		queue_free()
 
 
 func _generate_static_choices(choices) -> void:
@@ -220,3 +229,22 @@ func _pick_random_tm() -> String:
 
 	candidates.shuffle()
 	return candidates[0]
+
+
+func _show_event_card_reward(effects) -> void:
+	var card: Card = EventEffectResolver.create_event_card(effects, char_stats)
+	if not card:
+		push_warning("Event tried to show a card reward but none was created.")
+		_on_choice_selected({})  # fallback
+		return
+	
+	var card_rewards := preload("res://scenes/ui/card_rewards.tscn").instantiate() as CardRewards
+	ui_layer.add_child(card_rewards)
+	card_rewards.rewards = [card]
+	card_rewards.card_reward_selected.connect(func(selected: Card):
+		if selected:
+			char_stats.deck.add_card(selected)
+		SFXPlayer.play(PC_MENU_SELECT)
+		Events.event_room_exited.emit()
+		queue_free()
+	)
