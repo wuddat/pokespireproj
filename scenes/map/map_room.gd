@@ -8,8 +8,8 @@ const ICONS:={
 	Room.Type.NOT_ASSIGNED: [null, Vector2.ONE],
 	Room.Type.MONSTER: [preload("res://art/pokeball.png"), Vector2.ONE],
 	Room.Type.TREASURE: [preload("res://art/tile_0089.png"), Vector2(1.25, 1.25)],
-	Room.Type.POKECENTER:[preload("res://art/nurse.png"), Vector2(0.5, 0.5)],
-	Room.Type.SHOP: [preload("res://art/shop.png"), Vector2(1.4, 1.4)],
+	Room.Type.POKECENTER:[preload("res://art/sprites/building/pokecenter.png"), Vector2(0.4, 0.4)],
+	Room.Type.SHOP: [preload("res://art/sprites/building/mart.png"), Vector2(0.4, 0.4)],
 	Room.Type.BOSS: [preload("res://art/sprites/spritesheets/mewtwo_mech_sprite.png"), Vector2(0.6, 0.6)],
 	Room.Type.EVENT: [preload("res://art/statuseffects/confused-effect.png"), Vector2(.8, .8)],
 	Room.Type.TRAINER: [preload("res://art/sprites/items/ball/premier.png"), Vector2.ONE],
@@ -40,7 +40,7 @@ func set_available(new_value: bool) -> void:
 		if room.type == Room.Type.BOSS:
 			animation_player.play("hover")
 	elif not room.selected:
-		animation_player.play("RESET")
+		animation_player.stop()
 		line_2d.visible = false
 		sprite_2d.modulate = Color(1,1,1,0.7)
 
@@ -52,6 +52,8 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.scale = ICONS[room.type][1]
 	if room.type == Room.Type.MONSTER:
 		sprite_2d.texture = _get_monster_icon(room.tier)
+	if room.type == Room.Type.TRAINER:
+		sprite_2d.texture = _get_trainer_icon(room.battle_stats.trainer_type)
 	else:
 		sprite_2d.texture = ICONS[room.type][0]
 	if room.type == Room.Type.BOSS:
@@ -81,7 +83,20 @@ func _get_monster_icon(tier: int) -> Texture:
 		2: return preload("res://art/sprites/items/ball/ultra.png")
 		_: return preload("res://art/sprites/items/ball/poke.png")
 
-
+func _get_trainer_icon(trainer: String) -> Texture:
+	match trainer:
+		"Aroma Lady": return preload("res://art/trainer/icons/aromalady.png")
+		"Battle Girl": return preload("res://art/trainer/icons/battlegirl.png")
+		"Biker": return preload("res://art/trainer/icons/biker.png")
+		"Bird Keeper": return preload("res://art/trainer/icons/birdkeeper.png")
+		"Black Belt": return preload("res://art/trainer/icons/blackbelt.png")
+		"Bug Catcher": return preload("res://art/trainer/icons/bugcatcher.png")
+		"Engineer": return preload("res://art/trainer/icons/engineer.png")
+		"Fisher": return preload("res://art/trainer/icons/fisher.png")
+		"Hiker": return preload("res://art/trainer/icons/hiker.png")
+		"Psychic": return preload("res://art/trainer/icons/psychic.png")
+		"Youngster": return preload("res://art/trainer/icons/youngster.png")
+		_: return preload("res://art/sprites/items/ball/premier.png")
 
 #called by animatioplayer when 'select' animation finishes
 func _on_map_room_selected() -> void:

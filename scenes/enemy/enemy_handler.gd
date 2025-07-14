@@ -15,6 +15,7 @@ var caught_pokemon: Array[PokemonStats] = []
 var bench_pokemon: Array[String] = []
 var bench_clones: Array[PokemonStats] = []
 var battle_stats: BattleStats = null
+var phase_2: bool = false
 
 var enemy_text_delay: float = 0.4
 
@@ -34,7 +35,7 @@ func set_character(new_char_stats: CharacterStats) -> void:
 func setup_enemies(bat_stats: BattleStats) -> void:
 	if not bat_stats:
 		return
-	
+	phase_2 = false
 	battle_stats = bat_stats.duplicate()
 	
 	for enemy: Enemy in get_children():
@@ -241,8 +242,9 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 			var next_species = bench_clones.pop_front()
 			Events.battle_text_requested.emit("MewTwo summons [color=red]%s[/color]!" % next_species.species_id.capitalize())
 			_spawn_enemy_from_stats(next_species, enemy)
-		elif bench_clones.size() == 0:
+		elif bench_clones.size() == 0 and phase_2 == false:
 			print("attempting to spawn mewtwo:")
+			phase_2 = true
 			await get_tree().create_timer(0.5).timeout
 			Events.mewtwo_phase_2_requested.emit()
 			_spawn_enemy("mewtwo_mech", enemy)

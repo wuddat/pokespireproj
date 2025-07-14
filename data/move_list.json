@@ -2642,7 +2642,7 @@
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] damage to enemy and [color=red]3[/color] to the user unless [color=goldenrod]%s[/color].[/center]",
+	  "description": "[center]Deal [color=red]%s[/color] damage to enemy and [color=red]3[/color] to the user unless [color=goldenrod]LEAD[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "self_damage": 3,

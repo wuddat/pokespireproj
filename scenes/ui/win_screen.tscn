@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://baulqd6xr7qvs"]
+[gd_scene load_steps=14 format=3 uid="uid://baulqd6xr7qvs"]
 
 [ext_resource type="Script" uid="uid://duu7i0y0ashfw" path="res://scenes/ui/win_screen.gd" id="1_rc6je"]
 [ext_resource type="AudioStream" uid="uid://d4fb3s0fs3iud" path="res://art/music/8bit_pkmn_theme_.ogg" id="2_viy0t"]
@@ -21,13 +21,6 @@ outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 0.772549)
 shadow_offset = Vector2(5, 5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_45qu8"]
-font = ExtResource("3_mi4sw")
-outline_size = 1
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 0
-shadow_color = Color(0, 0, 0, 0.772549)
 
 [sub_resource type="Gradient" id="Gradient_2bl4m"]
 offsets = PackedFloat32Array(0, 0.218182, 0.50303, 0.80303, 1)
@@ -88,9 +81,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -157.5
-offset_top = -115.0
+offset_top = -103.0
 offset_right = 157.5
-offset_bottom = 55.0
+offset_bottom = 67.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
@@ -103,11 +96,17 @@ label_settings = SubResource("LabelSettings_8g5eo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="Label" parent="VboxContainer"]
+[node name="Description" type="RichTextLabel" parent="VboxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "You're  a  PoKeMon  Master!"
-label_settings = SubResource("LabelSettings_45qu8")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave]You're  a  PoKeMon  Master!"
+fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -135,9 +134,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -231.0
-offset_top = 57.0
+offset_top = 69.0
 offset_right = 226.0
-offset_bottom = 99.0
+offset_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
