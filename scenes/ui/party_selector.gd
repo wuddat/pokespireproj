@@ -126,7 +126,7 @@ func _on_slot_pressed(index: int) -> void:
 		else:
 			party_viewer.show_party_view(uid)
 		if uid in highlighted_in_bar_pkmn:
-			if highlighted_in_bar_pkmn.size() > 1:
+			if highlighted_in_bar_pkmn.size() >= 3 and char_stats.current_party.size() > 3:
 				highlighted_in_bar_pkmn.erase(uid)
 				sync_highlight_to_battling_pokemon()
 				print("Deselected UID: %s" % uid)

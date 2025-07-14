@@ -145,6 +145,7 @@ func _show_regular_battle_rewards() -> void:
 	reward_scene.character_stats = character
 	reward_scene.caught_pokemon = caught_pokemon
 	reward_scene.leveled_pkmn_in_battle = leveled_in_battle_pkmn
+	reward_scene.battle_stats = map.last_room.battle_stats
 	print("caught pokemon in _on_battle_won: ", caught_pokemon)
 	for pkmn in caught_pokemon:
 		print(pkmn.species_id)
@@ -274,20 +275,9 @@ func _on_return_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _add_item_test() -> void:
-	var itm_id := "tm_fire"
-	var existing_item: Item = null
-
-	# Check if the item already exists in inventory
-	for item in character.item_inventory.items:
-		if item.id == itm_id:
-			existing_item = item
-			break
-
-	if existing_item:
-		existing_item.quantity += 1
-		print("INCREASED QUANTITY of item: %s (now %d)" % [existing_item.name, existing_item.quantity])
-	else:
-		var itm = ItemData.build_item(itm_id)
+	var itm_ids := ["tm_fire", "pokeball"]
+	for item in itm_ids:
+		var itm = ItemData.build_item(item)
 		itm.quantity = 1  # initialize quantity if not already set in JSON
 		character.item_inventory.add_item(itm)
 		print("ADDED NEW ITEM: %s" % itm.name)

@@ -42,8 +42,8 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	if lead_enabled:
 		return "[color=goldenrod]LEAD: [/color]" + tooltip_text % mod_dmg
 	else:
-		if mod_dmg:
-			return tooltip_text % mod_dmg
+		if tooltip_text.find("%") != -1 and mod_dmg:
+			return tooltip_text % str(mod_dmg)
 		else:
 			return tooltip_text
 #	return "[color=dimgray][s]LEAD:[/s][/color] " + tooltip_text % mod_dmg

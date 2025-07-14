@@ -166,7 +166,8 @@ func on_added_pkmn_to_party(pkmn: PokemonStats) -> void:
 		return
 
 	var result_cards: Array[Card] = []
-
+	base_cards.shuffle()
+	base_cards = base_cards.slice(0,4)
 	while result_cards.size() < 10:
 		base_cards.shuffle()
 		for card in base_cards:

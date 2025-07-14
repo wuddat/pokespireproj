@@ -2613,7 +2613,7 @@
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
 	  "rarity": "common",
-	  "shift_enabled": 1,
+	  "shift_enabled": 0,
 	},
 	"tailwhip": {
 	  "name": "Tail Whip",

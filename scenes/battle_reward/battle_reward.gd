@@ -16,7 +16,7 @@ const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
 const PC_LOGOFF = preload("res://art/sounds/sfx/pc_logoff.wav")
 
 
-
+@export var battle_stats: BattleStats
 @export var run_stats: RunStats
 @export var character_stats: CharacterStats
 @export var caught_pokemon: Array[PokemonStats] = []
@@ -269,8 +269,11 @@ func _play_reward_sequence() -> void:
 	add_gold_reward(gold_reward)
 	await _reward_delay()
 	
-	#randi_range(0,1)
-	var rand_amt = 1
+	var rand_amt: int
+	if battle_stats.is_trainer_battle:
+		rand_amt = randi_range(1,2)
+	else: rand_amt = randi_range(0,1)
+	
 	for i in rand_amt:
 		add_random_item_reward()
 		await _reward_delay()
