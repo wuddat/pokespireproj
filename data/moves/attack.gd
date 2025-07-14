@@ -10,7 +10,7 @@ func get_default_tooltip() -> String:
 		return tooltip_text
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-	var mod_dmg = base_power
+	var mod_dmg: int = base_power
 	if player_modifiers:
 		mod_dmg = player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
 		
