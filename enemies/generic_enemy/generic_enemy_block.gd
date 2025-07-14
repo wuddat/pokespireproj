@@ -31,11 +31,11 @@ func setup_from_data(data: Dictionary) -> void:
 	requires_status = data.get("requires_status", "")
 	sound = preload("res://art/block.ogg")
 	
-	var block_display = "%s"
+	var block_display = ""
 	if status_effects.size() > 0:
 		intent.particles_on = true
 	intent.base_text = block_display
-	intent.current_text = str(block)
+	intent.current_text = ""
 	
 func perform_action() -> void:
 	if not enemy or not is_instance_valid(target):

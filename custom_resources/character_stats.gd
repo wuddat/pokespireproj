@@ -186,12 +186,9 @@ func on_added_pkmn_to_party(pkmn: PokemonStats) -> void:
 		deck.add_card(card)
 
 
-
-
 func check_if_all_party_fainted() -> void:
-	for pkmn in current_party:
-		if pkmn.health > 0:
-			return
+	if current_party.any(func(pkmn): return pkmn.health > 0):
+		return
 		Events.player_died.emit()
 
 

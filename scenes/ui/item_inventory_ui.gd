@@ -2,6 +2,7 @@
 extends HBoxContainer
 
 const EMPTY_ICON = preload("res://art/dottedline.png")
+const CARD_REWARDS = preload("res://scenes/ui/card_rewards.tscn")
 
 enum State {IDLE, SELECTING_TARGET}
 
@@ -9,9 +10,10 @@ var current_state := State.IDLE
 var pending_item: Item = null
 
 
-@onready var slot_1: TextureButton = %Slot1
-@onready var slot_2: TextureButton = %Slot2
-@onready var slot_3: TextureButton = %Slot3
+@onready var slot_1: ItemSlotUI = %Slot1
+@onready var slot_2: ItemSlotUI = %Slot2
+@onready var slot_3: ItemSlotUI = %Slot3
+
 @onready var item_inventory_ui: HBoxContainer = $"."
 
 var char_stats: CharacterStats
@@ -33,21 +35,24 @@ func _ready() -> void:
 
 
 func update_items() -> void:
-	if char_stats.item_inventory.size() != 0:
-		for i in range(char_stats.item_inventory.size()):
-			if is_instance_valid(char_stats.item_inventory.items[i]):
-				btn_slots[i].texture_normal = char_stats.item_inventory.items[i].icon
-				if not btn_slots[i].pressed.is_connected(_on_item_pressed):
-					btn_slots[i].pressed.connect(_on_item_pressed.bind(i))
-				btn_slots[i].get_child(0).text = str(char_stats.item_inventory.items[i].quantity)
-				if char_stats.item_inventory.items[i].quantity <=1:
-					btn_slots[i].get_child(0).hide()
-				else: btn_slots[i].get_child(0).show()
-				char_stats.item_inventory.items[i].current_position = btn_slots[i].global_position
-			else: btn_slots[i].texture_normal = EMPTY_ICON
-	else:
-		for slot in btn_slots:
-			slot.texture_normal = EMPTY_ICON
+	for i in range(btn_slots.size()):
+		# Disconnect any previous connections to avoid stacking
+		if btn_slots[i].pressed.is_connected(_on_item_pressed):
+			btn_slots[i].pressed.disconnect(_on_item_pressed)
+
+		# Safely check if there's an item at this index
+		if i < char_stats.item_inventory.items.size():
+			var item = char_stats.item_inventory.items[i]
+			if is_instance_valid(item):
+				btn_slots[i].update_item(item)
+				btn_slots[i].pressed.connect(_on_item_pressed.bind(i))
+				item.current_position = btn_slots[i].global_position
+			else:
+				btn_slots[i].texture_normal = EMPTY_ICON
+				btn_slots[i].get_child(0).hide()
+		else:
+			btn_slots[i].texture_normal = EMPTY_ICON
+			btn_slots[i].get_child(0).hide()
 
 func reset_item_use_state() -> void:
 	current_state = State.IDLE
@@ -58,6 +63,14 @@ func _on_item_used(current_item: Item) -> void:
 	print("used %s!" % current_item.name)
 	char_stats.item_inventory.use_item(current_item, current_item.targets)
 	update_items()
+	if current_item.category == "tm":
+		var tm_cards: Array[Card] = await EventEffectResolver.generate_tm_cards(current_item.type, 3, current_item.targets)
+		var rewardscene: CardRewards = CARD_REWARDS.instantiate()
+		rewardscene.rewards = tm_cards
+		rewardscene.card_reward_selected.connect(_on_card_reward_taken)
+		await get_tree().create_timer(1).timeout
+		get_tree().current_scene.top_bar.add_child(rewardscene)
+		rewardscene.skip_button.hide()
 
 
 func _on_item_pressed(index: int) -> void:
@@ -74,9 +87,14 @@ func _on_item_added(_itm: Item) -> void:
 
 func on_enemy_clicked(enemy: Node) -> void:
 	if current_state == State.SELECTING_TARGET and pending_item:
-		char_stats.item_inventory.use_item(pending_item, [enemy])
-		reset_item_use_state()
-		Events.item_aim_ended.emit()
+		if pending_item.category == "tm" and not enemy is PokemonBattleUnit:
+			reset_item_use_state()
+			Events.item_aim_ended.emit()
+			return
+		else:
+			char_stats.item_inventory.use_item(pending_item, [enemy])
+			reset_item_use_state()
+			Events.item_aim_ended.emit()
 
 
 func get_item_origin_position() -> Vector2:
@@ -87,9 +105,8 @@ func get_item_origin_position() -> Vector2:
 	return button.get_global_position() + button.size / 2.0
 
 
-func get_tooltip_data() -> Dictionary:
-	var intent_description: String = ""
-	return {
-		"header": "[color=tan]Items[/color]:",
-		"description": "When  you  find  some\nyou  can  use  them  to\ndo stuff!"
-	}
+func _on_card_reward_taken(card: Card) -> void:
+	card.current_cost = 0
+	Events.card_added_to_hand.emit(card)
+	#Utils.print_resource(card)
+	

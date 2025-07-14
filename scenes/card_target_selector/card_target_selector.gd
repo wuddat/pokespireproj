@@ -2,9 +2,11 @@
 extends Node2D
 
 const ARC_POINTS := 10
+const PC_LOGOFF = preload("res://art/sounds/sfx/pc_logoff.wav")
 
 @onready var area_2d: Area2D = $Area2D
 @onready var card_arc: Line2D = $CanvasLayer/CardArc
+
 
 var current_card: CardUI
 var current_item: Item = null
@@ -42,11 +44,19 @@ func _input(event: InputEvent) -> void:
 			current_item = null
 			return
 	if event.is_action_pressed("left_mouse") and current_item.targets.size()> 0:
-		Events.item_used.emit(current_item)
-		current_item.targets.clear()
-		current_item = null
-		Events.item_aim_ended.emit()
-		return
+		if current_item.category == "tm" and not current_item.targets[0] is PokemonBattleUnit:
+			print(current_item.targets[0].name)
+			current_item.targets.clear()
+			current_item = null
+			Events.item_aim_ended.emit()
+			SFXPlayer.pitch_play(PC_LOGOFF)
+			return
+		else:
+			Events.item_used.emit(current_item)
+			current_item.targets.clear()
+			current_item = null
+			Events.item_aim_ended.emit()
+			return
 
 
 func _get_points_from_card() -> Array:

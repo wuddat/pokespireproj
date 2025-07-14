@@ -40,6 +40,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var particles: CanvasLayer = %Particles
 @onready var item_inventory_ui: HBoxContainer = %ItemInventoryUI
 @onready var party_view: PartyView = %PartyView
+@onready var top_bar: CanvasLayer = %TopBar
 
 
 var stats: RunStats
@@ -273,7 +274,7 @@ func _on_return_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _add_item_test() -> void:
-	var itm_id := "pokeball"
+	var itm_id := "tm_fire"
 	var existing_item: Item = null
 
 	# Check if the item already exists in inventory

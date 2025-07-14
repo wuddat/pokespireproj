@@ -91,7 +91,7 @@ func start_turn() -> void:
 
 
 func shift_enemies() -> void:
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.3).timeout
 	var enemies: Array[Enemy] = []
 	var positions: Array[Vector2] = []
 	var target_positions: Array[String] = []
@@ -256,7 +256,8 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 	
 	var is_enemy_turn := acting_enemies.size() > 0
 	acting_enemies.erase(enemy)
-	enemy.queue_free()
+	if is_instance_valid(enemy):
+		enemy.queue_free()
 	child_order_changed.emit()
 	
 	if is_enemy_turn:

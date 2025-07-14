@@ -12,7 +12,10 @@ const CAUGHT_TEXT := "Pkmn Captured!"
 
 const COINGAIN = preload("res://art/sounds/sfx/coingain.wav")
 const REWARD_POP = preload("res://art/sounds/sfx/pokeball5.wav")
-const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")  
+const PING_SOUND := preload("res://art/sounds/sfx/pc_menu_select.wav")
+const PC_LOGOFF = preload("res://art/sounds/sfx/pc_logoff.wav")
+
+
 
 @export var run_stats: RunStats
 @export var character_stats: CharacterStats
@@ -54,12 +57,21 @@ func add_card_reward() -> void:
 	card_reward.pressed.connect(_show_card_rewards)
 	rewards.add_child.call_deferred(card_reward)
 
-func add_item_reward() -> void:
+func add_random_item_reward() -> void:
 	var item_reward := REWARD_BUTTON.instantiate() as RewardButton
 	var random_item := ItemData.get_random_item()
 	item_reward.reward_icon = random_item.icon
 	item_reward.reward_text = "You found %s!" % random_item.name.capitalize()
 	item_reward.pressed.connect(_on_item_reward_taken.bind(random_item))
+	rewards.add_child.call_deferred(item_reward)
+
+
+func add_item_reward(itm: String) -> void:
+	var item_reward := REWARD_BUTTON.instantiate() as RewardButton
+	var item := ItemData.build_item(itm)
+	item_reward.reward_icon = item.icon
+	item_reward.reward_text = "You found %s!" % item.name.capitalize()
+	item_reward.pressed.connect(_on_item_reward_taken.bind(item))
 	rewards.add_child.call_deferred(item_reward)
 
 
@@ -202,6 +214,7 @@ func _on_gold_reward_taken(amount: int) -> void:
 	SFXPlayer.play(COINGAIN)
 	run_stats.gold += amount
 	back_button.disabled = false
+	
 
 
 func _on_card_reward_taken(card: Card) -> void:
@@ -213,10 +226,14 @@ func _on_card_reward_taken(card: Card) -> void:
 func _on_item_reward_taken(item: Item) -> void:
 	if not character_stats or not item:
 		return
-	character_stats.item_inventory.add_item(item)
-	print("Added %s to player inventory" % item.name)
-	back_button.disabled = false
-
+	
+	var has_duplicate := character_stats.item_inventory.items.any(func(itm): return itm.id == item.id)
+	
+	if character_stats.item_inventory.size() < 3 or has_duplicate:
+		character_stats.item_inventory.add_item(item)
+		print("Added %s to player inventory" % item.name)
+		back_button.disabled = false
+	else: SFXPlayer.pitch_play(PC_LOGOFF)
 
 func _on_pokemon_reward_taken(stats: PokemonStats) -> void:
 	if not character_stats:
@@ -244,20 +261,24 @@ func _play_reward_sequence() -> void:
 			await _reward_delay()
 			
 	if caught_pokemon.size() > 0:
-		add_pkmn_reward()
-		await _reward_delay()
-		
+		for pk in caught_pokemon:
+			add_pkmn_reward()
+			await _reward_delay()
+	
+	
 	add_gold_reward(gold_reward)
 	await _reward_delay()
 	
-	add_item_reward()
-	await _reward_delay()
+	#randi_range(0,1)
+	var rand_amt = 1
+	for i in rand_amt:
+		add_random_item_reward()
+		await _reward_delay()
 	
-	add_item_reward()
-	await _reward_delay()
-	
-	add_item_reward()
-	await _reward_delay()
+	var item_amt = randi_range(1,2)
+	for i in item_amt:
+		add_item_reward("pokeball")
+		await _reward_delay()
 
 
 func _reward_delay(duration := 0.6) -> void:

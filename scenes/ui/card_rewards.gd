@@ -1,3 +1,4 @@
+#card_rewards.gd
 class_name CardRewards
 extends ColorRect
 

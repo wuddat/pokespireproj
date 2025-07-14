@@ -1,10 +1,13 @@
 #status.gd
 extends Card
 
-var action_delay = 0.2 #delay between actions
+var action_delay = 0.05 #delay between actions
 
 func get_default_tooltip() -> String:
-	return tooltip_text % base_power
+	if tooltip_text.find("%") != -1:
+		return tooltip_text % str(base_power)
+	else:
+		return tooltip_text
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
 	var mod_dmg = base_power
@@ -26,10 +29,13 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 						mod_dmg *= bonus_damage_multiplier
 						break
 	if targets:
-		var target_types = targets[0].stats.type
-		var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
-		mod_dmg *= type_multiplier
-		mod_dmg = round(mod_dmg)
+		if not (targets[0] is PokemonBattleUnit or targets[0] is Enemy):
+			return " "
+		else:
+			var target_types = targets[0].stats.type
+			var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
+			mod_dmg *= type_multiplier
+			mod_dmg = round(mod_dmg)
 
 	mod_dmg = 0
 	if tooltip_text.find("%") != -1:
@@ -71,7 +77,7 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler, battle_uni
 				if status_effect:
 					var stat_effect := StatusEffect.new()
 					stat_effect.source = battle_unit_owner
-					var status_to_apply := status_effect.duplicate()
+					var status_to_apply := status_effect.duplicate(true)
 					stat_effect.status = status_to_apply
 					stat_effect.sound = sound
 					stat_effect.execute(targets)

@@ -14,7 +14,7 @@ const CARD_SFX_1 = preload("res://art/sounds/sfx/card_sfx1.mp3")
 
 var cards_played_this_turn: int = 0
 var lead_enabled: bool = false
-var hand_max: int = 5
+var hand_max: int = 99
 
 func _ready():
 	_establish_connections()
@@ -25,13 +25,13 @@ func add_card(card: Card) -> void:
 	if total_hand >= hand_max:
 		return
 	var new_card_ui := card_ui.instantiate()
-	
 	add_child(new_card_ui)
+	await get_tree().process_frame
 	await get_tree().process_frame
 	var spawn_position = new_card_ui.global_position
 	new_card_ui.global_position = draw_pile_button.global_position + Vector2(0, -50)
 	SFXPlayer.pitch_play(CARD_SFX_1)
-	new_card_ui.animate_to_position(spawn_position, .2)
+	await new_card_ui.animate_to_position(spawn_position, .2)
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
 	new_card_ui.card = card
 	new_card_ui.card.base_card = card.duplicate(true)
@@ -125,3 +125,5 @@ func _establish_connections() -> void:
 		Events.card_play_initiated.connect(disable_hand)
 	if not Events.card_play_completed.is_connected(enable_hand):
 		Events.card_play_completed.connect(enable_hand)
+	if not Events.card_added_to_hand.is_connected(add_card):
+		Events.card_added_to_hand.connect(add_card)

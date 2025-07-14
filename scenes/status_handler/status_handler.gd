@@ -43,7 +43,8 @@ func apply_statuses_by_type(type: Status.Type) -> void:
 						status.on_end_of_turn(status_owner)
 		)
 		tween.tween_interval(STATUS_APPLY_INTERVAL)
-
+	var statuis = get_child_count()
+	columns = statuis
 	tween.finished.connect(func(): statuses_applied.emit(type))
 
 

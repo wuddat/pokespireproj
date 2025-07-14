@@ -39,6 +39,11 @@ func _ready() -> void:
 	Events.card_aim_ended.connect(_on_card_drag_or_aiming_ended)
 	Events.card_drag_ended.connect(_on_card_drag_or_aiming_ended)
 	card_state_machine.init(self)
+	while true:
+		await get_tree().process_frame
+		if card != null:
+			
+			break
 
 
 func _input(event: InputEvent) -> void:
@@ -102,9 +107,6 @@ func request_tooltip() -> void:
 	
 	var enemy_modifiers := get_active_enemy_modifiers()
 	if not is_instance_valid(player_pkmn_modifiers) or not is_instance_valid(enemy_modifiers) or not is_instance_valid(targets):
-		is_instance_valid(player_pkmn_modifiers)
-		is_instance_valid(enemy_modifiers)
-		is_instance_valid(targets)
 		var updated_tooltip := card.get_updated_tooltip(player_pkmn_modifiers, enemy_modifiers, targets)
 		Events.card_tooltip_requested.emit(card.icon, updated_tooltip, card.pkmn_icon, card.name.capitalize())
 

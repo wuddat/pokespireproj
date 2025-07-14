@@ -28,6 +28,8 @@ func build_item(id: String) -> Item:
 	item.icon = load(raw.get("icon_path", ""))
 	item.is_consumable = raw.get("is_consumable", true)
 	item.usable_in_battle = raw.get("usable_in_battle", true)
+	item.category = raw.get("category", "")
+	item.type = raw.get("type", "")
 	
 	if raw.has("status_effects"):
 		var raw_ids = raw["status_effects"]

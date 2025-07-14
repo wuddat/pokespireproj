@@ -120,6 +120,7 @@ layout_mode = 2
 text = "kill all"
 
 [node name="TopBar" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 10
 
 [node name="Background" type="ColorRect" parent="TopBar"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://boe47m2efxj4w"]
+
+[ext_resource type="Texture2D" uid="uid://d30341rsana41" path="res://art/sprites/items/medicine/rare-candy.png" id="1_obwa2"]
+[ext_resource type="Script" uid="uid://dlofm6rn7kuad" path="res://scenes/ui/item_slot.gd" id="2_mpkfb"]
+[ext_resource type="PackedScene" uid="uid://bcfgrnxf1tas7" path="res://scenes/ui/hoverable_tooltip.tscn" id="2_pdajm"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2xh5j"]
+
+[node name="ItemSlotUI" type="TextureButton"]
+custom_minimum_size = Vector2(40, 30)
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_2xh5j")
+texture_normal = ExtResource("1_obwa2")
+stretch_mode = 3
+script = ExtResource("2_mpkfb")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -12.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "99"
+
+[node name="HoverableTooltip" parent="." instance=ExtResource("2_pdajm")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1

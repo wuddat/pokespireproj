@@ -14,7 +14,10 @@ var targets: Array[Node] = []
 @export var is_consumable: bool
 @export var usable_in_battle: bool
 @export var quantity: int = 1
-
+@export var is_tm: bool = false
+@export var tm_type: Card.PkmnType = Card.PkmnType.NORMAL
+@export var category: String
+@export var type: String
 
 @export_group("Item Visuals")
 @export var icon: Texture

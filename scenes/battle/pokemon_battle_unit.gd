@@ -6,6 +6,7 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 const COMBAT_TEXT := preload("res://scenes/ui/combat_text_label.tscn")
 const LVL_UP = preload("res://art/sounds/sfx/lvl_up.wav")
 const DODGE = preload("res://art/sounds/sfx/dodge.wav")
+
 @export var stats: PokemonStats : set = set_pokemon_stats
 @export var spawn_position: String
 

@@ -3,9 +3,13 @@ extends Button
 
 @export var reward_icon: Texture : set = set_reward_icon
 @export var reward_text: String : set = set_reward_text
+@export var item_inventory: ItemInventory
+
 
 @onready var custom_icon: TextureRect = %CustomIcon
 @onready var custom_text: Label = %CustomText
+
+const PC_LOGOFF = preload("res://art/sounds/sfx/pc_logoff.wav")
 
 func set_reward_icon(new_icon: Texture) -> void:
 	reward_icon = new_icon

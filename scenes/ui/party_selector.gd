@@ -122,7 +122,7 @@ func _on_slot_pressed(index: int) -> void:
 				print("Entering switch mode for UID: %s" % uid)
 	else:
 		if party_viewer.visible == true:
-			party_viewer.hide()
+			party_viewer.back_button.pressed.emit()
 		else:
 			party_viewer.show_party_view(uid)
 		if uid in highlighted_in_bar_pkmn:

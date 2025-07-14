@@ -45,8 +45,12 @@ const ICON_SPACING := Vector2(54, 54)
 const ICONS_PER_ROW := 9
 
 func _ready():
-	await get_tree().process_frame
-	_update_visuals()
+	while true:
+		await get_tree().process_frame
+		if card != null:
+			_update_visuals()
+			break
+		
 
 
 func set_card(value: Card) -> void:

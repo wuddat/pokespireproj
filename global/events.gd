@@ -45,6 +45,7 @@ signal return_to_main_menu
 signal battle_text_requested(text: String)
 signal battle_text_completed()
 signal camera_shake_requested(damage: int, intensity: float)
+signal card_added_to_hand(card: Card)
 
 #Cutscene-related Events
 signal mewtwo_phase_2_requested

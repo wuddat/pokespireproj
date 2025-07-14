@@ -82,7 +82,6 @@ theme = ExtResource("1_gy3gl")
 script = ExtResource("2_els2s")
 
 [node name="CardVisuals" parent="." instance=ExtResource("3_ci03s")]
-material = null
 use_parent_material = true
 mouse_filter = 2
 

@@ -166,6 +166,28 @@ func _teach_tm(data: Dictionary, char_stats: CharacterStats) -> void:
 	char_stats.deck.add_card(card)
 
 
+func generate_tm_cards(type: String, count: int, node: Array[Node]) -> Array[Card]:
+	var pkmn: PokemonBattleUnit = node[0]
+	var result: Array[Card] = []
+	if not MoveData.type_to_moves.has(type):
+		print("EER: TM generation failed for type %s" % type)
+		return result
+	var move_ids = MoveData.type_to_moves[type]
+	move_ids.shuffle()
+	
+	move_ids = move_ids.slice(0,3)
+	
+	for move_id in move_ids:
+		var card = Utils.create_card(move_id)
+		card.pkmn_owner_uid = pkmn.stats.uid
+		card.pkmn_owner_name = pkmn.stats.species_id
+		card.pkmn_icon = pkmn.stats.icon
+		if card:
+			result.append(card)
+	
+	return result
+
+
 func _handle_card_gain(effect: String, data: Variant, char_stats: CharacterStats) -> void:
 	var card: Card = null
 	

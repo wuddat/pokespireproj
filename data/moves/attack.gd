@@ -4,7 +4,10 @@ extends Card
 var action_delay = 0.2
 
 func get_default_tooltip() -> String:
-	return tooltip_text % base_power
+	if tooltip_text.find("%") != -1:
+		return tooltip_text % str(base_power)
+	else:
+		return tooltip_text
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
 	var mod_dmg = base_power
@@ -27,11 +30,14 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 						break
 	if targets:
 		if not is_instance_valid(targets[0]):
-			return " "
-		var target_types = targets[0].stats.type
-		var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
-		mod_dmg *= type_multiplier
-		mod_dmg = round(mod_dmg)
+			return get_default_tooltip()
+		if not (targets[0] is PokemonBattleUnit or targets[0] is Enemy):
+			return get_default_tooltip()
+		else:
+			var target_types = targets[0].stats.type
+			var type_multiplier = TypeChart.get_multiplier(damage_type, target_types)
+			mod_dmg *= type_multiplier
+			mod_dmg = round(mod_dmg)
 
 	if lead_enabled:
 		return "[color=goldenrod]LEAD: [/color]" + tooltip_text % mod_dmg
@@ -149,14 +155,14 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 
 		# 🧬 Apply status effects to targets
 		for status_effect in status_effects:
-			await battle_unit_owner.get_tree().create_timer(action_delay).timeout
+			#await battle_unit_owner.get_tree().create_timer(action_delay).timeout
 			if status_effect:
 				var applied = randf() <= effect_chance
 				if applied:
 					var stat_effect := StatusEffect.new()
 					stat_effect.source = battle_unit_owner
-					stat_effect.status = status_effect.duplicate()
-					stat_effect.execute(targets)
+					stat_effect.status = status_effect.duplicate(true)
+					stat_effect.execute([tar])
 				else:
 					print("🎲 %s status failed to apply (%.0f%% chance) and applied was: %s" % [status_effect.id, effect_chance * 100, applied])	
 					
