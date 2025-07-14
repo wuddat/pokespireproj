@@ -223,8 +223,7 @@ func _on_event_entered() -> void:
 
 
 func _on_battle_won() -> void:
-	#if map.floors_climbed == MapGenerator.FLOORS:
-	if map.floors_climbed >= 0:
+	if map.floors_climbed == MapGenerator.FLOORS:
 		var win_screen_scene := _change_view(winscreenscene) as WinScreen
 		win_screen_scene.char_stats = character
 	else:
