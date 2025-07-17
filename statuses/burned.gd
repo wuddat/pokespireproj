@@ -8,10 +8,13 @@ func get_tooltip() -> String:
 func initialize_status(target: Node) -> void:
 	assert(target.get("modifier_handler"), "No modifiers on %s" % target)
 	check_and_apply_burn_mods(target)
+
 	
 
 func apply_status(target: Node) -> void:
 	check_and_apply_burn_mods(target)
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("BURN", Color.ORANGE)
 
 
 func check_and_apply_burn_mods(target: Node) -> void:

@@ -134,6 +134,8 @@ func shift_enemies() -> void:
 
 
 func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
+	if not is_instance_valid(enemy_node):
+		return
 	var enemy: Enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
 	if enemy_node:
 		enemy.global_position = enemy_node.global_position
@@ -222,6 +224,8 @@ func _on_enemy_statuses_applied(type: Status.Type, enemy: Enemy) -> void:
 
 
 func _on_enemy_fainted(enemy: Enemy) -> void:
+	if not is_instance_valid(enemy):
+		return
 	print("Enemy fainted: ", enemy.stats.species_id)
 	if !enemy.is_caught:
 		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] FAINTED!" % enemy.stats.species_id.capitalize())
@@ -232,7 +236,7 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		if next_species == null:
 			return
 		else:
-			if enemy:
+			if enemy and is_instance_valid(enemy):
 				Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
 				_spawn_enemy(next_species, enemy)
 
@@ -241,13 +245,15 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 			await get_tree().create_timer(0.5).timeout
 			var next_species = bench_clones.pop_front()
 			Events.battle_text_requested.emit("MewTwo summons [color=red]%s[/color]!" % next_species.species_id.capitalize())
-			_spawn_enemy_from_stats(next_species, enemy)
+			if is_instance_valid(next_species) and is_instance_valid(enemy):
+				_spawn_enemy_from_stats(next_species, enemy)
 		elif bench_clones.size() == 0 and phase_2 == false:
 			print("attempting to spawn mewtwo:")
 			phase_2 = true
 			await get_tree().create_timer(0.5).timeout
 			Events.mewtwo_phase_2_requested.emit()
-			_spawn_enemy("mewtwo_mech", enemy)
+			if is_instance_valid(enemy):
+				_spawn_enemy("mewtwo_mech", enemy)
 	
 	var battling_pokemon := party_handler.get_active_pokemon_nodes()
 	if battling_pokemon:

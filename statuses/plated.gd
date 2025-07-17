@@ -12,4 +12,8 @@ func apply_status(target: Node) -> void:
 	block_effect.sound = preload("res://art/block.ogg")
 	
 	block_effect.execute([target])
+	
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("BLOCK", Color.BLUE)
+	
 	status_applied.emit(self)

@@ -12,6 +12,8 @@ func initialize_status(target: Node) -> void:
 			target.status_handler.remove_status("chill")
 			return
 		if not target.is_froze:
+			if target.has_method("show_combat_text"):
+				target.show_combat_text("CHILL", Color.AQUAMARINE)
 			print("🧊 Chill: First time chilling %s" % target.stats.species_id)
 
 func apply_status(target: Node) -> void:
@@ -30,8 +32,12 @@ func apply_status(target: Node) -> void:
 			target.status_handler.remove_status("chill")
 			target.status_handler.add_status(FROZE)
 			print("❄️ Chill → FROZE triggered!")
+			if target.has_method("show_combat_text"):
+				target.show_combat_text("FROZE", Color.AQUA)
 		else:
 			print("🧊 Chill applied but not frozen yet (stacks: %d)" % stacks)
+			if target.has_method("show_combat_text"):
+				target.show_combat_text("CHILL", Color.AQUAMARINE)
 	else:
 		print("🔵 Chill: skipping non-enemy target")
 

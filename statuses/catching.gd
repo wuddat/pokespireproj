@@ -9,6 +9,8 @@ func initialize_status(target: Node) -> void:
 		target.is_catchable = true
 		target.skip_turn = true
 		target.enter_catching_state()
+		if target.has_method("show_combat_text"):
+			target.show_combat_text("CATCHING!", Color.GOLDENROD)
 	
 
 func apply_status(target: Node) -> void:

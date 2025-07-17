@@ -44,7 +44,7 @@ func _ready() -> void:
 		set_health_bar_ui(_queued_health_bar_ui)
 		
 	#status effect testing
-	#var status := preload("res://statuses/confused.tres")
+	#var status := preload("res://statuses/burned.tres")
 	#status_handler.add_status(status)
 	#var status1 := preload("res://statuses/attack_up.tres")
 	#status_handler.add_status(status1)
@@ -114,11 +114,9 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
 	
-	last_damage_taken = modified_damage
-	
-	
 	if modified_damage > 0:
 		show_combat_text("%s" % modified_damage)
+		last_damage_taken = modified_damage
 	
 	tween.finished.connect(func():
 		sprite_2d.material = null
@@ -134,9 +132,7 @@ func heal(amount: int) -> void:
 		var actual_heal := stats.health - health_before
 		if actual_heal > 0:
 			show_combat_text("+ %s HP" % amount, Color.GREEN)
-	
-	
-
+		
 	# Optional: Add UI or feedback here
 	print("%s healed for %d!" % [stats.species_id, amount])
 

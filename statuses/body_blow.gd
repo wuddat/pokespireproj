@@ -19,5 +19,7 @@ func apply_status(target: Node) -> void:
 		paralyze_effect.execute([target])
 		target.status_handler.remove_status("body_blow")
 		target.status_handler.remove_status("headshot")
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("BODY BLOW!", Color.RED)
 	else:
 		return

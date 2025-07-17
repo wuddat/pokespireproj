@@ -15,6 +15,8 @@ func initialize_status(target: Node) -> void:
 	block_mod.add_new_value(dex_val)
 
 	status_changed.connect(_on_status_changed.bind(block_mod))
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("DEXTERITY", Color.GREEN_YELLOW)
 
 func _on_status_changed(block_mod: Modifier) -> void:
 	if stacks <= 0 and block_mod:

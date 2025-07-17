@@ -164,7 +164,7 @@
 		
 	  ],
 	  "evolves_to": "wartortle",
-	  "evolution_level": 3
+	  "evolution_level": 6
 	},
 	"wartortle": {
 	  "name": "Wartortle",
@@ -191,7 +191,7 @@
 		"withdraw",
 	  ],
 	  "evolves_to": "blastoise",
-	  "evolution_level": 6
+	  "evolution_level": 12
 	},
 	"blastoise": {
 	  "name": "Blastoise",
@@ -208,7 +208,6 @@
 		"waterpulse",
 		"liquidation",
 		"irondefense",
-		"skullbash",
 		"bite",
 		"crunch",
 		"surf",
@@ -229,7 +228,7 @@
 		"tackle",
 		"stringshot",
 	  ],
-	  "evolution_level": 2,
+	  "evolution_level": 3,
 	  "evolves_to": "metapod"
 	},
 	"metapod": {
@@ -246,7 +245,7 @@
 		"harden",
 		"slam"
 	  ],
-	  "evolution_level": 4,
+	  "evolution_level": 6,
 	  "evolves_to": "butterfree"
 	},
 	"butterfree": {
@@ -294,7 +293,7 @@
 	  "move_ids": [
 		"poisonsting"
 	  ],
-	  "evolution_level": 2,
+	  "evolution_level": 3,
 	  "evolves_to": "kakuna"
 	},
 	"kakuna": {
@@ -312,7 +311,7 @@
 		"poisonsting",
 		"slam",
 	  ],
-	  "evolution_level": 4,
+	  "evolution_level": 6,
 	  "evolves_to": "beedrill"
 	},
 	"beedrill": {
@@ -357,7 +356,7 @@
 		"aerialace",
 		"whirlwind",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 5,
 	  "evolves_to": "pidgeotto"
 	},
 	"pidgeotto": {
@@ -380,7 +379,7 @@
 		"featherdance",
 		"whirlwind",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 10,
 	  "evolves_to": "pidgeot"
 	},
 	"pidgeot": {
@@ -424,7 +423,7 @@
 		"superfang"
 	  ],
 	  "evolves_to": "raticate",
-	  "evolution_level": 3
+	  "evolution_level": 5
 	},
 	"raticate": {
 	  "name": "Raticate",
@@ -463,7 +462,7 @@
 		"gust",
 		"wingattack"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 5,
 	  "evolves_to": "fearow"
 	},
 	"fearow": {
@@ -504,7 +503,7 @@
 		"superfang",
 		"coil",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "arbok"
 	},
 	"arbok": {
@@ -552,7 +551,7 @@
 		"tackle",
 		"doubleteam",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "raichu"
 	},
 	"raichu": {
@@ -592,7 +591,7 @@
 		"growl",
 		"bulldoze",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "sandslash"
 	},
 	"sandslash": {
@@ -633,7 +632,7 @@
 		"growl",
 		"leer"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "nidorina"
 	},
 	"nidorina": {
@@ -657,7 +656,7 @@
 		"bodyslam",
 		"doubleteam",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "nidoqueen"
 	},
 	"nidoqueen": {
@@ -698,7 +697,7 @@
 		"peck",
 		"leer",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "nidorino"
 	},
 	"nidorino": {
@@ -722,7 +721,7 @@
 		"leer",
 		"doubleteam",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "nidoking"
 	},
 
@@ -767,7 +766,7 @@
 		"scratch",
 		"doubleteam",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 8,
 	  "evolves_to": "clefable"
 	},
 	"clefable": {
@@ -823,7 +822,7 @@
 		"doubleteam",
 		"roar",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "nintetails"
 	},
 	"ninetales": {
@@ -867,7 +866,7 @@
 		"defensecurl",
 		"doubleteam",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 8,
 	  "evolves_to": "wigglytuff"
 	},
 	"wigglytuff": {
@@ -916,7 +915,7 @@
 		"supersonic",
 		"doubleteam",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 5,
 	  "evolves_to": "golbat"
 	},
 	"golbat": {
@@ -956,7 +955,7 @@
 		"sleeppowder",
 		"pound",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 5,
 	  "evolves_to": "gloom"
 	},
 	"gloom": {
@@ -977,7 +976,7 @@
 		"spore",
 		"darkpulse"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 12,
 	  "evolves_to": "vileplume"
 	},
 	"vileplume": {
@@ -1017,7 +1016,7 @@
 		"growl",
 		"growth",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "parasect"
 	},
 	"parasect": {
@@ -1062,7 +1061,7 @@
 		"supersonic",
 		"hypnosis",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "venomoth"
 	},
 	"venomoth": {
@@ -1102,7 +1101,7 @@
 		"furyswipes",
 		"hijumpkick"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "dugtrio"
 	},
 	"dugtrio": {
@@ -1142,7 +1141,7 @@
 		"slam",
 		"bite",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "persian"
 	},
 	"persian": {
@@ -1185,7 +1184,7 @@
 		"liquidation",
 		"supersonic",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "golduck"
 	},
 	"golduck": {
@@ -1231,7 +1230,7 @@
 		"swagger",
 		"lowkick"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "primeape"
 	},
 	"primeape": {
@@ -1282,7 +1281,7 @@
 		"firefang",
 		"roar",
 	  ],
-	  "evolution_level": 4,
+	  "evolution_level": 6,
 	  "evolves_to": "arcanine"
 	},
 	"arcanine": {
@@ -1328,7 +1327,7 @@
 		"doubleslap",
 		"pound",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 5,
 	  "evolves_to": "poliwhirl"
 	},
 	"poliwhirl": {
@@ -1353,7 +1352,7 @@
 		"supersonic",
 		"groundandpound",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 10,
 	  "evolves_to": "poliwrath"
 	},
 	"poliwrath": {
@@ -1396,7 +1395,7 @@
 	  "move_ids": [
 		"teleport",
 	  ],
-	  "evolution_level": 4,
+	  "evolution_level": 6,
 	  "evolves_to": "kadabra"
 	},
 	"kadabra": {
@@ -1414,7 +1413,7 @@
 		"psychic",
 		"barrier"
 	  ],
-	  "evolution_level": 7,
+	  "evolution_level": 12,
 	  "evolves_to": "alakazam"
 	},
 	"alakazam": {
@@ -1459,7 +1458,7 @@
 		"lowsweep",
 		"lowkick",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "machoke"
 	},
 	"machoke": {
@@ -1481,7 +1480,7 @@
 		"cometpunch",
 		"bulkup"
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "machamp"
 	},
 	"machamp": {
@@ -1520,7 +1519,7 @@
 		"poisonsting",
 		"razorleaf"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "weepinbell"
 	},
 	"weepinbell": {
@@ -1542,7 +1541,7 @@
 		"acidspray",
 		"sleeppowder"
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "victreebel"
 	},
 	"victreebel": {
@@ -1581,7 +1580,7 @@
 		"watergun",
 		"poisonsting"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "tentacruel"
 	},
 	"tentacruel": {
@@ -1619,7 +1618,7 @@
 		"growl",
 		"protect",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "graveler"
 	},
 	"graveler": {
@@ -1642,7 +1641,7 @@
 		"earthpower",
 		"protect",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "golem"
 	},
 	"golem": {
@@ -1688,7 +1687,7 @@
 		"bite",
 		"stomp",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "rapidash"
 	},
 	"rapidash": {
@@ -1730,7 +1729,7 @@
 		"watergun",
 		"calmmind",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "slowbro"
 	},
 	"slowbro": {
@@ -1768,7 +1767,7 @@
 		"thunderwave",
 		"screech",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "magneton"
 	},
 	"magneton": {
@@ -1829,7 +1828,7 @@
 		
 		
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "dodrio"
 	},
 	"dodrio": {
@@ -1866,7 +1865,7 @@
 		"bubblebeam",
 		"iceshard"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "dewgong"
 	},
 	"dewgong": {
@@ -1912,7 +1911,7 @@
 		"smokescreen",
 		"poisongas",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 8,
 	  "evolves_to": "muk"
 	},
 	"muk": {
@@ -1953,7 +1952,7 @@
 		"iceshard",
 		"protect",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "cloyster"
 	},
 	"cloyster": {
@@ -1994,7 +1993,7 @@
 		"lick",
 		"willowisp"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "haunter"
 	},
 	"haunter": {
@@ -2016,7 +2015,7 @@
 		"willowisp",
 		"darkpulse"
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "gengar"
 	},
 	"gengar": {
@@ -2074,7 +2073,7 @@
 		"confusion",
 		"headbutt"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "hypno"
 	},
 	"hypno": {
@@ -2109,7 +2108,7 @@
 		"metalclaw",
 		"bubblebeam"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "kingler"
 	},
 	"kingler": {
@@ -2145,7 +2144,7 @@
 		"screech",
 		"thundershock"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "electrode"
 	},
 	"electrode": {
@@ -2178,7 +2177,7 @@
 		"absorb",
 		"megadrain"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 8,
 	  "evolves_to": "exeggutor"
 	},
 	"exeggutor": {
@@ -2215,7 +2214,7 @@
 		"boneclub",
 		"rage",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "marowak"
 	},
 	"marowak": {
@@ -2308,7 +2307,7 @@
 		"poisongas",
 		"smokescreen",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "weezing"
 	},
 	"weezing": {
@@ -2350,7 +2349,7 @@
 		"megahorn",
 		"stomp"
 	  ],
-	  "evolution_level": 4,
+	  "evolution_level": 8,
 	  "evolves_to": "rhydon"
 	},
 	"rhydon": {
@@ -2442,7 +2441,7 @@
 		"leer",
 		"watergun"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "seadra"
 	},
 	"seadra": {
@@ -2477,7 +2476,7 @@
 		"hornattack",
 		"watergun"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "seaking"
 	},
 	"seaking": {
@@ -2516,7 +2515,7 @@
 		"lightscreen",
 		"swift"
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 7,
 	  "evolves_to": "starmie"
 	},
 	"starmie": {
@@ -2877,7 +2876,7 @@
 		"iceshard",
 		"waterpulse"
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 8,
 	  "evolves_to": "omastar"
 	},
 	"omastar": {
@@ -2924,7 +2923,7 @@
 		"leechlife",
 		"furyswipes",
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 8,
 	  "evolves_to": "kabutops"
 	},
 	"kabutops": {
@@ -3090,7 +3089,7 @@
 		"iceshard",
 		"haze",
 	  ],
-	  "evolution_level": 3,
+	  "evolution_level": 6,
 	  "evolves_to": "dragonair"
 	},
 	"dragonair": {
@@ -3112,7 +3111,7 @@
 		"slam",
 		"hornattack"
 	  ],
-	  "evolution_level": 6,
+	  "evolution_level": 12,
 	  "evolves_to": "dragonite"
 	},
 	"dragonite": {
@@ -3191,7 +3190,7 @@
 		"psychic",
 		"psybeam",
 		"hypnosis",
-		"barrier"
+		"rocktomb"
 	  ]
 	},
   }

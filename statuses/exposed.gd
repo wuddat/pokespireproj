@@ -4,7 +4,7 @@ extends Status
 const MODIFIER := 0.5
 
 func get_tooltip() -> String:
-	return tooltip % duration
+	return tooltip % str(duration)
 
 func initialize_status(target: Node) -> void:
 	assert(target.get("modifier_handler"), "No modifiers on %s" % target)
@@ -21,6 +21,9 @@ func initialize_status(target: Node) -> void:
 	
 	if not status_changed.is_connected(_on_status_changed):
 		status_changed.connect(_on_status_changed.bind(dmg_taken_modifier))
+	
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("EXPOSED", Color.SANDY_BROWN)
 
 #whenever status changes, ask if duration is <=0, and if so, remove status
 func _on_status_changed(dmg_taken_modifier: Modifier) -> void:

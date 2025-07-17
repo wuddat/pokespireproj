@@ -68,7 +68,7 @@ func animate(from_species: String, to_species: String):
 	#fade in bg
 	bg_tween.tween_property(background, "modulate:a", 0.8, 0.4)
 	
-	bg_tween.tween_property(label, "text", "What...?" % from_species.capitalize() , 0.4)
+	bg_tween.tween_property(label, "text", "What...?", 0.4)
 	bg_tween.tween_interval(1)
 	await bg_tween.finished
 	

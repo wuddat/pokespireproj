@@ -17,4 +17,6 @@ func apply_status(target: Node) -> void:
 		])
 	
 	damage_effect.execute([target])
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("POISONED", Color.PURPLE)
 	status_applied.emit(self)

@@ -21,6 +21,8 @@ func initialize_status(target: Node) -> void:
 			enemy_target.current_action.target = confused_target
 			print("[CONFUSE] updated enemy target to: ", enemy_target.stats.species_id)
 	enemy_target.current_action.update_intent_text()
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("CONFUSED", Color.ROSY_BROWN)
 	
 
 

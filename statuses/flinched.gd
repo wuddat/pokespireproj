@@ -4,6 +4,8 @@ extends Status
 
 func initialize_status(target: Node) -> void:
 	print("Flinched status initialized for %s" % target)
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("FLINCHED", Color.WHITE)
 	
 
 func apply_status(target: Node) -> void:

@@ -18,4 +18,7 @@ func apply_status(target: Node) -> void:
 	status_effect.status = atkpwr
 	status_effect.execute([target])
 	
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("ENRAGE", Color.RED)
+	
 	status_applied.emit(self)

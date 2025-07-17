@@ -14,6 +14,20 @@
 	  "consumable": true,
 	  "sound_path": "res://art/sounds/move_sfx/jump.wav"
 	},
+	"fullheal": {
+	  "name": "Full Heal",
+	  "id": "fullheal",
+	  "category": "target",
+	  "type": "item",
+	  "target": "enemy",
+	  "status_effects": ["cleanse"],
+	  "description": "[center][color=gold]Cleanse[/color] a pokemon of ALL [color=palegreen]STATUS[/color]![/center]",
+	  "icon_path": "res://art/sprites/items/medicine/antidote.png",
+	  "rarity": "common",
+	  "usable_in_battle": true,
+	  "consumable": true,
+	  "sound_path": "res://art/sounds/move_sfx/jump.wav"
+	},
 	"tm_fire": {
 	  "name": "TM Fire",
 	  "id": "tm_fire",
@@ -189,18 +203,6 @@
 	  "type": "dark",
 	  "description": "[center]Choose a [color=dimgray]DARK[/color] move to add to your hand!\nIt costs 0.[/center]",
 	  "icon_path": "res://art/sprites/items/tm/dark.png",
-	  "rarity": "common",
-	  "usable_in_battle": true,
-	  "consumable": true,
-	  "sound_path": "res://art/sounds/sfx/pc_access.wav"
-	},
-	"tm_dragon": {
-	  "name": "TM Dragon",
-	  "id": "tm_dragon",
-	  "category": "tm",
-	  "type": "dragon",
-	  "description": "[center]Choose a [color=lightsalmon]DRAGON[/color] move to add to your hand!\nIt costs 0.[/center]",
-	  "icon_path": "res://art/sprites/items/tm/dragon.png",
 	  "rarity": "common",
 	  "usable_in_battle": true,
 	  "consumable": true,

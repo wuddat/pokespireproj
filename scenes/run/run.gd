@@ -275,7 +275,7 @@ func _on_return_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _add_item_test() -> void:
-	var itm_ids := ["tm_fire", "pokeball"]
+	var itm_ids := ["tm_fire", "pokeball", "fullheal"]
 	for item in itm_ids:
 		var itm = ItemData.build_item(item)
 		itm.quantity = 1  # initialize quantity if not already set in JSON

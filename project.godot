@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="PokeSpireProject"
-run/main_scene="uid://bl8dkve10fma8"
+run/main_scene="uid://crr5hj2lsnnu5"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/image="uid://crs4x2b1b7icp"
 config/icon="uid://uu2myxkxc2s8"
 
 [autoload]

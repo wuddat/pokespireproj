@@ -10,3 +10,6 @@ func get_tooltip() -> String:
 func initialize_status(target: Node) -> void:
 	print("Paralysis status initialized for %s" % target.stats.species_id.capitalize())
 	duration = 3
+	
+	if target.has_method("show_combat_text"):
+		target.show_combat_text("PARALYZE", Color.GOLDENROD)

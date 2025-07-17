@@ -33,6 +33,7 @@ func update(run_stats: RunStats) -> void:
 	else:
 		price_label.add_theme_color_override("font_color", Color.RED)
 		buy_button.disabled = true
+
 func set_pkmn(new_pkmn: PokemonStats) -> void:
 	if not is_node_ready():
 		await ready
@@ -45,6 +46,7 @@ func set_pkmn(new_pkmn: PokemonStats) -> void:
 	
 	var new_pkmn_ui := PKMN_UI.instantiate()
 	pkmn_container.add_child(new_pkmn_ui)
+	new_pkmn_ui.set_pkmn(pkmn)
 	new_pkmn_ui.pkmn = pkmn
 
 	# Connect only once

@@ -27,3 +27,5 @@ func execute(targets: Array[Node]) -> void:
 				for i in range(feeble_decrement):
 					target.status_handler.decrement_status("feeble")
 				print("Feeble detected — block is reduced %s!" % target.stats.species_id)
+			if target.has_method("show_combat_text"):
+				target.show_combat_text("BLOCK", Color.BLUE)

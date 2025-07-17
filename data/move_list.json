@@ -50,7 +50,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly [b]FLINCH[/b].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	"sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "multiplay": 1,
 	},
 	"acidspray": {
@@ -68,7 +68,7 @@
 	  ],
 	  "description": "[center]Deal [color=red]%s[/color] and [color=purple]3 POISON[/color] to ALL enemie![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"accupressure": {
 	  "name": "Accupressure",
@@ -168,7 +168,7 @@
 	  "description": "[center]Bite for [color=red]%s[/color] damage and apply possibly FLINCH.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/move_sfx/bite.mp3",
-	  "rarity": "rare"
+	  "rarity": "common"
 	},
 	"bodyslam": {
 	  "name": "Body Slam",
@@ -179,14 +179,14 @@
 	  "target": "enemy",
 	  "power": 8,
 	  "accuracy": 100,
-	  "cost": 2,
+	  "cost": 1,
 	  "status_effects": [
 		"exposed"
 	  ],
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	  "sound_path": "res://art/sounds/move_sfx/beatup.mp3",
-	  "rarity": "rare"
+	  "rarity": "uncommon"
 	},
 	"boneclub": {
 	  "name": "Bone Club",
@@ -220,7 +220,7 @@
 	  "description": "[center]Toss a boomerang made of bone dealing [color=red]%s[/color] damage [color=red]TWICE[/color].[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/move_sfx/boneclub.mp3",
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "multiplay": 2,
 	},
 	"bonerush": {
@@ -271,7 +271,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/move_sfx/bubble1.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"bubblepunch": {
 	  "name": "Bubble Punch",
@@ -320,7 +320,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage then SHIFT an enemy![/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
-	  "rarity": "uncommon",
+	  "rarity": "rare",
 	  "shift_enabled": 1,
 	},
 	"bulletpunch": {
@@ -353,16 +353,16 @@
 	  "subtype": "single_target",
 	  "type": "bug",
 	  "target": "enemy",
-	  "power": 8,
+	  "power": 4,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
-		"poisoned"
+		"poisoned", "poisoned"
 	  ],
-	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]POISON[/color].[/center]",
+	  "description": "[center]Deal [color=red]%s[/color] damage and [color=purple]2 POISON[/color].[/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/bite.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"bugbuzz": {
 	  "name": "Bug Buzz",
@@ -380,7 +380,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies and apply [color=dimgray]DESPAIR[/color].[/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/calmmind.mp3",
-	  "rarity": "uncommon"
+	  "rarity": "rare"
 	},
 	"calmmind": {
 	  "name": "Calm Mind",
@@ -417,7 +417,7 @@
 	  "self_damage": 0,
 	  "self_status": ["exposed", "despair"],
 	  "multiplay": 2,
-	  "rarity": "uncommon",
+	  "rarity": "rare",
 	},
 	"coil": {
 	  "name": "Coil",
@@ -697,7 +697,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage[/center].",
 	  "icon_path": "res://art/tile_0102.png",
 	  "sound_path": "res://art/sounds/move_sfx/doubleslap.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"dualchop": {
 	  "name": "Dual Chop",
@@ -797,7 +797,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
-	  "rarity": "rare"
+	  "rarity": "uncommon"
 	},
 	"featherdance": {
 	  "name": "Feather Dance",
@@ -888,7 +888,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply [color=orange] 3 BURN[/color].[/center]",
 	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"firespin": {
 	  "name": "Fire Spin",
@@ -904,7 +904,7 @@
 	  "description": "[center]Apply [color=orange]4 BURN[/color] to ALL enemies each turn for 3 turns MAX.[/center]",
 	  "icon_path": "res://art/status_effects/BurnedIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/ember.mp3",
-	  "rarity": "common"
+	  "rarity": "rare"
 	},
 	"flareblitz": {
 	  "name": "Flare Blitz",
@@ -1028,7 +1028,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=green]HEAL[/color] HALF the amount.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	"sound_path": "res://art/sounds/move_sfx/absorb1.mp3",
-	  "rarity": "uncommon",
+	  "rarity": "rare",
 	  "self_heal": 1
 	},
 	"groundandpound": {
@@ -1096,7 +1096,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "common",
+	  "rarity": "rare",
 	  "requires_status": "poisoned"
 	},
 	"gust": {
@@ -1162,7 +1162,7 @@
 	  "self_status": ["cleanse"],
 	  "description": "[center]CLEANSE allies of ALL Status Effects![/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"headbutt": {
 	  "name": "Headbutt",
@@ -1212,7 +1212,7 @@
 	  "description": "[center]Slam your foe dealing [color=red]%s[/color] damage and apply 2 [color=green] Exposed[/color].[/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/move_sfx/doublekick.mp3",
-	  "rarity": "rare"
+	  "rarity": "common"
 	},
 		"hijumpkick": {
 	  "name": "Hi-Jump Kick",
@@ -1263,7 +1263,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage then SHIFT enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	  "sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
-	  "rarity": "rare",
+	  "rarity": "uncommon",
 	  "shift_enabled": 1,
 	},
 	"hydropump": {
@@ -1327,7 +1327,7 @@
 	  "description": "[center]Attempt to SLEEP a target![/center]",
 	  "icon_path": "res://art/status_effects/sleep_effect.png",
 	"sound_path": "res://art/sounds/move_sfx/calmmind.mp3",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"icebeam": {
 	  "name": "Ice Beam",
@@ -1345,7 +1345,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and [color=aquamarine]1 CHILL[/color]. [color=red]SHATTER[/color] on [color=aqua]FROZE[/color] for [color=red]3X[/color] damage![/center]",
 	  "icon_path": "res://art/status_effects/FrozenIC_Masters.png",
 	"sound_path": "res://art/sounds/move_sfx/darkpulse.mp3",
-	  "rarity": "rare",
+	  "rarity": "uncommon",
 	},
 	"icepunch": {
 	  "name": "Ice Punch",
@@ -1468,7 +1468,7 @@
 	  ],
 	  "description": "[center]Next attack deals [color=goldenrod]X2[/color] damage.[/center]",
 	  "icon_path": "res://art/status_effects/critical.png",
-	  "rarity": "uncommon"
+	  "rarity": "rare"
 	},
 	"leaftornado": {
 	  "name": "Leaf Tornado",
@@ -1484,7 +1484,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and SHIFT a random enemy [color=red]3X[/color]![/center]",
 	  "icon_path": "res://art/tile_0123.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "rare",
+	  "rarity": "uncommon",
 	  "shift_enabled": 1,
 	  "multiplay": 3,
 	},
@@ -1518,7 +1518,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage then [color=green]HEAL[/color] for HALF the amount![/center]",
 	  "icon_path": "res://art/heart.png",
 	"sound_path": "res://art/sounds/move_sfx/absorb1.mp3",
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "self_heal": 1,
 	},
 	"leer": {
@@ -1658,7 +1658,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage.[/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "uncommon"
+	  "rarity": "rare"
 	},
 	"metalclaw": {
 	  "name": "Metal Claw",
@@ -1701,7 +1701,7 @@
 	  "status_effects": ["dodge","dodge","dodge","dodge","dodge"],
 	  "description": "[center]Shrink and apply [color=aquamarine]5 DODGE[/color]![/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "uncommon",
+	  "rarity": "common",
 	},
 	"nightshade": {
 	  "name": "Nightshade",
@@ -1779,7 +1779,7 @@
 	  "status_effects": ["poisoned"],
 	  "description": "[center]Deal [color=red]%s[/color] damage 5X RANDOMLY and [color=purple]POISON[/color]!.[/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	  "rarity": "uncommon",
+	  "rarity": "rare",
 	  "multiplay": 5
 	},
 	"playrough": {
@@ -1838,15 +1838,16 @@
 	  "subtype": "single_target",
 	  "type": "poison",
 	  "target": "enemy",
-	  "power": 10,
+	  "power": 6,
 	  "accuracy": 100,
 	  "cost": 1,
 	  "status_effects": [
 		"poisoned","poisoned"
 	  ],
-	  "description": "[center]Deals [color=red]%s[/color] damage and applies [color=purple]2 POISON[/color]![/center]",
+	  "description": "[center]Deals [color=red]%s[/color] damage [color=red]2X[/color] and applies [color=purple]2 POISON[/color] each![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	  "rarity": "rare"
+	  "rarity": "rare",
+	  "multiplay": 2
 	},
 	"poisonpowder": {
 	  "name": "Poison Powder",
@@ -1861,11 +1862,11 @@
 	  "status_effects": [
 		"poisoned","poisoned",
 	  ],
-	  "description": "[center]Apply [color=purple]2 POISON[/color] [color=red]4X[/color] randomly![/center]",
+	  "description": "[center]Apply [color=purple]POISON[/color] [color=red]5X[/color] randomly![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
 	  "rarity": "rare",
 	  "sound_path": "res://art/sounds/move_sfx/poison_powder.mp3",
-	  "multiplay": 4
+	  "multiplay": 5
 	},
 	"poisonsting": {
 	  "name": "Poison Sting",
@@ -1882,14 +1883,14 @@
 	  ],
 	  "description": "[center]Sting your foe dealing [color=red]%s[/color] damage and apply [color=purple]2 POISON[/color].[/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	  "rarity": "rare"
+	  "rarity": "common"
 	},
 	"pokeball": {
 	  "name": "Pokeball",
 	  "id": "pokeball",
 	  "category": "status",
 	  "subtype": "item",
-	  "type": "grass",
+	  "type": "normal",
 	  "target": "enemy",
 	  "power": 1,
 	  "accuracy": 100,
@@ -1932,7 +1933,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage TWICE![/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	"sound_path": "res://art/sounds/move_sfx/confusion.mp3",
-	  "rarity": "common",
+	  "rarity": "rare",
 	  "multiplay": 2,
 	},
 	"psychic": {
@@ -1949,7 +1950,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and apply 5 FEEBLE![/center]",
 	  "icon_path": "res://art/tile_0103.png",
 	"sound_path": "res://art/sounds/move_sfx/confusion.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"quickattack": {
 	  "name": "Quick Attack",
@@ -1965,7 +1966,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies.[/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/doubleslap.mp3",
-	  "rarity": "rare"
+	  "rarity": "common"
 	},
 	"quickguard": {
 	  "name": "Quick Guard",
@@ -2017,7 +2018,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "multiplay": 4,
 	},
 	"ragepowder": {
@@ -2134,7 +2135,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage![/center]",
 	  "icon_path": "res://art/tile_0103.png",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"safeguard": {
 	  "name": "Safeguard",
@@ -2182,7 +2183,7 @@
 	  ],
 	  "description": "[center]Apply [color=sage]DESPAIR[/color] to all enemies![/center]",
 	  "icon_path": "res://art/status_effects/taunt.png",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"scratch": {
 	  "name": "Scratch",
@@ -2228,7 +2229,7 @@
 	  "status_effects": [],
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
-	  "rarity": "common"
+	  "rarity": "rare"
 	},
 	"seismictoss": {
 	  "name": "Seismic Toss",
@@ -2403,7 +2404,7 @@
 	  "status_effects": ["poisoned","poisoned","poisoned",],
 	  "description": "[center]Deal [color=purple] 3 POISON[/color] RANDOMLY![/center]",
 	  "icon_path": "res://art/status_effects/PoisonedIC_Masters.png",
-	  "rarity": "uncommon",
+	  "rarity": "common",
 	  "multiplay": 3,
 	},
 	"smokescreen": {
@@ -2452,7 +2453,7 @@
 	  "status_effects": ["sleep"],
 	  "description": "[center]ALL enemies with [color=purple]POISON[/color] gain [color=pink]1 SLEEP[/color]![/center]",
 	  "icon_path": "res://art/status_effects/sleep_effect.png",
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "requires_status": "poisoned"
 	},
 	"stomp": {
@@ -2472,7 +2473,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	 "lead_effects": {
 	  	"self_status": ["attack_up","attack_up","attack_up"],
 		"description": "[center]Deal [color=red]%s[/color] damage and gain [color=red]3 ATKPWR[/color].[/center]"
@@ -2510,7 +2511,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/surf.mp3",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"supersonic": {
 	  "name": "Supersonic",
@@ -2525,7 +2526,7 @@
 	  "status_effects": ["confused"],
 	  "description": "[center]CONFUSE an enemy![/center]",
 	  "icon_path": "res://art/statuseffects/confused-effect.png",
-	  "rarity": "uncommon",
+	  "rarity": "common",
 	  "sound_path": "res://art/sounds/move_sfx/supersonic.mp3"
 	},
 	"swagger": {
@@ -2559,7 +2560,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage to [b]ALL[/b] enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/aerial_ace.mp3",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"swordsdance": {
 	  "name": "Swords Dance",
@@ -2647,7 +2648,7 @@
 	  "sound_path": "res://art/sounds/move_sfx/bodyslam.mp3",
 	  "self_damage": 3,
 	  "self_status": [],
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	  "lead_effects": {"self_damage": 0},
 	},
 	"teleport": {
@@ -2682,7 +2683,7 @@
 	  "description": "[center]Deal [color=red]%s[/color] damage and possibly FLINCH.[/center]",
 	  "icon_path": "res://art/tile_0107.png",
 	  "sound_path": "res://art/sounds/VineWhip2.wav",
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	},
 	"thunder": {
 	  "name": "Thunder",
@@ -2749,7 +2750,7 @@
 	  "description": "[center]Apply [color=yellow]PARALYZE[/color] to ALL enemies.[/center]",
 	  "icon_path": "res://art/status_effects/ParalysisIC_Masters.png",
 	  "sound_path": "res://art/sounds/move_sfx/thundershock.mp3",
-	  "rarity": "uncommon"
+	  "rarity": "common"
 	},
 	"triattack": {
 	  "name": "Tri Attack",
@@ -2785,7 +2786,7 @@
 	  "self_status": [],
 	  "bonus_damage_if_target_has_status": "poisoned",
 	  "bonus_damage_multiplier": 2,
-	  "rarity": "common",
+	  "rarity": "uncommon",
 	},
 	"vinewhip": {
 	  "name": "Vine Whip",
@@ -2921,7 +2922,7 @@
 	  ],
 	  "description": "[center]Gain [color=sage]2 DEXTERITY[/color] and [color=red]2 ATKPWR[/color]![/center]",
 	  "icon_path": "res://art/status_effects/atkup.png",
-	  "rarity": "common"
+	  "rarity": "uncommon"
 	},
 	"zapcannon": {
 	  "name": "Zap Cannon",
