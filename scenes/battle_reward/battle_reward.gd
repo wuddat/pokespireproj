@@ -75,16 +75,15 @@ func add_item_reward(itm: String) -> void:
 	rewards.add_child.call_deferred(item_reward)
 
 
-func add_pkmn_reward() -> void:
+func add_pkmn_reward(pk: PokemonStats) -> void:
 	print("Caught Pokémon array:", caught_pokemon)
 	print("Caught Pokémon count:", caught_pokemon.size())
-	for stats in caught_pokemon:
-		var pkmn_reward := REWARD_BUTTON.instantiate()
-		pkmn_reward.reward_icon = stats.icon
-		pkmn_reward.reward_text = "Caught: %s " % stats.species_id.capitalize()
-		pkmn_reward.pressed.connect(_on_pokemon_reward_taken.bind(stats))
-		rewards.add_child.call_deferred(pkmn_reward)
-		print("Reward button added for:", stats.species_id)
+	var pkmn_reward := REWARD_BUTTON.instantiate()
+	pkmn_reward.reward_icon = pk.icon
+	pkmn_reward.reward_text = "Caught: %s " % pk.species_id.capitalize()
+	pkmn_reward.pressed.connect(_on_pokemon_reward_taken.bind(pk))
+	rewards.add_child.call_deferred(pkmn_reward)
+	print("Reward button added for:", pk.species_id)
 
 func add_leveled_pkmn_rewards(pkmn_stats: Array[PokemonStats]) -> void:
 		var card_reward := REWARD_BUTTON.instantiate() as RewardButton
@@ -262,7 +261,7 @@ func _play_reward_sequence() -> void:
 			
 	if caught_pokemon.size() > 0:
 		for pk in caught_pokemon:
-			add_pkmn_reward()
+			add_pkmn_reward(pk)
 			await _reward_delay()
 	
 	

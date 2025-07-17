@@ -925,10 +925,11 @@ position = Vector2(-0.75, 3.5)
 shape = SubResource("RectangleShape2D_qk3tf")
 
 [node name="StatsUI" parent="." instance=ExtResource("4_1wwld")]
-offset_left = -48.0
-offset_top = 17.0
-offset_right = 49.0
-offset_bottom = 33.0
+unique_name_in_owner = true
+offset_left = -74.0
+offset_top = 23.0
+offset_right = 75.0
+offset_bottom = 39.0
 
 [node name="StatusHandler" parent="." node_paths=PackedStringArray("status_owner") instance=ExtResource("7_nbhyu")]
 anchors_preset = 5
@@ -960,6 +961,8 @@ script = ExtResource("10_hvxgb")
 [node name="NameContainer" parent="." instance=ExtResource("11_peoo5")]
 unique_name_in_owner = true
 visible = false
+offset_top = 22.0
+offset_bottom = 39.0
 mouse_filter = 1
 
 [node name="UnitStatusIndicator" parent="." instance=ExtResource("12_2f3il")]

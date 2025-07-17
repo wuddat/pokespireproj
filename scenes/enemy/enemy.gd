@@ -16,7 +16,7 @@ const PULSE_SHADER := preload("res://pulse.gdshader")
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var arrow: Sprite2D = $Arrow
-@onready var stats_ui: StatsUI = $StatsUI as StatsUI
+@onready var stats_ui: StatsUI = %StatsUI
 @onready var intent_ui: IntentUI = %IntentUI as IntentUI
 @onready var animation_handler: Node = $AnimationHandler
 @onready var name_container: PanelContainer = %NameContainer
