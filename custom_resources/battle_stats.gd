@@ -1,9 +1,6 @@
 class_name BattleStats
 extends Resource
 
-
-
-
 @export_enum("Wild", "Trainer", "Legendary", "Boss") var encounter_type := "Wild"
 @export_enum("Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",  ) var trainer_type:= "None"
 
@@ -11,7 +8,7 @@ extends Resource
 @export_range(0.0, 10.0) var weight: float
 @export var gold_reward_min: int
 @export var gold_reward_max: int
-@export var enemies: PackedScene #TODO this may need to be changed for enemy distribution
+@export var enemies: PackedScene # adjust for enemy amt and placement
 
 @export_category("Enemy Types")
 @export_enum("Normal", "Water", "Rock", "Any") var pokemon_type:= "Any"

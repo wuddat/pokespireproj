@@ -29,6 +29,7 @@ func load_from_pokedex(data: Dictionary) -> void:
 		push_warning("Unexpected move_ids format: " + str(raw_ids))
 
 	move_ids = cleaned_ids
+	health = max_health
 	
 	#DEBUGVERSION
 			#print("Data is: ", data)
@@ -49,4 +50,4 @@ func load_from_pokedex(data: Dictionary) -> void:
 		#push_warning("Unexpected move_ids format: " + str(raw_ids))
 	
 	# Set runtime health to max_health
-	health = max_health
+	

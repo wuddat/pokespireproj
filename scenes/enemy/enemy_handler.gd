@@ -244,7 +244,8 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		if bench_clones.size() > 0:
 			await get_tree().create_timer(0.5).timeout
 			var next_species = bench_clones.pop_front()
-			Events.battle_text_requested.emit("MewTwo summons [color=red]%s[/color]!" % next_species.species_id.capitalize())
+			if next_species:
+				Events.battle_text_requested.emit("MewTwo summons [color=red]%s[/color]!" % next_species.species_id.capitalize())
 			if is_instance_valid(next_species) and is_instance_valid(enemy):
 				_spawn_enemy_from_stats(next_species, enemy)
 		elif bench_clones.size() == 0 and phase_2 == false:
