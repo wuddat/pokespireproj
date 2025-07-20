@@ -1,5 +1,5 @@
+# block.gd
 extends Card
-
 
 func get_default_tooltip() -> String:
 	return tooltip_text % base_power
@@ -11,36 +11,29 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, _enemy_modifiers: Mo
 		
 	return tooltip_text % mod_block
 
-
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
 	var move_data = MoveData.moves.get(id)
-	var base_block = base_power
-	var _battle_text: Array[String] = []
-
 	
 	if move_data == null:
 		push_warning("No move data for card ID: %s" % id)
 		return
-		
-	var block_effect := BlockEffect.new()
-	block_effect.amount = modifiers.get_modified_value(base_block, Modifier.Type.BLOCK_GAINED)
-	block_effect.base_block = base_block
-	block_effect.sound = sound
-	print("block targets are: ", [targets])
-	block_effect.execute(targets)
 	
-	if self_heal > 0:
-		var self_heal_effect := HealEffect.new()
-		self_heal_effect.amount = self_heal
-		#TODO add heal effect sfx
-		self_heal_effect.sound = null
-		self_heal_effect.execute([battle_unit_owner])
-
-	for status_effect in status_effects:
-		if status_effect:
-			var stat_effect := StatusEffect.new()
-			stat_effect.source = battle_unit_owner
-			var status_to_apply := status_effect.duplicate()
-			stat_effect.status = status_to_apply
-			stat_effect.execute(targets)
+	# Execute block effect
+	EffectExecutor.execute_block(base_power, targets, battle_unit_owner, modifiers, sound)
+	
+	# Apply status effects to targets
+	EffectExecutor.execute_status_effects(status_effects, targets, battle_unit_owner, effect_chance)
+	
+	# Apply self effects (no damage dealt for block cards)
+	EffectExecutor.execute_self_effects(
+		battle_unit_owner,
+		self_damage,
+		self_damage_percent_hp,
+		self_heal,
+		self_block,
+		self_status,
+		modifiers,
+		0  # No damage dealt for block cards
+	)
+	
 	emit_dialogue(["%s used %s!" % [battle_unit_owner.stats.species_id.capitalize(), name]])

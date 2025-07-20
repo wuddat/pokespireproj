@@ -1,43 +1,37 @@
-#shift.gd
+# shift.gd
 extends Card
 
-
 func get_default_tooltip() -> String:
-	return tooltip_text % base_power
+	if tooltip_text.find("%") != -1:
+		return tooltip_text % str(base_power)
+	else:
+		return tooltip_text
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler, targets: Array[Node]) -> String:
-		var mod_dmg:int = player_modifiers.get_modified_value(base_power, Modifier.Type.DMG_DEALT)
-		
-		if enemy_modifiers:
-			mod_dmg = enemy_modifiers.get_modified_value(mod_dmg, Modifier.Type.DMG_TAKEN)
-		
-		# Check for conditional bonus
-		if bonus_damage_if_target_has_status != "":
-			for tar in targets:
-				var handler = tar.get_node_or_null("StatusHandler")
-				if handler:
-					var statuses = handler.get_statuses()
-					print("statuses on unit are: %s" % [statuses])
-					for status in statuses:
-						if status.id == bonus_damage_if_target_has_status:
-							mod_dmg *= bonus_damage_multiplier
-							break
+	if tooltip_text.find("%") != -1 and base_power:
+		return tooltip_text % str(base_power)
+	else:
+		return tooltip_text
 
-		
-		return tooltip_text % mod_dmg
-
-
-func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
-	#var _move_data = MoveData.moves.get(id)
-	var tree := battle_unit_owner.get_tree()
-	var party_handler = tree.get_first_node_in_group("party_handler")
-	party_handler.shift_active_party()
+func apply_effects(_targets: Array[Node], modifiers: ModifierHandler, battle_unit_owner: PokemonBattleUnit) -> void:
+	# Execute the shift effect
+	EffectExecutor.execute_shift([battle_unit_owner], battle_unit_owner, 1)
+	
+	# Emit party shifted event
 	Events.party_shifted.emit()
 	
-	var enemy_handler = tree.get_first_node_in_group("enemy_handler") # Or however your picker is grouped
-	if enemy_handler:
-		for child in enemy_handler.get_children():
-			await child.update_action()
+	# Update enemy intents (this logic should be moved to a signal handler eventually)
+	_update_enemy_intents(battle_unit_owner.get_tree())
+
+func _update_enemy_intents(tree: SceneTree) -> void:
+	var enemy_handler = tree.get_first_node_in_group("enemy_handler")
+	if not enemy_handler:
+		return
+		
+	for child in enemy_handler.get_children():
+		if child.has_method("update_action"):
+			child.update_action()
+		if child.current_action:
 			child.current_action.update_intent_text()
-			await child.intent_ui.update_intent(child.current_action)
-			print("SHIFT.GD enemy attack target is: %s " % child.current_action.target.stats.species_id)
+		if child.intent_ui:
+			child.intent_ui.update_intent(child.current_action)
