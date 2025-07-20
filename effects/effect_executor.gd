@@ -128,11 +128,27 @@ static func execute_self_effects(
 	# Self status effects
 	execute_status_effects(self_status, [source], source, 1.0)
 
+# Add this improved version to effect_executor.gd
 static func execute_shift(targets: Array[Node], source: Node, amount: int = 1) -> void:
 	if amount <= 0:
 		return
 		
-	var shift_effect = ShiftEffect.new()
-	shift_effect.tree = source.get_tree()
-	shift_effect.amount = amount
-	shift_effect.execute(targets)
+	var tree = source.get_tree()
+	if not tree:
+		push_warning("ShiftEffect could not find parent TREE")
+		return
+		
+	# Handle player Pokemon shifting
+	if targets.size() > 0 and targets[0] is PokemonBattleUnit:
+		var party_handler = tree.get_first_node_in_group("party_handler")
+		if party_handler:
+			for i in amount:
+				party_handler.shift_active_party()
+		Events.party_shifted.emit()
+		
+	# Handle enemy shifting
+	elif targets.size() > 0 and targets[0] is Enemy:
+		var enemy_handler = tree.get_first_node_in_group("enemy_handler")
+		if enemy_handler:
+			enemy_handler.shift_enemies()
+			Events.party_shifted.emit()

@@ -2019,7 +2019,6 @@
 	  "bonus_damage_if_target_has_status": "",
 	  "bonus_damage_multiplier": 1,
 	  "rarity": "uncommon",
-	  "multiplay": 4,
 	},
 	"ragepowder": {
 	  "name": "Rage Powder",

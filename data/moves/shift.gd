@@ -20,7 +20,7 @@ func apply_effects(_targets: Array[Node], modifiers: ModifierHandler, battle_uni
 	# Emit party shifted event
 	Events.party_shifted.emit()
 	
-	# Update enemy intents (this logic should be moved to a signal handler eventually)
+	# TODO Update enemy intents (this logic should be moved to a signal handler eventually)
 	_update_enemy_intents(battle_unit_owner.get_tree())
 
 func _update_enemy_intents(tree: SceneTree) -> void:
