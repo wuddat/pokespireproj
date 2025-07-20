@@ -1,5 +1,5 @@
 #item_inventory_ui.gd
-extends HBoxContainer
+extends Control
 
 const EMPTY_ICON = preload("res://art/dottedline.png")
 const CARD_REWARDS = preload("res://scenes/ui/card_rewards.tscn")
@@ -8,13 +8,14 @@ enum State {IDLE, SELECTING_TARGET}
 
 var current_state := State.IDLE
 var pending_item: Item = null
+var selected_item: Item = null
 
 
 @onready var slot_1: ItemSlotUI = %Slot1
 @onready var slot_2: ItemSlotUI = %Slot2
 @onready var slot_3: ItemSlotUI = %Slot3
-
-@onready var item_inventory_ui: HBoxContainer = $"."
+@onready var item_inventory_ui: HBoxContainer = %HBoxContainer
+@onready var btn_container: HBoxContainer = $BtnContainer
 
 var char_stats: CharacterStats
 var btn_slots: Array[TextureButton] = []
@@ -77,9 +78,10 @@ func _on_item_pressed(index: int) -> void:
 	var itm = char_stats.item_inventory.items[index]
 	print("item has been pressed: %s" % itm.name)
 	if itm.usable_in_battle:
-		current_state = State.SELECTING_TARGET
-		pending_item = itm
-		Events.item_aim_started.emit(itm)
+		selected_item = itm
+		btn_container.show()
+	else:
+		btn_container.hide()
 
 
 func _on_item_added(_itm: Item) -> void:
@@ -110,3 +112,23 @@ func _on_card_reward_taken(card: Card) -> void:
 	Events.card_added_to_hand.emit(card)
 	#Utils.print_resource(card)
 	
+
+
+func _on_confirm_btn_pressed() -> void:
+	if selected_item.usable_in_battle:
+		current_state = State.SELECTING_TARGET
+		pending_item = selected_item
+		Events.item_aim_started.emit(selected_item)
+	selected_item = null
+	btn_container.hide()
+
+
+func _on_toss_btn_pressed() -> void:
+	char_stats.item_inventory.remove_item(selected_item)
+	selected_item = null
+	btn_container.hide()
+	update_items()
+
+func _gui_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("left_mouse") or Input.is_action_just_pressed("right_mouse") or Input.is_action_just_pressed("ui_cancel"):
+		btn_container.hide()

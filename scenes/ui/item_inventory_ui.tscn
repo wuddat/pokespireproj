@@ -9,24 +9,60 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_co6a8"]
 
-[node name="ItemInventoryUI" type="HBoxContainer"]
-offset_right = 92.0
-offset_bottom = 30.0
-theme_override_constants/separation = -14
-alignment = 1
+[node name="ItemInventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 32.0
 script = ExtResource("1_co6a8")
 
-[node name="Slot1" parent="." instance=ExtResource("2_3t1jn")]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -4
+
+[node name="Slot1" parent="HBoxContainer" instance=ExtResource("2_3t1jn")]
 unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_ac13h")
 
-[node name="Slot2" parent="." instance=ExtResource("2_3t1jn")]
+[node name="Slot2" parent="HBoxContainer" instance=ExtResource("2_3t1jn")]
 unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_3t1jn")
 
-[node name="Slot3" parent="." instance=ExtResource("2_3t1jn")]
+[node name="Slot3" parent="HBoxContainer" instance=ExtResource("2_3t1jn")]
 unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_co6a8")
+
+[node name="BtnContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 33.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConfirmBtn" type="Button" parent="BtnContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use"
+
+[node name="TossBtn" type="Button" parent="BtnContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Toss"
+
+[connection signal="pressed" from="BtnContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="BtnContainer/TossBtn" to="." method="_on_toss_btn_pressed"]

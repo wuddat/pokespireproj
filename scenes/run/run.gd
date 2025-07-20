@@ -38,7 +38,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var fade: ColorRect = %Fade
 @onready var fade_tween: Tween
 @onready var particles: CanvasLayer = %Particles
-@onready var item_inventory_ui: HBoxContainer = %ItemInventoryUI
+@onready var item_inventory_ui: Control = %ItemInventoryUI
 @onready var party_view: PartyView = %PartyView
 @onready var top_bar: CanvasLayer = %TopBar
 
