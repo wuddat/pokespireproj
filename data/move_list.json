@@ -1277,7 +1277,7 @@
 	  "accuracy": 100,
 	  "cost": 3,
 	  "status_effects": [],
-	  "description": "[center]Deal [color=red]%s[/color] damage to ALL enemies![/center]",
+	  "description": "[center]Deal [color=red]%s[/color] damage to an enemy and [color=red]10[/color] to adjacent enemies![/center]",
 	  "icon_path": "res://art/intent/aoe_w.png",
 	"sound_path": "res://art/sounds/move_sfx/surf.mp3",
 	  "rarity": "rare",

@@ -215,3 +215,6 @@ static func execute_enemy_animation(
 	tween.tween_property(source, "global_position", start_pos, 0.3)
 	
 	await tween.finished
+	
+static func execute_card_draw(amount: int) -> void:
+	Events.card_draw_requested.emit(amount)

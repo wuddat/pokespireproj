@@ -51,7 +51,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		return
 
 	# Separate primary and splash targets
-	var primary_targets = valid_targets
+	var primary_targets: Array[Node] = valid_targets
 	var splash_targets: Array[Node] = []
 	
 	if splash_damage > 0:
@@ -61,6 +61,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 	# Calculate damage amounts
 	var target_damage = _calculate_target_damage(primary_targets[0] if primary_targets.size() > 0 else null)
 	
+
 	# Execute primary damage
 	var total_damage_dealt = EffectExecutor.execute_damage(
 		target_damage, 
@@ -105,6 +106,10 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		modifiers,
 		total_damage_dealt
 	)
+	
+	#Apply Global Effects
+	if card_draw:
+		EffectExecutor.execute_card_draw(card_draw)
 
 # Helper functions
 func _get_valid_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) -> Array[Node]:

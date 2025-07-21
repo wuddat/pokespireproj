@@ -249,3 +249,6 @@ func _establish_connections() -> void:
 	
 	if not Events.player_pokemon_switch_requested.is_connected(_on_party_pokemon_switch_requested):
 		Events.player_pokemon_switch_requested.connect(_on_party_pokemon_switch_requested)
+	
+	if not Events.card_draw_requested.is_connected(draw_cards):
+		Events.card_draw_requested.connect(draw_cards)

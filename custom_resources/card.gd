@@ -77,6 +77,7 @@ const PKMN_COLORS := {
 @export var splash_damage: int = 0
 @export var shift_enabled: int = 0
 @export var lead_effects: Dictionary = {}
+@export var card_draw: int = 0
 
 @export_group("Self Effects")
 @export var self_heal: int
@@ -177,6 +178,7 @@ func setup_from_data(data: Dictionary) -> void:
 	bonus_damage_multiplier = data.get("bonus_damage_multiplier", 1.0)
 	shift_enabled = data.get("shift_enabled", 0)
 	self_shift = data.get("self_shift", 0)
+	card_draw = data.get("card_draw", 0)
 
 	
 
@@ -343,6 +345,7 @@ func reset_to_base_card() -> void:
 	splash_damage = base_card.splash_damage
 	shift_enabled = base_card.shift_enabled
 	lead_effects = base_card.lead_effects.duplicate()
+	card_draw = base_card.card_draw
 
 	# --- Self Effects ---
 	self_heal = base_card.self_heal

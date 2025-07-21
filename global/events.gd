@@ -24,6 +24,7 @@ signal player_hit
 signal player_died
 signal card_play_initiated
 signal card_play_completed
+signal card_draw_requested(amount: int)
 
 
 #Enemy-related Events
