@@ -19,7 +19,6 @@ func _ready() -> void:
 	_establish_connections()
 
 
-
 func start_battle(char_stats: CharacterStats) -> void:
 	character = char_stats
 	character.faint_pile.clear()
@@ -58,7 +57,6 @@ func start_turn() -> void:
 		pkmn.start_of_turn()
 
 
-
 func end_turn() -> void:
 	hand.disable_hand()
 	end_turn_button.hide()
@@ -81,6 +79,7 @@ func draw_card() -> void:
 		print("⚠️ No cards left to draw!")
 		return
 	hand.add_card(character.draw_pile.draw_card())
+	hand._count_children()
 	reshuffle_deck_from_discard()
 
 
@@ -140,8 +139,6 @@ func exhaust_cards_on_faint(uid: String) -> void:
 			cards_to_exhaust.add_card(card_ui.card)
 			hand.discard_card(card_ui)
 			draw_card()
-			
-			
 
 	for card: Card in character.discard.cards:
 		if card.pkmn_owner_uid == uid:
@@ -188,11 +185,15 @@ func _on_card_played(card: Card) -> void:
 	if card.id == "nightshade":
 		character.discard.add_card(card)
 		character.discard.add_card(card)
+		hand.hand_size -= 1
+		hand._count_children()
 		return
 	else:
 		hand.cards_played_this_turn += 1
+		hand.hand_size -= 1
 		hand.refresh_leads_to_base()
 		character.discard.add_card(card)
+		hand._count_children()
 
 
 func _on_statuses_applied(type: Status.Type) -> void:
@@ -201,19 +202,12 @@ func _on_statuses_applied(type: Status.Type) -> void:
 			draw_cards(character.cards_per_turn)
 		Status.Type.END_OF_TURN:
 			discard_cards()
-
-
-#func _on_pokemon_start_status_applied(pkmn: PokemonBattleUnit) -> void:
-
-
-
-#func _on_pokemon_end_status_applied(pkmn: PokemonBattleUnit) -> void:
-
-
+			
 
 func _on_party_pokemon_fainted(unit: PokemonBattleUnit) -> void:
 	var uid :=unit.stats.uid
 	exhaust_cards_on_faint(uid)
+
 
 func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void:
 	exhaust_cards_on_faint(uid_out)
@@ -230,8 +224,10 @@ func _on_party_pokemon_switch_requested(uid_out: String, uid_in: String) -> void
 func _on_evolution_triggered(_pkmn: PokemonBattleUnit) -> void:
 	hand.disable_hand()
 
+
 func _on_evolution_completed() -> void:
 	hand.enable_hand()
+
 
 func _establish_connections() -> void:
 	if not Events.card_played.is_connected(_on_card_played):

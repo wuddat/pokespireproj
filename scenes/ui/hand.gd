@@ -15,6 +15,7 @@ const CARD_SFX_1 = preload("res://art/sounds/sfx/card_sfx1.mp3")
 var cards_played_this_turn: int = 0
 var lead_enabled: bool = false
 var hand_max: int = 99
+var hand_size: int = 0
 
 func _ready():
 	_establish_connections()
@@ -56,7 +57,6 @@ func add_card(card: Card) -> void:
 		new_card_ui.player_pkmn_modifiers = player.modifier_handler
 	if card.pkmn_owner_uid  != "":
 		await _assign_modifiers_when_battle_pkmn_ready(new_card_ui, card.pkmn_owner_uid)
-	
 
 
 func discard_card(card: CardUI) -> void:
@@ -119,6 +119,13 @@ func _assign_modifiers_when_battle_pkmn_ready(cardui: CardUI, uid: String) -> vo
 		tries +=1
 	
 	push_warning("Couldn't find pkmnnbattleunits for card uid")
+
+func _count_children() -> void:
+	hand_size = get_child_count()
+	if hand_size > 7:
+		add_theme_constant_override("separation", -hand_size-(hand_size/2))
+	else: add_theme_constant_override("separation", 0)
+		
 
 func _establish_connections() -> void:
 	if not Events.card_play_initiated.is_connected(disable_hand):

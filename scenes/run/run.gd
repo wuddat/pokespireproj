@@ -29,6 +29,9 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var pokecenterbtn: Button = %PokecenterButton
 @onready var add_item_button: Button = %AddItemButton
 @onready var kill_enemies_button: Button = %KillEnemiesButton
+@onready var draw_card_button: Button = %DrawCardButton
+
+
 @onready var mapbtn: Button = %MapButton
 @onready var rewardsbtn: Button = %RewardsButton
 @onready var shopbtn: Button = %ShopButton
@@ -118,6 +121,7 @@ func _setup_event_connections() -> void:
 	shopbtn.pressed.connect(_change_view.bind(shopscene))
 	treasurebtn.pressed.connect(_change_view.bind(treasurescene))
 	kill_enemies_button.pressed.connect(_on_kill_enemies)
+	draw_card_button.pressed.connect(Events.card_draw_requested.emit.bind(1))
 
 
 func 	_setup_top_bar():
