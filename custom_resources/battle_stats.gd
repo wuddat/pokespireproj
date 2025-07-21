@@ -60,7 +60,7 @@ func assign_enemy_pkmn_party() -> void:
 							0:
 								enemy_pkmn_party = ["grimer", "koffing", "ekans", "koffing"]
 							1:
-								enemy_pkmn_party = ["muk", "arbok", "jynx", "wheezing"]
+								enemy_pkmn_party = ["muk", "arbok", "jynx", "weezing"]
 							2:
 								enemy_pkmn_party = ["muk", "muk", "muk", "muk"]
 					"Bird Keeper":

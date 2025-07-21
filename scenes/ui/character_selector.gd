@@ -11,13 +11,19 @@ const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 @onready var title: Label = %Title
 @onready var description: Label = %Description
 @onready var character_portrait: AnimatedSprite2D = %CharacterPortrait
+@onready var character_text: VBoxContainer = $CharacterText
 
 
 var current_character: CharacterStats : set = set_current_character
-
+var tween: Tween
+var active_button: String = ""
+var starting_portrait_pos: Vector2
+var starting_title_pos: Vector2
 
 func _ready() -> void:
 	set_current_character(BULBASAUR_STATS)
+	starting_portrait_pos = character_portrait.global_position
+	starting_title_pos = character_text.global_position
 
 
 func set_current_character(new_charcter: CharacterStats) -> void:
@@ -36,14 +42,45 @@ func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_packed(RUN_SCENE)
 
 func _on_bulbasaur_button_pressed() -> void:
-	SFXPlayer.play(PC_MENU_SELECT)
-	current_character = BULBASAUR_STATS
+	if active_button != "bulbasaur":
+		if tween and tween.is_running():
+			tween.kill()
+		SFXPlayer.play(PC_MENU_SELECT)
+		active_button = "bulbasaur"
+		_tween_on_select()
+	
 
 func _on_squirtle_button_pressed() -> void:
-	SFXPlayer.play(PC_MENU_SELECT)
-	current_character = SQUIRTLE_STATS
+	if active_button != "squirtle":
+		if tween and tween.is_running():
+			tween.kill()
+		SFXPlayer.play(PC_MENU_SELECT)
+		active_button = "squirtle"
+		_tween_on_select()
+		
 
 
 func _on_charmander_button_pressed() -> void:
-	SFXPlayer.play(PC_MENU_SELECT)
-	current_character = CHARMANDER_STATS
+	if active_button != "charmander":
+		if tween and tween.is_running():
+			tween.kill()
+		SFXPlayer.play(PC_MENU_SELECT)
+		active_button = "charmander"
+		_tween_on_select()
+		
+
+
+func _tween_on_select() -> void:
+		tween = create_tween()
+		tween.tween_property(character_portrait, "global_position", Vector2(character_portrait.global_position.x-800,character_portrait.global_position.y), 0.2)
+		tween.parallel().tween_property(character_text, "global_position", Vector2(character_text.global_position.x+800,character_text.global_position.y), 0.2)
+		await tween.finished
+		if active_button == "charmander":
+			current_character = CHARMANDER_STATS
+		if active_button == "bulbasaur":
+			current_character = BULBASAUR_STATS
+		if active_button == "squirtle":
+			current_character = SQUIRTLE_STATS
+		tween = create_tween()
+		tween.tween_property(character_portrait, "global_position", Vector2(starting_portrait_pos), 0.2)
+		tween.parallel().tween_property(character_text, "global_position", Vector2(starting_title_pos), 0.2)
