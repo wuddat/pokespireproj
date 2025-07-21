@@ -143,6 +143,7 @@ func get_chance_based_action() -> EnemyAction:
 	return null
 
 
+# Update setup_actions_from_moves in enemy_action_picker.gd
 func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void:
 	refresh_target_pool()
 	enemy = enemy_ref
@@ -159,32 +160,16 @@ func setup_actions_from_moves(enemy_ref: Enemy, move_ids: Array[String]) -> void
 			continue
 
 		var category = move_data.get("category", "attack")
-		var action_scene: Script
-
-		match category:
-			"attack":
-				action_scene = preload("res://enemies/generic_enemy/generic_enemy_attack.gd")
-			"defense":
-				action_scene = preload("res://enemies/generic_enemy/generic_enemy_block.gd")
-			"status":
-				action_scene = preload("res://enemies/generic_enemy/generic_enemy_status.gd")
-			_:
-				push_warning("Unknown move category for: " + move_id)
-				continue
-
-		var action = action_scene.new()
-		action.script_type = category
-		add_child(action)
+		var action = EnemyActionFactory.create_action(category, move_data)
 		
+		if not action:
+			continue
+			
+		add_child(action)
 		action.enemy = enemy
 		
 		var target_type = move_data.get("target", "enemy")
 		resolve_action_targets(action, target_type)
-
-		if action.has_method("setup_from_data"):
-			action.setup_from_data(move_data)
-		else:
-			push_warning("Action is missing setup_from_data")
 
 	setup_chances()
 

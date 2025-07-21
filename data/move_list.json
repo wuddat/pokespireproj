@@ -2663,7 +2663,7 @@
 	  "status_effects": [],
 	  "description": "[center]SHIFT places randomly![/center]",
 	  "icon_path": "res://art/tile_0123.png",
-	  "sound_path": "res://art/sounds/move_sfx/jump.mp3",
+	  "sound_path": "res://art/sounds/move_sfx/jump.wav",
 	  "rarity": "common",
 	  "shift_enabled": 1,
 	},

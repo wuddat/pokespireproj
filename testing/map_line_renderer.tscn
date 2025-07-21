@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8nway4q86us6"]
+
+[ext_resource type="Script" uid="uid://cu4ano862aetn" path="res://testing/map_line_renderer.gd" id="1_3wlcd"]
+
+[node name="MapLineRenderer" type="Node2D"]
+script = ExtResource("1_3wlcd")

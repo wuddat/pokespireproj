@@ -152,3 +152,66 @@ static func execute_shift(targets: Array[Node], source: Node, amount: int = 1) -
 		if enemy_handler:
 			enemy_handler.shift_enemies()
 			Events.party_shifted.emit()
+
+
+# Add this to effect_executor.gd
+static func execute_enemy_damage(
+	amount: int,
+	targets: Array[Node], 
+	source: Node,
+	damage_type: String = "normal",
+	sound: AudioStream = null,
+	animate: bool = true
+) -> int:
+	var total_damage_dealt = 0
+	
+	for target in targets:
+		if not is_instance_valid(target) or target.stats.health <= 0:
+			continue
+			
+		if target.has_method("dodge_check") and target.dodge_check():
+			continue
+			
+		var type_multiplier = TypeChart.get_multiplier(damage_type, target.stats.type)
+		var final_damage = round(amount * type_multiplier)
+		
+		var damage_effect = DamageEffect.new()
+		if sound:
+			damage_effect.sound = sound
+		damage_effect.amount = final_damage
+		
+		# Set sound based on effectiveness
+		if type_multiplier > 1:
+			damage_effect.sound = preload("res://art/sounds/sfx/supereffective.wav")
+		elif type_multiplier < 1:
+			damage_effect.sound = preload("res://art/sounds/not_effective.wav")
+		
+		damage_effect.execute([target])
+		total_damage_dealt += final_damage
+		
+	return total_damage_dealt
+
+static func execute_enemy_animation(
+	source: Node,
+	targets: Array[Node],
+	total_damage: int = 0
+) -> void:
+	if targets.is_empty():
+		return
+		
+	var target = targets[0]
+	if not is_instance_valid(target):
+		return
+		
+	var start_pos = source.global_position
+	var end_pos = target.global_position + Vector2.RIGHT * 32
+	
+	if total_damage <= 0:
+		end_pos = source.global_position + Vector2.LEFT * 32
+	
+	var tween = source.create_tween().set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(source, "global_position", end_pos, 0.3)
+	tween.tween_interval(0.2)
+	tween.tween_property(source, "global_position", start_pos, 0.3)
+	
+	await tween.finished

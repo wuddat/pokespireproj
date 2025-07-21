@@ -12,99 +12,53 @@ texture = ExtResource("4_jcaow")
 margins = Vector2i(1, 1)
 separation = Vector2i(1, 1)
 0:0/0 = 0
-0:0/0/modulate = Color(1, 1, 1, 0.746)
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
 0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
 0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
 0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
 0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
 1:0/0 = 0
-1:0/0/modulate = Color(1, 1, 1, 0.745098)
 1:0/0/terrain_set = 0
 1:0/0/terrains_peering_bit/right_side = 0
 1:0/0/terrains_peering_bit/bottom_right_corner = 0
 1:0/0/terrains_peering_bit/top_right_corner = 0
 2:0/0 = 0
-2:0/0/modulate = Color(1, 1, 1, 0.745098)
 2:0/0/terrain_set = 0
 2:0/0/terrains_peering_bit/bottom_left_corner = 0
 2:0/0/terrains_peering_bit/left_side = 0
 2:0/0/terrains_peering_bit/top_left_corner = 0
 3:0/0 = 0
-3:0/0/modulate = Color(1, 1, 1, 0.745098)
 3:0/0/terrain_set = 0
 3:0/0/terrains_peering_bit/bottom_right_corner = 0
 3:0/0/terrains_peering_bit/bottom_side = 0
 3:0/0/terrains_peering_bit/bottom_left_corner = 0
 4:0/0 = 0
-4:0/0/modulate = Color(1, 1, 1, 0.745098)
 4:0/0/terrain_set = 0
 4:0/0/terrains_peering_bit/top_left_corner = 0
 4:0/0/terrains_peering_bit/top_side = 0
 4:0/0/terrains_peering_bit/top_right_corner = 0
 4:1/0 = 0
-4:1/0/modulate = Color(1, 1, 1, 0.745098)
 4:1/0/terrain_set = 0
 4:1/0/terrains_peering_bit/bottom_left_corner = 0
 3:1/0 = 0
-3:1/0/modulate = Color(1, 1, 1, 0.745098)
 3:1/0/terrain_set = 0
 3:1/0/terrains_peering_bit/bottom_right_corner = 0
 2:1/0 = 0
-2:1/0/modulate = Color(1, 1, 1, 0.745098)
 2:1/0/terrain_set = 0
 2:1/0/terrains_peering_bit/top_left_corner = 0
 1:1/0 = 0
-1:1/0/modulate = Color(1, 1, 1, 0.745098)
 1:1/0/terrain_set = 0
 1:1/0/terrains_peering_bit/top_right_corner = 0
-1:2/0 = 0
-1:2/0/modulate = Color(1, 1, 1, 0.745098)
-1:2/0/terrain_set = 0
-1:2/0/terrain = 0
-1:2/0/terrains_peering_bit/left_side = 0
-1:2/0/terrains_peering_bit/top_side = 0
-2:2/0 = 0
-2:2/0/modulate = Color(1, 1, 1, 0.745098)
-2:2/0/terrain_set = 0
-2:2/0/terrain = 0
-2:2/0/terrains_peering_bit/right_side = 0
-2:2/0/terrains_peering_bit/top_side = 0
-3:2/0 = 0
-3:2/0/modulate = Color(1, 1, 1, 0.745098)
-3:2/0/terrain_set = 0
-3:2/0/terrain = 0
-3:2/0/terrains_peering_bit/bottom_side = 0
-3:2/0/terrains_peering_bit/left_side = 0
-4:2/0 = 0
-4:2/0/modulate = Color(1, 1, 1, 0.745098)
-4:2/0/terrain_set = 0
-4:2/0/terrain = 0
-4:2/0/terrains_peering_bit/right_side = 0
-4:2/0/terrains_peering_bit/bottom_side = 0
-6:0/0 = 0
-6:0/0/modulate = Color(1, 1, 1, 0.619608)
-6:0/0/terrain_set = 0
-7:0/0 = 0
-7:0/0/modulate = Color(1, 1, 1, 0.619608)
-8:0/0 = 0
-8:0/0/modulate = Color(1, 1, 1, 0.619608)
-6:1/0 = 0
-6:1/0/modulate = Color(1, 1, 1, 0.619608)
-7:1/0 = 0
-7:1/0/modulate = Color(1, 1, 1, 0.619608)
-6:2/0 = 0
-6:2/0/modulate = Color(1, 1, 1, 0.619608)
-7:2/0 = 0
-7:2/0/modulate = Color(1, 1, 1, 0.619608)
 
 [sub_resource type="TileSet" id="TileSet_sqgf4"]
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-terrain_set_0/terrain_1/name = "Terrain 1"
-terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_04w0f")
 
 [sub_resource type="Gradient" id="Gradient_tqkkf"]
@@ -119,20 +73,15 @@ width = 50
 script = ExtResource("1_sxf4j")
 music = ExtResource("2_a2pkv")
 
-[node name="Visuals" type="Node2D" parent="."]
-
-[node name="MapLineRenderer" parent="Visuals" instance=ExtResource("5_fcby6")]
-unique_name_in_owner = true
-position = Vector2(-10, -10)
+[node name="MapLineRenderer" parent="." instance=ExtResource("5_fcby6")]
 tileset_resource = SubResource("TileSet_sqgf4")
 tileset_texture = ExtResource("4_jcaow")
 terrain_paint_mode = 1
-path_style = 3
-background_tile = Vector2i(6, 0)
+
+[node name="Visuals" type="Node2D" parent="."]
 
 [node name="Lines" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
-visible = false
 
 [node name="Rooms" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true

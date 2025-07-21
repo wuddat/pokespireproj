@@ -13,6 +13,7 @@ const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 @onready var rooms: Node2D = %Rooms
 @onready var visuals: Node2D = $Visuals
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var path_tile_renderer: MapLineRenderer = %MapLineRenderer
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -22,6 +23,9 @@ var camera_edge_y: float
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS - 1)
+	if not path_tile_renderer:
+		path_tile_renderer = MapLineRenderer.new()
+		add_child(path_tile_renderer)
 
 
 func _input(event: InputEvent) -> void:
@@ -57,6 +61,13 @@ func create_map() -> void:
 	var map_width_pixels := MapGenerator.X_DIST * (MapGenerator.MAP_WIDTH - 1)
 	visuals.position.x = (get_viewport_rect().size.x - map_width_pixels) / 2
 	visuals.position.y = get_viewport_rect().size.y / 2
+	
+	# Render paths using the new tile renderer
+	# Option 1: Render directly from map data
+	path_tile_renderer.render_map_paths_on_tilemap(map_data)
+	
+	# Option 2: Render from existing Line2D nodes (if you want to keep both)
+	# path_tile_renderer.render_paths_from_line2d_nodes(lines)
 
 func unlock_floor(which_floor: int = floors_climbed) -> void:
 	for map_room: MapRoom in rooms.get_children():
