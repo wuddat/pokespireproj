@@ -30,6 +30,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var add_item_button: Button = %AddItemButton
 @onready var kill_enemies_button: Button = %KillEnemiesButton
 @onready var draw_card_button: Button = %DrawCardButton
+@onready var save_btn: Button = %SaveBtn
 
 
 @onready var mapbtn: Button = %MapButton
@@ -45,7 +46,7 @@ const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 @onready var party_view: PartyView = %PartyView
 @onready var top_bar: CanvasLayer = %TopBar
 
-
+var save_data: SaveData
 var stats: RunStats
 var character: CharacterStats
 var caught_pokemon: Array[PokemonStats] = []
@@ -61,7 +62,7 @@ func _ready() -> void:
 			character = run_startup.picked_character.create_instance()
 			_start_run()
 		RunStartup.Type.CONTINUED_RUN:
-			print("TODO: load previous run")
+			_load_run()
 
 
 func _start_run() -> void:
@@ -72,6 +73,46 @@ func _start_run() -> void:
 	
 	map.generate_new_map()
 	map.unlock_floor(0)
+	
+	save_data = SaveData.new()
+	_save_run(true)
+
+
+func _load_run() -> void:
+	save_data = SaveData.load_data()
+	assert(save_data, "Couldn't load last save")
+	
+	RNG.set_from_save_data(save_data.rng_seed, save_data.rng_state)
+	stats = save_data.run_stats
+	character = save_data.char_stats
+	character.deck = save_data.current_deck
+	character.current_party = save_data.current_party
+	character.item_inventory = save_data.item_inventory
+	character.draftable_cards = save_data.draftable_cards
+	
+	map.load_map(save_data.map_data, save_data.floors_climbed, save_data.last_room)
+	
+	if save_data.last_room and not save_data.was_on_map:
+		_on_map_exited(save_data.last_room)
+	
+	_setup_event_connections()
+	_setup_top_bar()
+
+
+func _save_run(was_on_map: bool) -> void:
+	save_data.rng_seed = RNG.instance.seed
+	save_data.rng_state = RNG.instance.state
+	save_data.run_stats = stats
+	save_data.char_stats = character
+	save_data.current_deck = character.deck
+	save_data.current_party = character.current_party
+	save_data.item_inventory = character.item_inventory
+	save_data.draftable_cards = character.draftable_cards
+	save_data.map_data = map.map_data.duplicate()
+	save_data.floors_climbed = map.floors_climbed
+	save_data.last_room = map.last_room
+	save_data.was_on_map = was_on_map
+	save_data.save_data()
 
 
 func _change_view(scene: PackedScene) -> Node:
@@ -92,6 +133,8 @@ func _show_map() -> void:
 		
 	map.show_map()
 	map.unlock_next_rooms()
+	
+	_save_run(true)
 	particles.show()
 	
 
@@ -112,6 +155,7 @@ func _setup_event_connections() -> void:
 	Events.evolution_completed.connect(_on_evolution_completed)
 	Events.add_leveled_pkmn_to_rewards.connect(_on_leveled_pkmn_to_rewards)
 	Events.return_to_main_menu.connect(_on_return_to_main_menu)
+	Events.save_game.connect(_save_run)
 	
 	battlebutton.pressed.connect(_change_view.bind(battlescene))
 	pokecenterbtn.pressed.connect(_change_view.bind(pokecenterscene))
@@ -122,6 +166,7 @@ func _setup_event_connections() -> void:
 	treasurebtn.pressed.connect(_change_view.bind(treasurescene))
 	kill_enemies_button.pressed.connect(_on_kill_enemies)
 	draw_card_button.pressed.connect(Events.card_draw_requested.emit.bind(1))
+	save_btn.pressed.connect(_save_run.bind(false))
 
 
 func 	_setup_top_bar():
@@ -230,11 +275,13 @@ func _on_battle_won() -> void:
 	if map.floors_climbed == MapGenerator.FLOORS:
 		var win_screen_scene := _change_view(winscreenscene) as WinScreen
 		win_screen_scene.char_stats = character
+		SaveData.delete_data()
 	else:
 		_show_regular_battle_rewards()
 	
 
 func _on_map_exited(room: Room) -> void:
+	_save_run(false)
 	match room.type:
 		Room.Type.MONSTER:
 			_on_battle_room_entered(room)

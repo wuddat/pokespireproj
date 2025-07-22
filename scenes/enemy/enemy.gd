@@ -387,7 +387,7 @@ func did_escape_catch() -> bool:
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
 	var escape_chance = base_chance + (bonus * 0.4)  # 30% to 70% chance to break out
 	current_wobble += 1
-	return randf() > escape_chance
+	return RNG.instance.randf() > escape_chance
 
 func was_caught() -> bool:
 	if current_wobble >= max_wobble:
@@ -397,7 +397,7 @@ func was_caught() -> bool:
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
 	var catch_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
 	current_wobble += 1
-	return randf() > catch_chance
+	return RNG.instance.randf() > catch_chance
 
 
 func mark_as_caught() -> void:

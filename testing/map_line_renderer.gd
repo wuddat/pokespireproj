@@ -74,8 +74,7 @@ func _ready() -> void:
 	_update_atlas_coordinates()
 	
 	# Initialize random generator
-	random_generator = RandomNumberGenerator.new()
-	random_generator.randomize()
+	random_generator = RNG.instance
 	
 	# Setup default background tile pool if empty
 	if background_tile_pool.is_empty():

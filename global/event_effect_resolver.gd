@@ -53,7 +53,7 @@ func _gain_random_card_of_type(type: String, char_stats: CharacterStats) -> void
 		return
 	
 	var move_ids = MoveData.type_to_moves[type]
-	move_ids.shuffle()
+	RNG.array_shuffle(move_ids)
 	
 	for move_id in move_ids:
 		var card := Utils.create_card(move_id)
@@ -72,7 +72,7 @@ func _gain_random_card_of_type_for_pokemon(data:Dictionary, char_stats: Characte
 		return
 	
 	var move_ids = MoveData.type_to_moves[type]
-	move_ids.shuffle()
+	RNG.array_shuffle(move_ids)
 	
 	for move_id in move_ids:
 		var card = Utils.create_card(move_id)
@@ -113,7 +113,7 @@ func _gain_rare_card_of_type_for_pokemon(data: Dictionary, char_stats: Character
 		print("⚠️ No rare/uncommon moves found for type: %s" % type)
 		return
 
-	rare_moves.shuffle()
+	RNG.array_shuffle(rare_moves)
 	var move_id = rare_moves[0]
 	print("🎁 Teaching rare move: %s" % move_id)
 
@@ -173,7 +173,7 @@ func generate_tm_cards(type: String, count: int, node: Array[Node]) -> Array[Car
 		print("EER: TM generation failed for type %s" % type)
 		return result
 	var move_ids = MoveData.type_to_moves[type]
-	move_ids.shuffle()
+	RNG.array_shuffle(move_ids)
 	
 	move_ids = move_ids.slice(0,3)
 	
@@ -210,7 +210,7 @@ func _handle_card_gain(effect: String, data: Variant, char_stats: CharacterStats
 				if move_ids.is_empty():
 					return
 
-			move_ids.shuffle()
+			RNG.array_shuffle(move_ids)
 			card = Utils.create_card(move_ids[0])
 
 		"teach_tm":
@@ -246,7 +246,7 @@ func create_event_card(effects: Dictionary, char_stats: CharacterStats) -> Card:
 				var type = effects[effect]
 				if not MoveData.type_to_moves.has(type):
 					return null
-				card = Utils.create_card(MoveData.type_to_moves[type].pick_random())
+				card = Utils.create_card(RNG.array_pick_random(MoveData.type_to_moves[type]))
 			"gain_random_card_of_type_for_pokemon", "gain_rare_card_of_type_for_pokemon", "teach_tm", "imbued_stone":
 				var type = effects[effect].get("type", "")
 				var move_id = effects[effect].get("move_id", "")
@@ -262,7 +262,7 @@ func create_event_card(effects: Dictionary, char_stats: CharacterStats) -> Card:
 						candidates = candidates.filter(func(m): return MoveData.moves.get(m, {}).get("rarity", "") in ["rare", "uncommon"])
 						if candidates.is_empty():
 							return null
-					card = Utils.create_card(candidates.pick_random())
+					card = Utils.create_card(RNG.array_pick_random(candidates))
 				
 				var pkmn = char_stats.current_party.filter(func(p): return p.uid == uid)
 				if not pkmn.is_empty():

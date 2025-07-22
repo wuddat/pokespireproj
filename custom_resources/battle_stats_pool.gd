@@ -26,13 +26,13 @@ func get_random_battle_for_tier_and_type(tier: int, type: String) -> BattleStats
 		push_warning("No battles found for tier %d and type %s" % [tier, type])
 		return null
 	
-	var selected_battle = filtered.pick_random().duplicate()
+	var selected_battle = RNG.array_pick_random(filtered).duplicate()
 
 	if selected_battle.encounter_type == "Trainer":
 		# Randomly assign a trainer type
 		var trainer_types := ["Aroma Lady","Battle Girl","Biker", "Bird Keeper","Black Belt","Bug Catcher","Engineer", "Fisher", "Hiker", "Psychic","Youngster",]
 		#var trainer_types := ["Fisher"]
-		selected_battle.trainer_type = trainer_types.pick_random()
+		selected_battle.trainer_type = RNG.array_pick_random(trainer_types)
 		selected_battle.assign_enemy_pkmn_party()
 
 	return selected_battle
@@ -64,7 +64,7 @@ func _setup_weight_for_tier(tier: int) -> void:
 
 
 func get_random_battle_for_tier(tier: int) -> BattleStats:
-	var roll := randf_range(0.0, total_weights_by_tier[tier])
+	var roll := RNG.instance.randf_range(0.0, total_weights_by_tier[tier])
 	var battles := _get_all_battles_for_tier(tier)
 	
 	for battle: BattleStats in battles:

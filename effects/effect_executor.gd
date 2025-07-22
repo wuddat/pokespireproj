@@ -52,7 +52,7 @@ static func execute_status_effects(
 		if not status_effect:
 			continue
 			
-		var applied = randf() <= effect_chance
+		var applied = RNG.instance.randf() <= effect_chance
 		if applied:
 			var stat_effect = StatusEffect.new()
 			stat_effect.source = source

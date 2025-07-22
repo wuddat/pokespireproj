@@ -38,7 +38,7 @@ func _ready():
 			description_label.text = "You find a strange stone glowing faintly with the symbol for %s..." % stone_type.capitalize()
 		"hypno_trance":
 			var random_pkmn = char_stats.get_all_party_members()
-			random_pkmn.shuffle()
+			RNG.array_shuffle(random_pkmn)
 			event_data["target_pokemon"] = random_pkmn[0]
 			description_label.text = "A wild Hypno appears! It seems to have your %s in a trance..." % random_pkmn[0].species_id.capitalize()
 			hypno.show()
@@ -165,7 +165,7 @@ func _generate_hypno_trance_choices() -> void:
 			var selected = view.card_detail_overlay.tooltip_card.get_child(0).card
 			char_stats.deck.remove_card(selected)
 			var all_ids = MoveData.moves.keys()
-			all_ids.shuffle()
+			RNG.array_shuffle(all_ids)
 			var new_card = Utils.create_card(all_ids[0])
 			new_card.pkmn_owner_uid = pkmn.uid
 			new_card.pkmn_owner_name = pkmn.species_id
@@ -214,7 +214,7 @@ func generate_skip_button(skip_text: String) -> void:
 
 func _pick_random_type() -> String:
 	var types := MoveData.type_to_moves.keys()
-	types.shuffle()
+	RNG.array_shuffle(types)
 	return types[0]
 
 func _pick_random_tm() -> String:
@@ -227,7 +227,7 @@ func _pick_random_tm() -> String:
 	if candidates.is_empty():
 		return "tackle"
 
-	candidates.shuffle()
+	RNG.array_shuffle(candidates)
 	return candidates[0]
 
 

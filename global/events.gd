@@ -65,6 +65,7 @@ signal evolution_completed
 
 #Map-related Events
 signal map_exited(room: Room)
+signal save_game(on_map: bool)
 
 #Shop-related Events
 signal shop_exited

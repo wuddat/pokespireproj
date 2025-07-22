@@ -82,7 +82,7 @@ func play() -> void:
 		return
 
 	# 🧬 Select a random card from discard
-	var random_card := discard.cards[randi() % discard.cards.size()]
+	var random_card := discard.cards[RNG.instance.randi() % discard.cards.size()]
 	print("🎲 Metronome selected:", random_card.id)
 
 	discard.cards.erase(random_card)
@@ -234,7 +234,7 @@ func play_card_with_delay(crd: Card) -> void:
 	else:
 		# Handle randomplay roll
 		if crd.randomplay > 0:
-			crd.multiplay = randi_range(2, crd.randomplay)
+			crd.multiplay = RNG.instance.randi_range(2, crd.randomplay)
 
 		# Pre-select random targets if needed
 		if crd.target == Card.Target.RANDOM_ENEMY:

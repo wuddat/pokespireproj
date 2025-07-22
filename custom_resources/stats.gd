@@ -8,10 +8,10 @@ signal stats_changed
 @export var art: Texture
 @export var icon: Texture
 
-var health: int : set = set_health
-var block: int : set = set_block
+@export var health: int : set = set_health
+@export var block: int : set = set_block
 
-var uid: String
+@export var uid: String
 
 func set_health(value : int) -> void:
 	health = clampi(value, 0, max_health)

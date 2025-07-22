@@ -1,5 +1,5 @@
 class_name RunStats
-extends Node
+extends Resource
 
 signal gold_changed
 

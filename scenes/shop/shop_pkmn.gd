@@ -11,7 +11,7 @@ const PKMN_UI = preload("res://scenes/ui/pkmn_button.tscn")
 @onready var price: HBoxContainer = %Price
 @onready var price_label: Label = %PriceLabel
 @onready var buy_button: Button = %BuyButton
-@onready var gold_cost := randi_range(100,300)
+@onready var gold_cost := RNG.instance.randi_range(100,300)
 @onready var pokemon_sprite: PkmnButton = %PokemonSprite
 
 func _ready() -> void:

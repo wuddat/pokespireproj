@@ -200,7 +200,7 @@ func dodge_check() -> bool:
 	if status_handler.has_status("dodge"):
 		var dodge_stacks = status_handler.get_status_stacks("dodge")
 		var dodge_chance = dodge_stacks * 0.1
-		var dodge_outcome = randf()
+		var dodge_outcome = RNG.instance.randf()
 		var dodge = status_handler.get_status("dodge")
 		dodge.stacks -= 1
 

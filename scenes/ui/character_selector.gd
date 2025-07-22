@@ -16,7 +16,7 @@ const PC_MENU_SELECT = preload("res://art/sounds/sfx/pc_menu_select.wav")
 
 var current_character: CharacterStats : set = set_current_character
 var tween: Tween
-var active_button: String = ""
+var active_button: String = "bulbasaur"
 var starting_portrait_pos: Vector2
 var starting_title_pos: Vector2
 

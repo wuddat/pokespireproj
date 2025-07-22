@@ -42,7 +42,7 @@ var events := {
 
 func get_random_event_id() -> String:
 	var keys := events.keys()
-	keys.shuffle()
+	RNG.array_shuffle(keys)
 	return keys[0]
 
 func get_event(id: String) -> Dictionary:

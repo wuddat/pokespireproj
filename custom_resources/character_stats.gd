@@ -19,15 +19,15 @@ extends Stats
 @export_group("Pokemon Data")
 @export var starting_party: Array[String] = []
 
-var current_party: Array[PokemonStats] = []
-var mana : int : set = set_mana
-var deck: CardPile
-var discard: CardPile
-var draw_pile: CardPile
-var faint_pile: Dictionary = {} # uid (String) -> CardPile
-var battle_deck: CardPile
-var draftable_cards: CardPile
-var item_inventory: ItemInventory
+@export var current_party: Array[PokemonStats] = []
+@export var mana : int : set = set_mana
+@export var deck: CardPile
+@export var discard: CardPile
+@export var draw_pile: CardPile
+@export var faint_pile: Dictionary = {} # uid (String) -> CardPile
+@export var battle_deck: CardPile
+@export var draftable_cards: CardPile
+@export var item_inventory: ItemInventory
 
 
 
@@ -166,10 +166,10 @@ func on_added_pkmn_to_party(pkmn: PokemonStats) -> void:
 		return
 
 	var result_cards: Array[Card] = []
-	base_cards.shuffle()
+	RNG.array_shuffle(base_cards)
 	base_cards = base_cards.slice(0,4)
 	while result_cards.size() < 10:
-		base_cards.shuffle()
+		RNG.array_shuffle(base_cards)
 		for card in base_cards:
 			var new_card = card.duplicate()
 			

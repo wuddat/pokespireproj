@@ -48,7 +48,7 @@ func set_available(new_value: bool) -> void:
 func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
-	line_2d.rotation_degrees = randi_range(-10, 10)
+	line_2d.rotation_degrees = RNG.instance.randi_range(-10, 10)
 	sprite_2d.scale = ICONS[room.type][1]
 	if room.type == Room.Type.MONSTER:
 		sprite_2d.texture = _get_monster_icon(room.tier)

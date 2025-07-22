@@ -65,7 +65,7 @@ func select_valid_target() -> void:
 			action.target = null
 		return
 	
-	target = valid_targets.pick_random()
+	target = RNG.array_pick_random(valid_targets)
 	current_target_pos = target.spawn_position
 	#print("🎯 ENEMY_ACTION_PICKER.GD Picker selected new valid target: %s" % target.stats.species_id)
 #
@@ -109,7 +109,7 @@ func select_confused_target() -> void:
 		#print("🤯 No valid targets in confused_target_pool!")
 	else:
 		refresh_target_pool()
-		target = confused_target_pool.pick_random()
+		target = RNG.array_pick_random(confused_target_pool)
 		#print("🤪 CONFUSED! Selected target:", target.stats.species_id)
 	for action in get_children():
 		action.target = target
@@ -135,7 +135,7 @@ func get_first_conditional_action() -> EnemyAction:
 
 
 func get_chance_based_action() -> EnemyAction:
-	var roll := randf_range(0.0, total_weight)
+	var roll := RNG.instance.randf_range(0.0, total_weight)
 	for child in get_children():
 		var action = child as EnemyAction
 		if action and action.type == EnemyAction.Type.CHANCE_BASED and action.accumulated_weight > roll:

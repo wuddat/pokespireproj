@@ -2,7 +2,7 @@
 class_name ItemInventory
 extends Resource
 
-var items: Array[Item] = []
+@export var items: Array[Item] = []
 
 func add_item(item: Item) -> void:
 	var existing_item: Item = null

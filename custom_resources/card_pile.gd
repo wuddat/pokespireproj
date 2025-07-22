@@ -26,7 +26,7 @@ func remove_card(card: Card):
 	card_pile_size_changed.emit(cards.size())
 
 func shuffle() -> void:
-	cards.shuffle()
+	RNG.array_shuffle(cards)
 	
 
 func clear() -> void:

@@ -150,6 +150,7 @@ func _on_enemy_turn_ended() -> void:
 
 func _on_player_died() -> void:
 		Events.battle_over_screen_requested.emit("You Whited Out!", BattleOverPanel.Type.LOSE)
+		SaveData.delete_data()
 
 
 func _update_stat_ui(pkmn: PokemonStats) -> void:
@@ -250,8 +251,8 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 			)
 	)
 	
-	learnable_cards.shuffle()
-	forgettable_cards.shuffle()
+	RNG.array_shuffle(learnable_cards)
+	RNG.array_shuffle(forgettable_cards)
 	learnable_cards = learnable_cards.slice(0, 3)
 	forgettable_cards = forgettable_cards.slice(0, 3)
 

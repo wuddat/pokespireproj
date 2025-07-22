@@ -4,10 +4,10 @@
 [ext_resource type="FontFile" uid="uid://cr4p2fxjmio8y" path="res://art/poke_font.ttf" id="2_to3sr"]
 [ext_resource type="Resource" uid="uid://br2s55y88y5ux" path="res://scenes/run/run_startup.tres" id="2_uy6wb"]
 [ext_resource type="Texture2D" uid="uid://rc07vvkv2ffs" path="res://art/mank.png" id="4_gl58c"]
-[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="4_txrk6"]
 [ext_resource type="Texture2D" uid="uid://dflgoqc1mu7ql" path="res://art/bulbasaur_spritesheet.png" id="4_uy6wb"]
-[ext_resource type="Texture2D" uid="uid://c2xhttrclo1r7" path="res://art/tile_0116.png" id="5_uy6wb"]
-[ext_resource type="Texture2D" uid="uid://boklhiqs1414d" path="res://art/tile_0115.png" id="6_45qu8"]
+[ext_resource type="Texture2D" uid="uid://dh8lyqfw6ma3c" path="res://art/sprites/icons/1.png" id="6_45qu8"]
+[ext_resource type="Texture2D" uid="uid://b5jsjryv6bf1k" path="res://art/sprites/icons/7.png" id="7_2bl4m"]
+[ext_resource type="Texture2D" uid="uid://dxbnidv4inqhv" path="res://art/sprites/icons/4.png" id="8_4u3lx"]
 [ext_resource type="Texture2D" uid="uid://do0ydx76pjy6i" path="res://art/dottedline.png" id="9_45qu8"]
 
 [sub_resource type="Gradient" id="Gradient_wb0q5"]
@@ -822,7 +822,7 @@ vertical_alignment = 1
 [node name="CharacterPortrait" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(76, 190)
-scale = Vector2(2.28, 2.28)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_txrk6")
 autoplay = "default"
 flip_h = true
@@ -889,13 +889,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -22.0
+offset_top = -23.0
+offset_right = 18.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_txrk6")
+texture = ExtResource("6_45qu8")
+stretch_mode = 6
 
 [node name="SquirtleButton" type="Button" parent="CharacterButtons"]
 custom_minimum_size = Vector2(60, 60)
@@ -911,12 +912,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -20.0
+offset_top = -23.0
 offset_right = 20.0
-offset_bottom = 20.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_uy6wb")
+texture = ExtResource("7_2bl4m")
+stretch_mode = 6
 
 [node name="CharmanderButton" type="Button" parent="CharacterButtons"]
 custom_minimum_size = Vector2(60, 60)
@@ -932,12 +934,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -20.0
+offset_top = -24.0
 offset_right = 20.0
-offset_bottom = 20.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_45qu8")
+texture = ExtResource("8_4u3lx")
+stretch_mode = 6
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1

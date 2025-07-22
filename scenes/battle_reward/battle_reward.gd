@@ -122,7 +122,7 @@ func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 
 	for i in max_rewards:
 		_setup_card_chances()
-		var roll := randf_range(0.0, card_reward_total_weight)
+		var roll := RNG.instance.randf_range(0.0, card_reward_total_weight)
 
 		for rarity: Card.Rarity in card_rarity_weights:
 			if card_rarity_weights[rarity] > roll:
@@ -136,7 +136,7 @@ func _show_leveled_card_rewards(pkmn_uid: String) -> void:
 				else:
 					print("⚠️ No card of rolled rarity, picking random fallback")
 					if not available_cards.is_empty():
-						picked_card = available_cards.pick_random()
+						picked_card = RNG.array_pick_random(available_cards)
 						card_reward_array.append(picked_card)
 						available_cards.erase(picked_card)
 				break
@@ -162,7 +162,7 @@ func _show_card_rewards() -> void:
 	
 	for i in run_stats.card_rewards:
 		_setup_card_chances()
-		var roll := randf_range(0.0, card_reward_total_weight)
+		var roll := RNG.instance.randf_range(0.0, card_reward_total_weight)
 		
 		for rarity: Card.Rarity in card_rarity_weights:
 			if card_rarity_weights[rarity] > roll:
@@ -175,7 +175,7 @@ func _show_card_rewards() -> void:
 					available_cards.erase(picked_card)
 				else:
 					print("picked Card" , picked_card, picked_card)
-					picked_card = available_cards.pick_random()
+					picked_card = RNG.array_pick_random(available_cards)
 					card_reward_array.append(picked_card)
 				break
 	print("Cards in reward array are: ")
@@ -204,7 +204,7 @@ func _get_random_available_card(available_cards: Array[Card], with_rarity: Card.
 		func(card: Card):
 			return card.rarity == with_rarity
 	)
-	return all_possible_cards.pick_random()
+	return RNG.array_pick_random(all_possible_cards)
 
 
 func _on_gold_reward_taken(amount: int) -> void:
@@ -270,14 +270,14 @@ func _play_reward_sequence() -> void:
 	
 	var rand_amt: int
 	if battle_stats.is_trainer_battle:
-		rand_amt = randi_range(1,2)
-	else: rand_amt = randi_range(0,1)
+		rand_amt = RNG.instance.randi_range(1,2)
+	else: rand_amt = RNG.instance.randi_range(0,1)
 	
 	for i in rand_amt:
 		add_random_item_reward()
 		await _reward_delay()
 	
-	var item_amt = randi_range(1,2)
+	var item_amt = RNG.instance.randi_range(1,2)
 	for i in item_amt:
 		add_item_reward("pokeball")
 		await _reward_delay()

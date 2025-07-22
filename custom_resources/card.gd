@@ -88,9 +88,9 @@ const PKMN_COLORS := {
 @export var self_shift: int = 0
 
 var random_targets = []
-var current_cost: int
-var base_card: Card = null
-var lead_enabled: bool = false
+@export var current_cost: int
+@export var base_card: Card = null
+@export var lead_enabled: bool = false
 
 
 func is_single_targeted() -> bool:
@@ -130,7 +130,7 @@ func _get_targets(targets: Array[Node], battle_unit_owner: PokemonBattleUnit) ->
 		Target.RANDOM_ENEMY:
 			print("RANDOM_ENEMY group:", enemy_group)
 			if enemy_group.size() > 0:
-				var selected = enemy_group[randi() % enemy_group.size()]
+				var selected = enemy_group[RNG.instance.randi() % enemy_group.size()]
 				print("Selected random enemy:", selected.name)
 				return [selected]
 			return []

@@ -41,7 +41,7 @@ func _generate_shop_cards() -> void:
 	available_cards = available_cards.filter(func(card: Card) -> bool:
 		return card.rarity != Card.Rarity.COMMON
 	)
-	available_cards.shuffle()
+	RNG.array_shuffle(available_cards)
 	shop_card_array = available_cards.slice(0,5)
 	
 	for card: Card in shop_card_array:
@@ -57,7 +57,7 @@ func _generate_shop_pkmn() -> void:
 
 	# Step 1: Get a shuffled list of available species IDs from your pokedex
 	var species_ids = Pokedex.pokedex.keys()
-	species_ids.shuffle()
+	RNG.array_shuffle(species_ids)
 	var selected_ids = species_ids.slice(0, 3)  # Pick 3 random Pokémon for the shop
 
 	# Step 2: Generate stats for each selected Pokémon

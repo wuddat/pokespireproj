@@ -58,5 +58,5 @@ func get_random_item() -> Item:
 		return null
 
 	var keys = items.keys()
-	var random_key = keys.pick_random()
+	var random_key = RNG.array_pick_random(keys)
 	return build_item(random_key)

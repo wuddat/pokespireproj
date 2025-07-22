@@ -67,7 +67,7 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 			await _spawn_enemy_from_stats(enemy_clones[i], enemy_nodes[i])
 	else:
 		for new_enemy: Node2D in enemy_nodes:
-			var species_id = species_ids.pick_random()
+			var species_id = RNG.array_pick_random(species_ids)
 			_spawn_enemy(species_id, new_enemy)
 		all_new_enemies.queue_free()
 
