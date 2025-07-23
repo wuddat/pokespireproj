@@ -5,9 +5,14 @@
 
 [resource]
 script = ExtResource("2_uxfql")
+encounter_type = "Wild"
+trainer_type = "None"
 battle_tier = 1
 weight = 1.0
 gold_reward_min = 188
 gold_reward_max = 248
 enemies = ExtResource("1_d6j47")
+enemy_amt = 4
+pokemon_type = "Any"
+enemy_pkmn_party = Array[String]([])
 metadata/_custom_type_script = "uid://e8dxadmnd240"

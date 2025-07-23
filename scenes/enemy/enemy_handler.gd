@@ -43,10 +43,13 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 	
 	var species_ids:Array[String] = []
 	if battle_stats.is_trainer_battle:
-		battle_stats.assign_enemy_pkmn_party()
+		#battle_stats.assign_enemy_pkmn_party()
 		species_ids = battle_stats.enemy_pkmn_party.duplicate()
 	else: 
-		species_ids = Pokedex.get_species_for_tier(battle_stats.battle_tier)
+		#species_ids = Pokedex.get_species_for_tier(battle_stats.battle_tier)
+		species_ids = battle_stats.enemy_pkmn_party
+		print("Pkmn in battle")
+		print(battle_stats.enemy_pkmn_party)
 	
 	var all_new_enemies := battle_stats.enemies.instantiate()
 	var max_spawn:= all_new_enemies.get_child_count()
@@ -66,9 +69,8 @@ func setup_enemies(bat_stats: BattleStats) -> void:
 		for i in range(min(enemy_clones.size(), enemy_nodes.size())):
 			await _spawn_enemy_from_stats(enemy_clones[i], enemy_nodes[i])
 	else:
-		for new_enemy: Node2D in enemy_nodes:
-			var species_id = RNG.array_pick_random(species_ids)
-			_spawn_enemy(species_id, new_enemy)
+		for i in enemy_nodes.size():
+			_spawn_enemy(species_ids[i], enemy_nodes[i])
 		all_new_enemies.queue_free()
 
 

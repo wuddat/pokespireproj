@@ -85,10 +85,10 @@ func _load_run() -> void:
 	RNG.set_from_save_data(save_data.rng_seed, save_data.rng_state)
 	stats = save_data.run_stats
 	character = save_data.char_stats
-	character.deck = save_data.current_deck
-	character.current_party = save_data.current_party
-	character.item_inventory = save_data.item_inventory
-	character.draftable_cards = save_data.draftable_cards
+	#character.deck = save_data.current_deck
+	#character.current_party = save_data.current_party
+	#character.item_inventory = save_data.item_inventory
+	#character.draftable_cards = save_data.draftable_cards
 	
 	map.load_map(save_data.map_data, save_data.floors_climbed, save_data.last_room)
 	
@@ -104,10 +104,10 @@ func _save_run(was_on_map: bool) -> void:
 	save_data.rng_state = RNG.instance.state
 	save_data.run_stats = stats
 	save_data.char_stats = character
-	save_data.current_deck = character.deck
-	save_data.current_party = character.current_party
-	save_data.item_inventory = character.item_inventory
-	save_data.draftable_cards = character.draftable_cards
+	#save_data.current_deck = character.deck
+	#save_data.current_party = character.current_party
+	#save_data.item_inventory = character.item_inventory
+	#save_data.draftable_cards = character.draftable_cards
 	save_data.map_data = map.map_data.duplicate()
 	save_data.floors_climbed = map.floors_climbed
 	save_data.last_room = map.last_room

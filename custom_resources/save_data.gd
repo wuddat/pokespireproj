@@ -7,10 +7,10 @@ const SAVE_PATH = "user://savegame.tres"
 #Playerstats
 @export var run_stats: RunStats
 @export var char_stats: CharacterStats
-@export var current_deck: CardPile
-@export var current_party: Array[PokemonStats]
-@export var draftable_cards: CardPile
-@export var item_inventory: ItemInventory
+#@export var current_deck: CardPile
+#@export var current_party: Array[PokemonStats]
+#@export var draftable_cards: CardPile
+#@export var item_inventory: ItemInventory
 
 #Mapstats
 @export var map_data: Array[Array]
@@ -21,6 +21,7 @@ const SAVE_PATH = "user://savegame.tres"
 #RNGstats
 @export var rng_seed: int
 @export var rng_state: int
+
 
 
 func save_data() -> void:

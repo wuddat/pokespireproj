@@ -12,6 +12,7 @@ weight = 6.0
 gold_reward_min = 120
 gold_reward_max = 150
 enemies = ExtResource("1_glpuk")
+enemy_amt = 2
 pokemon_type = "Normal"
 enemy_pkmn_party = Array[String]([])
 metadata/_custom_type_script = "uid://e8dxadmnd240"

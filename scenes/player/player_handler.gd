@@ -25,7 +25,16 @@ func start_battle(char_stats: CharacterStats) -> void:
 	
 	character.battle_deck = character.build_battle_deck(party_handler.active_battle_party)
 	character.draw_pile = character.battle_deck.duplicate(true)
+	print(RNG.instance)
+	#var rngprints = RNG.instance.get_property_list()
+	#for pr in rngprints:
+		#print(pr)
 	character.draw_pile.shuffle()
+	#print(RNG.instance)
+	#var rngprints2 = RNG.instance.get_property_list()
+	#for pr2 in rngprints2:
+		#print(pr2)
+	
 	
 	for pkmn in character.current_party:
 		if pkmn.health <= 0:

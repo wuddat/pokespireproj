@@ -9,6 +9,7 @@ extends Resource
 @export var gold_reward_min: int
 @export var gold_reward_max: int
 @export var enemies: PackedScene # adjust for enemy amt and placement
+@export var enemy_amt: int
 
 @export_category("Enemy Types")
 @export_enum("Normal", "Water", "Rock", "Any") var pokemon_type:= "Any"
@@ -33,6 +34,9 @@ func assign_enemy_pkmn_party() -> void:
 		match encounter_type:
 			"Wild":
 				enemy_pkmn_party = Pokedex.get_species_for_tier(battle_tier)
+				RNG.array_shuffle(enemy_pkmn_party)
+				enemy_pkmn_party = enemy_pkmn_party.slice(0,enemy_amt)
+				print(enemy_pkmn_party)
 
 			"Trainer":
 				match trainer_type:

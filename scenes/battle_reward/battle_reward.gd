@@ -204,7 +204,7 @@ func _get_random_available_card(available_cards: Array[Card], with_rarity: Card.
 		func(card: Card):
 			return card.rarity == with_rarity
 	)
-	return RNG.array_pick_random(all_possible_cards)
+	return all_possible_cards.pick_random()
 
 
 func _on_gold_reward_taken(amount: int) -> void:
