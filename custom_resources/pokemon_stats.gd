@@ -64,7 +64,7 @@ static func from_enemy_stats(stats: PokemonStats) -> PokemonStats:
 
 
 func get_draft_cards_from_type() -> Array[String]:
-	var combined_moves: Array[String] = []
+	var combined_moves: Array[String] =  []
 	#print("PKMN TYPE: ", type)
 	for t in type:
 		#print("Checking type: ", t)

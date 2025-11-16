@@ -84,10 +84,11 @@ func refresh_leads_to_base() -> void:
 			var crd: Card = child.card
 			if crd.base_card != null and crd.lead_effects:
 				print("============PRINTING CARD BEFORE: =======================")
-				Utils.print_resource(crd)
-				crd = crd.base_card.duplicate(true)
-				crd.base_card = crd
-				child.card = crd
+				#Utils.print_resource(crd)
+				#crd = crd.base_card.duplicate(true)
+				#crd.base_card = crd
+				#child.card = crd
+				child.card.reset_to_base_card()
 				child.stop_lead_effect()
 				child.card_visuals._update_visuals()
 				print("============PRINTING CARD AFTER: =======================")
