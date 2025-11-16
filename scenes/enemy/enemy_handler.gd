@@ -135,7 +135,7 @@ func shift_enemies() -> void:
 		print("[ENEMYHANDLER] AFTER shift, position: ", enemy.global_position, " | spawn_coords: ", enemy.spawn_coords)
 
 
-func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
+func _spawn_enemy(species_id: String, enemy_node: Node2D, switch_in: bool = false) -> void:
 	if not is_instance_valid(enemy_node):
 		return
 	var enemy: Enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
@@ -146,7 +146,6 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 	stats.species_id = species_id
 	stats.load_from_pokedex(Pokedex.get_pokemon_data(species_id))
 	enemy.stats = stats
-	
 	add_child(enemy)
 	
 	if enemy.stats.species_id == "mewtwo_mech":
@@ -162,6 +161,9 @@ func _spawn_enemy(species_id: String, enemy_node: Node2D) -> void:
 		enemy.is_trainer_pkmn = true
 		await enemy.animation_handler.trainer_spawn_animation(enemy)
 		enemy.show()
+		if switch_in:
+			enemy.skip_turn = true
+			enemy.intent_ui.visible = false
 	var ui := stats_ui_scn.instantiate() as HealthBarUI
 	right_panel.add_child(ui)
 	ui.icon.position = Vector2(60, 7)
@@ -240,7 +242,8 @@ func _on_enemy_fainted(enemy: Enemy) -> void:
 		else:
 			if enemy and is_instance_valid(enemy):
 				Events.battle_text_requested.emit("Trainer sends out [color=red]%s[/color]!" % next_species.capitalize())
-				_spawn_enemy(next_species, enemy)
+				var switch_in = true
+				_spawn_enemy(next_species, enemy, switch_in)
 
 	if battle_stats.is_boss_battle:
 		if bench_clones.size() > 0:

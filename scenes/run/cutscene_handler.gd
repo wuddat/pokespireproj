@@ -29,7 +29,7 @@ func _on_mewtwo_phase_2_requested() -> void:
 	show()
 	MusicPlayer.pause()
 	print("transition requested")
-	get_tree().paused = true
+	#get_tree().paused = true
 	var animation := mewtwo_phase_2.instantiate()
 	add_child(animation)
 	print("cutscene added")
