@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("2_rc4oo")
 encounter_type = "Trainer"
-trainer_type = "Fisher"
+trainer_type = "None"
 battle_tier = 0
 weight = 6.0
 gold_reward_min = 120
 gold_reward_max = 150
 enemies = ExtResource("1_glpuk")
 enemy_amt = 2
-pokemon_type = "Normal"
+pokemon_type = "Any"
 enemy_pkmn_party = Array[String]([])
 metadata/_custom_type_script = "uid://e8dxadmnd240"

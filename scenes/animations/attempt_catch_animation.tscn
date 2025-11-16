@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://kp81nyslrulp"]
+
+[ext_resource type="Script" uid="uid://bmg8qy3dsv6ct" path="res://scenes/animations/attempt_catch_animation.gd" id="1_un3tr"]
+[ext_resource type="PackedScene" uid="uid://ombtsrp0an1b" path="res://scenes/enemy/catch_animator.tscn" id="2_sag0y"]
+[ext_resource type="Texture2D" uid="uid://d2ytoyith4o5p" path="res://art/bulbasaur.png" id="3_5rbco"]
+
+[sub_resource type="Gradient" id="Gradient_h03dp"]
+offsets = PackedFloat32Array(0, 0.548246, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.603922, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s8615"]
+gradient = SubResource("Gradient_h03dp")
+
+[node name="AttemptCatchAnimation" type="CanvasLayer"]
+process_mode = 3
+layer = 50
+script = ExtResource("1_un3tr")
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 49
+
+[node name="Background" type="TextureRect" parent="BGLayer"]
+unique_name_in_owner = true
+process_mode = 3
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture1D_s8615")
+expand_mode = 1
+
+[node name="SpritesLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 50
+
+[node name="Label" type="Label" parent="SpritesLayer"]
+unique_name_in_owner = true
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -44.0
+offset_right = 21.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CatchAnimator" parent="SpritesLayer" instance=ExtResource("2_sag0y")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpritesLayer"]
+
+[node name="pkmn" type="Sprite2D" parent="SpritesLayer"]
+clip_children = 2
+position = Vector2(245, 152)
+texture = ExtResource("3_5rbco")
+
+[node name="color_overlay" type="ColorRect" parent="SpritesLayer/pkmn"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.5
+offset_top = -18.5
+offset_right = -18.5
+offset_bottom = -18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true

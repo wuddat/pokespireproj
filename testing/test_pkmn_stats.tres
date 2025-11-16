@@ -19,4 +19,7 @@ level = 1
 max_health = 25
 art = ExtResource("1_r7daw")
 icon = ExtResource("2_72r40")
+health = 0
+block = 0
+uid = ""
 metadata/_custom_type_script = "uid://c850f60iwin7v"

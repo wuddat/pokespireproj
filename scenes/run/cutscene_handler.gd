@@ -6,6 +6,8 @@ const trainerscene := preload("res://scenes/animations/trainer_intro_scene.tscn"
 const wildscene := preload("res://scenes/animations/wild_intro.tscn")
 const mewtwo_phase_2 := preload("res://scenes/animations/mewtwo_phase_2.tscn")
 const pkmn_reward_animation := preload("res://scenes/animations/pokemon_reward_animation.tscn")
+const attempt_catch_animation := preload("res://scenes/animations/attempt_catch_animation.tscn")
+
 @export var char_stats: CharacterStats
 
 var current_animation: Node
@@ -17,6 +19,10 @@ func _ready() -> void:
 		Events.pokemon_reward_requested.connect(_on_pokemon_reward_requested)
 	if not Events.pokemon_reward_completed.is_connected(_on_pokemon_reward_completed):
 		Events.pokemon_reward_completed.connect(_on_pokemon_reward_completed)
+	if not Events.catch_attempted.is_connected(_on_catch_attempted):
+		Events.catch_attempted.connect(_on_catch_attempted)
+	if not Events.catch_completed.is_connected(cutscene_complete):
+		Events.catch_completed.connect(cutscene_complete)
 	hide()
 
 func _on_mewtwo_phase_2_requested() -> void:
@@ -62,5 +68,19 @@ func _on_pokemon_reward_requested(pkmn: PokemonStats) -> void:
 func _on_pokemon_reward_completed() -> void:
 	current_animation.queue_free()
 	print("cutscene complete")
+	get_tree().paused = false
+	MusicPlayer.resume()
+
+func _on_catch_attempted(enemy: Enemy) -> void:
+	show()
+	print("[CUTSCENE HANDLER] catching animation triggered")
+	var animation := attempt_catch_animation.instantiate()
+	current_animation = animation
+	animation.target_pokemon_node = enemy
+	add_child(animation)
+	
+func cutscene_complete() -> void:
+	current_animation.queue_free()
+	print('[CUTSCENEHANDLER] cutscene complete')
 	get_tree().paused = false
 	MusicPlayer.resume()

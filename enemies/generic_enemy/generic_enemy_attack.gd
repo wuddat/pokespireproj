@@ -26,7 +26,7 @@ func perform_action() -> void:
 		return
 	
 	var final_damage = calculate_damage(targets_to_hit[0] if targets_to_hit.size() > 0 else null)
-	var primary_targets = targets_to_hit
+	var primary_targets: Array[Node] = targets_to_hit
 	var splash_targets: Array[Node] = []
 	
 	if splash_damage > 0:

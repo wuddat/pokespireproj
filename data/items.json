@@ -12,7 +12,7 @@
 	  "rarity": "common",
 	  "usable_in_battle": true,
 	  "consumable": true,
-	  "sound_path": "res://art/sounds/move_sfx/jump.wav"
+	  "sound_path": "res://art/sounds/sfx/pokeball3.wav"
 	},
 	"fullheal": {
 	  "name": "Full Heal",

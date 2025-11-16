@@ -162,10 +162,12 @@ func update_intent(action: EnemyAction) -> void:
 
 
 func do_turn() -> void:
+	if stats.health <= 0:
+		Events.enemy_fainted.emit(self)
 	stats.block = 0
 	enemy_action_picker._on_party_shifted()
 	await status_effect_checks()
-	await catch_check()
+	#await catch_check()
 
 	if skip_turn:
 		print("⛔️ Enemy skipping turn due to skip_turn flag.")
@@ -265,46 +267,46 @@ func status_effect_checks() -> void:
 		is_confused = false
 
 
-func catch_check() -> void:
-	await get_tree().create_timer(enemy_text_delay).timeout
-	if stats.health <= 0:
-			print("❌ Skipping catch check: %s already fainted." % stats.species_id)
-			return
-
-	if status_handler.has_status("catching"):
-		Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is trying to break free!" % stats.species_id.capitalize())
-		await get_tree().create_timer(enemy_text_delay).timeout
-		print("🎯 %s is being caught, will skip turn." % self)
-		catch_animator.animated_sprite_2d.play("shakes")
-		SFXPlayer.play(WOBBLE)
-		await get_tree().create_timer(.5).timeout
-		SFXPlayer.play(WOBBLE)
-		await catch_animator.animated_sprite_2d.animation_finished
-		
-		if did_escape_catch():
-			print("💥 %s broke free!" % stats.species_id)
-			catch_animator.animated_sprite_2d.play("breakout")
-			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] BROKE FREE!" % stats.species_id.capitalize())
-			SFXPlayer.play(BREAKOUT)
-			await catch_animator.animated_sprite_2d.animation_finished
-			await get_tree().create_timer(enemy_text_delay).timeout
-			sprite_2d.visible = true
-			catch_animator.queue_free()
-			catch_animator = null
-			status_handler.remove_status("catching")
-		elif was_caught():
-			await get_tree().create_timer(.2).timeout
-			print("✅ %s was caught!" % stats.species_id)
-			catch_animator.animated_sprite_2d.play("success")
-			SFXPlayer.play(CAUGHT)
-			await catch_animator.animated_sprite_2d.animation_finished
-			Events.battle_text_requested.emit("Enemy [color=red]%s[/color] was caught!" % stats.species_id.capitalize())
-			await get_tree().create_timer(enemy_text_delay).timeout
-			take_damage(stats.health, Modifier.Type.DMG_TAKEN)
-			skip_turn = true
-		else:
-			skip_turn = true
-			catch_animator.animated_sprite_2d.play("rest")
+#func catch_check() -> void:
+	#await get_tree().create_timer(enemy_text_delay).timeout
+	#if stats.health <= 0:
+			#print("❌ Skipping catch check: %s already fainted." % stats.species_id)
+			#return
+#
+	#if status_handler.has_status("catching"):
+		#Events.battle_text_requested.emit("Enemy [color=red]%s[/color] is trying to break free!" % stats.species_id.capitalize())
+		#await get_tree().create_timer(enemy_text_delay).timeout
+		#print("🎯 %s is being caught, will skip turn." % self)
+		#catch_animator.animated_sprite_2d.play("shakes")
+		#SFXPlayer.play(WOBBLE)
+		#await get_tree().create_timer(.5).timeout
+		#SFXPlayer.play(WOBBLE)
+		#await catch_animator.animated_sprite_2d.animation_finished
+		#
+		#if did_escape_catch():
+			#print("💥 %s broke free!" % stats.species_id)
+			#catch_animator.animated_sprite_2d.play("breakout")
+			#Events.battle_text_requested.emit("Enemy [color=red]%s[/color] BROKE FREE!" % stats.species_id.capitalize())
+			#SFXPlayer.play(BREAKOUT)
+			#await catch_animator.animated_sprite_2d.animation_finished
+			#await get_tree().create_timer(enemy_text_delay).timeout
+			#sprite_2d.visible = true
+			#catch_animator.queue_free()
+			#catch_animator = null
+			#status_handler.remove_status("catching")
+		#elif was_caught():
+			#await get_tree().create_timer(.2).timeout
+			#print("✅ %s was caught!" % stats.species_id)
+			#catch_animator.animated_sprite_2d.play("success")
+			#SFXPlayer.play(CAUGHT)
+			#await catch_animator.animated_sprite_2d.animation_finished
+			#Events.battle_text_requested.emit("Enemy [color=red]%s[/color] was caught!" % stats.species_id.capitalize())
+			#await get_tree().create_timer(enemy_text_delay).timeout
+			#take_damage(stats.health, Modifier.Type.DMG_TAKEN)
+			#skip_turn = true
+		#else:
+			#skip_turn = true
+			#catch_animator.animated_sprite_2d.play("rest")
 	
 
 func take_damage(damage: int, mod_type: Modifier.Type) -> void:
@@ -341,8 +343,6 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 			
 			if stats.health <= 0 and status_handler.has_status("catching"):
 				is_catchable = true
-				catch_animator.animated_sprite_2d.play("success")
-				await catch_animator.animated_sprite_2d.animation_finished
 				print("enemy was caught ", is_catchable)
 				print("Emitting captured signal with:", self.stats)
 				mark_as_caught()
@@ -372,10 +372,10 @@ func enter_catching_state():
 		return
 	catch_animator = catch_animator_tscn.instantiate()
 	catch_animator.name = "CatchAnimator"
-	add_child(catch_animator)	
+	add_child(catch_animator)
 	catch_animator.global_position = sprite_2d.global_position
-	sprite_2d.visible = false
-	catch_animator.visible = true
+	#sprite_2d.visible = false
+	catch_animator.visible = false
 	catch_animator.animated_sprite_2d.play("catch")
 	await catch_animator.animated_sprite_2d.animation_finished
 	catch_animator.animated_sprite_2d.play("rest")

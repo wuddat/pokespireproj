@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=4 format=3 uid="uid://bylsusamu6ff4"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=5 format=3 uid="uid://bylsusamu6ff4"]
 
 [ext_resource type="Texture2D" uid="uid://63ugptgfqloj" path="res://art/squirtleback.png" id="1_77uey"]
 [ext_resource type="Script" uid="uid://dswbye42ve1b5" path="res://custom_resources/character_stats.gd" id="1_h6c1m"]
 [ext_resource type="SpriteFrames" uid="uid://cwpej1o1muuub" path="res://art/frames/squirtle_frames.tres" id="2_77uey"]
+[ext_resource type="Script" uid="uid://c850f60iwin7v" path="res://custom_resources/pokemon_stats.gd" id="2_fngw1"]
 
 [resource]
 script = ExtResource("1_h6c1m")
@@ -16,6 +17,12 @@ max_mana = 3
 starting_moves = Array[String](["bubble", "bubble", "bubble", "bubble", "bubble", "defensecurl", "defensecurl", "defensecurl", "defensecurl", "watergun"])
 starting_items = Array[String]([])
 starting_party = Array[String](["squirtle"])
+current_party = Array[ExtResource("2_fngw1")]([])
+mana = 0
+faint_pile = {}
 max_health = 36
 art = ExtResource("1_77uey")
+health = 0
+block = 0
+uid = ""
 metadata/_custom_type_script = "uid://dswbye42ve1b5"

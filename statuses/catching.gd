@@ -11,6 +11,7 @@ func initialize_status(target: Node) -> void:
 		target.enter_catching_state()
 		if target.has_method("show_combat_text"):
 			target.show_combat_text("CATCHING!", Color.GOLDENROD)
+		Events.catch_attempted.emit(target)
 	
 
 func apply_status(target: Node) -> void:
