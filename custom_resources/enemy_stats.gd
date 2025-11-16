@@ -5,6 +5,7 @@ extends PokemonStats
 @export var ai: PackedScene
 var skip_turn: bool = false
 var has_slept: bool = false
+var catch_rate: float = 100.0
 
 func load_from_pokedex(data: Dictionary) -> void:
 	if data.is_empty():

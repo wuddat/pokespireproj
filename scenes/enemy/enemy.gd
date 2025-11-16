@@ -43,6 +43,7 @@ var has_slept: bool = false
 var max_wobble = 3
 var current_wobble = 0
 var is_trainer_pkmn: bool = false
+var catch_rate: float
 
 #dialogue delay
 var enemy_text_delay: float = 0.4
