@@ -244,6 +244,7 @@ func _on_trainer_room_entered(room: Room) -> void:
 	#animation.global_position = get_viewport().get_visible_rect().size / 2
 	animation.sprite_2d.texture = room.battle_stats.trainer_sprite
 	animation.trainer_name.text = room.battle_stats.trainer_type
+	animation.enemy_party_count = room.battle_stats.enemy_pkmn_party.size()
 	await animation.play_intro()
 	_load_battle(room)
 	await fade_in()

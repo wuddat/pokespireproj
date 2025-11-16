@@ -21,9 +21,12 @@ const ICONS:={
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
 @onready var line_2d: Line2D = $Visuals/Line2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hoverable_tooltip: Control = $Visuals/Sprite2D/HoverableTooltip
 
 var available := false: set = set_available
 var room: Room : set = set_room
+var header: String
+var description: String
 
 
 func _ready() -> void:
@@ -52,8 +55,11 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.scale = ICONS[room.type][1]
 	if room.type == Room.Type.MONSTER:
 		sprite_2d.texture = _get_monster_icon(room.tier)
+		hoverable_tooltip.hide()
 	if room.type == Room.Type.TRAINER:
 		sprite_2d.texture = _get_trainer_icon(room.battle_stats.trainer_type)
+		header = room.battle_stats.trainer_type + ":"
+		description = str(room.battle_stats.enemy_pkmn_party.size()) + " pokemon"
 	else:
 		sprite_2d.texture = ICONS[room.type][0]
 	if room.type == Room.Type.BOSS:
@@ -101,3 +107,22 @@ func _get_trainer_icon(trainer: String) -> Texture:
 #called by animatioplayer when 'select' animation finishes
 func _on_map_room_selected() -> void:
 	selected.emit(room)
+
+func get_tooltip_data() -> Dictionary:
+	if room.type == Room.Type.SHOP:
+		header = "SHOP:"
+		description = "I wonder what's for sale.."
+	if room.type == Room.Type.POKECENTER:
+		header = "POKECENTER:"
+		description = "Good place to rest up.."
+	if room.type == Room.Type.EVENT:
+		header = "EVENT:"
+		description = "Anything could happen here.."
+	if room.type == Room.Type.TRAINER:
+		header = room.battle_stats.trainer_type + ":"
+		description = str(room.battle_stats.enemy_pkmn_party.size()) + " pokemon"
+
+	return {
+		"header": header,
+		"description": description
+	}
