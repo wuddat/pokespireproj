@@ -1,6 +1,8 @@
 class_name EvolutionReward
 extends Control
 
+signal evolution_reward_selected(old_move_id: String, new_card: Card, pokemon_uid: String, pokemon:PokemonStats)
+
 @onready var cards_to_forget: VBoxContainer = %CardsToForget
 @onready var cards_to_learn: VBoxContainer = %CardsToLearn
 @onready var forget_slot: CardMenuUI = %ForgetCard
@@ -144,6 +146,7 @@ func _on_confirm() -> void:
 		Utils.print_resource(new_card)
 		new_card.pkmn_owner_uid = pokemon.uid  # ✅ Make sure ownership is preserved
 		player_deck.cards.append(new_card)
+	evolution_reward_selected.emit(forget_card.id, learn_card, pokemon.uid, pokemon)
 	queue_free()
 
 

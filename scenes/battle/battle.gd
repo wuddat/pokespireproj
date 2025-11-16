@@ -262,12 +262,54 @@ func _play_evolution_cutscene(pkmn: PokemonBattleUnit) -> void:
 	evo_reward.label.text = "%s wants to learn a NEW move!" % pkmn.stats.species_id.capitalize()
 	evo_reward.forgettable_cards = forgettable_cards
 	evo_reward.learnable_cards = learnable_cards
+	
+	evo_reward.evolution_reward_selected.connect(_on_evolution_reward_selected)
 
 	# Wait for reward to finish before resuming battle
 	await evo_reward.tree_exited
 	
 	get_tree().paused = false
 
+func _on_evolution_reward_selected(old_card_id: String, new_card: Card, pokemon_uid: String, pokemon:PokemonStats) -> void:
+	var cards_to_swap_in_draw: Array[Card] = []
+	var cards_to_swap_in_discard: Array[Card] = []
+	var cards_to_swap_in_hand: Array[Card] = []
+	
+	var replacement = new_card.duplicate(true)
+	var move_data = MoveData.moves.get(new_card.id)
+	if move_data and replacement.has_method("setup_from_data"):
+		replacement.setup_from_data(move_data)
+	replacement.pkmn_owner_uid = pokemon_uid
+	replacement.pkmn_owner_name = pokemon_uid
+	replacement.pkmn_icon = pokemon.icon
+	
+	
+	for card in char_stats.draw_pile.cards:
+		if card.id == old_card_id and card.pkmn_owner_uid == pokemon_uid:
+			cards_to_swap_in_draw.append(card)
+	
+	for card in char_stats.discard.cards:
+		if card.id == old_card_id and card.pkmn_owner_uid == pokemon_uid:
+			cards_to_swap_in_discard.append(card)
+			
+	for card_ui in player_handler.hand.get_children():
+		if card_ui.card.id == old_card_id:
+			card_ui.queue_free()
+			player_handler.hand.add_card(replacement)
+		if card_ui.card.pkmn_owner_uid == pokemon_uid:
+			card_ui.card_visuals._update_visuals()
+	
+	for old_card in cards_to_swap_in_draw:
+		char_stats.draw_pile.cards.erase(old_card)
+		char_stats.draw_pile.add_card(replacement)
+	
+	for old_card in cards_to_swap_in_discard:
+		char_stats.discard.cards.erase(old_card)
+		char_stats.draw_pile.add_card(replacement)
+	
+	for old_card in cards_to_swap_in_hand:
+		player_handler.hand.cards.erase(old_card)
+		player_handler.hand.add_card(replacement)
 
 func _on_mewtwo_phase_2_requested() -> void:
 	background.hide()

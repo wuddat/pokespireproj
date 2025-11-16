@@ -12,7 +12,7 @@ extends Stats
 @export var evolves_to: String = ""
 @export var evolution_level: int = 101
 @export var current_exp: int = 0
-@export var level: int = 1
+@export var level: int = 5
 
 func get_xp_for_next_level(lvl: int) -> int:
 	return 10 + health * 1.2 * lvl
