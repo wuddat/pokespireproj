@@ -353,6 +353,18 @@ func take_damage(damage: int, mod_type: Modifier.Type) -> void:
 	)
 
 
+func heal(amount: int) -> void:
+	if stats:
+		var health_before := stats.health
+		stats.heal(amount)
+		var actual_heal := stats.health - health_before
+		if actual_heal > 0:
+			show_combat_text("+ %s HP" % amount, Color.GREEN)
+		
+	# Optional: Add UI or feedback here
+	print("%s healed for %d!" % [stats.species_id, amount])
+
+
 func gain_block(block: int, mod_type:Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
@@ -384,7 +396,7 @@ func enter_catching_state():
 func did_escape_catch() -> bool:
 	# TODO catchrate formula
 	var hp_ratio := float(stats.health) / float(stats.max_health)
-	var base_chance := 0.3 
+	var base_chance := 0.2 
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
 	var escape_chance = base_chance + (bonus * 0.4)  # 30% to 70% chance to break out
 	current_wobble += 1
@@ -394,7 +406,7 @@ func was_caught() -> bool:
 	if current_wobble >= max_wobble:
 		return true
 	var hp_ratio := float(stats.health) / float(stats.max_health)
-	var base_chance := 0.4  # Base 40% chance to break free
+	var base_chance := 0.2  # Base 40% chance to break free
 	var bonus = clamp(hp_ratio, 0.0, 1.0)  # More HP = more likely to escape
 	var catch_chance = base_chance + (bonus * 0.4)  # 40% to 80% chance to break out
 	current_wobble += 1

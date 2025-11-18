@@ -30,6 +30,7 @@ func build_item(id: String) -> Item:
 	item.usable_in_battle = raw.get("usable_in_battle", true)
 	item.category = raw.get("category", "")
 	item.type = raw.get("type", "")
+	item.base_power = raw.get("base_power", 0)
 	
 	if raw.has("status_effects"):
 		var raw_ids = raw["status_effects"]

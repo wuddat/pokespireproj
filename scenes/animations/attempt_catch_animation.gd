@@ -73,6 +73,7 @@ func begin_catch(sprite: Node2D):
 	target_pokemon_node.hide()
 	
 	var tween := create_tween()
+	pkmn.texture = target_pokemon_node.sprite_2d.texture
 	pkmn.show()
 	pokeball.play("catch")
 	SFXPlayer.play(JUMP)

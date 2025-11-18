@@ -96,7 +96,8 @@ static func execute_self_effects(
 	self_block: int = 0,
 	self_status: Array[Status] = [],
 	modifiers: ModifierHandler = null,
-	total_damage_dealt: int = 0
+	total_damage_dealt: int = 0,
+	dmg_block: int = 0
 ) -> void:
 	# Self damage
 	if self_damage > 0:
@@ -117,6 +118,12 @@ static func execute_self_effects(
 		block_effect.amount = modifiers.get_modified_value(self_block, Modifier.Type.BLOCK_GAINED) if modifiers else self_block
 		block_effect.base_block = self_block
 		block_effect.execute([source])
+		
+	if dmg_block > 0:
+		var dmg_block_effect = BlockEffect.new()
+		dmg_block_effect.amount = total_damage_dealt
+		dmg_block_effect.base_block = total_damage_dealt
+		dmg_block_effect.execute([source])
 		
 	# Self heal
 	if self_heal > 0:

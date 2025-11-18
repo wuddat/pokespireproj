@@ -14,6 +14,21 @@
 	  "consumable": true,
 	  "sound_path": "res://art/sounds/sfx/pokeball3.wav"
 	},
+	"potion": {
+	  "name": "Potion",
+	  "id": "potion",
+	  "base_power": 20,
+	  "category": "target",
+	  "type": "heal",
+	  "target": "enemy",
+	  "status_effects": [],
+	  "description": "[center]Heal a pokemon by [color=lightgreen]20[/color] HP![/center]",
+	  "icon_path": "res://art/sprites/items/medicine/potion.png",
+	  "rarity": "common",
+	  "usable_in_battle": true,
+	  "consumable": true,
+	  "sound_path": "res://art/sounds/sfx/stat_up.mp3"
+	},
 	"fullheal": {
 	  "name": "Full Heal",
 	  "id": "fullheal",

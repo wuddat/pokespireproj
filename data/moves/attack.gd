@@ -104,7 +104,8 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler, battle_unit
 		self_block,
 		self_status,
 		modifiers,
-		total_damage_dealt
+		total_damage_dealt,
+		dmg_block
 	)
 	
 	#Apply Global Effects

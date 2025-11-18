@@ -37,6 +37,8 @@ func use_item(item: Item, targets: Array[Node]) -> void:
 						stat_effect.source = null
 						stat_effect.status = status_effect.duplicate()
 						stat_effect.execute(targets)
+				if item.type == "heal":
+					tar.heal(item.base_power)
 
 	if item.is_consumable:
 		item.quantity -= 1

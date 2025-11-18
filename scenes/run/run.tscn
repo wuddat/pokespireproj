@@ -68,6 +68,7 @@ process_material = SubResource("ParticleProcessMaterial_l6p45")
 [node name="CurrentView" type="Node" parent="."]
 
 [node name="DebugButtons" type="VBoxContainer" parent="."]
+visible = false
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2

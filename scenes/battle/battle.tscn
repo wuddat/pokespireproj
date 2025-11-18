@@ -166,6 +166,7 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_n5ix6")
 
 [node name="StatUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="LeftPanel" type="VBoxContainer" parent="StatUI"]
 anchors_preset = 4
